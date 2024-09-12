@@ -1,9 +1,3 @@
-<%-- 
-    Document   : Footer
-    Created on : Sep 11, 2024, 8:32:43 PM
-    Author     : AnhVuNAV
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
