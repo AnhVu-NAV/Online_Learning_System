@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/SWP391_Project/web/index.html</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/SWP391_Project/src/java/validation/InputValidation.java</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/SWP391_Project/src/java/dal/AccountDAO.java</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/SWP391_Project/src/java/dal/SliderDAO.java</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/SWP391_Project/src/java/controller/CreateNewAccountController.java</file>
         </group>
     </open-files>
 </project-private>

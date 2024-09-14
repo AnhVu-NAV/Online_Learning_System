@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,11 +48,13 @@
                 <i class="fa fa-lock" aria-hidden="true"></i>
               </span>
             </div>
-
+            
+            <p style="color: red" class="text-center">${requestScope.error}</p> 
+            
             <div class="container-login100-form-btn">
               <button class="login100-form-btn">Login</button>
             </div>
-
+            
             <div class="text-center p-t-12">
               <span class="txt1"> Forgot </span>
               <a class="txt2" href="#"> Username / Password? </a>

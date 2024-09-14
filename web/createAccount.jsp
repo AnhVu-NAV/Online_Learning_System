@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,40 +37,13 @@
             <span class="login100-form-title"> Create new password </span>
 
             <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-              <input class="input100" type="text" name="email" placeholder="Email"/>
+              <input class="input100" type="text" placeholder="Email" name="email"/>
               <span class="focus-input100"></span>
               <span class="symbol-input100">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
               </span>
             </div>
-
-            <div class="wrap-input100 validate-input">
-                <input type="text" class="input100" placeholder="Name" name="name">
-                <span class="focus-input100"></span>
-                <span class="symbol-input100">
-                  <i class="fa-solid fa-user" aria-hidden="true"></i>
-                </span>
-            </div>
             
-
-            <div class="wrap-input100 validate-input">
-                <input type="text" class="input100" placeholder="Date of birth" name="dob">
-                <span class="focus-input100"></span>
-                <span class="symbol-input100">
-                  <i class="fa-solid fa-cake-candles" aria-hidden="true"></i>
-                </span>
-            </div>
-            
-
-            <div class="wrap-input100 validate-input">
-                <input type="text" class="input100" placeholder="Address" name="address">
-                <span class="focus-input100"></span>
-                <span class="symbol-input100">
-                  <i class="fa-solid fa-address-book" aria-hidden="true"></i>
-                </span>
-            </div>
-            
-
             <div class="wrap-input100 validate-input">
                 <input type="text" class="input100" placeholder="Phone Number" name="phone_number">
                 <span class="focus-input100"></span>
@@ -79,7 +53,7 @@
             </div>
 
             <div class="wrap-input100 validate-input" data-validate="Password is required">
-              <input class="input100" type="password" name="password" placeholder="Password"/>
+              <input class="input100" type="password" placeholder="Password" name="password"/>
               <span class="focus-input100"></span>
               <span class="symbol-input100">
                 <i class="fa fa-lock" aria-hidden="true"></i>
@@ -87,13 +61,15 @@
             </div>
 
             <div class="wrap-input100 validate-input" data-validate="Password is required">
-              <input class="input100" type="password" name="rewrite_password" placeholder="Rewrite Password"/>
+              <input class="input100" type="password" placeholder="Rewrite Password" name="rewrite_password"/>
               <span class="focus-input100"></span>
               <span class="symbol-input100">
                 <i class="fa fa-lock" aria-hidden="true"></i>
               </span>
             </div>
-
+            
+            <p class="text-center" style="color: red">${requestScope.error}</p>
+            
             <div class="container-login100-form-btn">
               <button class="login100-form-btn">Create</button>
             </div>
