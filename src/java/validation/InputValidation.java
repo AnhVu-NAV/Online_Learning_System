@@ -8,7 +8,7 @@ import java.util.Scanner;
  *
  * @author 84941
  */
-public class Validation {
+public class InputValidation {
     Scanner sc = new Scanner(System.in);
 
     public String checkInputString() {
