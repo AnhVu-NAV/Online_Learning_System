@@ -25,7 +25,7 @@ public class DBContext {
         try {
             String user = "root"; // change this to your MySQL username
             String pass = "123456"; // change this to your MySQL password
-            String url = "jdbc:mysql://localhost:3306/learnik"; // change mydb to your database name
+            String url = "jdbc:mysql://localhost:3306/OnlineLearningSystem"; // change mydb to your database name
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, pass);
             System.out.println(connection);
@@ -36,12 +36,7 @@ public class DBContext {
     }
 
     public static void main(String[] args) {
-        DBContext dbContext = new DBContext();
-        if (dbContext.connection != null) {
-            System.out.println("Kết nối thành công với cơ sở dữ liệu!");
-        } else {
-            System.out.println("Kết nối thất bại!");
-        }
+        new DBContext(); // Just to test the connection
     }
     
     public ResultSet getData(String sql) {
@@ -55,8 +50,5 @@ public class DBContext {
         }
         return rs;
     }
-    
-    
-    
 }
 
