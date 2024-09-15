@@ -14,9 +14,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author AnhVuNAV
+ * @author 84941
  */
-public class Controller extends HttpServlet {
+public class SettingListController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +33,10 @@ public class Controller extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controller</title>");  
+            out.println("<title>Servlet SettingListController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Controller at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SettingListController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
