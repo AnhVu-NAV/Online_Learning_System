@@ -8,6 +8,10 @@
             <file>file:/D:/SWP_OnlineLearningProject/swp391_onlinelearning/web/LessonView.jsp</file>
             <file>file:/D:/SWP_OnlineLearningProject/swp391_onlinelearning/src/java/controller/ChapterDisplayController.java</file>
             <file>file:/D:/SWP_OnlineLearningProject/swp391_onlinelearning/src/java/dal/UserDAO.java</file>
+            <file>file:/D:/SWP391_Group4_OnlineLearning/swp391_onlinelearning/src/java/controller/SettingListController.java</file>
+            <file>file:/D:/SWP391_Group4_OnlineLearning/swp391_onlinelearning/src/java/controller/UserListController.java</file>
+            <file>file:/D:/SWP391_Group4_OnlineLearning/swp391_onlinelearning/src/java/controller/UserLogListController.java</file>
+            <file>file:/D:/SWP391_Group4_OnlineLearning/swp391_onlinelearning/src/java/dal/DBContext.java</file>
         </group>
     </open-files>
 </project-private>
