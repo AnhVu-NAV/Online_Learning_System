@@ -1,72 +1,90 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package model;
-
 import java.sql.Timestamp;
-import java.util.Date;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 /**
  *
  * @author mocun
  */
-@Builder
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Blogs {
-
     private int blogId;
     private int authorId;
     private String title;
     private String content;
-    private String thumbnailUrl;
-    private String briefInfo;
-    private String category;
-    private Date createdDate;
-    private Date updatedDate;
-    private String authorName;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
-    // Getter và Setter cho thumbnailUrl
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
+    // Constructor
+    public Blogs(int blogId, int authorId, String title, String content, Timestamp createdAt, Timestamp updatedAt) {
+        this.blogId = blogId;
+        this.authorId = authorId;
+        this.title = title;
+        this.content = content;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
+    // Getters and Setters
+    public int getBlogId() {
+        return blogId;
     }
 
-    public String getBriefInfo() {
-        return briefInfo;
+    public void setBlogId(int blogId) {
+        this.blogId = blogId;
     }
 
-    public void setBriefInfo(String briefInfo) {
-        this.briefInfo = briefInfo;
+    public int getAuthorId() {
+        return authorId;
     }
 
-    public String getCategory() {
-        return category;
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     // toString method
     @Override
     public String toString() {
-        return "Blogs{"
-                + "blogId=" + blogId
-                + ", authorId=" + authorId
-                + ", title='" + title + '\''
-                + ", content='" + content + '\''
-                + ", thumbnailUrl='" + thumbnailUrl + '\''
-                + ", briefInfo='" + briefInfo + '\''
-                + ", category='" + category + '\''
-                + ", createdDate=" + createdDate
-                + ", updatedDate=" + updatedDate
-                + ", authorName=" + authorName
-                + '}';
+        return "Blogs{" +
+                "blogId=" + blogId +
+                ", authorId=" + authorId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }
