@@ -52,7 +52,6 @@ public class BlogDAO extends DBContext {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return list;
     }
 
@@ -67,7 +66,6 @@ public class BlogDAO extends DBContext {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return noOfRecords;
     }
 }
