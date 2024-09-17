@@ -11,7 +11,8 @@ CREATE TABLE Accounts(
     role_id INT,accounts
     created_date DATE,
     status INT,
-    UNIQUE (email)
+    UNIQUE (email),
+    phone_number VARCHAR(256) 
 );
 CREATE TABLE UserLogs(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -65,3 +66,10 @@ VALUES
 (1, 'marketing', 'Marketing role', 1, '2024-09-15', '2024-09-15'),
 (2, 'login', 'Login event', 1, '2024-09-15', '2024-09-15'),
 (2, 'logout', 'Logout event', 1, '2024-09-15', '2024-09-15');
+
+INSERT INTO Accounts (email, first_name, last_name, password, dob, gender, role_id, created_date, status, phone_number)
+VALUES ('example@example.com', 'John', 'Doe', 'securepassword', '1990-01-01', 0, 2, '2024-09-16', 1, '123-456-7890');
+
+
+ALTER TABLE accounts
+ADD phone_number VARCHAR(256) ;
