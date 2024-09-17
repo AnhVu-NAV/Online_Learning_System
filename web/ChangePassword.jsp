@@ -3,53 +3,40 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>E-Learning</title>
+        <title>Traveland</title>
         <!-- Bootstrap CSS -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <style>
             body {
-                background-color: #f3e8ff; /* Màu nền tím nhạt */
+                background-color: #f8f9fa;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 height: 100vh;
-                margin: 0;
             }
             .verify-otp {
                 background-color: #ffffff;
-                padding: 40px;
-                border-radius: 15px;
-                box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-                max-width: 400px; /* Đặt chiều rộng tối đa */
-                width: 100%;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             }
             .form-title {
-                margin-bottom: 30px;
-                color: #5d3b91; /* Màu tím cho tiêu đề */
-            }
-            .form-group {
                 margin-bottom: 20px;
             }
-            .form-control {
-                border: 2px solid #d3bdf0; /* Màu viền tím nhạt */
-                padding: 10px;
-                border-radius: 5px;
+            .form-group {
+                margin-bottom: 15px;
             }
             .form-submit {
                 width: 100%;
-                background-color: #a166ff; /* Màu tím nhạt cho nút */
+                background-color: #86B817;
                 color: #ffffff;
                 border: none;
                 padding: 10px;
                 border-radius: 5px;
                 cursor: pointer;
-                transition: background-color 0.3s ease;
             }
             .form-submit:hover {
-                background-color: #8241cc; /* Màu tím đậm hơn khi hover */
-            }
-            .alert {
-                text-align: center;
+                background-color: #0056b3;
             }
         </style>
     </head>
@@ -60,7 +47,7 @@
                     <div class="verify-otp-content">
                         <div class="verify-otp-form">
                             <h2 class="form-title text-center">Change Password</h2>
-                            <form action="changePassword" method="POST" class="register-form" id="verify-form">
+                            <form action="changePass" method="POST" class="register-form" id="verify-form">
                                 <c:choose>
                                     <c:when test="${not empty error}">
                                         <div class="alert alert-danger">${error}</div>
