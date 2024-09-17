@@ -124,8 +124,8 @@
 
     <!-- Declare Controller Servlet -->
     <servlet>
-        <servlet-name>UserListController</servlet-name>
-        <servlet-class>controller.UserListController</servlet-class>
+        <servlet-name>AdminDashboardController</servlet-name>
+        <servlet-class>controller.AdminDashboardController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SettingListController</servlet-name>
@@ -176,16 +176,16 @@
         <servlet-class>controller.RegisterCourseController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UserListController</servlet-name>
-        <url-pattern>/UserList</url-pattern>
+        <servlet-name>AdminDashboardController</servlet-name>
+        <url-pattern>/AdminDashboardController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SettingListController</servlet-name>
-        <url-pattern>/SettingList</url-pattern>
+        <url-pattern>/SettingListController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserLogListController</servlet-name>
-        <url-pattern>/UserLogList</url-pattern>
+        <url-pattern>/UserLogListController</url-pattern>
     </servlet-mapping>
 
     <!-- Map BlogListServlet -->
