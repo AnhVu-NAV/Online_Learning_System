@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package validation;
+package util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -128,9 +128,4 @@ public class InputValidation {
         return password;
     }
 
-//    public static LocalDate getDate(String dob_raw) {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//        LocalDate dob = LocalDate.parse(dob_raw, formatter);
-//        return dob;
-//    }
 }

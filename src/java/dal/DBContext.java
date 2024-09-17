@@ -32,7 +32,7 @@ public class DBContext {
         }
     }
 
-//    public static void main(String[] args) {
-//        new DBContext(); // Just to test the connection
-//    }
+    public static void main(String[] args) {
+        new DBContext(); // Just to test the connection
+    }
 }

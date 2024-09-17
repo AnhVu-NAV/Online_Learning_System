@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.*;
 import model.Account;
-import validation.InputValidation;
+import util.InputValidation;
 
 /**
  *
@@ -73,7 +73,7 @@ public class CreateNewAccountController extends HttpServlet {
 
     private boolean isEmailExisted(String email) {
         AccountDAO adao = new AccountDAO();
-        ArrayList<String> list = adao.getAllEmail();
+        Vector<String> list = adao.getAllEmail();
         for (String string : list) {
             if (string.equals(email)) {
                 return true;

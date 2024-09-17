@@ -5,6 +5,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  *
@@ -14,17 +15,31 @@ public class Account {
 
     private int id;
     private String email;
-    private LocalDate dob;
+    private Date dob;
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private String password;
-    private int role;
-    private int gender;
+    private int role_id;
+    private boolean gender;
     private LocalDate createdDate;
-    private int isActivated;
+    private int status;
 
     public Account() {
+    }
+
+    public Account(int id, String email, Date dob, String firstName, String lastName, String phoneNumber, String password, int role_id, boolean gender, LocalDate createdDate, int status) {
+        this.id = id;
+        this.email = email;
+        this.dob = dob;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.role_id = role_id;
+        this.gender = gender;
+        this.createdDate = createdDate;
+        this.status = status;
     }
     
     public Account(String email, String phoneNumber, String password) {
@@ -50,11 +65,11 @@ public class Account {
         this.email = email;
     }
 
-    public LocalDate getDob() {
+    public Date getDob() {
         return dob;
     }
 
-    public void setDob(LocalDate dob) {
+    public void setDob(Date dob) {
         this.dob = dob;
     }
 
@@ -90,19 +105,19 @@ public class Account {
         this.password = password;
     }
 
-    public int getRole() {
-        return role;
+    public int getRoleId() {
+        return role_id;
     }
 
-    public void setRole(int role) {
-        this.role = role;
+    public void setRoleId(int role) {
+        this.role_id = role;
     }
 
-    public int getGender() {
+    public boolean getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(boolean gender) {
         this.gender = gender;
     }
 
@@ -119,17 +134,17 @@ public class Account {
         this.createdDate = date;
     }
 
-    public int getIsActivated() {
-        return isActivated;
+    public int getStatus() {
+        return status;
     }
 
-    public void setIsActivated(int isActivated) {
-        this.isActivated = isActivated;
+    public void setStatus(int isActivated) {
+        this.status = isActivated;
     }
 
     @Override
     public String toString() {
-        return "Account{" + "id=" + id + ", email=" + email + ", dob=" + dob + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", password=" + password + ", role=" + role + ", gender=" + gender + ", createdDate=" + createdDate + ", isActivated=" + isActivated + '}';
+        return "Account{" + "id=" + id + ", email=" + email + ", dob=" + dob + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", password=" + password + ", role=" + role_id + ", gender=" + gender + ", createdDate=" + createdDate + ", status=" + status + '}';
     }
 
 }
