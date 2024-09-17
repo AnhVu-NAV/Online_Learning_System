@@ -22,11 +22,12 @@ public class Account {
     private int role_id;
     private Date created_date;
     private int status;
+    private String phone_number;
 
     public Account() {
     }
 
-    public Account(int id, String email, String first_name, String last_name, String password, Date dob, boolean gender, int role_id, Date created_date, int status) {
+    public Account(int id, String email, String first_name, String last_name, String password, Date dob, boolean gender, int role_id, Date created_date, int status, String phone_number) {
         this.id = id;
         this.email = email;
         this.first_name = first_name;
@@ -37,24 +38,7 @@ public class Account {
         this.role_id = role_id;
         this.created_date = created_date;
         this.status = status;
-    }
-
-    
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+        this.phone_number = phone_number;
     }
 
     public int getId() {
@@ -71,6 +55,22 @@ public class Account {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getPassword() {
@@ -97,11 +97,11 @@ public class Account {
         this.gender = gender;
     }
 
-    public int getRole() {
+    public int getRole_id() {
         return role_id;
     }
 
-    public void setRole(int role_id) {
+    public void setRole_id(int role_id) {
         this.role_id = role_id;
     }
 
@@ -120,6 +120,20 @@ public class Account {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    
+
+    
+
+    
 
     
 
