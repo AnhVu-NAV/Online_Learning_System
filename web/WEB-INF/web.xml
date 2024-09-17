@@ -97,5 +97,11 @@
     <servlet-mapping>
         <servlet-name>SettingDashboardController</servlet-name>
         <url-pattern>/SettingDashboardController</url-pattern>
+        <servlet-name>changePassword</servlet-name>
+        <servlet-class>controller.changePassword</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>changePassword</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
     </servlet-mapping>
 </web-app>
