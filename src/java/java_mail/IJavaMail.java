@@ -10,7 +10,7 @@ package java_mail;
  */
 public interface IJavaMail {
     boolean send(String toEmail,String subject,String messageContent);
-    
-        
-    
+       
 }
+
+
