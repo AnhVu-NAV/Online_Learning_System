@@ -120,12 +120,21 @@
 
         <servlet-name>Controller</servlet-name>
         <servlet-class>controller.Controller</servlet-class>
-        <servlet-name>BlogListServlet</servlet-name>
-        <servlet-class>com.example.project.controller.BlogListServlet</servlet-class>
     </servlet>
+    <!-- Khai báo servlet BlogListServlet -->
+    <servlet>
+        <servlet-name>BlogListServlet</servlet-name>
+        <servlet-class>controller.BlogListServlet</servlet-class>
+    </servlet>
+    
+    <!-- Mapping servlet Controller -->
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Mapping servlet BlogListServlet -->
+    <servlet-mapping>
         <servlet-name>BlogListServlet</servlet-name>
         <url-pattern>/blogList</url-pattern>
 
@@ -256,6 +265,6 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>-->
     <session-config>
-        <session-timeout> 30 </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 </web-app>
