@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <!-- Khai báo servlet Controller -->
     <servlet>
         <servlet-name>UserDashboardController</servlet-name>
         <servlet-class>controller.UserDashboardController</servlet-class>
@@ -40,23 +41,27 @@
         <servlet-name>BlogListServlet</servlet-name>
         <servlet-class>com.example.project.controller.BlogListServlet</servlet-class>
     </servlet>
+    <!-- Khai báo servlet BlogListServlet -->
+    <servlet>
+        <servlet-name>BlogListServlet</servlet-name>
+        <servlet-class>controller.BlogListServlet</servlet-class>
+    </servlet>
+    
+    <!-- Mapping servlet Controller -->
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
+    
+    <!-- Mapping servlet BlogListServlet -->
     <servlet-mapping>
         <servlet-name>BlogListServlet</servlet-name>
         <url-pattern>/blogList</url-pattern>
 
     </servlet-mapping>
-    <!--    <servlet-mapping>
-        <servlet-name>HomepageController</servlet-name>
-        <url-pattern>/Homepage</url-pattern>
-    </servlet-mapping>-->
-    <!--    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>-->
+
+    <!-- Cấu hình session -->
     <session-config>
-        <session-timeout> 30 </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 </web-app>

@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dal.BlogDAO;
@@ -15,15 +14,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Blogs;
+import model.Blog;
 
 /**
  *
  * @author mocun
  */
-//@WebServlet(name="BlogListServlet", urlPatterns={"/blogListServlet"})
+@WebServlet(name = "BlogListServlet", urlPatterns = {"/blogList"})
 public class BlogListServlet extends HttpServlet {
-    
+
     private BlogDAO blogDAO;  // Assuming you have a DAO for Blog
 
     @Override
@@ -34,24 +33,20 @@ public class BlogListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // Pagination logic
         int page = 1;
         int recordsPerPage = 5;
         if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
         }
 
-        List<Blogs> blogList = blogDAO.getPaginatedBlogs((page - 1) * recordsPerPage, recordsPerPage);
-        int noOfRecords = blogDAO.getNoOfRecords();  // To get total number of records for pagination
+        List<Blog> blogList = blogDAO.getPaginatedBlogs((page - 1) * recordsPerPage, recordsPerPage);
+        int noOfRecords = blogDAO.getNoOfRecords();
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 
-        // Set attributes to forward to the JSP
         request.setAttribute("blogList", blogList);
         request.setAttribute("noOfPages", noOfPages);
         request.setAttribute("currentPage", page);
 
-        // Redirect to the blog list JSP page
         RequestDispatcher dispatcher = request.getRequestDispatcher("/blogList.jsp");
         dispatcher.forward(request, response);
     }
@@ -91,5 +86,4 @@ public class BlogListServlet extends HttpServlet {
 //    public String getServletInfo() {
 //        return "Short description";
 //    }// </editor-fold>
-
 }
