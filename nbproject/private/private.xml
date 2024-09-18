@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/bloglist.jsp</file>
+            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/controller/BlogListServlet.java</file>
+            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/model/Blogs.java</file>
+            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/blogList.jsp</file>
+            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/dal/BlogDAO.java</file>
+            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/model/Blog.java</file>
+            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>
