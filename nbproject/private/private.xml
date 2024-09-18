@@ -24,6 +24,7 @@
             <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/ForgotPasswordController.java</file>
             <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/ChangePasswordController.java</file>
             <file>file:/D:/SWP-Project/swp391_onlinelearning/web/ForgotPassword.jsp</file>
+
             <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/dal/UserDAO.java</file>
             <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/controller/ForgotPasswordController.java</file>
             <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/controller/ChangePasswordController.java</file>
@@ -32,6 +33,13 @@
             <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/css/globals.css</file>
             <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/component/Header.jsp</file>
             <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/bloglist.jsp</file>
+            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/controller/BlogListServlet.java</file>
+            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/model/Blogs.java</file>
+            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/blogList.jsp</file>
+            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/dal/BlogDAO.java</file>
+            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/model/Blog.java</file>
+
         </group>
     </open-files>
 </project-private>

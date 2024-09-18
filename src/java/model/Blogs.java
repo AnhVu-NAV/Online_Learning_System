@@ -3,27 +3,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import java.sql.Timestamp;
+
 /**
  *
  * @author mocun
  */
 public class Blogs {
+
     private int blogId;
     private int authorId;
     private String title;
     private String content;
+    private String thumbnailUrl;
+    private String briefInfo;
+    private String category;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
     // Constructor
-    public Blogs(int blogId, int authorId, String title, String content, Timestamp createdAt, Timestamp updatedAt) {
+    public Blogs(int blogId, int authorId, String title, String content, String thumbnailUrl, String briefInfo, String category, Timestamp createdAt, Timestamp updatedAt) {
         this.blogId = blogId;
         this.authorId = authorId;
         this.title = title;
         this.content = content;
+        this.thumbnailUrl = thumbnailUrl;
+        this.briefInfo = briefInfo;
+        this.category = category;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public Blogs() {
+
     }
 
     // Getters and Setters
@@ -75,16 +88,44 @@ public class Blogs {
         this.updatedAt = updatedAt;
     }
 
+    // Getter và Setter cho thumbnailUrl
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public String getBriefInfo() {
+        return briefInfo;
+    }
+
+    public void setBriefInfo(String briefInfo) {
+        this.briefInfo = briefInfo;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     // toString method
     @Override
     public String toString() {
-        return "Blogs{" +
-                "blogId=" + blogId +
-                ", authorId=" + authorId +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+        return "Blogs{"
+                + "blogId=" + blogId
+                + ", authorId=" + authorId
+                + ", title='" + title + '\''
+                + ", content='" + content + '\''
+                + ", thumbnailUrl='" + thumbnailUrl + '\''
+                + ", briefInfo='" + briefInfo + '\''
+                + ", category='" + category + '\''
+                + ", createdAt=" + createdAt
+                + ", updatedAt=" + updatedAt
+                + '}';
     }
 }
