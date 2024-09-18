@@ -41,7 +41,6 @@ public class CheckRoleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        processRequest(request, response);
         HttpSession session = request.getSession();
         if (session.getAttribute("account") == null) {
             request.getRequestDispatcher("login.jsp").forward(request, response); 

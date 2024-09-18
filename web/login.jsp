@@ -61,7 +61,7 @@
             </div>
 
             <div class="text-center p-t-136">
-              <a id="loginBtn" class="txt2" href="createAccount.jsp">
+              <a id="loginBtn" class="txt2" href="create_account.jsp">
                 Create your Account
                 <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
               </a>

@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Account;
+import util.*;
 
 /**
  *
@@ -20,53 +21,41 @@ import model.Account;
  */
 public class LoginSystemController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        request.setCharacterEncoding("UTF-8"); 
+        request.setCharacterEncoding("UTF-8");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String action = request.getParameter("action"); 
         AccountDAO adao = new AccountDAO();
-        Account account = adao.getAccountByEmail(email);
-        if (account == null) {
-            request.setAttribute("error", "This email is not existed");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            if (isValidPassword(account, password)) {
-                session.setAttribute("account", account);
-                request.getRequestDispatcher("homepageDemo.jsp").forward(request, response);
+
+        try {
+            Account account = adao.getAccountByEmail(email);
+            if (account == null) {
+                throw new Exception("This email is not existed");
             } else {
-                request.setAttribute("error", "Password is incorrect");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                if (!isValidPassword(account, password)) {
+                    throw new Exception("Password is incorrect");
+                }
+                session.setAttribute("account", account);
+                request.getRequestDispatcher("home_page_demo.jsp").forward(request, response);
             }
+        } catch (Exception e) {
+            request.setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
     private boolean isValidPassword(Account account, String password) {
+        password = PasswordEncoding.getEncodingPassword(password);
         return account.getPassword().equals(password);
     }
 

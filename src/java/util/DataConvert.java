@@ -12,12 +12,18 @@ import java.util.Date;
  */
 public class DataConvert {
 
-    public static java.sql.Date convertDate(Date date) {
+    public static java.sql.Date convertToSQLDate(Date date) {
         if (date != null) {
             // Convert java.util.Date to java.sql.Date
             return new java.sql.Date(date.getTime());
-        } else {
-            return null; // Handle null input
         }
+        return null; // Handle null input
+    }
+
+    public static java.util.Date convertToUtilDate(Date date) {
+        if (date != null) {
+            return new java.util.Date(date.getTime());
+        }
+        return null;
     }
 }
