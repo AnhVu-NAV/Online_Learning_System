@@ -34,7 +34,7 @@ public class LoginSystemController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String action = request.getParameter("action"); 
+//        String action = request.getParameter("action"); 
         AccountDAO adao = new AccountDAO();
 
         try {

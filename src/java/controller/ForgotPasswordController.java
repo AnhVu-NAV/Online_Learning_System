@@ -23,13 +23,13 @@ public class ForgotPasswordController extends HttpServlet{
         try (PrintWriter out = response.getWriter()) {
             String email = request.getParameter("email"); //email người nhận
             AccountDAO adao = new AccountDAO();
-            String fullName = adao.checkEmail(email);
+//            String fullName = adao.checkEmail(email);
 
             if (fullName.equals("Nothing")) {
                 request.setAttribute("message", "No exit account with this email. Please check again!");
                 request.getRequestDispatcher("forgetPass.jsp").forward(request, response);
             }
-            String newPass = adao.updatePass(email);
+//            String newPass = adao.updatePass(email);
 
             //SMTP
             Properties properties = new Properties();
@@ -54,8 +54,8 @@ public class ForgotPasswordController extends HttpServlet{
                 String content = "<html><body>"
                         + "<p style='font-size: 20px; font-weight: bold;'>     Traveland     </p>"
                         + "<p style='font-size: 12px; font-weight: bold;'>      Reset Password      </p>"
-                        + "<p style='font-size: 10px;'>Hi <span style='font-weight: bold;'>" + fullName + "</span>,</p>"
-                        + "<p>This is your new password for your Traveland account: <span style='font-weight: bold;'>" + newPass + "</span></p>"
+//                        + "<p style='font-size: 10px;'>Hi <span style='font-weight: bold;'>" + fullName + "</span>,</p>"
+//                        + "<p>This is your new password for your Traveland account: <span style='font-weight: bold;'>" + newPass + "</span></p>"
                         + "<p>Do not share for anyone else.</p>"
                         + "<p>Thank you!</p>"
                         + "</body></html>";
