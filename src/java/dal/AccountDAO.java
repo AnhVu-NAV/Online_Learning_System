@@ -8,6 +8,7 @@ import model.Account;
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import model.Setting;
 import util.DataConvert;
 
 /**
@@ -16,7 +17,16 @@ import util.DataConvert;
  */
 public class AccountDAO extends DBContext {
 
-    public Account getAccountByEmail(String email) throws SQLException {
+    // <editor-fold defaultstate="collapsed" desc="Declare variable and constructor">
+    private SettingDAO setdao;
+
+    public AccountDAO() {
+        this.setdao = new SettingDAO();
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Get methods">
+    public Account getAccountByEmail(String email) throws Exception {
         String sql = "select * from Account where email = ?";
         Account account = new Account();
         PreparedStatement pre = connection.prepareStatement(sql);
@@ -27,7 +37,7 @@ public class AccountDAO extends DBContext {
             account.setEmail(rs.getString("email"));
             account.setPassword(rs.getString("password"));
             account.setDob(DataConvert.convertToUtilDate(rs.getDate("dob")));
-            account.setRoleId(rs.getInt("role_id"));
+            account.setRoleId(setdao.getSettingById(rs.getInt("role_id")));
             account.setCreatedDate(DataConvert.convertToUtilDate(rs.getDate("created_date")));
             account.setStatus(rs.getInt("status"));
             account.setPhoneNumber(rs.getString("phone_number"));
@@ -41,6 +51,33 @@ public class AccountDAO extends DBContext {
         pre.close();
         return null;
     }
+
+    public Account getAccountById(int id) throws Exception {
+        String sql = "select * from Account where id = ?";
+        Account account = new Account();
+        PreparedStatement pre = connection.prepareStatement(sql);
+        pre.setInt(1, id);
+        ResultSet rs = pre.executeQuery();
+        if (rs.next()) {
+            account.setId(rs.getInt("id"));
+            account.setEmail(rs.getString("email"));
+            account.setPassword(rs.getString("password"));
+            account.setDob(DataConvert.convertToUtilDate(rs.getDate("dob")));
+            account.setRoleId(setdao.getSettingById(rs.getInt("role_id")));
+            account.setCreatedDate(DataConvert.convertToUtilDate(rs.getDate("created_date")));
+            account.setStatus(rs.getInt("status"));
+            account.setPhoneNumber(rs.getString("phone_number"));
+            account.setGender(rs.getBoolean("gender"));
+            account.setFirstName(rs.getString("first_name"));
+            account.setLastName(rs.getString("last_name"));
+            account.setImage_url(rs.getString("image_url"));
+            return account;
+        }
+        rs.close();
+        pre.close();
+        return null;
+    }
+    // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Update methods">
     public Vector<String> getAllEmail() throws SQLException {
@@ -145,7 +182,7 @@ public class AccountDAO extends DBContext {
         pre.setString(1, account.getEmail());
         pre.setString(2, account.getPhoneNumber());
         pre.setString(3, account.getPassword());
-        pre.setInt(4, account.getRoleId());
+        pre.setInt(4, account.getRoleId().getId());
         pre.setDate(5, DataConvert.convertToSQLDate(account.getCreatedDate()));
         pre.setInt(6, account.getStatus());
         pre.setString(7, account.getImage_url());
@@ -169,23 +206,31 @@ public class AccountDAO extends DBContext {
 //        adao.updatePhoneNumber(account, "0912797815"); 
 //       
 //        delete
-        Account account = adao.getAccountByEmail("hoana5k44nknd@gmail.com");
-        adao.deleteAccount(account); 
+//            Account account = adao.getAccountByEmail("hoana5k44nknd@gmail.com");
+//            adao.deleteAccount(account);
 //
 //        insert        
 //        LocalDate dob1 = LocalDate.parse("2024-10-02", formatter);
+//            SettingDAO sdao = new SettingDAO();
 //            Account account = new Account(
 //                    "hoana5k44nknd@gmail.com",
 //                    "0949279204",
 //                    "12345678",
-//                    0);
+//                    sdao.getSettingById(1)); 
 //
 //            adao.insertAccount(account);
 //
 //        for (String string : adao.getAllEmail()) {
 //            System.out.println(string);
 //        }
+//            System.out.println(sdao.getSettingById(1).toString());
 //            System.out.println(adao.getAccountByEmail("hoana5k44nknd@gmail.com").toString());
+            SettingDAO setdao = new SettingDAO();
+            SettingTypeDAO setttingTypeDAO = new SettingTypeDAO();
+            setttingTypeDAO.insert("a");
+            Setting setting = new Setting(setttingTypeDAO.getSettingTypeByName("a"), "b", 0);
+            setdao.insert(setting); 
+            Account account = new Account("a@gmail.com", "0949279204", "12345678", setdao.getSettingById(3)); 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

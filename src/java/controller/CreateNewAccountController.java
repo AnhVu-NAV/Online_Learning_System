@@ -5,6 +5,8 @@
 package controller;
 
 import dal.AccountDAO;
+import dal.SettingDAO;
+import dal.SettingTypeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.*;
 import model.Account;
+import model.Setting;
 import util.*;
 
 /**
@@ -25,7 +28,7 @@ public class CreateNewAccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("create_account.jsp").forward(request, response); 
+        request.getRequestDispatcher("create_account.jsp").forward(request, response);
     }
 
     @Override
@@ -36,16 +39,16 @@ public class CreateNewAccountController extends HttpServlet {
         String password = request.getParameter("password");
         String rewritePassword = request.getParameter("rewrite_password");
         AccountDAO adao = new AccountDAO();
-        
+
         try {
             email = InputValidation.getEmail(email);
             phoneNumber = InputValidation.getPhone(phoneNumber);
             if (isEmailExisted(email)) {
                 throw new Exception("This email is already existed");
             }
-            if (password.equals(rewritePassword) && InputValidation.checkFormatOfPassword(password)) { 
-                Account account = new Account(email, phoneNumber, password, 0);
-                adao.insertAccount(account); 
+            if (password.equals(rewritePassword) && InputValidation.checkFormatOfPassword(password)) {
+                Account account = getAccount(email, phoneNumber, password);
+                adao.insertAccount(account);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 throw new Exception("Password is not duplicated");
@@ -65,6 +68,20 @@ public class CreateNewAccountController extends HttpServlet {
             }
         }
         return false;
+    }
+
+    private Account getAccount(String email, String phoneNumber, String password) throws Exception {
+        SettingDAO setdao = new SettingDAO();
+        SettingTypeDAO setttingTypeDAO = new SettingTypeDAO();
+        setttingTypeDAO.insert("");
+        Setting setting = new Setting(setttingTypeDAO.getSettingTypeByName(""), "", 0);
+        setdao.insert(setting);
+        if (setdao.getMaxId() != 0) {
+            Account account = new Account(email, phoneNumber, password, setdao.getSettingById(setdao.getMaxId()));
+            return account;
+        } else {
+            throw new Exception("Cannot create account according to unidentified error");
+        }
     }
 
     /**
