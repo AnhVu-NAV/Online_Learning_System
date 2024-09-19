@@ -10,5 +10,13 @@
             <file>file:/D:/SWP391_Group4_OnlineLearning/swp391_onlinelearning/src/java/controller/SettingDashboardController.java</file>
         </group>
         <group/>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/model/Customer.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/forgetPasswordController.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/dal/CustomerDAO.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/web/ChangePassword.jsp</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/changePassword.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/web/ForgotPassword.jsp</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/dal/DBContext.java</file>
+        </group>
     </open-files>
 </project-private>

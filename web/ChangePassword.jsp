@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Traveland</title>
+        <title>E-Learning</title>
         <!-- Bootstrap CSS -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <style>
@@ -47,7 +47,7 @@
                     <div class="verify-otp-content">
                         <div class="verify-otp-form">
                             <h2 class="form-title text-center">Change Password</h2>
-                            <form action="changePass" method="POST" class="register-form" id="verify-form">
+                            <form action="changePassword" method="POST" class="register-form" id="verify-form">
                                 <c:choose>
                                     <c:when test="${not empty error}">
                                         <div class="alert alert-danger">${error}</div>
