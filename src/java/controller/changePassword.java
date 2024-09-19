@@ -18,7 +18,7 @@ import model.Customer;
  *
  * @author admin
  */
-public class changePassword extends HttpServlet {
+public class ChangePassword extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -83,14 +83,14 @@ public class changePassword extends HttpServlet {
             if (new_pass.equals(c_new_pass)){
                 CustomerDAO cus = new CustomerDAO();
                 cus.updatePass(nuser.getEmail(), new_pass);
-                response.sendRedirect("AccountController");
+                response.sendRedirect("ChangePassword.jsp");
             } else {
                 request.setAttribute("error", "You entered confirm password diffent new password!");
                 request.getRequestDispatcher("changePass.jsp").forward(request, response);
             }
         } else {
             request.setAttribute("error", "Password is not correct!");
-            request.getRequestDispatcher("changePass.jsp").forward(request, response);
+            request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
 
         }
 
