@@ -53,5 +53,13 @@
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/test/dal/UserDAOTest.java</file>
         </group>
         <group/>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/model/Customer.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/forgetPasswordController.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/dal/CustomerDAO.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/web/ChangePassword.jsp</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/changePassword.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/web/ForgotPassword.jsp</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/dal/DBContext.java</file>
+        </group>
     </open-files>
 </project-private>
