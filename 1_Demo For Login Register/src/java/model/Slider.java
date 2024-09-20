@@ -11,7 +11,7 @@ package model;
 public class Slider {
 
     private int id;
-    private Account account;
+    private Account author_id;
     private String image_url;
     private String backlink_url;
     private int status;
@@ -21,7 +21,7 @@ public class Slider {
 
     public Slider(int id, Account account, String image_url, String backlink_url, int status) {
         this.id = id;
-        this.account = account;
+        this.author_id = account;
         this.image_url = image_url;
         this.backlink_url = backlink_url;
         this.status = status;
@@ -37,11 +37,11 @@ public class Slider {
     }
 
     public Account getAccount() {
-        return account;
+        return author_id;
     }
 
     public void setAccount(Account account) {
-        this.account = account;
+        this.author_id = account;
     }
 
     public String getImage_url() {

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : slider.jsp
-    Created on : Sep 18, 2024, 10:32:37 PM
+    Document   : index.jsp
+    Created on : Sep 19, 2024, 9:52:46 PM
     Author     : ADMIN
 --%>
 
@@ -10,131 +10,50 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
-        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css" />
-        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css"/>
-        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css"/>
-        <link rel="stylesheet" type="text/css" href="css/util.css" />
-        <link rel="stylesheet" type="text/css" href="css/main.css" />
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                margin: 0;
-                background-color: #f0f0f0;
-            }
-
-            .slider {
-                position: relative;
-                width: 80%;
-                max-width: 800px;
-                overflow: hidden;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            }
-
-            .slides {
-                display: flex;
-                transition: transform 0.5s ease-in-out;
-            }
-
-            .slide {
-                min-width: 100%;
-                box-sizing: border-box;
-            }
-
-            .slide img {
-                width: 100%;
-                border-radius: 10px;
-            }
-
-            .prev, .next {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                background-color: rgba(0, 0, 0, 0.5);
-                color: white;
-                border: none;
-                padding: 10px;
-                cursor: pointer;
-                border-radius: 50%;
-            }
-
-            .prev {
-                left: 10px;
-            }
-
-            .next {
-                right: 10px;
-            }
-
-            img {
-                width: 797px;
-                height: 400px;
-            }
-        </style>
+        <title>JSP Page</title>
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+        <link href="img/favicon.ico" rel="icon">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
-
-        <div class="slider">
-            <p style="color: red">${requestScope.error}</p>
-            <div class="slides">
-                <!--<div class="slide"><img src="img/001.jpg" alt=""></div>-->
-                <c:set var="sliders" value="${requestScope.list_of_sldiers}"/>
-                <c:forEach items="${sliders}" var="s">
-                    <div class="slide"><img src="${s.getImage_url()}" alt=""></div>
+        <div class="container-fluid p-0 mb-5">
+            <div class="owl-carousel header-carousel position-relative">
+                <c:forEach items="${requestScope.list}" var="s">
+                    <div class="owl-carousel-item position-relative">
+                        <a href="${s.getBacklink_url()}" target="_blank"/>
+                        <img class="img-fluid" src="${s.getImage_url()}">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
+                            <div class="container">
+                                <div class="row justify-content-start">
+                                    <div class="col-sm-10 col-lg-8">
+                                        <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Best Online Courses</h5>
+                                        <h1 class="display-3 text-white animated slideInDown">The Best Online Learning Platform</h1>
+                                        <p class="fs-5 text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea sanctus eirmod elitr.</p>
+                                        <a href="${s.getBacklink_url()}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
+                                        <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </c:forEach>
             </div>
-
-            <button class="prev" onclick="prevSlide()">&#10094;</button>
-            <button class="next" onclick="nextSlide()">&#10095;</button>
-
         </div>
+        <!-- Carousel End -->
 
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> <!--khong co la k chay dc-->
+        <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>-->
+        <script src="lib/wow/wow.min.js"></script> <!--khong co la k chay dc-->
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script> <!--khong co la k chay dc-->
 
-        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-        <script src="vendor/bootstrap/js/popper.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendor/select2/select2.min.js"></script>
-        <script src="vendor/tilt/tilt.jquery.min.js"></script>
-        <script>
-                $(".js-tilt").tilt({
-                    scale: 1.1,
-                });
-                let currentSlide = 0;
-
-                function showSlide(index) {
-                    const slides = document.querySelectorAll('.slide');
-                    if (index >= slides.length) {
-                        currentSlide = 0;
-                    } else if (index < 0) {
-                        currentSlide = slides.length - 1;
-                    } else {
-                        currentSlide = index;
-                    }
-                    const offset = -currentSlide * 100;
-                    document.querySelector('.slides').style.transform = `translateX(${offset}%)`;
-                }
-
-                function nextSlide() {
-                    showSlide(currentSlide + 1);
-                }
-
-                function prevSlide() {
-                    showSlide(currentSlide - 1);
-                }
-
-                document.addEventListener('DOMContentLoaded', () => {
-                    showSlide(currentSlide);
-                });
-
-        </script>
-        <script src="js/main.js"></script>
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script> <!--khong co la k chay dc-->
     </body>
 </html>
-

@@ -131,6 +131,7 @@ public class Course {
     }
 
     // </editor-fold>
+    
     @Override
     public String toString() {
         return "Course{" + "id=" + id + ", title=" + title + ", account=" + account + ", createdDate=" + createdDate + ", thumbnailUrl=" + thumbnailUrl + ", numberOfLesson=" + numberOfLesson + '}';

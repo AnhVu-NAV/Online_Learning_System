@@ -15,6 +15,7 @@
         <meta content="" name="description">
         <link href="img/favicon.ico" rel="icon">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link href="lib/animate/animate.min.css" rel="stylesheet">
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -25,7 +26,7 @@
             <div class="owl-carousel header-carousel position-relative">
                 <c:forEach items="${requestScope.list}" var="s">
                     <div class="owl-carousel-item position-relative">
-                    <a href="${s.getBacklink_url()}" target="_blank"/>
+                        <a href="${s.getBacklink_url()}" target="_blank"/>
                         <img class="img-fluid" src="${s.getImage_url()}">
                         <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
                             <div class="container">
@@ -45,16 +46,13 @@
             </div>
         </div>
         <!-- Carousel End -->
-        
-        <jsp:include page="footer.html"></jsp:include>
-        
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> <!--khong co la k chay dc-->
-        <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>-->
-        <script src="lib/wow/wow.min.js"></script> <!--khong co la k chay dc-->
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script> <!--khong co la k chay dc-->
 
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script> <!--khong co la k chay dc-->
+        <jsp:include page="footer.html"></jsp:include>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script> 
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="js/main.js"></script> 
     </body>
 </html>

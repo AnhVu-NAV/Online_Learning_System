@@ -13,14 +13,14 @@ public class PricePackage {
     private int id;
     private Course course;
     private String title;
-    private double price;
-    private double salePrice;
+    private int price;
+    private int salePrice;
     private int duration;
 
     public PricePackage() {
     }
 
-    public PricePackage(int id, Course course, String title, double price, double salePrice, int duration) {
+    public PricePackage(int id, Course course, String title, int price, int salePrice, int duration) {
         this.id = id;
         this.course = course;
         this.title = title;
@@ -55,19 +55,19 @@ public class PricePackage {
         this.title = title;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public double getSalePrice() {
+    public int getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(double salePrice) {
+    public void setSalePrice(int salePrice) {
         this.salePrice = salePrice;
     }
 

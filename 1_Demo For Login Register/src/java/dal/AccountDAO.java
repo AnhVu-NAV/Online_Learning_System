@@ -37,7 +37,7 @@ public class AccountDAO extends DBContext {
             account.setEmail(rs.getString("email"));
             account.setPassword(rs.getString("password"));
             account.setDob(DataConvert.convertToUtilDate(rs.getDate("dob")));
-            account.setRoleId(setdao.getSettingById(rs.getInt("role_id")));
+            account.setRole_id(setdao.getSettingById(rs.getInt("role_id")));
             account.setCreatedDate(DataConvert.convertToUtilDate(rs.getDate("created_date")));
             account.setStatus(rs.getInt("status"));
             account.setPhoneNumber(rs.getString("phone_number"));
@@ -63,7 +63,7 @@ public class AccountDAO extends DBContext {
             account.setEmail(rs.getString("email"));
             account.setPassword(rs.getString("password"));
             account.setDob(DataConvert.convertToUtilDate(rs.getDate("dob")));
-            account.setRoleId(setdao.getSettingById(rs.getInt("role_id")));
+            account.setRole_id(setdao.getSettingById(rs.getInt("role_id")));
             account.setCreatedDate(DataConvert.convertToUtilDate(rs.getDate("created_date")));
             account.setStatus(rs.getInt("status"));
             account.setPhoneNumber(rs.getString("phone_number"));
@@ -182,7 +182,7 @@ public class AccountDAO extends DBContext {
         pre.setString(1, account.getEmail());
         pre.setString(2, account.getPhoneNumber());
         pre.setString(3, account.getPassword());
-        pre.setInt(4, account.getRoleId().getId());
+        pre.setInt(4, account.getRole_id().getId());
         pre.setDate(5, DataConvert.convertToSQLDate(account.getCreatedDate()));
         pre.setInt(6, account.getStatus());
         pre.setString(7, account.getImage_url());

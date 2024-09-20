@@ -133,19 +133,32 @@ public class SliderDAO extends DBContext {
     public static void main(String[] args) {
         SliderDAO sdao = new SliderDAO();
         Slider slider = new Slider();
+        Slider slider1 = new Slider();
+        Slider slider2 = new Slider();
         try {
-            slider.setAccount(adao.getAccountByEmail("a@gmail.com"));
-            slider.setBacklink_url("https://");
-            slider.setImage_url("https://www.elleman.vn/app/uploads/2018/08/13/gi%C3%A0y-sneakers-2-elle-man-8.jpg");
-            slider.setStatus(1);
-            sdao.insertSlider(slider); 
+//            slider.setAccount(adao.getAccountByEmail("b@gmail.com"));
+//            slider.setBacklink_url("https://");
+//            slider.setImage_url("https://www.elleman.vn/app/uploads/2018/08/13/gi%C3%A0y-sneakers-2-elle-man-8.jpg");
+//            slider.setStatus(1);
+            
+            slider1.setAccount(adao.getAccountByEmail("b@gmail.com"));
+            slider1.setBacklink_url("https://");
+            slider1.setImage_url("https://cdn.pixabay.com/photo/2016/02/10/16/37/cat-1192026_1280.jpg");
+            slider1.setStatus(1);
+            
+            slider2.setAccount(adao.getAccountByEmail("b@gmail.com"));
+            slider2.setBacklink_url("https://");
+            slider2.setImage_url("https://cdn2.fptshop.com.vn/unsafe/Uploads/images/tin-tuc/168364/Originals/meme-con-meo%20(1).jpg");
+            slider2.setStatus(1);
+            sdao.insertSlider(slider1); 
+            sdao.insertSlider(slider2); 
 //            System.out.println(sdao.getSliderById(sdao.getMaxId()).toString());
 //            System.out.println(sdao.getSliderById(sdao.getMaxId()).getImage_url());
 //            sdao.deleteSlider(1);
 //            sdao.deleteSlider(2); 
-//            for (Slider s : sdao.getAllSlider()) {
-//                System.out.println(s.toString());
-//            }
+            for (Slider s : sdao.getAllSlider()) {
+                System.out.println(s.toString());
+            }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

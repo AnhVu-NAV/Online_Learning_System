@@ -18,7 +18,7 @@ public class Blog {
     private String thumbnailUrl;
     private String title;
     private String briefInfo;
-    private Account account;
+    private Account author_id;
     private String blogDetail;
     private int status;
 
@@ -33,7 +33,7 @@ public class Blog {
         this.thumbnailUrl = thumbnailUrl;
         this.title = title;
         this.briefInfo = briefInfo;
-        this.account = account;
+        this.author_id = account;
         this.blogDetail = blogDetail;
         this.status = status;
     }
@@ -97,11 +97,11 @@ public class Blog {
     }
 
     public Account getAccount() {
-        return account;
+        return author_id;
     }
 
     public void setAccount(Account account) {
-        this.account = account;
+        this.author_id = account;
     }
 
     public String getBlogDetail() {
