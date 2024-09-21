@@ -16,7 +16,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="././css/styleLogin.css"/>
+        <link rel="stylesheet" href="css/styleLogin.css"/>
     </head>
     <body id ="LoginForm"/>
     <dec:body/>
@@ -30,12 +30,10 @@
                 <p class="subtitle">Join experienced Designers on this platform.</p>
             </div>
             <div class="login-right">
-                <div class="alert alert-${alert}">
-                ${message}</div>
                 <h2>Hello,Again</h2>
                 <p>We are happy to have you back.</p>
                 <form action="<c:url value="/login"/>" id="formLogin" method="POST">
-                    <input type="text" name="email" id="email" placeholder="Email address" class="input-field">
+                    <input type="text" name="username" id="username" placeholder="Email address" class="input-field">
                     <input type="password" name="password" id="password" placeholder="Password" class="input-field">
                     <div class="remember-forgot">
                         <label><input type="checkbox" name="remember"> Remember Me</label>

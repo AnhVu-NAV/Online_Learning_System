@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  *
@@ -19,11 +20,11 @@ public class Blogs {
     private String thumbnailUrl;
     private String briefInfo;
     private String category;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    private Date createdAt;
+    private Date updatedAt;
 
     // Constructor
-    public Blogs(int blogId, int authorId, String title, String content, String thumbnailUrl, String briefInfo, String category, Timestamp createdAt, Timestamp updatedAt) {
+    public Blogs(int blogId, int authorId, String title, String content, String thumbnailUrl, String briefInfo, String category, Date createdAt, Date updatedAt) {
         this.blogId = blogId;
         this.authorId = authorId;
         this.title = title;
@@ -72,7 +73,7 @@ public class Blogs {
         this.content = content;
     }
 
-    public Timestamp getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
@@ -80,7 +81,7 @@ public class Blogs {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
