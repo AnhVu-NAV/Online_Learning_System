@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.Vector;
-import utility.DataConvert;
+import util.DataConvert;
 /**
  *
  * @author 84941
@@ -20,21 +20,21 @@ public class SettingDAO extends DBContext{
     //insert new setting into database. Attribute id is AUTO_INCREMENT 
     public int insertSetting(Setting obj) {
         int n = 0;
-        String sql = "INSERT INTO [dbo].[Settings]\n"
-                + "           ([setting_type_id]\n"
-                + "           ,[value]\n"
-                + "           ,[description]\n"
-                + "           ,[status]\n"
-                + "           ,[created_date]\n"
-                + "           ,[updated_date]\n"
+        String sql = "INSERT INTO Setting\n"
+                + "           (setting_type_id\n"
+                + "           ,value\n"
+                + "           ,status\n"
+                + "           ,description\n"
+                + "           ,created_date\n"
+                + "           ,updated_date)\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?,?)";
+                + "           (?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setInt(1, obj.getSetting_type_id());
             pre.setString(2, obj.getValue());
-            pre.setString(3, obj.getDescription());
-            pre.setInt(4, obj.getStatus());
+            pre.setInt(3, obj.getStatus());
+            pre.setString(4, obj.getDiscription());
             pre.setDate(5, dc.UtilDateToSqlDate(obj.getCreated_date()));
             pre.setDate(6, dc.UtilDateToSqlDate(obj.getUpdated_date()));
             n = pre.executeUpdate();
@@ -55,11 +55,11 @@ public class SettingDAO extends DBContext{
                 int id = rs.getInt(1);
                 int setting_type_id = rs.getInt(2);
                 String value = rs.getString(3);
-                String description = rs.getString(4);
-                int status = rs.getInt(5);
+                int status = rs.getInt(4);
+                String description = rs.getString(5);
                 Date created_date = rs.getDate(6);
                 Date updated_date = rs.getDate(7);
-                Setting obj = new Setting(id, setting_type_id, value, description, status, created_date, updated_date);
+                Setting obj = new Setting(id, setting_type_id, value, description, status, description, created_date, updated_date);
                 vector.add(obj);
 
             }
@@ -68,57 +68,26 @@ public class SettingDAO extends DBContext{
             ex.printStackTrace();
         }
         return vector;
-        
-    }
-    // get all the settings in the database
-    public Vector<Setting> getAll() {
-        Vector<Setting> vector = new Vector<>();
-        String sql = "SELECT [id]\n"
-                + "      ,[setting_type_id]\n"
-                + "      ,[value]\n"
-                + "      ,[description]\n"
-                + "      ,[status]\n"
-                + "      ,[created_date]\n"
-                + "      ,[updated_date]\n"
-                + "  FROM [dbo].[Settings]";  
 
-        try {
-            Statement state = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs = state.executeQuery(sql);
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                int setting_type_id = rs.getInt(2);
-                String value = rs.getString(3);
-                String description = rs.getString(4);
-                int status = rs.getInt(5);
-                Date created_date = rs.getDate(6);
-                Date updated_date = rs.getDate(7);
-                Setting obj = new Setting(id, setting_type_id, value, description, status, created_date, updated_date);
-                vector.add(obj);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return vector;
     }
-    // update Setting information based on id
+    // update setting information based on id
     public int updateSetting(Setting obj) {
         int n = 0;
-        String sql = "UPDATE [dbo].[Settings]\n"
-                + "   SET [setting_type_id] = ?\n"
-                + "      ,[value] = ?\n"
-                + "      ,[description] = ?\n"
-                + "      ,[status] = ?\n"
-                + "      ,[created_date] = ?\n"
-                + "      ,[updated_date] = ?\n"             
-                + " WHERE [id] = ?";
+        String sql = "UPDATE Setting\n"
+                + "   SET setting_type_id = ?\n"
+                + "      ,value = ?\n"
+                + "      ,status = ?\n"
+                + "      ,description = ?\n"
+                + "      ,created_date = ?\n"
+                + "      ,updated_date = ?\n"
+                + " WHERE id = ?";
         try {
 
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setInt(1, obj.getSetting_type_id());
             pre.setString(2, obj.getValue());
-            pre.setString(3, obj.getDescription());
-            pre.setInt(4, obj.getStatus());
+            pre.setInt(3, obj.getStatus());
+            pre.setString(4, obj.getDiscription());
             pre.setDate(5, dc.UtilDateToSqlDate(obj.getCreated_date()));
             pre.setDate(6, dc.UtilDateToSqlDate(obj.getUpdated_date()));
             pre.setInt(7, obj.getId());
@@ -128,5 +97,36 @@ public class SettingDAO extends DBContext{
         }
         return n;
     }
+    public Setting getSettingById(int search_id) {
+        Vector<Setting> vector = new Vector<>();
+        String sql = "SELECT id"
+                + "      ,setting_type_id"
+                + "      ,value"
+                + "      ,status"
+                + "      ,description"
+                + "      ,created_date"
+                + "      ,updated_date"
+                + "  FROM Setting"
+                + "  WHERE Setting.id = " + search_id;
 
+        try {
+            Statement state = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = state.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                int setting_type_id = rs.getInt(2);
+                String value = rs.getString(3);
+                int status = rs.getInt(4);
+                String description = rs.getString(5);
+                Date created_date = rs.getDate(6);
+                Date updated_date = rs.getDate(7);
+                Setting obj = new Setting(id, setting_type_id, value, description, status, description, created_date, updated_date);
+                return obj;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+
+    }
 }
