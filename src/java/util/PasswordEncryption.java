@@ -13,24 +13,24 @@ import org.apache.tomcat.util.codec.binary.Base64;
  */
 public class PasswordEncryption {
 
-    public static String EncryptBySHA256(String rawPassword) {
+    public static String EncryptBySHA256(String raw_password) {
         // Creating a salt code
         String salt = "ahsbdajnsbdj21ek;ádjuadawdwd231";
-        String encryptedPassword = null;
+        String encrypted_password = null;
 
         // Adding the salt code into the raw password
-        rawPassword = rawPassword + salt;
+        raw_password = raw_password + salt;
         try {
             // Transfer the combonation of raw password and salt code into byte array using UTF-8
-            byte[] dataBytes = rawPassword.getBytes("UTF-8");
+            byte[] dataBytes = raw_password.getBytes("UTF-8");
             // Compute a hash for the input data
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             // Pass the byte array and the method used for encryption
-            encryptedPassword = Base64.encodeBase64String(md.digest(dataBytes));
+            encrypted_password = Base64.encodeBase64String(md.digest(dataBytes));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return encryptedPassword;
+        return encrypted_password;
     }
     //test 
 //    public static void main(String[] args) {
