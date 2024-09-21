@@ -12,14 +12,19 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.Vector;
 import model.Account;
+import send_email.EmailService;
+import send_email.IJavaMail;
+import util.*;
+
 
 /**
  *
  * @author 84941
  */
-public class AdminDashboardController extends HttpServlet {
+public class DashboardController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,90 +39,118 @@ public class AdminDashboardController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         AccountDAO accountDAO = new AccountDAO();
+        DataConvert dataConvert = new DataConvert();
         String service = request.getParameter("service");
         if (service == null) {
             service = "viewAllAccount";
         }
         if (service.equals("viewAllAccount")) {
-            //check service
-            String submit = request.getParameter("submit");
+            
+            String fillterSubmit = request.getParameter("fillterSubmit");
             //get data
             Vector<Account> vector = null;
-            String sql = "select * from accounts ";
-            String checked="sort_by_id";
-            if (submit != null) {
+            String sql = "select * from account ";
+            String checked = "sort_by_id";
+            if (fillterSubmit != null) {
                 String search_by_name = request.getParameter("search_by_name");
                 String search_by_email = request.getParameter("search_by_email");
-                String search_by_phone_number = request.getParameter("search_by_phone_number");
+                String search_by_phone = request.getParameter("search_by_phone");
                 String fillter_by_gender = request.getParameter("fillter_by_gender");
                 String fillter_by_role = request.getParameter("fillter_by_role");
                 String fillter_by_status = request.getParameter("fillter_by_status");
                 String sort_by = request.getParameter("sort_by");
                 sql += " where (lower(first_name) like '%" + search_by_name.toLowerCase() + "%' or lower(last_name) like '%" + search_by_name.toLowerCase() + "%' ) "
                         + " and email like '%" + search_by_email + "%' "
-                        + " and phone_number like '%" + search_by_phone_number + "%' ";
-                if (!fillter_by_gender.equals("All gender")) {
-                    sql += " and gender =" + fillter_by_gender;
+                        + " and phone like '%" + search_by_phone + "%' ";
+                if (!fillter_by_gender.equals("all")) {
+                    sql += " and gender= " + fillter_by_gender;
                 }
-                if (!fillter_by_role.equals("All role")) {
+                if (!fillter_by_role.equals("all")) {
                     sql += " and role_id =" + fillter_by_role;
                 }
-                if (!fillter_by_status.equals("All status")) {
+                if (!fillter_by_status.equals("all")) {
                     sql += " and status =" + fillter_by_status;
-                }               
+                }
                 if (sort_by != null) {
                     switch (sort_by) {
                         case "sort_by_id": {
-                            sql += "order by id asc";
+                            sql += " order by id asc";
                             break;
                         }
                         case "sort_by_name": {
                             sql += " order by last_name asc,first_name asc ";
-                            checked="sort_by_name";
+                            checked = "sort_by_name";
                             break;
                         }
                         case "sort_by_gender": {
                             sql += " order by gender asc ";
-                            checked="sort_by_gender";
+                            checked = "sort_by_gender";
                             break;
                         }
                         case "sort_by_email": {
-                            sql += "order by email asc";
-                            checked="sort_by_email";
+                            sql += " order by email asc";
+                            checked = "sort_by_email";
                             break;
                         }
-                        case "sort_by_phone_number": {
-                            sql += " order by phone_number asc ";
-                            checked="sort_by_phone_number";
+                        case "sort_by_phone": {
+                            sql += " order by phone asc ";
+                            checked = "sort_by_phone";
                             break;
                         }
                         case "sort_by_role": {
                             sql += " order by role_id asc ";
-                            checked="sort_by_role";
+                            checked = "sort_by_role";
                             break;
                         }
                     }
                 }
             }
+
             vector = accountDAO.getAccounts(sql);
             //set data for views
             request.setAttribute("data", vector);
             request.setAttribute("checked", checked);
             // select view
-            RequestDispatcher dispath = request.getRequestDispatcher("ViewUserList.jsp");
+            RequestDispatcher dispath = request.getRequestDispatcher("jsp/ViewUserList.jsp");
             //run
             dispath.forward(request, response);
 
         }
         if (service.equals("viewUserDetails")) {
-            String search_id_raw = request.getParameter("search_id");
-            Account account = accountDAO.getAccountById(Integer.parseInt(search_id_raw));
+            String id_raw = request.getParameter("id");
+            Account account = accountDAO.getAccountById(Integer.parseInt(id_raw));
             //set data for views
             request.setAttribute("account", account);
             // select view
-            RequestDispatcher dispath = request.getRequestDispatcher("ViewUserDetails.jsp");
+            RequestDispatcher dispath = request.getRequestDispatcher("jsp/ViewUserDetails.jsp");
             //run
             dispath.forward(request, response);
+        }
+        if(service.equals("addNewUser")){
+            String first_name= request.getParameter("addNewUserFirstName");
+            String last_name = request.getParameter("addNewUserLastName");
+            Date dob = dataConvert.StringToSqlDate(request.getParameter("addNewUserDob"));
+            Boolean gender = Boolean.parseBoolean(request.getParameter("addNewUserGender"));
+            String email = request.getParameter("addNewUserEmail");
+            String phone = request.getParameter("addNewUserPhone");
+            String address = request.getParameter("addNewUserAddress");
+            int role_id = Integer.parseInt(request.getParameter("addNewUserRole"));
+            String password = CreateRandom.generate6_DigitCode();
+            Date created_date = GetTodayDate.getTodayDate();
+            Account account =  new Account(0, email, first_name, last_name, password, dob, role_id, created_date, 2, phone, gender, address, null);
+            accountDAO.insertAccount(account);
+            String subject="New account successfully created. Please login with your default password";
+            String email_content="Your default password is "+password;
+            IJavaMail emailService = new EmailService();
+            emailService.send(email, subject , email_content);
+            String message = "Add new user successfuly";
+            //set data for views
+            request.setAttribute("message", message);
+            // select view
+            RequestDispatcher dispath = request.getRequestDispatcher("DashboardController?service=viewAllAccount");
+            //run
+            dispath.forward(request, response);
+                              
         }
     }
 
