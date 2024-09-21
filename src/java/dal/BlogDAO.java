@@ -79,9 +79,8 @@ public class BlogDAO {
                     "https://example.com/image" + (offset + i + 1) + ".jpg", // URL hình ảnh giả
                     "Category " + (offset + i + 1),
                     "Brief info about blog " + (offset + i + 1),
-                    new java.sql.Timestamp(System.currentTimeMillis()),
-                    new java.sql.Timestamp(System.currentTimeMillis()),
-                    (offset + i + 1) % 10, // Số lượng bình luận giả
+                    new java.sql.Date(System.currentTimeMillis()),
+                    new java.sql.Date(System.currentTimeMillis()),
                     "Author " + (offset + i + 1) // Tên tác giả giả
             );
             list.add(blog);
