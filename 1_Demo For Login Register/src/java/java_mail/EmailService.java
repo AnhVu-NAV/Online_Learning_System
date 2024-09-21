@@ -49,7 +49,7 @@ public class EmailService implements IJavaMail {
 
     public static void main(String[] args) {
         IJavaMail emailService = new EmailService();
-        String toEmail = "tranxuanhoan04@gmail.com";
+        String toEmail = "@gmail.com";
         String subject = "Test my module"; 
         String messageContent = "Can you read it? I'm very happy if you can see it";
         boolean result = emailService.send(toEmail, subject, messageContent);
