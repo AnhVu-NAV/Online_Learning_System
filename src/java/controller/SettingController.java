@@ -4,19 +4,23 @@
  */
 
 package controller;
-
+import dal.SettingDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Vector;
+import model.Setting;
+import util.DataConvert;
 
 /**
  *
  * @author 84941
  */
-public class SettingListController extends HttpServlet {
+public class SettingController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -28,17 +32,29 @@ public class SettingListController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SettingListController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SettingListController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        SettingDAO settingDAO = new SettingDAO();
+        DataConvert dataConvert = new DataConvert();
+        String service = request.getParameter("service");
+        if (service == null) {
+            service = "viewAllSetting";
+        }
+        if(service.equals("viewAllSetting")){
+            String fillterSubmit = request.getParameter("fillterSubmit");
+            Vector<Setting> vector = null;
+            String sql = "select * from setting ";
+            String checked = "sort_by_id";
+            if(fillterSubmit!=null){
+                
+            }
+            vector = settingDAO.getSettings(sql);
+            //set data for views
+            request.setAttribute("data", vector);
+            request.setAttribute("checked", checked);
+            // select view
+            RequestDispatcher dispath = request.getRequestDispatcher("jsp/ViewSettingList.jsp");
+            //run
+            dispath.forward(request, response);
+            
         }
     } 
 
