@@ -78,10 +78,8 @@
             
             <div class="container-login100-form-btn">                
                 <p id="loginBtn" class="txt2">Or</p><i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i><br/>
-                <!--<button class="login100-form-btn button">Login With Google</button><br/>-->
                 <a href="login?action=gmail" class="login100-form-btn button">Login With Google</a> 
                 <a href="login?action=facebook" class="login100-form-btn button1">Login With Facebook</a> 
-              <!--<button class="login100-form-btn button1">Login With Facebook</button>-->
             </div>
 
             <div class="text-center p-t-136">

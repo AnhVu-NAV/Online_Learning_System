@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.*;
+import java_mail.EmailService;
+import java_mail.IJavaMail;
 import model.Account;
 import model.Setting;
 import util.*;
@@ -28,7 +30,20 @@ public class CreateNewAccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("create_account.jsp").forward(request, response);
+//        request.getRequestDispatcher("create_account.jsp").forward(request, response);
+        String action = request.getParameter("action");
+        try {
+            if (action != null) {
+                if (action.equals("gmail")) {
+                    loginByGmailAccount();
+                    request.setAttribute("message", "Please check your email!");
+                    request.getRequestDispatcher("create_account.jsp").forward(request, response);
+                }
+            }
+        } catch (Exception e) {
+            request.setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("create_account.jsp").forward(request, response);
+        }
     }
 
     @Override
@@ -81,6 +96,16 @@ public class CreateNewAccountController extends HttpServlet {
             return account;
         } else {
             throw new Exception("Cannot create account according to unidentified error");
+        }
+    }
+
+    private void loginByGmailAccount() throws Exception {
+        IJavaMail emailService = new EmailService();
+        String toEmail = "tranxuanhoan04@gmail.com";
+        String subject = "Test my module";
+        String messageContent = "Can you read it? I'm very happy if you can see it";
+        if (!emailService.send(toEmail, subject, messageContent)) {
+            throw new Exception("Failed to send email.");
         }
     }
 
