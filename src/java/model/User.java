@@ -5,152 +5,74 @@
 package model;
 
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
- * @author admin
+ * @author AnhVuNAV
  */
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+
 public class User {
-    int CustomerID;
-    String FirstName;
-    String LastName;
-    String Email;
-    String Password;
-    Date DoB;
-    Date Created_Date;
-    String PhoneNumber;
-    int RoleID;
-    int Status;
-    int Gender;
-    String Address;
-    String image_url;
 
-    public User(int CustomerID, String FirstName, String LastName, String Email, String Password, Date DoB, Date Created_Date, String PhoneNumber, int RoleID, int Status, int Gender, String Address, String image_url) {
-        this.CustomerID = CustomerID;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.Email = Email;
-        this.Password = Password;
-        this.DoB = DoB;
-        this.Created_Date = Created_Date;
-        this.PhoneNumber = PhoneNumber;
-        this.RoleID = RoleID;
-        this.Status = Status;
-        this.Gender = Gender;
-        this.Address = Address;
+    private int id;
+    private String email;
+    private String first_name;
+    private String last_name;
+    private String password;
+    private Date dob;
+    private int role_id;
+    private Date created_date;
+    private int status;
+    private String phone;
+    private int gender;
+    private String address;
+    private String image_url;
+    //Add attribute role from setting
+    private Setting role = new Setting();
+
+    public User(String email, String first_name, String last_name, String password,
+            Date dob, int role_id, Date created_date, int status, String phone, int gender, String address, String image_url) {
+        this.email = email;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.password = password;
+        this.dob = dob;
+        this.role_id = role_id;
+        this.created_date = created_date;
+        this.status = status;
+        this.phone = phone;
+        this.gender = this.gender;
+        this.address = address;
         this.image_url = image_url;
     }
 
-    public User() {
-    }
-
-    public int getCustomerID() {
-        return CustomerID;
-    }
-
-    public String getFirstName() {
-        return FirstName;
-    }
-
-    public String getLastName() {
-        return LastName;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public Date getDoB() {
-        return DoB;
-    }
-
-    public Date getCreated_Date() {
-        return Created_Date;
-    }
-
-    public String getPhoneNumber() {
-        return PhoneNumber;
-    }
-
-    public int getRoleID() {
-        return RoleID;
-    }
-
-    public int getStatus() {
-        return Status;
-    }
-
-    public int getGender() {
-        return Gender;
-    }
-
-    public String getAddress() {
-        return Address;
-    }
-
-    public String getImage_url() {
-        return image_url;
-    }
-
-    public void setCustomerID(int CustomerID) {
-        this.CustomerID = CustomerID;
-    }
-
-    public void setFirstName(String FirstName) {
-        this.FirstName = FirstName;
-    }
-
-    public void setLastName(String LastName) {
-        this.LastName = LastName;
-    }
-
-    public void setEmail(String Email) {
-        this.Email = Email;
-    }
-
-    public void setPassword(String Password) {
-        this.Password = Password;
-    }
-
-    public void setDoB(Date DoB) {
-        this.DoB = DoB;
-    }
-
-    public void setCreated_Date(Date Created_Date) {
-        this.Created_Date = Created_Date;
-    }
-
-    public void setPhoneNumber(String PhoneNumber) {
-        this.PhoneNumber = PhoneNumber;
-    }
-
-    public void setRoleID(int RoleID) {
-        this.RoleID = RoleID;
-    }
-
-    public void setStatus(int Status) {
-        this.Status = Status;
-    }
-
-    public void setGender(int Gender) {
-        this.Gender = Gender;
-    }
-
-    public void setAddress(String Address) {
-        this.Address = Address;
-    }
-
-    public void setImage_url(String image_url) {
+    public User(int id, String email, String first_name, String last_name, String password,
+            Date dob, int role_id, Date created_date, int status, String phone, int gender, String address, String image_url) {
+        this.id = id;
+        this.email = email;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.password = password;
+        this.dob = dob;
+        this.role_id = role_id;
+        this.created_date = created_date;
+        this.status = status;
+        this.phone = phone;
+        this.gender = this.gender;
+        this.address = address;
         this.image_url = image_url;
     }
-    
-    
-
-    
-    
-    
 }
