@@ -16,8 +16,9 @@ public class EmailProperty {
 
     public static final int TSL_PORT = 587; // Port for TLS/STARTTLS
 
-    public static final String APP_EMAIL = ""; // your email
+    public static final String APP_EMAIL = ""; // dien email cua minh vao day
 
-    public static final String APP_PASSWORD = ""; // your password
+    public static final String APP_PASSWORD = ""; // dien mat khau ung dung vao day
+    //truoc het phai cai dat xac thuc 2 lop truoc, xong sau do cai dat mat khau ung ung
 
 }

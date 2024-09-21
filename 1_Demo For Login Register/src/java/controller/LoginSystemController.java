@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java_mail.EmailService;
+import java_mail.IJavaMail;
 import model.Account;
 import util.*;
 
@@ -24,7 +26,19 @@ public class LoginSystemController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        String action = request.getParameter("action");
+        try {
+            if (action != null) {
+                if (action.equals("gmail")) {
+                    loginByGmailAccount();
+                    request.setAttribute("message", "Please check your email!");
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                }
+            }
+        } catch (Exception e) {
+            request.setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
     }
 
     @Override
@@ -34,7 +48,6 @@ public class LoginSystemController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-//        String action = request.getParameter("action"); 
         AccountDAO adao = new AccountDAO();
 
         try {
@@ -57,6 +70,16 @@ public class LoginSystemController extends HttpServlet {
     private boolean isValidPassword(Account account, String password) {
         password = PasswordEncoding.getEncodingPassword(password);
         return account.getPassword().equals(password);
+    }
+
+    private void loginByGmailAccount() throws Exception {
+        IJavaMail emailService = new EmailService();
+        String toEmail = "tranxuanhoan04@gmail.com";
+        String subject = "Test my module";
+        String messageContent = "Can you read it? I'm very happy if you can see it";
+        if (!emailService.send(toEmail, subject, messageContent)) {
+            throw new Exception("Failed to send email.");
+        }
     }
 
     @Override

@@ -26,15 +26,8 @@ public class SliderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SliderDAO sliderDao = new SliderDAO();
-        String id_raw = request.getParameter("id");
         try {
             Vector<Slider> list = sliderDao.getAllSlider();
-            if (id_raw != null) {
-                int id = Integer.parseInt(id_raw);
-//                request.setAttribute("sliderDetail", sliderDao.getSliderById(id).getBacklink_url());
-//                request.setAttribute("sliderDetail", "google.com");
-                response.sendRedirect("google.com"); 
-            }
             if (list != null) {
                 request.setAttribute("list", list);
             } else {

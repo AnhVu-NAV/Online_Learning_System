@@ -16,6 +16,24 @@
     <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/util.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <style>
+        .button {
+            border-style: solid;
+            border-radius: 40px;
+            height: 60px;
+            text-align: center;
+            background-color: red;
+            color: white;
+        }
+        .button1 {
+            border-style: solid;
+            border-radius: 40px;
+            height: 60px;
+            text-align: center;
+            background-color: blue;
+            color: white;
+        }
+    </style>
   </head>
   <body>
     <div class="limiter">
@@ -54,6 +72,16 @@
             <div class="text-center p-t-12">
               <span class="txt1"> Forgot </span>
               <a class="txt2" href="#"> Username / Password? </a>
+            </div> <br/>
+            
+            <p style="color: green" class="text-center">${requestScope.message}</p> 
+            
+            <div class="container-login100-form-btn">                
+                <p id="loginBtn" class="txt2">Or</p><i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i><br/>
+                <!--<button class="login100-form-btn button">Login With Google</button><br/>-->
+                <a href="login?action=gmail" class="login100-form-btn button">Login With Google</a> 
+                <a href="login?action=facebook" class="login100-form-btn button1">Login With Facebook</a> 
+              <!--<button class="login100-form-btn button1">Login With Facebook</button>-->
             </div>
 
             <div class="text-center p-t-136">
