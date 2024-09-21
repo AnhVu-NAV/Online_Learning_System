@@ -5,11 +5,26 @@
 package model;
 
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
- * @author 84941
+ * @author AnhVuNAV
  */
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+
 public class User {
 
     private int id;
@@ -41,21 +56,8 @@ public class User {
     String Address;
     String image_url;
 
-    public User(int CustomerID, String FirstName, String LastName, String Email, String Password, Date DoB, Date Created_Date, String PhoneNumber, int RoleID, int Status, int Gender, String Address, String image_url) {
-        this.CustomerID = CustomerID;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.Email = Email;
-        this.Password = Password;
-        this.DoB = DoB;
-        this.Created_Date = Created_Date;
-        this.PhoneNumber = PhoneNumber;
-        this.RoleID = RoleID;
-        this.Status = Status;
-        this.Gender = Gender;
-        this.Address = Address;
-        this.image_url = image_url;
-    }
+    //Add attribute role from setting
+    private Setting role = new Setting();
 
     public User() {
     }
@@ -298,13 +300,4 @@ public class User {
         this.Address = Address;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
-    }
-    
-    
-
-    
-    
-    
 }

@@ -58,7 +58,7 @@
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between">
-                            <span>${blog.commentsCount} comments</span>
+                            <span>comments</span>
                             <span>by ${blog.authorName}</span>
                         </div>
                     </article>

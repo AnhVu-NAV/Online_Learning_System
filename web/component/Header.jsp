@@ -3,8 +3,10 @@
     Created on : Sep 11, 2024, 8:33:04 PM
     Author     : HuyLVN
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x" %>
 <!DOCTYPE html>
 <html>
 
@@ -13,39 +15,49 @@
         <title>Header</title>
         <link rel="stylesheet" href="../css/style.css" />
         <link rel="stylesheet" href="../css/globals.css" />
-    </head>
 
-    <body>
-        <div class="web">
-            <div class="div">
-                <div class="overlap">
-                    <img class="man-working-night" src="../img/man-working-night-1.png" />
-                    <div class="group">
-                        <p class="text-wrapper">Save for the right education</p>
-                        <div class="frame"><div class="text-wrapper-2">Let’s Connect</div></div>
-                        <p class="p">
-                            Get courses from ₫249,000 and create a self-paced learning lifestyle that works for you.
-                            Sale ends Sept 13.
-                        </p>
-                    </div>
-                </div>
-                <div class="overlap-group-wrapper">
-                    <div class="overlap-group">
-                        <div class="ellipse"></div>
-                        <p class="aolt"><span class="span">A</span> <span class="text-wrapper-3">olt</span></p>
-                    </div>
-                </div>
-                <div>
-                    <input type="search" placeholder="Search..." class="search-bar">
-                </div>
-                <div class="navbar">
-                    <div class="text-wrapper-4">OUR BUSINESS</div>
-                    <div class="text-wrapper-5">TEACH</div>
-                    <div class="text-wrapper-6">SIGN UP</div>
-                    <div class="text-wrapper-7">LOG IN</div>
+</head>
+
+<body>
+    <div class="web">
+        <div class="div">
+            <div class="overlap">
+                <img class="man-working-night" src="../img/man-working-night-1.png" />
+                <!--<img class="man-working-night" src="../../public/images/man-working-night-1.png" />-->
+                <div class="group">
+                    <p class="text-wrapper">Save for the right education</p>
+                    <div class="frame"><div class="text-wrapper-2">Let’s Connect</div></div>
+                    <p class="p">
+                        Get courses from ₫249,000 and create a self-paced learning lifestyle that works for you.
+                        Sale ends Sept 13.
+                    </p>
                 </div>
             </div>
+            <div class="overlap-group-wrapper">
+                <div class="overlap-group">
+                    <div class="ellipse"></div>
+                    <p class="learnik"><span class="span">A</span> <span class="text-wrapper-3">learnik</span></p>
+                </div>
+            </div>
+            <div>
+                <input type="search" placeholder="Search..." class="search-bar">
+            </div>
+            <ul class="navbar ml-auto">
+                <li class="nav-item active">
+                    <a class="text-wrapper-4 nav-link" href="#">OUR BUSINESS</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="text-wrapper-5 nav-link" href="#">TEACH</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="text-wrapper-6 nav-link" href="#">SIGN UP</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="text-wrapper-7 nav-link" href='<c:url value="/login?action=login"/>'>LOG IN</a>
+                </li>
+            </ul>
         </div>
-    </body>
+    </div>
+</body>
 
 </html>
