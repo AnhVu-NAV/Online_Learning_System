@@ -79,25 +79,19 @@
         <servlet-class>controller.UserListController</servlet-class>
         <servlet-name>AdminDashboardController</servlet-name>
         <servlet-class>controller.AdminDashboardController</servlet-class>
+        <servlet-name>DashboardController</servlet-name>
+        <servlet-class>controller.DashboardController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SettingListController</servlet-name>
-        <servlet-class>controller.SettingListController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UserLogListController</servlet-name>
-        <servlet-class>controller.UserLogListController</servlet-class>
+        <servlet-name>SettingController</servlet-name>
+        <servlet-class>controller.SettingController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AdminDashboardController</servlet-name>
-        <url-pattern>/AdminDashboardController</url-pattern>
+        <servlet-name>DashboardController</servlet-name>
+        <url-pattern>/DashboardController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SettingListController</servlet-name>
-        <url-pattern>/SettingListController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UserLogListController</servlet-name>
-        <url-pattern>/UserLogListController</url-pattern>
+        <servlet-name>SettingController</servlet-name>
+        <url-pattern>/SettingController</url-pattern>
     </servlet-mapping>
 </web-app>

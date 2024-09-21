@@ -18,27 +18,31 @@ public class Account {
     private String last_name;
     private String password;
     private Date dob;
-    private boolean gender;
     private int role_id;
     private Date created_date;
     private int status;
-    private String phone_number;
+    private String phone;
+    private boolean gender;
+    private String address;
+    private String image_url;       
 
     public Account() {
     }
 
-    public Account(int id, String email, String first_name, String last_name, String password, Date dob, boolean gender, int role_id, Date created_date, int status, String phone_number) {
+    public Account(int id, String email, String first_name, String last_name, String password, Date dob, int role_id, Date created_date, int status, String phone, boolean gender, String address, String image_url) {
         this.id = id;
         this.email = email;
         this.first_name = first_name;
         this.last_name = last_name;
         this.password = password;
         this.dob = dob;
-        this.gender = gender;
         this.role_id = role_id;
         this.created_date = created_date;
         this.status = status;
-        this.phone_number = phone_number;
+        this.phone = phone;
+        this.gender = gender;
+        this.address = address;
+        this.image_url = image_url;
     }
 
     public int getId() {
@@ -89,14 +93,6 @@ public class Account {
         this.dob = dob;
     }
 
-    public boolean isGender() {
-        return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
-    }
-
     public int getRole_id() {
         return role_id;
     }
@@ -121,13 +117,41 @@ public class Account {
         this.status = status;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+    
+    
+
+    
 
     
 
