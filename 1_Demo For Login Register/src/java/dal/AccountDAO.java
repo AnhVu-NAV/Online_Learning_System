@@ -9,7 +9,7 @@ import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import model.Setting;
-import util.DataConvert;
+import util.DateConvert;
 
 /**
  *
@@ -36,9 +36,9 @@ public class AccountDAO extends DBContext {
             account.setId(rs.getInt("id"));
             account.setEmail(rs.getString("email"));
             account.setPassword(rs.getString("password"));
-            account.setDob(DataConvert.convertToUtilDate(rs.getDate("dob")));
+            account.setDob(DateConvert.convertToUtilDate(rs.getDate("dob")));
             account.setRole_id(setdao.getSettingById(rs.getInt("role_id")));
-            account.setCreatedDate(DataConvert.convertToUtilDate(rs.getDate("created_date")));
+            account.setCreatedDate(DateConvert.convertToUtilDate(rs.getDate("created_date")));
             account.setStatus(rs.getInt("status"));
             account.setPhoneNumber(rs.getString("phone_number"));
             account.setGender(rs.getBoolean("gender"));
@@ -62,9 +62,9 @@ public class AccountDAO extends DBContext {
             account.setId(rs.getInt("id"));
             account.setEmail(rs.getString("email"));
             account.setPassword(rs.getString("password"));
-            account.setDob(DataConvert.convertToUtilDate(rs.getDate("dob")));
+            account.setDob(DateConvert.convertToUtilDate(rs.getDate("dob")));
             account.setRole_id(setdao.getSettingById(rs.getInt("role_id")));
-            account.setCreatedDate(DataConvert.convertToUtilDate(rs.getDate("created_date")));
+            account.setCreatedDate(DateConvert.convertToUtilDate(rs.getDate("created_date")));
             account.setStatus(rs.getInt("status"));
             account.setPhoneNumber(rs.getString("phone_number"));
             account.setGender(rs.getBoolean("gender"));
@@ -120,8 +120,8 @@ public class AccountDAO extends DBContext {
                      WHERE id = ?;
                      """;
         PreparedStatement pre = connection.prepareStatement(sql);
-        pre.setDate(1, DataConvert.convertToSQLDate(account.getDob()));
-        pre.setDate(2, DataConvert.convertToSQLDate(dob));
+        pre.setDate(1, DateConvert.convertToSQLDate(account.getDob()));
+        pre.setDate(2, DateConvert.convertToSQLDate(dob));
         pre.setInt(3, account.getId());
         pre.executeUpdate();
         pre.close();
@@ -183,7 +183,7 @@ public class AccountDAO extends DBContext {
         pre.setString(2, account.getPhoneNumber());
         pre.setString(3, account.getPassword());
         pre.setInt(4, account.getRole_id().getId());
-        pre.setDate(5, DataConvert.convertToSQLDate(account.getCreatedDate()));
+        pre.setDate(5, DateConvert.convertToSQLDate(account.getCreatedDate()));
         pre.setInt(6, account.getStatus());
         pre.setString(7, account.getImage_url());
         pre.executeUpdate();

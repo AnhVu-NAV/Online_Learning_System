@@ -4,9 +4,9 @@
  */
 package util;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import org.apache.tomcat.util.codec.binary.Base64;
+
 
 /**
  *
@@ -14,21 +14,23 @@ import java.security.NoSuchAlgorithmException;
  */
 public class PasswordEncoding {
 
-    public static String getEncodingPassword(String data) {
-        StringBuilder hexString = new StringBuilder();
+    public static String getEncodingPassword(String raw_password) {
+        // Creating a salt code
+        String salt = "ahsbdajnsbdj21ek;ádjuadawdwd231";
+        String encrypted_password = null;
+
+        // Thêm salt code vào để tăng tính bảo mật 
+        raw_password = raw_password + salt;
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(data.getBytes("UTF-8"));
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
-            }
-        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
-            System.err.println(e.getMessage());
+            // Transfer the combonation of raw password and salt code into byte array using UTF-8
+            byte[] dataBytes = raw_password.getBytes("UTF-8");
+            // Compute a hash for the input data
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            // Pass the byte array and the method used for encryption
+            encrypted_password = Base64.encodeBase64String(md.digest(dataBytes));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return hexString.toString();
+        return encrypted_password;       
     }
 }

@@ -6,6 +6,7 @@ package util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  *
@@ -120,7 +121,7 @@ public class InputValidation {
         }
     }
     
-    public static boolean checkFormatOfPassword(String password) throws Exception {
+    public static boolean getFormattedPassword(String password) throws Exception {
         password = removeUnneccessaryBlank(password);
         if (password.length() < 8 || password.length() > 32) {
             throw new Exception("Password must have length between 8 and 32 characters");

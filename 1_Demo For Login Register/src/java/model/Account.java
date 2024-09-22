@@ -6,6 +6,7 @@ package model;
 
 import java.util.Date;
 import java.util.Vector;
+import util.DateConvert;
 import util.PasswordEncoding;
 
 /**
@@ -45,7 +46,8 @@ public class Account {
         this.password = getEncodingPassword(password);
         this.role_id = role_id;
         this.gender = gender;
-        this.createdDate = setCreatedDateForNewAccount();
+//        this.createdDate = setCreatedDateForNewAccount();
+        setCreatedDate(); 
         this.status = status;
         this.image_url = image_url;
     }
@@ -55,7 +57,8 @@ public class Account {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = getEncodingPassword(password);
-        this.createdDate = setCreatedDateForNewAccount();
+//        this.createdDate = setCreatedDateForNewAccount();
+        setCreatedDate(); 
         setRole_id(role_id);
         this.image_url = "";
         this.status = 0;
@@ -133,6 +136,10 @@ public class Account {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public void setCreatedDate() {
+        this.createdDate = DateConvert.getCurrentDate();
     }
 
     public int getStatus() {

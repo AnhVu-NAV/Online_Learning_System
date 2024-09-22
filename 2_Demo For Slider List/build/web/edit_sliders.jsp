@@ -64,12 +64,44 @@
                 border-style: solid;
                 border-radius: 20px;
             }
+            .popup {
+                display: none;
+                position: fixed;
+                z-index: 1001;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.7);
+                text-align: left;
+            }
+            .popup-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 500px;
+            }
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
         </style>
     </head>
 
     <body>
         <div id="outer">
-            <header class="header order-last" id="tm-header">
+            <div class="header">
                 <nav class="navbar">
                     <div class="collapse navbar-collapse single-page-nav">
                         <form action="" method="POST">
@@ -97,92 +129,102 @@
                         </form>
                     </div>
                 </nav>
-            </header>
+            </div>
 
-            <button class="navbar-button collapsed" type="button">
-                <span class="menu_icon">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </span>
-            </button>
-
-            <main id="content-box" class="order-first">
-                <div class="banner-section section parallax-window" data-parallax="scroll" id="section-1">
+            <main id="content-box">
+                <div class="banner-section parallax-window" data-parallax="scroll" id="section-1">
                     <div class="container">
                         <div class="item">
-                            <!-- <div class="bg-blue-transparent logo-fa"><span><i class="fas fa-2x fa-atom"></i></span> Simply Amazed</div>
-                                      <div class="bg-blue-transparent simple"><p>Your simplest HTML template, the most amazing page ever, yet free!</p></div> -->
-                            <form action="index.html" method="POST" class=" d-flex align-items-center search-bar">
+                            <form action="slider" method="POST" class=" d-flex align-items-center search-bar">
                                 <div class="mx-auto d-flex flex-grow-1">
                                     <input type="text" placeholder="Search..." name="result" class="search-input me-2"/>
                                     <input type="submit" value="Search" class="search-button"/>
                                 </div>
 
                                 <div class="d-flex action-buttons">
-                                    <button type="button" class="btn btn-outline-primary me-1">Show</button>
-                                    <button type="button" class="btn btn-outline-secondary me-1">Hide</button>
-                                    <button type="button" class="btn btn-outline-success me-1">Add</button>
-                                    <button type="button" class="btn btn-outline-warning">Edit</button>
+                                    <button type="submit" class="btn btn-outline-primary me-1" name="crud" value="Show">Show</button>
+                                    <button type="submit" class="btn btn-outline-secondary me-1" name="crud" value="Hide">Hide</button>
+                                    <button type="submit" class="btn btn-outline-success me-1" name="crud" value="Add">Add</button>
+                                    <button type="submit" class="btn btn-outline-warning" name="crud" value="Edit">Edit</button>
                                 </div>
                             </form>
                         </div>
 
                         <section class="row">
                             <div class="container">
-                                <%--<c:forEach items="${requestScope.data}" var="s">--%>
-                                <div class="row slider_detail">
-                                    <div class="item col-md-4">
-                                        <div class="tm-work-item-inner">
-                                            <div class="icn"></div>
-                                            <h3 class="text-left">Slider: </h3>
-                                            <ul class="text-left">
-                                                <li>Id: </li> 
-                                                <li>Account: </li>
-                                                <li>Image Url: </li>
-                                                <li>Back Link Url: </li>
-                                                <li>Status: </li>
-                                                <li><a href="#">Live Demo</a></li>
-                                            </ul>
+                                <c:set var="id" value="0"/>
+                                <c:if test="${showAllSlider ne null}">
+                                    <c:forEach items="${requestScope.showAllSlider}" var="s">
+                                        <div class="row slider_detail">
+                                            <div class="item col-md-4">
+                                                <div class="tm-work-item-inner">
+                                                    <div class="icn"></div>
+                                                    <h3 class="text-left">Slider: ${id + 1}</h3>
+                                                    <ul class="text-left">
+                                                        <li>Id: ${s.getId()}</li> 
+                                                        <li>Account: </li>
+                                                        <li>Image Url: ${s.getImage_url()}</li>
+                                                        <li>Back Link Url: ${s.getBacklink_url()}</li>
+                                                        <li>Status: ${s.getStatus()}</li>
+                                                        <li><a href="#">Live Demo</a></li>
+                                                    </ul>
 
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <br/>
-                                <%--</c:forEach>--%><div class="row slider_detail">
-                                <div class="item col-md-4">
-                                    <div class="tm-work-item-inner">
-                                        <div class="icn"></div>
-                                            <h3 class="text-left">Slider: </h3>
-                                            <ul class="text-left">
-                                                <li>Id: </li> 
-                                                <li>Account: </li>
-                                                <li>Image Url: </li>
-                                                <li>Back Link Url: </li>
-                                                <li>Status: </li>
-                                                <li><a href="#">Live Demo</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                        <br/>
+                                    </c:forEach>  
+                                </c:if>
+
                             </div>
                         </section>
 
-                        <!-- <section class="gallery-section section parallax-window" data-parallax="scroll" data-image-src="img/section-3-bg.jpg" id="section-3">
-                          
-                        </section> -->
-
-                        <!-- <section class="contact-section section" id="section-4">
-                          
-                        </section> -->
-                        </main>
+                        <!-- Cua so Popup -->
+                        <div id="editSliderPopup" class="popup">
+                            <div class="popup-content">
+                                <span class="close" id="closePopup">&times;</span>
+                                <h3>Edit Slider</h3>
+                                <form action="">
+                                    Image Url:<br/>
+                                    <input type="text" name="image_url" placeholder="Image Url..."/><br/>
+                                    Back Link Url:<br/>
+                                    <input type="text" name="backlink_url" placeholder="Back Link Url..."/><br/>
+                                    Status:<br/>
+                                    <select name="status"> 
+                                        <option value="1">Activate</option>
+                                        <option value="0" selected>Inactivate</option>
+                                    </select>
+                                    <br/>
+                                    <button type="submit">Save</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </main>
+        </div>
 
-                    <script src="js/jquery-3.3.1.min.js"></script>
-                    <script src="js/bootstrap.bundle.min.js"></script>
-                    <script src="js/jquery.singlePageNav.min.js"></script>
-                    <script src="js/slick.js"></script>
-                    <script src="js/parallax.min.js"></script>
-                    <script src="js/templatemo-script.js"></script>
-                    </body>
-                    </html>
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/jquery.singlePageNav.min.js"></script>
+        <script src="js/slick.js"></script>
+        <script src="js/parallax.min.js"></script>
+        <script src="js/templatemo-script.js"></script>
+        <script>
+            var popup = document.getElementById("editSliderPopup");
+            var editButton = document.querySelector(".btn-outline-warning");
+            var closeButton = document.getElementById("closePopup");
+            editButton.onclick = function () {
+                popup.style.display = "block";
+            }
+            closeButton.onclick = function () {
+                popup.style.display = "none";
+            }
+            window.onclick = function (event) {
+                if (event.target === popup) {
+                    popup.style.display = "none";
+                }
+            }
+        </script>
+    </body>
+</html>

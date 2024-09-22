@@ -61,7 +61,7 @@ public class CreateNewAccountController extends HttpServlet {
             if (isEmailExisted(email)) {
                 throw new Exception("This email is already existed");
             }
-            if (password.equals(rewritePassword) && InputValidation.checkFormatOfPassword(password)) {
+            if (password.equals(rewritePassword) && InputValidation.getFormattedPassword(password)) {
                 Account account = getAccount(email, phoneNumber, password);
                 adao.insertAccount(account);
                 request.getRequestDispatcher("login.jsp").forward(request, response);

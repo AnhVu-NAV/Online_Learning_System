@@ -31,8 +31,8 @@ public class SettingDAO extends DBContext {
             setting.setValue(rs.getString("value"));
             setting.setStatus(rs.getInt("status"));
             setting.setDescription(rs.getString("description"));
-            setting.setCreatedDate(DataConvert.convertToUtilDate(rs.getDate("created_date")));
-            setting.setUpdatedDate(DataConvert.convertToUtilDate(rs.getDate("updated_date")));
+            setting.setCreatedDate(DateConvert.convertToUtilDate(rs.getDate("created_date")));
+            setting.setUpdatedDate(DateConvert.convertToUtilDate(rs.getDate("updated_date")));
             return setting;
         }
         rs.close();
@@ -65,8 +65,8 @@ public class SettingDAO extends DBContext {
         pre.setString(2, setting.getValue());
         pre.setInt(3, setting.getStatus());
         pre.setString(4, setting.getDescription());
-        pre.setDate(5, DataConvert.convertToSQLDate(setting.getCreatedDate()));
-        pre.setDate(6, DataConvert.convertToSQLDate(setting.getUpdatedDate()));
+        pre.setDate(5, DateConvert.convertToSQLDate(setting.getCreatedDate()));
+        pre.setDate(6, DateConvert.convertToSQLDate(setting.getUpdatedDate()));
         pre.executeUpdate();
         pre.close();
     }

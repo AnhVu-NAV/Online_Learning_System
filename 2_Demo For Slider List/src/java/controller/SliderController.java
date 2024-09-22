@@ -6,7 +6,6 @@ package controller;
 
 import dal.SliderDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -42,6 +41,17 @@ public class SliderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String crud = request.getParameter("crud");
+        SliderDAO sliderDao = new SliderDAO();
+        try {
+            if (crud.equals("Show")) {
+                request.setAttribute("showAllSlider", sliderDao.getAllSlider()); 
+            }
+        } catch (Exception e) {
+            request.setAttribute("error", e.getMessage()); 
+        } finally {
+            request.getRequestDispatcher("edit_sliders.jsp").forward(request, response); 
+        }
     }
 
     @Override
