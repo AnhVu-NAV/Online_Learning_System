@@ -45,7 +45,7 @@
                             <!-- End message -->
                             <h3 class="fw-bold fs-4 mb-3">Admin Dashboard</h3>
                             <h3 class="fw-bold fs-4 my-3">Setting List</h3>
-                            <form action="SettingController" method="post">
+                            <form action="SettingDashboardController" method="post">
                                 <div class="row gx-2 gx-md-3 mb-4">
                                     <!-- Search by value -->
                                     <div class="col-md-4 mb-2 mb-md-0">
@@ -189,7 +189,7 @@
                                                             </c:when>
                                                         </c:choose>
                                                     </td>
-                                                    <td><a class="btn btn-primary" href="SettingController?service=viewSettingDetails&id=${setting.getId()}" role="button">View</a></td>
+                                                    <td><a class="btn btn-primary" href="SettingDashboardController?service=viewSettingDetails&id=${setting.getId()}" role="button">View</a></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -199,14 +199,14 @@
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <c:forEach begin="1" end="${requestScope.totalPage}" var="i">
-                                        <li class="page-item"><a class="page-link" href="SettingController?service=viewAllSetting&index=${i}">${i}</a></li>
+                                        <li class="page-item"><a class="page-link" href="SettingDashboardController?service=viewAllSetting&index=${i}">${i}</a></li>
                                         </c:forEach>
                                 </ul>
                             </nav>
                             <!-- Registration Form Section start-->
                             <h3 class="fw-bold fs-4 my-3">Add new setting</h3>                           
                             <div class="wrapper rounded bg-white p-4">                               
-                                <form class="form" action="SettingController" method="post">
+                                <form class="form" action="SettingDashboardController" method="post">
                                     <div class="row">
                                         <div class="col-md-6 mt-md-0 mt-3">
                                             <label for="firstName">Value</label>

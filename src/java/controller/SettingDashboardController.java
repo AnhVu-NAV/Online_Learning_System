@@ -22,7 +22,7 @@ import util.*;
  *
  * @author 84941
  */
-public class SettingController extends HttpServlet {
+public class SettingDashboardController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -76,12 +76,12 @@ public class SettingController extends HttpServlet {
                             break;
                         }
                         case "sort_by_created_date": {
-                            sql += " order by created_date asc";
+                            sql += " order by created_date desc";
                             checked = "sort_by_created_date";
                             break;
                         }
                         case "sort_by_updated_date": {
-                            sql += " order by updated_date asc ";
+                            sql += " order by updated_date desc ";
                             checked = "sort_by_updated_date";
                             break;
                         }
@@ -126,7 +126,7 @@ public class SettingController extends HttpServlet {
             //set data for views
             request.setAttribute("message", message);
             // select view
-            RequestDispatcher dispath = request.getRequestDispatcher("SettingController?service=viewAllSetting");
+            RequestDispatcher dispath = request.getRequestDispatcher("SettingDashboardController?service=viewAllSetting");
             //run
             dispath.forward(request, response);
 
