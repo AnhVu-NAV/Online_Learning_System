@@ -37,17 +37,19 @@
         <servlet-class>controller.AdminDashboardController</servlet-class>
         <servlet-name>DashboardController</servlet-name>
         <servlet-class>controller.DashboardController</servlet-class>
+        <servlet-name>AccountDashboardController</servlet-name>
+        <servlet-class>controller.AccountDashboardController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SettingController</servlet-name>
-        <servlet-class>controller.SettingController</servlet-class>
+        <servlet-name>SettingDashboardController</servlet-name>
+        <servlet-class>controller.SettingDashboardController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>DashboardController</servlet-name>
-        <url-pattern>/DashboardController</url-pattern>
+        <servlet-name>AccountDashboardController</servlet-name>
+        <url-pattern>/AccountDashboardController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SettingController</servlet-name>
-        <url-pattern>/SettingController</url-pattern>
+        <servlet-name>SettingDashboardController</servlet-name>
+        <url-pattern>/SettingDashboardController</url-pattern>
     </servlet-mapping>
 </web-app>

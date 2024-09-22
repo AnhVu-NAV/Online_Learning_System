@@ -28,7 +28,7 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="DashboardController?service=viewAllAccount" class="sidebar-link">
+                    <a href="AccountDashboardController?service=viewAllAccount" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>Users List</span>
                     </a>
@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="SettingController?service=viewAllSetting" class="sidebar-link">
+                    <a href="SettingDashboardController?service=viewAllSetting" class="sidebar-link">
                         <i class="lni lni-cog"></i>
                         <span>Setting List</span>
                     </a>
