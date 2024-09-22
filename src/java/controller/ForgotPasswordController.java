@@ -1,6 +1,4 @@
-
 package controller;
-
 
 import dal.UserDAO;
 import jakarta.servlet.ServletException;
@@ -8,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -38,10 +37,13 @@ public class ForgotPasswordController extends HttpServlet {
             String email = request.getParameter("email"); //email người nhận
             UserDAO cus = new UserDAO();
             String fullName = cus.checkEmail(email);
+            HttpSession sessions = request.getSession();
 
             if (fullName.equals("Nothing")) {
-                request.setAttribute("message", "No exit account with this email. Please check again!");
-                request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
+                sessions.setAttribute("message", "No existing account with this email. Please check again!");
+                response.sendRedirect("ForgotPassword.jsp");
+                return;
+
             }
             String newPass = cus.updatePass(email);
 
@@ -87,8 +89,8 @@ public class ForgotPasswordController extends HttpServlet {
                 message.setContent(multipart); //chứa nội dung của email
 
                 Transport.send(message);
-                request.setAttribute("message", "Your new password has been sent to your email. Please check and log in again.");
-                request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
+                sessions.setAttribute("message", "Your new password has been sent to your email. Please check and log in again.");
+                response.sendRedirect("ForgotPassword.jsp");
             } catch (MessagingException e) {
                 throw new RuntimeException(e);
             }
