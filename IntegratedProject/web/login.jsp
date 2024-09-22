@@ -76,11 +76,11 @@
             
             <p style="color: green" class="text-center">${requestScope.message}</p> 
             
-            <div class="container-login100-form-btn">                
+<!--            <div class="container-login100-form-btn">                
                 <p id="loginBtn" class="txt2">Or</p><i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i><br/>
                 <a href="login?action=gmail" class="login100-form-btn button">Login With Google</a> 
                 <a href="login?action=facebook" class="login100-form-btn button1">Login With Facebook</a> 
-            </div>
+            </div>-->
 
             <div class="text-center p-t-136">
               <a id="loginBtn" class="txt2" href="create_account.jsp">

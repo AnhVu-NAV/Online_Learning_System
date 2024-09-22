@@ -13,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.*;
 import java_mail.EmailService;
@@ -27,6 +28,8 @@ import util.*;
  */
 public class CreateNewAccountController extends HttpServlet {
 
+    private static String randomCode = null;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,7 +38,6 @@ public class CreateNewAccountController extends HttpServlet {
         try {
             if (action != null) {
                 if (action.equals("gmail")) {
-                    loginByGmailAccount();
                     request.setAttribute("message", "Please check your email!");
                     request.getRequestDispatcher("create_account.jsp").forward(request, response);
                 }
@@ -53,20 +55,41 @@ public class CreateNewAccountController extends HttpServlet {
         String phoneNumber = request.getParameter("phone_number");
         String password = request.getParameter("password");
         String rewritePassword = request.getParameter("rewrite_password");
+        String code = request.getParameter("code");
+        PrintWriter out = response.getWriter();
         AccountDAO adao = new AccountDAO();
-
+        HttpSession session = request.getSession();
         try {
-            email = InputValidation.getEmail(email);
-            phoneNumber = InputValidation.getPhone(phoneNumber);
-            if (isEmailExisted(email)) {
-                throw new Exception("This email is already existed");
-            }
-            if (password.equals(rewritePassword) && InputValidation.getFormattedPassword(password)) {
-                Account account = getAccount(email, phoneNumber, password);
-                adao.insertAccount(account);
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+            if (email != null) {
+                if (isEmailExisted(email)) {
+                    throw new Exception("This email is already existed");
+                }
+                randomCode = CreateRandom.generate6_DigitCode();
+                request.setAttribute("vetifyCode", "aa");
+                loginByGmailAccount(email, randomCode);
+                request.getRequestDispatcher("create_account.jsp").forward(request, response);
+                session.setAttribute("email", email);
             } else {
-                throw new Exception("Password is not duplicated");
+                if (code != null) {
+                    if (code.equals(randomCode)) {
+                        request.setAttribute("vetifyCode", "bb");
+                        request.getRequestDispatcher("create_account.jsp").forward(request, response);
+                    } else {
+                        request.setAttribute("vetifyCode", "aa");
+                        throw new Exception("Wrong code");
+                    }
+                }
+                if (phoneNumber != null && password != null && rewritePassword != null) {
+                    request.setAttribute("vetifyCode", "bb");
+                    phoneNumber = InputValidation.getPhone(phoneNumber);
+                    if (password.equals(rewritePassword) && InputValidation.getFormattedPassword(password)) {
+                        Account account = getAccount((String) session.getAttribute("email"), phoneNumber, password);
+                        adao.insertAccount(account);
+                        request.getRequestDispatcher("login.jsp").forward(request, response);
+                    } else {
+                        out.println("hehe");
+                    }
+                }
             }
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
@@ -99,11 +122,11 @@ public class CreateNewAccountController extends HttpServlet {
         }
     }
 
-    private void loginByGmailAccount() throws Exception {
+    private void loginByGmailAccount(String email, String code) throws Exception {
         IJavaMail emailService = new EmailService();
-        String toEmail = "tranxuanhoan04@gmail.com";
-        String subject = "Test my module";
-        String messageContent = "Can you read it? I'm very happy if you can see it";
+        String toEmail = email;
+        String messageContent = code;
+        String subject = "Vertified Code";
         if (!emailService.send(toEmail, subject, messageContent)) {
             throw new Exception("Failed to send email.");
         }

@@ -22,7 +22,7 @@ public class DBContext {
         try {
             String user = "root"; // change this to your MySQL username
             String pass = "hoan2709"; // change this to your MySQL password
-            String url = "jdbc:mysql://localhost:3306/Learnik"; // change mydb to your database name
+            String url = "jdbc:mysql://localhost:3306/swp391"; // change mydb to your database name 
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, pass);
             System.out.println(connection);

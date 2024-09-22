@@ -24,6 +24,8 @@
         <style>
             .wrap-login100 {
                 width: 500px;
+                transition: all 0.5s ease;
+                position: relative;
             }
             .button {
                 border-style: solid;
@@ -47,65 +49,86 @@
         <div class="limiter">
             <div class="container-login100">
                 <div class="wrap-login100">
+                    <%--<c:choose>--%>
+                        <c:if test="${requestScope.vetifyCode eq null}">
+                            <div class="form-step active" id="step1">
+                                <form class="login100-form validate-form" action="create" method="POST">
+                                    <span class="login100-form-title"> Create new account </span>
+                                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                                        <input class="input100" type="text" placeholder="Email" name="email"/>
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <p class="text-center" style="color: red">${requestScope.error}</p>
+                                    <div class="container-login100-form-btn">
+                                        <input type="submit" class="login100-form-btn" value="Check vertify code"/>
+                                    </div>
+                                    <p style="color: green" class="text-center">${requestScope.message}</p>
+                                    <div class="text-center p-t-136">
+                                        <a id="loginBtn" class="txt2" href="login.jsp">
+                                            Have an account?
+                                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </c:if>
 
-                    <form class="login100-form validate-form" action="create" method="POST">
+                        <c:if test="${requestScope.vetifyCode eq 'aa'}">
+                            <div class="form-step active" id="step2">
+                                <form action="create" method="POST">
+                                    <span class="login100-form-title"> Verify Email </span>
+                                    <div class="wrap-input100 validate-input" data-validate="Code is required">
+                                        <input class="input100" type="password" placeholder="Verify Code" name="code"/>
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-long-arrow-alt-right" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <p class="text-center" style="color: red">${requestScope.error}</p>
+                                    <div class="container-login100-form-btn">
+                                        <input type="submit" class="login100-form-btn" value="Check"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </c:if>
 
-                        <span class="login100-form-title"> Create new password </span>
+                        <c:if test="${requestScope.vetifyCode eq 'bb'}">
+                            <div class="form-step active" id="step3">
+                                <form action="create" method="POST">
+                                    <span class="login100-form-title"> Your information </span>
+                                    <div class="wrap-input100 validate-input">
+                                        <input type="text" class="input100" placeholder="Phone Number" name="phone_number">
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                                        <input class="input100" type="password" placeholder="Password" name="password"/>
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                                        <input class="input100" type="password" placeholder="Rewrite Password" name="rewrite_password"/>
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <p class="text-center" style="color: red">${requestScope.error}</p>
+                                    <div class="container-login100-form-btn">
+                                        <input type="submit" class="login100-form-btn" value="Create your account"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </c:if>
 
-                        <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                            <input class="input100" type="text" placeholder="Email" name="email"/>
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                            </span>
-                        </div>
-
-                        <div class="wrap-input100 validate-input">
-                            <input type="text" class="input100" placeholder="Phone Number" name="phone_number">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                            </span>
-                        </div>
-
-                        <div class="wrap-input100 validate-input" data-validate="Password is required">
-                            <input class="input100" type="password" placeholder="Password" name="password"/>
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-lock" aria-hidden="true"></i>
-                            </span>
-                        </div>
-
-                        <div class="wrap-input100 validate-input" data-validate="Password is required">
-                            <input class="input100" type="password" placeholder="Rewrite Password" name="rewrite_password"/>
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-lock" aria-hidden="true"></i>
-                            </span>
-                        </div>
-
-                        <p class="text-center" style="color: red">${requestScope.error}</p>
-
-                        <div class="container-login100-form-btn">
-                            <button class="login100-form-btn">Create</button>
-                        </div>
-
-                        <p style="color: green" class="text-center">${requestScope.message}</p> 
-
-                        <div class="container-login100-form-btn">                
-                            <p id="loginBtn" class="txt2">Or</p><i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i><br/>
-                            <a href="create?action=gmail" class="login100-form-btn button">Google</a><br/>
-                            <a href="create?action=facebook" class="login100-form-btn button1">Facebook</a> 
-                        </div>
-
-                        <div class="text-center p-t-136">
-                            <a id="loginBtn" class="txt2" href="login.jsp">
-                                Have an account?
-                                <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                            </a>
-                        </div>
-
-                    </form>            
+                    <%--</c:choose>--%>
                 </div>
             </div>
         </div>
