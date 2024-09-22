@@ -15,13 +15,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import model.User;
 
 /**
  *
  * @author mocun
  */
-public class AuthenrizationFilter implements Filter {
+public class AuthorizationFilter implements Filter {
 
     private ServletContext context;
 
@@ -35,22 +37,33 @@ public class AuthenrizationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getRequestURI();
+
         if (url.contains("/admin")) {
+//            if (url.startsWith(request.getContextPath() + "/admin")) {
             HttpSession session = request.getSession(false);
-            User user = (User) session.getAttribute("user");
+            User user = (session != null) ? (User) session.getAttribute("user") : null;
             if (user != null) {
-                if (user.getRole_id() == 0) {
+                if (user.getRole_id() == 6) {
                     // Admin user
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else if (user.getRole_id() == 1) {
                     // Customer user
-                    response.sendRedirect(request.getContextPath() + "/login?action=login&message='Not permission'&alert=danger");
+                    request.setAttribute("message", "Not Permission");
+                    request.setAttribute("alert", "danger");
+                    request.getRequestDispatcher("/login.jsp").forward(request, response);
+
                 } else if (user.getRole_id() == 2) {
                     // Default user
-                    response.sendRedirect(request.getContextPath() + "/login?action=login&message='Not permission'&alert=danger");
+                    request.setAttribute("message", "Not Permission");
+                    request.setAttribute("alert", "danger");
+                    request.getRequestDispatcher("/login.jsp").forward(request, response);
+
                 }
             } else {
-                response.sendRedirect(request.getContextPath() + "/login?action=login&message='Not login'&alert=danger");
+                request.setAttribute("message", "Not Permission");
+                request.setAttribute("alert", "danger");
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
+
             }
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
