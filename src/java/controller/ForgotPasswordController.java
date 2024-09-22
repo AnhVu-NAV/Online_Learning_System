@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package controller;
 
-import dal.CustomerDAO;
+
+import dal.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,7 +20,7 @@ import java.util.Properties;
  *
  * @author admin
  */
-public class forgetPasswordController extends HttpServlet {
+public class ForgotPasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,12 +36,12 @@ public class forgetPasswordController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String email = request.getParameter("email"); //email người nhận
-            CustomerDAO cus = new CustomerDAO();
+            UserDAO cus = new UserDAO();
             String fullName = cus.checkEmail(email);
 
             if (fullName.equals("Nothing")) {
                 request.setAttribute("message", "No exit account with this email. Please check again!");
-                request.getRequestDispatcher("forgetPass.jsp").forward(request, response);
+                request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
             }
             String newPass = cus.updatePass(email);
 
@@ -55,8 +53,6 @@ public class forgetPasswordController extends HttpServlet {
             properties.put("mail.smtp.starttls.enable", "true");
 
             // Tài khoản Gmail gửi
-//            String username = "giaptdhe186094@fpt.edu.vn";
-//            String password = "voqfdcwtvasoucxx";
             String username = "tuannahe182193@fpt.edu.vn";
             String password = "bjcg ajlw kqjq rnzn";
 
@@ -68,10 +64,10 @@ public class forgetPasswordController extends HttpServlet {
             });
             try {
                 String content = "<html><body>"
-                        + "<p style='font-size: 20px; font-weight: bold;'>     Traveland     </p>"
+                        + "<p style='font-size: 20px; font-weight: bold;'>     Learnik     </p>"
                         + "<p style='font-size: 12px; font-weight: bold;'>      Reset Password      </p>"
                         + "<p style='font-size: 10px;'>Hi <span style='font-weight: bold;'>" + fullName + "</span>,</p>"
-                        + "<p>This is your new password for your Traveland account: <span style='font-weight: bold;'>" + newPass + "</span></p>"
+                        + "<p>This is your new password for your Learnik account: <span style='font-weight: bold;'>" + newPass + "</span></p>"
                         + "<p>Do not share for anyone else.</p>"
                         + "<p>Thank you!</p>"
                         + "</body></html>";
@@ -92,7 +88,7 @@ public class forgetPasswordController extends HttpServlet {
 
                 Transport.send(message);
                 request.setAttribute("message", "Your new password has been sent to your email. Please check and log in again.");
-                request.getRequestDispatcher("sign_in.jsp").forward(request, response);
+                request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
             } catch (MessagingException e) {
                 throw new RuntimeException(e);
             }
