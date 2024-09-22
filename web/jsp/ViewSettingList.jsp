@@ -22,55 +22,70 @@
     <body>
         <div class="wrapper">
             <jsp:include page="/component/DashboardSidebar.jsp"></jsp:include>
-            <div class="main">
+                <div class="main">
                     <main class="content px-3 py-4">
                         <div class="container-fluid">
                             <div class="mb-3">
-                                
-                                <h3 class="fw-bold fs-4 mb-3">Admin Dashboard</h3>
-                                <h3 class="fw-bold fs-4 my-3">Setting List</h3>
-                                <form action="DashboardController" method="post">
-                                    <div class="row gx-2 gx-md-3 mb-4">
-                                        <!-- Search by value -->
-                                        <div class="col-md-4 mb-2 mb-md-0">
-                                            <label class="form-label visually-hidden" for="searchByValue">Search by value</label>
-                                            <div class="input-group input-group-merge">
-                                                <span class="input-group-prepend input-group-text">
-                                                    <i class="bi-search"></i>
-                                                </span>
-                                                <input type="text" class="form-control form-control-lg" name="search_by_value" placeholder="Search by value" aria-label="Search by value">
-                                            </div>
+                                <!-- Display error message if any -->
+                            <c:set var="error_message" value="${requestScope.error_message}"></c:set>
+                            <c:if test="${not empty error_message}">
+                                <div class="alert alert-danger" role="alert">
+                                    ${pageScope.error_message}
+                                </div>
+                            </c:if>                                           
+                            <!-- End error message -->
+
+                            <!-- Display message if any -->
+                            <c:set var="message" value="${requestScope.message}"></c:set>
+                            <c:if test="${not empty message}">
+                                <div class="alert alert-success" role="alert">
+                                    ${pageScope.message}
+                                </div>
+                            </c:if>                                            
+                            <!-- End message -->
+                            <h3 class="fw-bold fs-4 mb-3">Admin Dashboard</h3>
+                            <h3 class="fw-bold fs-4 my-3">Setting List</h3>
+                            <form action="SettingController" method="post">
+                                <div class="row gx-2 gx-md-3 mb-4">
+                                    <!-- Search by value -->
+                                    <div class="col-md-4 mb-2 mb-md-0">
+                                        <label class="form-label visually-hidden" for="searchByValue">Search by value</label>
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-prepend input-group-text">
+                                                <i class="bi-search"></i>
+                                            </span>
+                                            <input type="text" class="form-control form-control-lg" name="search_by_value" placeholder="Search by value" aria-label="Search by value">
                                         </div>
-                                        <!-- End Search by value -->
-                                        
-                                        <!-- Fillter by type -->
-                                        <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
-                                            <label class="form-label visually-hidden" for="fillterByType">Select type</label>
-                                            <select class="form-select form-select-lg" name="fillter_by_type" aria-label="Select type">
-                                                <option value="all" selected>All type</option>
-                                                <option value="0">Male</option>
-                                                <option value="1">Female</option>
-                                            </select>
-                                        </div>
-                                        <!-- End Fillter by type -->
-                                        
-                                        <!-- Fillter by status -->
-                                        <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
-                                            <label class="form-label visually-hidden" for="fillterByStatus">Select status</label>
-                                            <select class="form-select form-select-lg" name="fillter_by_status" aria-label="Select status">
-                                                <option value="all" selected>All status</option>
-                                                <option value="1">Admin</option>
-                                                <option value="2">Customer</option>
-                                                <option value="3">Expert</option>
-                                                <option value="4">Marketing</option>
-                                            </select>
-                                        </div>
-                                        <!-- End Fillter by status -->
                                     </div>
-                                                                   
-                                    <br/>
-                                    <!-- Start sorting -->
-                                    <div class="container">
+                                    <!-- End Search by value -->
+
+                                    <!-- Fillter by type -->
+                                    <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
+                                        <label class="form-label visually-hidden" for="fillterByType">Select type</label>
+                                        <select class="form-select form-select-lg" name="fillter_by_type" aria-label="Select type">
+                                            <option value="all" selected>All type</option>
+                                            <c:forEach items="${requestScope.setting_type}" var="setting_type">
+                                                <option value="${setting_type.getId()}">${setting_type.getName()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <!-- End Fillter by type -->
+
+                                    <!-- Fillter by status -->
+                                    <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
+                                        <label class="form-label visually-hidden" for="fillterByStatus">Select status</label>
+                                        <select class="form-select form-select-lg" name="fillter_by_status" aria-label="Select status">
+                                            <option value="all" selected>All status</option>
+                                            <option value="1">Activated</option>
+                                            <option value="0">Deactivated</option>
+                                        </select>
+                                    </div>
+                                    <!-- End Fillter by status -->
+                                </div>
+
+                                <br/>
+                                <!-- Start sorting -->
+                                <div class="container">
                                     <c:set var="checked" value="${requestScope.checked}"></c:set>
                                         <h5 class="mb-3">Sort by</h5>
                                         <div class="row">
@@ -154,11 +169,26 @@
                                             <c:forEach items="${requestScope.data}" var="setting">
                                                 <tr>
                                                     <td>${setting.getId()}</td>
-                                                    <td>${setting.getSetting_type_id()}</td>                                                
+                                                    <td>
+                                                        <c:forEach items="${requestScope.setting_type}" var="setting_type">
+                                                            <c:if test="${setting.getSetting_type_id()==setting_type.getId()}">
+                                                                ${setting_type.getName()}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </td>                                                
                                                     <td>${setting.getValue()}</td>
                                                     <td>${setting.getCreated_date()}</td>
                                                     <td>${setting.getUpdated_date()}</td>
-                                                    <td>${setting.getStatus()}</td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${setting.getStatus() == 0}">
+                                                                Deactivated
+                                                            </c:when>
+                                                            <c:when test="${setting.getStatus() == 1}">
+                                                                Activated
+                                                            </c:when>
+                                                        </c:choose>
+                                                    </td>
                                                     <td><a class="btn btn-primary" href="SettingController?service=viewSettingDetails&id=${setting.getId()}" role="button">View</a></td>
                                                 </tr>
                                             </c:forEach>
@@ -166,68 +196,38 @@
                                     </table>
                                 </div>
                             </div>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <c:forEach begin="1" end="${requestScope.totalPage}" var="i">
+                                        <li class="page-item"><a class="page-link" href="SettingController?service=viewAllSetting&index=${i}">${i}</a></li>
+                                        </c:forEach>
+                                </ul>
+                            </nav>
                             <!-- Registration Form Section start-->
-                            <h3 class="fw-bold fs-4 my-3">Add new user</h3>                           
+                            <h3 class="fw-bold fs-4 my-3">Add new setting</h3>                           
                             <div class="wrapper rounded bg-white p-4">                               
-                                <form class="form" action="DashboardController" method="post">
+                                <form class="form" action="SettingController" method="post">
                                     <div class="row">
                                         <div class="col-md-6 mt-md-0 mt-3">
-                                            <label for="firstName">First Name</label>
-                                            <input type="text" class="form-control w-100" id="addNewUserFirstName" name="addNewUserFirstName"> 
+                                            <label for="firstName">Value</label>
+                                            <input type="text" class="form-control w-100" id="addNewSettingValue" name="addNewSettingValue" required=""> 
                                         </div>
                                         <div class="col-md-6 mt-md-0 mt-3">
-                                            <label for="lastName">Last Name</label>
-                                            <input type="text" class="form-control w-100" id="addNewUserLastName" name="addNewUserLastName"> 
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6 mt-md-0 mt-3">
-                                            <label for="birthday">Dob</label>
-                                            <input type="date" class="form-control w-100" id="addNewUserDob" name="addNewUserDob"> 
-                                        </div>
-                                        <div class="col-md-6 mt-md-0 mt-3">
-                                            <label>Gender</label>
-                                            <div class="d-flex align-items-center mt-2">
-                                                <label class="option">
-                                                    <input type="radio" name="addNewUserGender" value="0" required> Male
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                                <label class="option ms-4">
-                                                    <input type="radio" name="addNewUserGender" value="1" required> Female
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mt-md-0 mt-3">
-                                            <label for="email">Email</label>
-                                            <input type="email" class="form-control w-100" id="addNewUserEmail" name="addNewUserEmail" required> 
-                                        </div>
-                                        <div class="col-md-6 mt-md-0 mt-3">
-                                            <label for="phone">Phone</label>
-                                            <input type="tel" class="form-control w-100" id="addNewUserPhone" name="addNewUserPhone"> 
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mt-md-0 mt-3">
-                                            <label for="firstName">Address</label>
-                                            <input type="text" class="form-control w-100" id="addNewUserAddress" name="addNewUserAddress"> 
+                                            <label for="lastName">Description</label>
+                                            <input type="text" class="form-control w-100" id="addNewSettingDescription" name="addNewSettingDescription" required=""> 
                                         </div>
                                     </div>
                                     <div class="my-md-2 my-3">
                                         <label for="subject">Role</label>
-                                        <select id="addNewUserRole" class="form-select w-100" name="addNewUserRole" required> 
-                                            <option value="2">Customer</option>
-                                            <option value="3">Marketing</option>
-                                            <option value="4">Sale</option>
-                                            <option value="5">Expert</option>
+                                        <select id="addNewSettingSettingType" class="form-select w-100" name="addNewSettingSettingType" required> 
+                                            <c:forEach items="${requestScope.setting_type}" var="setting_type">
+                                                <option value="${setting_type.getId()}">${setting_type.getName()}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
-                                    <input type="hidden" name="service" value="addNewUser">
+                                    <input type="hidden" name="service" value="addNewSetting">
                                     <div class="text-center mt-4">
-                                        <button type="submit" name="addNewUserSubmit" class="btn btn-primary w-100">Add new user</button> 
+                                        <button type="submit" name="addNewSettingSubmit" class="btn btn-primary w-100">Add new setting</button> 
                                     </div>
                                 </form>
                             </div>

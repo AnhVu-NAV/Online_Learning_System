@@ -15,8 +15,8 @@ public class EmailProperty {
  
     public static final int TSL_PORT = 587; // Port for TLS/STARTTLS
  
-    public static final String APP_EMAIL = ""; // your email
+    public static final String APP_EMAIL = "hoana5k44nknd@gmail.com"; // your email
  
-    public static final String APP_PASSWORD = ""; // your password
+    public static final String APP_PASSWORD = "tuej akmj iqph dyls"; // your password
  
 }
