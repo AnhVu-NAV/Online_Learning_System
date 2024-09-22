@@ -59,7 +59,7 @@ public class LoginSystemController extends HttpServlet {
                     throw new Exception("Password is incorrect");
                 }
                 session.setAttribute("account", account);
-                request.getRequestDispatcher("slider_list.jsp").forward(request, response);
+                request.getRequestDispatcher("slider?action=list").forward(request, response);
 //                request.getRequestDispatcher("home_page_demo.jsp");
             }
         } catch (Exception e) {

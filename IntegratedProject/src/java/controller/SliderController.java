@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.util.Vector;
 import model.Account;
 import model.Slider;
@@ -28,22 +29,53 @@ public class SliderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SliderDAO sliderDao = new SliderDAO();
+        Slider slider;
+        PrintWriter out = response.getWriter();
         try {
+            int nrpp = 10;
+            int totalPage = (sliderDao.getAllSlider().size() + nrpp - 1) / nrpp;
+            String index_raw = request.getParameter("index");
+            int index = 1;
+            if (index_raw != null) {
+                index = Integer.parseInt(index_raw);
+            }
+            String string = "select * from Slider limit " + (index - 1) * nrpp + "," + nrpp;
+            request.setAttribute("sliderType", sliderDao.getAllSlider());
+            request.setAttribute("totalPage", totalPage);
+            if (request.getParameter("action") != null) {
+                if (request.getParameter("action").equals("next")) {
+                    request.setAttribute("showAllSlider", sliderDao.getSliders(string));
+                    request.getRequestDispatcher("slider?action=list").forward(request, response);
+                }
+            }
+            if ("list".equals(request.getParameter("action"))) { //goi ra bang slider?action=list
+                out.println("oke");
+                Vector<Slider> list = sliderDao.getAllSlider();
+                request.setAttribute("showAllSlider", sliderDao.getSliders(string));
+//                request.setAttribute("showAllSlider", list);
+                request.getRequestDispatcher("slider_list.jsp").forward(request, response);
+            }
             if (request.getParameter("id") != null) {
                 int id = Integer.parseInt(request.getParameter("id"));
-                request.setAttribute("slider", sliderDao.getSliderById(id));
-                request.getRequestDispatcher("slider.jsp").forward(request, response);
-            }
-            Vector<Slider> list = sliderDao.getAllSlider();
-            if (list != null) {
-                request.setAttribute("list", list);
-            } else {
-                throw new Exception("Sliders are empty");
+                if (request.getParameter("action") != null && request.getParameter("action").equals("view")) {
+                    request.setAttribute("slider", sliderDao.getSliderById(id));
+                    request.getRequestDispatcher("slider.jsp").forward(request, response);
+                } else if (request.getParameter("action") != null && request.getParameter("action").equals("show")) {
+                    slider = sliderDao.getSliderById(id);
+                    slider.setStatus(1);
+                    sliderDao.updateSliderById(id, slider);
+                    request.getRequestDispatcher("slider?action=list").forward(request, response);
+                } else if (request.getParameter("action") != null && request.getParameter("action").equals("hide")) {
+                    slider = sliderDao.getSliderById(id);
+                    slider.setStatus(0);
+                    sliderDao.updateSliderById(id, slider);
+                    request.getRequestDispatcher("slider?action=list").forward(request, response);
+                }
             }
         } catch (Exception ex) {
             request.setAttribute("error", ex.getMessage());
+            request.getRequestDispatcher("slider_list.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("slider.jsp").forward(request, response);
     }
 
     @Override
@@ -53,20 +85,16 @@ public class SliderController extends HttpServlet {
         String imageUrl = request.getParameter("imageUrl");
         String backlinkUrl = request.getParameter("backlinkUrl");
         String status_raw = request.getParameter("status");
+        String choice = request.getParameter("choice");
+        String result = request.getParameter("result");
         SliderDAO sliderDao = new SliderDAO();
         HttpSession sesson = request.getSession();
         try {
             if (crud != null) {
                 switch (crud) {
-                    case "Show":
-                        request.setAttribute("showAllSlider", sliderDao.getAllSlider());
-                        request.getRequestDispatcher("slider_list.jsp").forward(request, response);
-                        break;
                     case "Add":
                         request.setAttribute("add", "add");
                         request.getRequestDispatcher("slider_list.jsp").forward(request, response);
-                        break;
-                    case "Hide":
                         break;
                     case "Edit":
                         request.setAttribute("edit", "edit");
@@ -74,9 +102,30 @@ public class SliderController extends HttpServlet {
                         break;
                 }
             }
+            if (result != null) {
+                if (sliderDao.getSlderByRequest(result) == null) {
+                    throw new Exception("No result");
+                } else {
+                    request.setAttribute("showAllSlider", sliderDao.getSlderByRequest(result));
+                    request.getRequestDispatcher("slider?action=list").forward(request, response);
+                }
+            }
+//            if (choice != null) {
+//                switch (choice) {
+//                    case "byDate":
+//                        
+//                        break;
+//                    case "byId":
+//                        break;
+//                    case "byAccount":
+//                        break;
+//                    case "byStatus":
+//                        break;
+//                }
+//            }
 //            AccountDAO adao = new AccountDAO();
 //            Account account = adao.getAccountById(2); 
-            Account account = (Account) sesson.getAttribute("account"); 
+            Account account = (Account) sesson.getAttribute("account");
             Slider slider;
             int status = 0;
             if (imageUrl != null && backlinkUrl != null && status_raw != null && request.getParameter("id") == null) {

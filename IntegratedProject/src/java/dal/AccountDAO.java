@@ -40,7 +40,7 @@ public class AccountDAO extends DBContext {
             account.setRoleId(setdao.getSettingById(rs.getInt("role_id")));
             account.setCreatedDate(DateConvert.convertToUtilDate(rs.getDate("created_date")));
             account.setStatus(rs.getInt("status"));
-            account.setPhoneNumber(rs.getString("phone_number"));
+            account.setPhoneNumber(rs.getString("phone"));
             account.setGender(rs.getBoolean("gender"));
             account.setFirstName(rs.getString("first_name"));
             account.setLastName(rs.getString("last_name"));
@@ -66,7 +66,7 @@ public class AccountDAO extends DBContext {
             account.setRoleId(setdao.getSettingById(rs.getInt("role_id")));
             account.setCreatedDate(DateConvert.convertToUtilDate(rs.getDate("created_date")));
             account.setStatus(rs.getInt("status"));
-            account.setPhoneNumber(rs.getString("phone_number"));
+            account.setPhoneNumber(rs.getString("phone"));
             account.setGender(rs.getBoolean("gender"));
             account.setFirstName(rs.getString("first_name"));
             account.setLastName(rs.getString("last_name"));
@@ -125,9 +125,9 @@ public class AccountDAO extends DBContext {
 
     public void updatePhoneNumber(Account account, String phoneNumber) throws SQLException {
         String sql = "UPDATE Account\n"
-                + "SET phone_number = CASE \n"
-                + "    WHEN phone_number = ? THEN ?\n"
-                + "    ELSE phone_number\n"
+                + "SET phone = CASE \n"
+                + "    WHEN phone = ? THEN ?\n"
+                + "    ELSE phone\n"
                 + "END\n"
                 + "WHERE id = ?;";
         PreparedStatement pre = connection.prepareStatement(sql);
@@ -164,7 +164,7 @@ public class AccountDAO extends DBContext {
     }
 
     public void insertAccount(Account account) throws Exception {
-        String sql = "insert into Account (email, phone_number, password, role_id, created_date, status, image_url)\n"
+        String sql = "insert into Account (email, phone, password, role_id, created_date, status, image_url)\n"
                 + "values (?, ?, ?, ?, ?, ?, ?);";
         PreparedStatement pre = connection.prepareStatement(sql);
         pre.setString(1, account.getEmail());

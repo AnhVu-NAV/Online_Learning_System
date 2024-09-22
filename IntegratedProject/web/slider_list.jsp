@@ -26,13 +26,13 @@
                 position: fixed;
                 left: 0;
                 top: 0;
-                width: 400px;
+                width: 350px;
                 z-index: 1000;
                 height: 100vh;
             }
             main {
-                margin-left: 400px;
-                width: calc(100% - 400px);
+                margin-left: 350px;
+                width: calc(100% - 350px);
             }
             .header-title {
                 color: white;
@@ -42,12 +42,12 @@
                 padding: 10px 0;
                 font-weight: bold;
             }
-            .search-input {
-                flex-grow: 1;
-            }
-            .search-button {
-                margin-left: 8px;
-            }
+            /*            .search-input {
+                            align-content: center;
+                        }
+                        .search-button {
+                            margin-left: 8px;
+                        }*/
             .action-buttons {
                 margin-left: 16px;
             }
@@ -60,16 +60,12 @@
             p {
                 color: black;
             }
-            .slider_detail {
-                border-style: solid;
-                border-radius: 20px;
-            }
             .table {
                 width: 100%;
                 border-collapse: collapse;
                 margin-top: 20px;
+                box-sizing: border-box;
             }
-
             th, td {
                 padding: 10px;
                 text-align: left;
@@ -80,6 +76,19 @@
                 background-color: #f2f2f2;
                 font-weight: bold;
             }
+            .search-bar {
+                padding-left: 320px; /* Khoảng cách giữa các thành phần */
+            }
+            .search-input {
+                width: 300px; /* Điều chỉnh chiều rộng */
+                padding: 10px; /* Khoảng cách bên trong */
+            }
+            .image-url {
+                max-width: 400px; /* Giới hạn chiều rộng tối đa */
+                overflow: hidden; /* Ẩn bớt nội dung tràn */
+                text-overflow: ellipsis; /* Hiện dấu '...' cho nội dung tràn */
+                white-space: nowrap; /* Không xuống dòng */
+            }
         </style>
     </head>
 
@@ -88,7 +97,7 @@
             <div class="header">
                 <nav class="navbar">
                     <div class="collapse navbar-collapse single-page-nav">
-                        <form action="" method="POST">
+                        <form action="slider" method="POST">
                             <div class="navbar-nav">
                                 <li class="header-title">
                                     <h3 style="color: white">Filter</h3>
@@ -106,7 +115,7 @@
                                     <a class="nav-link"><span class="icn"></span>By Account</a>
                                 </li>
                                 <li class="nav-item">
-                                    <input type="checkbox" value="byStatus"/>
+                                    <input type="checkbox" value="byStatus" name="choice"/>
                                     <a class="nav-link"><span class="icn"></span>By Status</a>
                                 </li>
                             </div>
@@ -126,10 +135,7 @@
                                 </div>
 
                                 <div class="d-flex action-buttons">
-                                    <button type="submit" class="btn btn-outline-primary me-1" name="crud" value="Show">Show</button>
-                                    <button type="submit" class="btn btn-outline-secondary me-1" name="crud" value="Hide">Hide</button>
                                     <button type="submit" class="btn btn-outline-success me-1" name="crud" value="Add">Add</button>
-                                    <button type="submit" class="btn btn-outline-warning" name="crud" value="Edit">Edit</button>
                                 </div>
                             </form>
                         </div>
@@ -138,7 +144,7 @@
                             <div class="container">
                                 <p style="color: red; text-align: left;">${requestScope.error}</p>
                                 <c:set var="id" value="0"/>
-                                <c:if test="${requestScope.showAllSlider ne null}">
+                                <c:if test="${requestScope.showAllSlider ne null}">             
                                     <div class="row slider_detail">
                                         <div class="item col-md-4">
                                             <div class="tm-work-item-inner">
@@ -146,11 +152,12 @@
                                                     <thead>
                                                         <tr>
                                                             <th>No.</th>
-                                                            <th>Id</th>
-                                                            <th>Image Url</th>
-                                                            <th>Back Link Url</th>
+                                                            <th class="image-url">Image Url</th>
+                                                            <th class="image-url">Back Link Url</th>
                                                             <th>Status</th>
                                                             <th>Account</th>
+                                                            <th>Show/Hide</th> 
+                                                            <th>Edit</th>  
                                                             <th>Live demo</th> 
                                                         </tr>
                                                     </thead>
@@ -159,12 +166,16 @@
                                                             <c:set var="id" value="${id + 1}" />
                                                             <tr>
                                                                 <td>${id}</td> 
-                                                                <td>${s.getId()}</td>
-                                                                <td>${s.getImage_url()}</td>
-                                                                <td>${s.getBacklink_url()}</td>
+                                                                <td class="image-url">${s.getImage_url()}</td>
+                                                                <td class="image-url">${s.getBacklink_url()}</td>
                                                                 <td>${s.getStatus()}</td>
                                                                 <td>${s.getAccount().getFirstName()} ${s.getAccount().getLastName()}</td>
-                                                                <td><a href="slider?id=${s.getId()}">View</a></td> 
+                                                                <td> 
+                                                                    <a href="slider?action=show&id=${s.getId()}">Show</a><br/> 
+                                                                    <a href="slider?action=hide&id=${s.getId()}">Hide</a>
+                                                                </td>
+                                                                <td><a href="slider?action=edit&id=${s.getId()}">Edit</a></td>
+                                                                <td><a href="slider?action=view&id=${s.getId()}">View</a></td> 
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>
@@ -252,6 +263,13 @@
                                 </c:if>
                             </div>
                         </section>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <c:forEach begin="1" end="${requestScope.totalPage}" var="i">
+                                    <li class="page-item"><a class="page-link" href="slider?action=next&index=${i}">${i}</a></li>
+                                    </c:forEach>
+                            </ul>
+                        </nav>
 
                     </div>
                 </div>

@@ -7,6 +7,7 @@ package dal;
 import java.util.Vector;
 import model.Slider;
 import java.sql.*;
+import model.Account;
 
 /**
  *
@@ -61,8 +62,51 @@ public class SliderDAO extends DBContext {
         }
         return null;
     }
-    // </editor-fold>
 
+    public Vector<Slider> getSlderByRequest(String request) throws Exception {
+        Vector<Slider> list = new Vector();
+        String sql = "select * from Slider\n"
+                + "where id = ? or image_url like ? or author_id like ? or backlink_url like ? or status like ?; ";
+        PreparedStatement pre = connection.prepareStatement(sql);
+        pre.setString(1, request);
+        pre.setString(2, request);
+        pre.setString(3, request);
+        pre.setString(4, request);
+        pre.setString(5, request);
+        ResultSet rs = pre.executeQuery();
+        while (rs.next()) {
+            Slider slider = new Slider();
+            slider.setId(rs.getInt("id"));
+            slider.setAccount(adao.getAccountById(rs.getInt("author_id")));
+            slider.setImage_url(rs.getString("image_url"));
+            slider.setBacklink_url(rs.getString("backlink_url"));
+            slider.setStatus(rs.getInt("status"));
+            list.add(slider);
+        }
+        rs.close();
+        pre.close();
+        return list;
+    }
+
+    public Vector<Slider> getSliders(String sql) throws Exception {
+        Vector<Slider> vector = new Vector<Slider>();
+        Statement state = connection.createStatement(
+                ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        ResultSet rs = state.executeQuery(sql);
+        AccountDAO adao = new AccountDAO();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            Account account = adao.getAccountById(rs.getInt("author_id"));
+            String image_url = rs.getString("image_url");
+            String backlink_url = rs.getString("backlink_url");
+            int status = rs.getInt("status");
+            Slider obj = new Slider(account, image_url, backlink_url, status);
+            vector.add(obj);
+        }
+        return vector;
+    }
+
+    // </editor-fold>
     public void updateSliderById(int id, Slider slider) throws Exception {
         String sql = "UPDATE Slider\n"
                 + " SET image_url = ?, author_id = ?, backlink_url = ?, status = ?\n"
@@ -122,7 +166,7 @@ public class SliderDAO extends DBContext {
         try {
 ////            slider.setAccount(adao.getAccountByEmail("b@gmail.com"));
 ////            slider.setBacklink_url("https://");
-////            slider.setImage_url("https://www.elleman.vn/app/uploads/2018/08/13/gi%C3%A0y-sneakers-2-elle-man-8.jpg");
+////            slider.setImage_url("");
 ////            slider.setStatus(1);
 //
 //            slider1.setAccount(adao.getAccountByEmail("b@gmail.com"));
@@ -140,17 +184,16 @@ public class SliderDAO extends DBContext {
 ////            System.out.println(sdao.getSliderById(sdao.getMaxId()).getImage_url());
 ////            sdao.deleteSlider(1);
 ////            sdao.deleteSlider(2); 
-//            for (Slider s : sdao.getAllSlider()) {
-//                System.out.println(s.toString());
-//            }
+            for (Slider s : sdao.getAllSlider()) {
+                System.out.println(s.toString());
+            }
 
-            slider.setAccount(adao.getAccountByEmail("b@gmail.com"));
-            slider.setBacklink_url("heheheh");
-            slider.setImage_url("hahaha");
-            slider.setStatus(1);
-//            slider.setId(6); 
-            sdao.updateSliderById(6, slider);
-            System.out.println(sdao.getSliderById(6));
+//            slider.setAccount(adao.getAccountByEmail("b@gmail.com"));
+//            slider.setBacklink_url("heheheh");
+//            slider.setImage_url("hahaha");
+//            slider.setStatus(1);
+////            slider.setId(6); 
+//            sdao.updateSliderById(6, slider);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
