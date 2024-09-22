@@ -263,6 +263,7 @@ public class UserDAO extends DBContext {
                 String phone = rs.getString("phone");
                 String address = rs.getString("address");
                 int role_id = rs.getInt("role_id");
+//                int banned = rs.getBanned("banned");
 
                 User u = new User(id, username, password, fullname, email, phone, address, role_id);
                 users.add(u);
@@ -286,16 +287,17 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public User getOne(String username, String password) {
+    public User getOne(String username, String password, Integer banned) {
         PreparedStatement stm = null;
         ResultSet rs = null;
-        String sql = "select * from [user]\n"
-                + "where [username] = ?\n"
-                + "and [password] = ?";
+        StringBuilder sql = new StringBuilder("SELECT * FROM [user] AS u\n");
+        sql.append(" INNER JOIN setting AS r ON r.id = u.role_id \n");
+        sql.append("WHERE u.username = ? AND u.password = ? AND u.banned = ?");
         try {
             stm = connection.prepareStatement(sql);
             stm.setString(1, username);
             stm.setString(2, password);
+            stm.setInt(3, banned);
             rs = stm.executeQuery();
 
             if (rs.next()) {
@@ -303,12 +305,12 @@ public class UserDAO extends DBContext {
                 u.setId(rs.getInt("id"));
                 u.setUsername(username);
                 u.setPassword(password);
+                u.setBanned(banned);
                 u.setFullname(rs.getString("fullname"));
                 u.setAddress(rs.getString("address"));
                 u.setEmail(rs.getString("email"));
                 u.setPhone(rs.getString("phone"));
                 u.setRole_id(rs.getInt("role_id"));
-                u.setBanned(rs.getInt("banned"));
                 System.out.println(u);
                 return u;
 
@@ -356,7 +358,7 @@ public class UserDAO extends DBContext {
                 int role_id = rs.getInt("role_id");
                 int banned = rs.getInt("banned");
 
-                User u = new User(id, username, password, fullname, email, phone, address, role_id, banned);
+                User u = new User(id, username, password, fullname, email, phone, address, role_id);
                 users.add(u);
             }
             return users;

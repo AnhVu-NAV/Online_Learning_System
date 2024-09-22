@@ -88,7 +88,5 @@ public class Setting {
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
-
     
-
 }
