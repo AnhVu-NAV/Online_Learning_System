@@ -58,8 +58,11 @@
             <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/dal/CustomerDAO.java</file>
             <file>file:/D:/SWP-Project/swp391_onlinelearning/web/ChangePassword.jsp</file>
             <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/changePassword.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/model/User.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/dal/UserDAO.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/ChangePassword.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/ForgotPasswordController.java</file>
             <file>file:/D:/SWP-Project/swp391_onlinelearning/web/ForgotPassword.jsp</file>
-            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/dal/DBContext.java</file>
         </group>
     </open-files>
 </project-private>

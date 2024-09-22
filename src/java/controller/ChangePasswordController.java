@@ -4,7 +4,8 @@
  */
 package controller;
 
-import dal.CustomerDAO;
+
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,13 +13,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Customer;
+
+import model.User;
 
 /**
  *
  * @author admin
  */
-public class ChangePassword extends HttpServlet {
+public class ChangePasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -73,7 +75,7 @@ public class ChangePassword extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        Customer nuser = (Customer) session.getAttribute("us");
+        User nuser = (User) session.getAttribute("us");
 
         String new_pass = request.getParameter("new_pass");
         String old_pass = request.getParameter("old_pass");
@@ -81,12 +83,12 @@ public class ChangePassword extends HttpServlet {
 
         if (nuser.getPassword().equals(old_pass)) {
             if (new_pass.equals(c_new_pass)){
-                CustomerDAO cus = new CustomerDAO();
+                UserDAO cus = new UserDAO();
                 cus.updatePass(nuser.getEmail(), new_pass);
                 response.sendRedirect("ChangePassword.jsp");
             } else {
                 request.setAttribute("error", "You entered confirm password diffent new password!");
-                request.getRequestDispatcher("changePass.jsp").forward(request, response);
+                request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
             }
         } else {
             request.setAttribute("error", "Password is not correct!");
