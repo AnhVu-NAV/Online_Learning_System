@@ -39,7 +39,7 @@
                             <div class="col">
                                 <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4">
                                     <ol class="breadcrumb mb-0">
-                                        <li class="breadcrumb-item"><a href="DashboardController?service=viewAllAccount">User List</a></li>
+                                        <li class="breadcrumb-item"><a href="AccountDashboardController?service=viewAllAccount">User List</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">User Details</li>
                                     </ol>
                                 </nav>
@@ -56,14 +56,14 @@
                                     <!-- Update account start -->                                                                                                                        
                                     <select class="form-select w-100" onchange="window.location.href=this.value">  
                                             <c:forEach items="${requestScope.setting}" var="setting">
-                                                <option value="${pageContext.request.contextPath}/DashboardController?service=updateAccount&accountId=${account.getId()}&roleId=${setting.getId()}" ${account.getRole_id()==setting.getId()?"selected":""} >${setting.getValue()}</option>
+                                                <option value="${pageContext.request.contextPath}/AccountDashboardController?service=updateAccount&accountId=${account.getId()}&roleId=${setting.getId()}" ${account.getRole_id()==setting.getId()?"selected":""} >${setting.getValue()}</option>
                                             </c:forEach>
                                         </select>
                                         <br/>
                                         <div class="d-flex justify-content-center mb-2">
-                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${account.getStatus() == 1 ? 'btn-success' : 'btn-outline-success'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/DashboardController?service=updateAccount&accountId=${account.getId()}&status=1';">Activated</button>
-                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${account.getStatus() == 0 ? 'btn-danger' : 'btn-outline-danger'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/DashboardController?service=updateAccount&accountId=${account.getId()}&status=0';">Deactivated</button>
-                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${account.getStatus() == 2 ? 'btn-warning' : 'btn-outline-warning'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/DashboardController?service=updateAccount&accountId=${account.getId()}&status=2';">Default</button>
+                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${account.getStatus() == 1 ? 'btn-success' : 'btn-outline-success'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/AccountDashboardController?service=updateAccount&accountId=${account.getId()}&status=1';">Activated</button>
+                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${account.getStatus() == 0 ? 'btn-danger' : 'btn-outline-danger'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/AccountDashboardController?service=updateAccount&accountId=${account.getId()}&status=0';">Deactivated</button>
+                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${account.getStatus() == 2 ? 'btn-warning' : 'btn-outline-warning'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/AccountDashboardController?service=updateAccount&accountId=${account.getId()}&status=2';">Default</button>
                                         </div>                                                                           
                                     <!-- Update account end -->
                                 </div>

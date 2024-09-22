@@ -28,7 +28,7 @@ import util.*;
  *
  * @author 84941
  */
-public class DashboardController extends HttpServlet {
+public class AccountDashboardController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -173,7 +173,7 @@ public class DashboardController extends HttpServlet {
             //set data for views
             request.setAttribute("message", message);
             // select view
-            RequestDispatcher dispath = request.getRequestDispatcher("DashboardController?service=viewAllAccount");
+            RequestDispatcher dispath = request.getRequestDispatcher("AccountDashboardController?service=viewAllAccount");
             //run
             dispath.forward(request, response);
 
@@ -191,7 +191,7 @@ public class DashboardController extends HttpServlet {
                 //set data for views
                 request.setAttribute("message", message);
                 // select view
-                RequestDispatcher dispath = request.getRequestDispatcher("DashboardController?service=viewAllAccount");
+                RequestDispatcher dispath = request.getRequestDispatcher("AccountDashboardController?service=viewAllAccount");
                 //run
                 dispath.forward(request, response);
 
@@ -205,7 +205,7 @@ public class DashboardController extends HttpServlet {
                 //set data for views
                 request.setAttribute("message", message);
                 // select view
-                RequestDispatcher dispath = request.getRequestDispatcher("DashboardController?service=viewAllAccount");
+                RequestDispatcher dispath = request.getRequestDispatcher("AccountDashboardController?service=viewAllAccount");
                 //run
                 dispath.forward(request, response);
             }

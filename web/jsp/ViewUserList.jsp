@@ -45,7 +45,7 @@
                             <!-- End message -->
                             <h3 class="fw-bold fs-4 mb-3">Admin Dashboard</h3>
                             <h3 class="fw-bold fs-4 my-3">Users List</h3>
-                            <form action="DashboardController" method="post">
+                            <form action="AccountDashboardController" method="post">
                                 <div class="row gx-2 gx-md-3 mb-4">
                                     <!-- Search by name -->
                                     <div class="col-md-4 mb-2 mb-md-0">
@@ -242,7 +242,7 @@
                                                             </c:when>
                                                         </c:choose>
                                                     </td>
-                                                    <td><a class="btn btn-primary" href="DashboardController?service=viewUserDetails&id=${account.getId()}" role="button">View</a></td>
+                                                    <td><a class="btn btn-primary" href="AccountDashboardController?service=viewUserDetails&id=${account.getId()}" role="button">View</a></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -252,14 +252,14 @@
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <c:forEach begin="1" end="${requestScope.totalPage}" var="i">
-                                        <li class="page-item"><a class="page-link" href="DashboardController?service=viewAllAccount&index=${i}">${i}</a></li>
+                                        <li class="page-item"><a class="page-link" href="AccountDashboardController?service=viewAllAccount&index=${i}">${i}</a></li>
                                     </c:forEach>
                                 </ul>
                             </nav>
                             <!-- Registration Form Section start-->
                             <h3 class="fw-bold fs-4 my-3">Add new user</h3>                           
                             <div class="wrapper rounded bg-white p-4">                               
-                                <form class="form" action="DashboardController" method="post">
+                                <form class="form" action="AccountDashboardController" method="post">
                                     <div class="row">
                                         <div class="col-md-6 mt-md-0 mt-3">
                                             <label for="firstName">First Name</label>
