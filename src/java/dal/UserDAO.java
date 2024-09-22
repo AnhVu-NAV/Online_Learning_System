@@ -15,13 +15,13 @@ import java.util.logging.Logger;
  *
  * @author HI
  */
-public class CustomerDAO extends DBContext {
+public class UserDAO extends DBContext {
     
-    private static final Logger LOGGER = Logger.getLogger(CustomerDAO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(UserDAO.class.getName());
     
     
     public String updatePass(String email) {
-        String sql = "UPDATE [User] SET Password = ? WHERE Email LIKE ?";
+        String sql = "UPDATE Account SET Password = ? WHERE Email LIKE ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             String newPass = generateNewPassword();
             pstmt.setString(1, newPass);
@@ -35,7 +35,7 @@ public class CustomerDAO extends DBContext {
     }
 
     public void updatePass(String email, String pass) {
-        String sql = "UPDATE [User] SET Password = ? WHERE Email LIKE ?";
+        String sql = "UPDATE Account SET Password = ? WHERE Email LIKE ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, pass);
             pstmt.setString(2, email);
@@ -46,7 +46,7 @@ public class CustomerDAO extends DBContext {
     }
     
     public String checkEmail(String email) {
-        String sql = "SELECT FullName FROM [User] WHERE Email = ?";
+        String sql = "SELECT CONCAT(first_name, ' ', last_name) as FullName FROM Account WHERE email = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, email);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -73,5 +73,20 @@ public class CustomerDAO extends DBContext {
         }
 
         return sb.toString();
+    }
+    
+    public static void main(String[] args) {
+        // Tạo kết nối đến database
+        
+        
+        
+            // Tạo đối tượng AccountDAO
+            UserDAO accountDAO = new UserDAO();
+
+            // Thông tin tài khoản cần thay đổi mật khẩu
+            
+            accountDAO.updatePass("customer2@example.com");
+        
+        
     }
 }
