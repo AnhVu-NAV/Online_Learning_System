@@ -28,13 +28,13 @@ public class SettingDAO extends DBContext{
                 + "           ,created_date\n"
                 + "           ,updated_date)\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "           (?,?,?,?,?,?)";
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setInt(1, obj.getSetting_type_id());
             pre.setString(2, obj.getValue());
             pre.setInt(3, obj.getStatus());
-            pre.setString(4, obj.getDiscription());
+            pre.setString(4, obj.getDescription());
             pre.setDate(5, dc.UtilDateToSqlDate(obj.getCreated_date()));
             pre.setDate(6, dc.UtilDateToSqlDate(obj.getUpdated_date()));
             n = pre.executeUpdate();
@@ -59,7 +59,7 @@ public class SettingDAO extends DBContext{
                 String description = rs.getString(5);
                 Date created_date = rs.getDate(6);
                 Date updated_date = rs.getDate(7);
-                Setting obj = new Setting(id, setting_type_id, value, description, status, description, created_date, updated_date);
+                Setting obj = new Setting(id, setting_type_id, value, description, status, created_date, updated_date);
                 vector.add(obj);
 
             }
@@ -87,7 +87,7 @@ public class SettingDAO extends DBContext{
             pre.setInt(1, obj.getSetting_type_id());
             pre.setString(2, obj.getValue());
             pre.setInt(3, obj.getStatus());
-            pre.setString(4, obj.getDiscription());
+            pre.setString(4, obj.getDescription());
             pre.setDate(5, dc.UtilDateToSqlDate(obj.getCreated_date()));
             pre.setDate(6, dc.UtilDateToSqlDate(obj.getUpdated_date()));
             pre.setInt(7, obj.getId());
@@ -120,7 +120,7 @@ public class SettingDAO extends DBContext{
                 String description = rs.getString(5);
                 Date created_date = rs.getDate(6);
                 Date updated_date = rs.getDate(7);
-                Setting obj = new Setting(id, setting_type_id, value, description, status, description, created_date, updated_date);
+                Setting obj = new Setting(id, setting_type_id, value, description, status, created_date, updated_date);
                 return obj;
             }
         } catch (SQLException ex) {

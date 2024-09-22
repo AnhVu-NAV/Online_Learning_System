@@ -5,6 +5,8 @@
 package controller;
 
 import dal.AccountDAO;
+import dal.SettingDAO;
+import dal.SettingTypeDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,10 +17,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Vector;
 import model.Account;
+import model.Setting;
+import model.SettingType;
+import model.Paging;
 import send_email.EmailService;
 import send_email.IJavaMail;
 import util.*;
-
 
 /**
  *
@@ -39,16 +43,20 @@ public class DashboardController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         AccountDAO accountDAO = new AccountDAO();
+        SettingDAO settingDAO = new SettingDAO();
+        SettingTypeDAO settingTypeDAO = new SettingTypeDAO();
         DataConvert dataConvert = new DataConvert();
         String service = request.getParameter("service");
         if (service == null) {
             service = "viewAllAccount";
         }
         if (service.equals("viewAllAccount")) {
-            
+
             String fillterSubmit = request.getParameter("fillterSubmit");
             //get data
-            Vector<Account> vector = null;
+            Vector<Account> accountVector = null;
+            Vector<Setting> settingVector = null;
+            SettingType settingType = null;
             String sql = "select * from account ";
             String checked = "sort_by_id";
             if (fillterSubmit != null) {
@@ -88,7 +96,7 @@ public class DashboardController extends HttpServlet {
                             break;
                         }
                         case "sort_by_email": {
-                            sql += " order by email asc";
+                            sql += " order by email asc ";
                             checked = "sort_by_email";
                             break;
                         }
@@ -105,11 +113,24 @@ public class DashboardController extends HttpServlet {
                     }
                 }
             }
-
-            vector = accountDAO.getAccounts(sql);
+            //paging
+            int nrpp=10;
+            accountVector = accountDAO.getAccounts(sql);
+            int totalPage=(accountVector.size()+nrpp-1)/nrpp;
+            String index_raw=request.getParameter("index");
+            int index=1;
+            if(index_raw!=null){
+                index=Integer.parseInt(index_raw);
+            }
+            sql+=" limit "+(index-1)*nrpp+","+nrpp;
+            accountVector = accountDAO.getAccounts(sql);
+            settingType = settingTypeDAO.getSettingTypeByName("Account Role");
+            settingVector = settingDAO.getSettings("select * from Setting where setting_type_id=" + settingType.getId());          
             //set data for views
-            request.setAttribute("data", vector);
+            request.setAttribute("data", accountVector);
+            request.setAttribute("setting", settingVector);
             request.setAttribute("checked", checked);
+            request.setAttribute("totalPage", totalPage);
             // select view
             RequestDispatcher dispath = request.getRequestDispatcher("jsp/ViewUserList.jsp");
             //run
@@ -119,15 +140,20 @@ public class DashboardController extends HttpServlet {
         if (service.equals("viewUserDetails")) {
             String id_raw = request.getParameter("id");
             Account account = accountDAO.getAccountById(Integer.parseInt(id_raw));
+            Vector<Setting> settingVector = null;
+            SettingType settingType = null;
+            settingType = settingTypeDAO.getSettingTypeByName("Account Role");
+            settingVector = settingDAO.getSettings("select * from Setting where setting_type_id=" + settingType.getId());
             //set data for views
             request.setAttribute("account", account);
+            request.setAttribute("setting", settingVector);
             // select view
             RequestDispatcher dispath = request.getRequestDispatcher("jsp/ViewUserDetails.jsp");
             //run
             dispath.forward(request, response);
         }
-        if(service.equals("addNewUser")){
-            String first_name= request.getParameter("addNewUserFirstName");
+        if (service.equals("addNewUser")) {
+            String first_name = request.getParameter("addNewUserFirstName");
             String last_name = request.getParameter("addNewUserLastName");
             Date dob = dataConvert.StringToSqlDate(request.getParameter("addNewUserDob"));
             Boolean gender = Boolean.parseBoolean(request.getParameter("addNewUserGender"));
@@ -137,12 +163,12 @@ public class DashboardController extends HttpServlet {
             int role_id = Integer.parseInt(request.getParameter("addNewUserRole"));
             String password = CreateRandom.generate6_DigitCode();
             Date created_date = GetTodayDate.getTodayDate();
-            Account account =  new Account(0, email, first_name, last_name, password, dob, role_id, created_date, 2, phone, gender, address, null);
+            Account account = new Account(0, email, first_name, last_name, PasswordEncryption.EncryptBySHA256(password), dob, role_id, created_date, 2, phone, gender, address, null);
             accountDAO.insertAccount(account);
-            String subject="New account successfully created. Please login with your default password";
-            String email_content="Your default password is "+password;
+            String subject = "New account successfully created. Please login with your default password";
+            String email_content = "Your default password is " + password;
             IJavaMail emailService = new EmailService();
-            emailService.send(email, subject , email_content);
+            emailService.send(email, subject, email_content);
             String message = "Add new user successfuly";
             //set data for views
             request.setAttribute("message", message);
@@ -150,7 +176,40 @@ public class DashboardController extends HttpServlet {
             RequestDispatcher dispath = request.getRequestDispatcher("DashboardController?service=viewAllAccount");
             //run
             dispath.forward(request, response);
-                              
+
+        }
+        if (service.equals("updateAccount")) {
+            int account_id = Integer.parseInt(request.getParameter("accountId"));
+            String role_id_raw = request.getParameter("roleId");
+            String status_raw = request.getParameter("status");
+            if (role_id_raw != null) {
+                int role_id = Integer.parseInt(role_id_raw);
+                Account account = accountDAO.getAccountById(account_id);
+                account.setRole_id(role_id);
+                accountDAO.updateAccount(account);
+                String message = "Update account role successfuly";
+                //set data for views
+                request.setAttribute("message", message);
+                // select view
+                RequestDispatcher dispath = request.getRequestDispatcher("DashboardController?service=viewAllAccount");
+                //run
+                dispath.forward(request, response);
+
+            }
+            if (status_raw != null) {
+                int status = Integer.parseInt(status_raw);
+                Account account = accountDAO.getAccountById(account_id);
+                account.setStatus(status);
+                accountDAO.updateAccount(account);
+                String message = "Update account status successfuly";
+                //set data for views
+                request.setAttribute("message", message);
+                // select view
+                RequestDispatcher dispath = request.getRequestDispatcher("DashboardController?service=viewAllAccount");
+                //run
+                dispath.forward(request, response);
+            }
+
         }
     }
 
