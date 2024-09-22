@@ -19,12 +19,12 @@
         <style>
             .wrapper {
                 display: flex;
-                height: 100vh; 
+                height: 100vh;
             }
 
             #ViewUserDetail {
-                flex-grow: 1; 
-                overflow-y: auto; 
+                flex-grow: 1;
+                overflow-y: auto;
             }
         </style>
 
@@ -50,41 +50,22 @@
                             <div class="col-lg-4">
                                 <div class="card mb-4">
                                     <div class="card-body text-center">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                                             class="rounded-circle img-fluid" style="width: 150px;">
-                                        <h5 class="my-3">${account.getFirst_name()} ${account.getLast_name()}</h5>
-                                    <p class="text-muted mb-1">${account.getRole_id()}</p>
-                                    <p class="text-muted mb-4">${account.getAddress()}</p>
-                                    <div class="d-flex justify-content-center mb-2">
-                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Follow</button>
-                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1">Message</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-4 mb-lg-0">
-                                <div class="card-body p-0">
-                                    <ul class="list-group list-group-flush rounded-3">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                            <i class="fas fa-globe fa-lg text-warning"></i>
-                                            <p class="mb-0">https://mdbootstrap.com</p>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                            <i class="fab fa-github fa-lg text-body"></i>
-                                            <p class="mb-0">mdbootstrap</p>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                            <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                                            <p class="mb-0">@mdbootstrap</p>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                            <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                                            <p class="mb-0">mdbootstrap</p>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                            <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                                            <p class="mb-0">mdbootstrap</p>
-                                        </li>
-                                    </ul>
+                                        <img src="${account.getImage_url()}" alt="avatar"
+                                         class="rounded-circle img-fluid" style="width: 150px;">
+                                    <h5 class="my-3">${account.getFirst_name()} ${account.getLast_name()}</h5>
+                                    <!-- Update account start -->                                                                                                                        
+                                    <select class="form-select w-100" onchange="window.location.href=this.value">  
+                                            <c:forEach items="${requestScope.setting}" var="setting">
+                                                <option value="${pageContext.request.contextPath}/DashboardController?service=updateAccount&accountId=${account.getId()}&roleId=${setting.getId()}" ${account.getRole_id()==setting.getId()?"selected":""} >${setting.getValue()}</option>
+                                            </c:forEach>
+                                        </select>
+                                        <br/>
+                                        <div class="d-flex justify-content-center mb-2">
+                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${account.getStatus() == 1 ? 'btn-success' : 'btn-outline-success'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/DashboardController?service=updateAccount&accountId=${account.getId()}&status=1';">Activated</button>
+                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${account.getStatus() == 0 ? 'btn-danger' : 'btn-outline-danger'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/DashboardController?service=updateAccount&accountId=${account.getId()}&status=0';">Deactivated</button>
+                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${account.getStatus() == 2 ? 'btn-warning' : 'btn-outline-warning'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/DashboardController?service=updateAccount&accountId=${account.getId()}&status=2';">Default</button>
+                                        </div>                                                                           
+                                    <!-- Update account end -->
                                 </div>
                             </div>
                         </div>
@@ -97,6 +78,24 @@
                                         </div>
                                         <div class="col-sm-9">
                                             <p class="text-muted mb-0">${account.getFirst_name()} ${account.getLast_name()}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Gender</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <c:choose>
+                                                    <c:when test="${account.isGender() == false}">
+                                                        Male
+                                                    </c:when>
+                                                    <c:when test="${account.isGender() == true}">
+                                                        Female
+                                                    </c:when>                                                       
+                                                </c:choose>
+                                            </p>                                         
                                         </div>
                                     </div>
                                     <hr>
@@ -137,74 +136,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card mb-4 mb-md-0">
-                                        <div class="card-body">
-                                            <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                                            </p>
-                                            <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                                            <div class="progress rounded" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                                                     aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                                            <div class="progress rounded" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                                                     aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                                            <div class="progress rounded" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                                                     aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                                            <div class="progress rounded" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                                                     aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                                            <div class="progress rounded mb-2" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                                                     aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card mb-4 mb-md-0">
-                                        <div class="card-body">
-                                            <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                                            </p>
-                                            <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                                            <div class="progress rounded" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                                                     aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                                            <div class="progress rounded" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                                                     aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                                            <div class="progress rounded" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                                                     aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                                            <div class="progress rounded" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                                                     aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                                            <div class="progress rounded mb-2" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                                                     aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
