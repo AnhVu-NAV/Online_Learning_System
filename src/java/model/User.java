@@ -16,7 +16,6 @@ import lombok.ToString;
  *
  * @author AnhVuNAV
  */
-
 @Builder
 @Data
 @AllArgsConstructor
@@ -26,7 +25,7 @@ import lombok.ToString;
 @ToString
 
 public class User {
-    
+
     private int id;
     private String username;
     private String password;
@@ -36,6 +35,8 @@ public class User {
     private String address;
     private int role_id;
     private int banned;
+    //Add attribute role from setting
+    private Setting role = new Setting();
 
     public User(String username, String password, String fullname, String email, String phone, String address, int role_id) {
         this.username = username;
@@ -46,7 +47,7 @@ public class User {
         this.address = address;
         this.role_id = role_id;
     }
-    
+
     public User(int id, String username, String password, String fullname, String email, String phone, String address, int role_id) {
         this.id = id;
         this.username = username;

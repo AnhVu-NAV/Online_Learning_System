@@ -15,9 +15,9 @@ public class DBContext {
     protected Connection connection;
     public DBContext() {
         try {
-            String user = "root"; // change this to your MySQL username
+            String user = "sa"; // change this to your MySQL username
             String pass = "123456"; // change this to your MySQL password
-            String url = "jdbc:mysql://localhost:3306/shopcard"; // change mydb to your database name
+            String url = "jdbc:mysql://localhost:8081/OnlineLearningSystem"; // change mydb to your database name
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, pass);
             System.out.println(connection);
