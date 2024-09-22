@@ -36,7 +36,12 @@ public class DBContext {
     }
 
     public static void main(String[] args) {
-        new DBContext(); // Just to test the connection
+        DBContext dbContext = new DBContext();
+        if (dbContext.connection != null) {
+            System.out.println("Kết nối thành công với cơ sở dữ liệu!");
+        } else {
+            System.out.println("Kết nối thất bại!");
+        }
     }
     
     public ResultSet getData(String sql) {
