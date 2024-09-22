@@ -26,30 +26,27 @@
         <servlet-name>BlogListServlet</servlet-name>
         <servlet-class>controller.BlogListServlet</servlet-class>
     </servlet>
-    
     <!-- Mapping servlet Controller -->
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
-    
     <!-- Mapping servlet BlogListServlet -->
     <servlet-mapping>
         <servlet-name>BlogListServlet</servlet-name>
         <url-pattern>/blogList</url-pattern>
 
     </servlet-mapping>
-
+    
     <filter>
-        <filter-name>servletFilter</filter-name>
+        <filter-name>AuthorizationFilter</filter-name>
         <filter-class>filter.AuthorizationFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>servletFilter</filter-name>
-        <url-pattern>/</url-pattern>
+        <filter-name>AuthorizationFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
-  
-
+    
     <!-- Cấu hình session -->
     <session-config>
         <session-timeout>30</session-timeout>
