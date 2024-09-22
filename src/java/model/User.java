@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,35 +28,51 @@ import lombok.ToString;
 public class User {
 
     private int id;
-    private String username;
-    private String password;
-    private String fullname;
     private String email;
-    private String phone;
-    private String address;
+    private String first_name;
+    private String last_name;
+    private String password;
+    private Date dob;
     private int role_id;
-    private int banned;
+    private Date created_date;
+    private int status;
+    private String phone;
+    private int gender;
+    private String address;
+    private String image_url;
     //Add attribute role from setting
     private Setting role = new Setting();
 
-    public User(String username, String password, String fullname, String email, String phone, String address, int role_id) {
-        this.username = username;
-        this.password = password;
-        this.fullname = fullname;
+    public User(String email, String first_name, String last_name, String password,
+            Date dob, int role_id, Date created_date, int status, String phone, int gender, String address, String image_url) {
         this.email = email;
-        this.phone = phone;
-        this.address = address;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.password = password;
+        this.dob = dob;
         this.role_id = role_id;
+        this.created_date = created_date;
+        this.status = status;
+        this.phone = phone;
+        this.gender = this.gender;
+        this.address = address;
+        this.image_url = image_url;
     }
 
-    public User(int id, String username, String password, String fullname, String email, String phone, String address, int role_id) {
+    public User(int id, String email, String first_name, String last_name, String password,
+            Date dob, int role_id, Date created_date, int status, String phone, int gender, String address, String image_url) {
         this.id = id;
-        this.username = username;
-        this.password = password;
-        this.fullname = fullname;
         this.email = email;
-        this.phone = phone;
-        this.address = address;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.password = password;
+        this.dob = dob;
         this.role_id = role_id;
+        this.created_date = created_date;
+        this.status = status;
+        this.phone = phone;
+        this.gender = this.gender;
+        this.address = address;
+        this.image_url = image_url;
     }
 }

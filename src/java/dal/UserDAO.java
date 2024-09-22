@@ -7,6 +7,7 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,22 +23,25 @@ public class UserDAO extends DBContext {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Vector<User> users = new Vector<>();
-        String sql = "select * from [user]";
+        String sql = "SELECT * FROM [user]";
         try {
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                String fullname = rs.getString("fullname");
                 String email = rs.getString("email");
-                String phone = rs.getString("phone");
-                String address = rs.getString("address");
+                String first_name = rs.getString("first_name");
+                String last_name = rs.getString("last_name");
+                String password = rs.getString("password");
+                Date dob = rs.getDate("dob");
                 int role_id = rs.getInt("role_id");
-//                int banned = rs.getBanned("banned");
-
-                User u = new User(id, username, password, fullname, email, phone, address, role_id);
+                Date created_date = rs.getDate("created_date");
+                int status = rs.getInt("status");
+                String phone = rs.getString("phone");
+                int gender = rs.getInt("gender");
+                String address = rs.getString("address");
+                String image_url = rs.getString("image_url");
+                User u = new User(id, email, first_name, last_name, password, dob, role_id, created_date, status, phone, gender, address, image_url);
                 users.add(u);
             }
             return users;
@@ -59,30 +63,36 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public User getOne(String username, String password, Integer banned) {
+    public User getOne(String email, String password, Integer status) {
         PreparedStatement stm = null;
         ResultSet rs = null;
-        StringBuilder sql = new StringBuilder("SELECT * FROM [user] AS u\n");
-        sql.append(" INNER JOIN setting AS r ON r.id = u.role_id \n");
-        sql.append("WHERE u.username = ? AND u.password = ? AND u.banned = ?");
+        String sql = "SELECT * FROM user AS u "
+                + "INNER JOIN setting AS r ON r.id = u.role_id "
+                + "WHERE u.email = ? AND u.password = ? AND u.status = ?";
         try {
             stm = connection.prepareStatement(sql);
-            stm.setString(1, username);
+            stm.setString(1, email);
             stm.setString(2, password);
-            stm.setInt(3, banned);
+            stm.setInt(3, status);
+
             rs = stm.executeQuery();
 
             if (rs.next()) {
                 User u = new User();
                 u.setId(rs.getInt("id"));
-                u.setUsername(username);
+                u.setEmail(email);
                 u.setPassword(password);
-                u.setBanned(banned);
-                u.setFullname(rs.getString("fullname"));
-                u.setAddress(rs.getString("address"));
-                u.setEmail(rs.getString("email"));
-                u.setPhone(rs.getString("phone"));
+                u.setStatus(status);
+                u.setFirst_name(rs.getString("first_name"));
+                u.setLast_name(rs.getString("last_name"));
+                u.setDob(rs.getDate("dob"));
                 u.setRole_id(rs.getInt("role_id"));
+                u.setCreated_date(rs.getDate("created_date"));
+                u.setPhone(rs.getString("phone"));
+                u.setGender(rs.getInt("gender"));
+                u.setAddress(rs.getString("address"));
+                u.setImage_url(rs.getString("image_url"));
+
                 System.out.println(u);
                 return u;
 
@@ -115,22 +125,26 @@ public class UserDAO extends DBContext {
         PreparedStatement stm = null;
         ResultSet rs = null;
         Vector<User> users = new Vector<>();
-        String sql = "select * from [user] where role_id = 1";
+        String sql = "SELECT * FROM [user] WHERE role_id = 1";
         try {
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                String fullname = rs.getString("fullname");
                 String email = rs.getString("email");
-                String phone = rs.getString("phone");
-                String address = rs.getString("address");
+                String first_name = rs.getString("first_name");
+                String last_name = rs.getString("last_name");
+                String password = rs.getString("password");
+                Date dob = rs.getDate("dob");
                 int role_id = rs.getInt("role_id");
-                int banned = rs.getInt("banned");
+                Date created_date = rs.getDate("created_date");
+                int status = rs.getInt("status");
+                String phone = rs.getString("phone");
+                int gender = rs.getInt("gender");
+                String address = rs.getString("address");
+                String image_url = rs.getString("image_url");
 
-                User u = new User(id, username, password, fullname, email, phone, address, role_id);
+                User u = new User(id, email, first_name, last_name, password, dob, role_id, created_date, status, phone, gender, address, image_url);
                 users.add(u);
             }
             return users;
@@ -155,23 +169,28 @@ public class UserDAO extends DBContext {
     public User getUserById(int userId) {
         PreparedStatement stm = null;
         ResultSet rs = null;
-        String sql = "select * from [user]\n"
-                + "where [id] = ?";
+        String sql = "SELECT * FROM [user]\n"
+                + "WHERE [id] = ?";
         try {
             stm = connection.prepareStatement(sql);
             stm.setInt(1, userId);
             rs = stm.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 User u = new User();
                 u.setId(rs.getInt("id"));
-                u.setUsername(rs.getString("username"));
-                u.setPassword(rs.getString("password"));
-                u.setFullname(rs.getString("fullname"));
-                u.setAddress(rs.getString("address"));
                 u.setEmail(rs.getString("email"));
-                u.setPhone(rs.getString("phone"));
+                u.setPassword(rs.getString("password"));
+                u.setStatus(rs.getInt("status"));
+                u.setFirst_name(rs.getString("first_name"));
+                u.setLast_name(rs.getString("last_name"));
+                u.setDob(rs.getDate("dob"));
                 u.setRole_id(rs.getInt("role_id"));
+                u.setCreated_date(rs.getDate("created_date"));
+                u.setPhone(rs.getString("phone"));
+                u.setGender(rs.getInt("gender"));
+                u.setAddress(rs.getString("address"));
+                u.setImage_url(rs.getString("image_url"));
                 System.out.println(u);
                 return u;
             }
@@ -198,7 +217,7 @@ public class UserDAO extends DBContext {
         ResultSet rs = null;
         Vector<User> customers = new Vector<>();
         String sql = "select * from [user]\n"
-                + "where role_id = 1 and [fullname] LIKE ?";
+                + "where role_id = 1 and [first_name] OR [last_name] LIKE ?";
         try {
             stm = connection.prepareStatement(sql);
             stm.setString(1, "%" + name + "%");
@@ -207,13 +226,18 @@ public class UserDAO extends DBContext {
             while (rs.next()) {
                 User u = new User();
                 u.setId(rs.getInt("id"));
-                u.setUsername(rs.getString("username"));
-                u.setPassword(rs.getString("password"));
-                u.setFullname(rs.getString("fullname"));
-                u.setAddress(rs.getString("address"));
                 u.setEmail(rs.getString("email"));
-                u.setPhone(rs.getString("phone"));
+                u.setPassword(rs.getString("password"));
+                u.setStatus(rs.getInt("status"));
+                u.setFirst_name(rs.getString("first_name"));
+                u.setLast_name(rs.getString("last_name"));
+                u.setDob(rs.getDate("dob"));
                 u.setRole_id(rs.getInt("role_id"));
+                u.setCreated_date(rs.getDate("created_date"));
+                u.setPhone(rs.getString("phone"));
+                u.setGender(rs.getInt("gender"));
+                u.setAddress(rs.getString("address"));
+                u.setImage_url(rs.getString("image_url"));
                 System.out.println(u);
 
                 customers.add(u);
@@ -236,51 +260,51 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public void insert(User user) {
-        PreparedStatement stm = null;
-
-        String sql = "INSERT INTO [dbo].[user]\n"
-                + "           ([username]\n"
-                + "           ,[password]\n"
-                + "           ,[fullname]\n"
-                + "           ,[email]\n"
-                + "           ,[phone]\n"
-                + "           ,[address]\n"
-                + "           ,[role_id])\n"
-                + "     VALUES\n"
-                + "           (?,?,?,?,?,?,?)";
-        try {
-            stm = connection.prepareStatement(sql);
-            stm.setString(1, user.getUsername());
-            stm.setString(2, user.getPassword());
-            stm.setString(3, user.getFullname());
-            stm.setString(4, user.getEmail());
-            stm.setString(5, user.getPhone());
-            stm.setString(6, user.getAddress());
-            stm.setInt(7, user.getRole_id());
-            stm.executeUpdate();
-
-            System.out.println("Insert OK");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                stm.close();
-                connection.close();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(UserDAO.class
-                        .getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
+//    public void insert(User user) {
+//        PreparedStatement stm = null;
+//
+//        String sql = "INSERT INTO [dbo].[user]\n"
+//                + "           ([username]\n"
+//                + "           ,[password]\n"
+//                + "           ,[fullname]\n"
+//                + "           ,[email]\n"
+//                + "           ,[phone]\n"
+//                + "           ,[address]\n"
+//                + "           ,[role_id])\n"
+//                + "     VALUES\n"
+//                + "           (?,?,?,?,?,?,?)";
+//        try {
+//            stm = connection.prepareStatement(sql);
+//            stm.setString(1, user.getUsername());
+//            stm.setString(2, user.getPassword());
+//            stm.setString(3, user.getFullname());
+//            stm.setString(4, user.getEmail());
+//            stm.setString(5, user.getPhone());
+//            stm.setString(6, user.getAddress());
+//            stm.setInt(7, user.getRole_id());
+//            stm.executeUpdate();
+//
+//            System.out.println("Insert OK");
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(UserDAO.class
+//                    .getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//            try {
+//                stm.close();
+//                connection.close();
+//
+//            } catch (SQLException ex) {
+//                Logger.getLogger(UserDAO.class
+//                        .getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//    }
 
     public void banAnUser(int userId) {
         PreparedStatement stm = null;
 
-        String sql = "UPDATE [dbo].[user] SET [banned] = 1 WHERE id = ?";
+        String sql = "UPDATE [dbo].[user] SET [status] = 1 WHERE id = ?";
         try {
             stm = connection.prepareStatement(sql);
             stm.setInt(1, userId);
@@ -304,7 +328,7 @@ public class UserDAO extends DBContext {
     }
 
     public void unbanUser(int userId) {
-        String sql = "UPDATE [user] SET banned = 0 WHERE id = ?";
+        String sql = "UPDATE [user] SET status = 0 WHERE id = ?";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             stm.setInt(1, userId);
             stm.executeUpdate();
