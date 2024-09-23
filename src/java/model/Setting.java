@@ -18,7 +18,6 @@ public class Setting {
     private String description;
     private Date createdDate;
     private Date updatedDate;
-
     public Setting() {
     }
 
@@ -32,8 +31,6 @@ public class Setting {
         this.updatedDate = updatedDate;
     }
 
-
-    // Getters and setters
     public int getId() {
         return id;
     }
@@ -75,6 +72,7 @@ public class Setting {
     }
 
     public Date getCreatedDate() {
+        return createdDate;
     }
 
     public void setCreatedDate(Date createdDate) {
