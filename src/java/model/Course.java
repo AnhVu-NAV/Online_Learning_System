@@ -5,42 +5,24 @@
 package model;
 
 import java.sql.Date;
-import java.util.List;
 
 /**
  *
- * @author Admin
+ * @author AnhVuNAV
  */
 public class Course {
     private int id;
     private String title;
-    private String subtitle; // Thêm thuộc tính subtitle
     private int expertId;
-    private int totalDuration;
-    private int categoryId;
     private String description;
     private String thumbnailUrl;
-    private int status;
-    private Date updatedDate;
+    private int numberOfLesson;
+    private int price;
+    private int salePrice;
     private Date createdDate;
-    private int numberOfLearners;
-    private List<String> taglines; // Thêm thuộc tính để lưu danh sách tagline
-
-    // Constructors
-    public Course() {}
-
-    public Course(int id, String title, String subtitle, int expertId, int totalDuration, int categoryId, String description, String thumbnailUrl, int status, Date updatedDate, Date createdDate, int numberOfLearners) {
-        this.id = id;
-        this.title = title;
-        this.subtitle = subtitle;
-        this.expertId = expertId;
-        this.totalDuration = totalDuration;
-        this.categoryId = categoryId;
-        this.description = description;
-        this.thumbnailUrl = thumbnailUrl;
-        this.status = status;
-        this.updatedDate = updatedDate;
-    
+    private Date updatedDate;
+    private int categoryId; 
+    private float totalDuration;
     
     public Course() {
     }
@@ -58,7 +40,25 @@ public class Course {
         this.updatedDate = updatedDate;
         this.categoryId = categoryId;
         this.totalDuration = totalDuration;
-    }    
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public float getTotalDuration() {
+        return totalDuration;
+    }
+
+    public void setTotalDuration(float totalDuration) {
+        this.totalDuration = totalDuration;
+    }
+
+    
 
     public int getId() {
         return id;
@@ -74,14 +74,6 @@ public class Course {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
     }
 
     public int getExpertId() {
@@ -116,7 +108,7 @@ public class Course {
         this.numberOfLesson = numberOfLesson;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -124,7 +116,7 @@ public class Course {
         this.price = price;
     }
 
-    public int getSalePrice() {
+    public double getSalePrice() {
         return salePrice;
     }
 
@@ -138,7 +130,6 @@ public class Course {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
-        this.numberOfLearners = numberOfLearners;
     }
 
     public Date getUpdatedDate() {
@@ -149,26 +140,6 @@ public class Course {
         this.updatedDate = updatedDate;
     }
 
-    public int getCategoryId() {
-        return categoryId;
-    }
 
-    public float getTotalDuration() {
-        return totalDuration;
-    }
-
-    public void setTotalDuration(float totalDuration) {
-        this.totalDuration = totalDuration;
-    }
-
-    public List<String> getTaglines() {
-        return taglines;
-    }
-
-    public void setTaglines(List<String> taglines) {
-        this.taglines = taglines;
-    }
     
-    
-
 }
