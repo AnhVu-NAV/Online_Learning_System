@@ -41,6 +41,7 @@
                         <li><a href="#"><i class='bx bx-cog'></i> Settings</a></li>
                     </ul>
                 </nav>
+                <!-- Your sidebar content here -->
             </aside>
 
             <!-- Main Content -->
@@ -50,6 +51,7 @@
                     <h1>Update Personal Details</h1>
                 </header>
                 <form action="UpdateUserProfile" method="post">
+                <form action="UpdateUserProfileServlet" method="post">
                     <input type="hidden" name="userId" value="${user.id}" />
                     <section class="personal-section">
                         <div class="personal-details">
@@ -79,6 +81,7 @@
                         <h2>Profile Image</h2>
                         <label><strong>Image URL:</strong></label>
                         <input type="text" name="image_url" value="${user.image_url}"  />
+                        <input type="text" name="image_url" value="${user.image_url}" required />
                     </section>
 
                     <section class="gender-section">
