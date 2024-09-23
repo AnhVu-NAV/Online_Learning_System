@@ -6,6 +6,7 @@ package controller;
 
 
 import dal.UserDAO;
+import dal.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import model.User;
+import model.Account;
 
 /**
  *
@@ -26,6 +28,12 @@ public class ChangePasswordController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
+========
+public class UserProfileController extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+>>>>>>>> 4d0982c745e6175e3e5a1a5b1ff350c362a92147:src/java/controller/UserProfileController.java
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -39,10 +47,6 @@ public class ChangePasswordController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet changePass</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet changePass at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,9 +63,29 @@ public class ChangePasswordController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+    throws ServletException, IOException {
+        // Lấy thông tin người dùng từ request hoặc session
+        int userId = Integer.parseInt(request.getParameter("userId"));
+
+        // Khởi tạo đối tượng AccountDAO
+        AccountDAO accountDAO = new AccountDAO();
+        
+        // Lấy thông tin chi tiết của người dùng từ cơ sở dữ liệu
+        Account user = accountDAO.getUserById(userId);
+        
+        // Kiểm tra nếu người dùng không tồn tại
+        if (user == null) {
+            // Xử lý lỗi hoặc chuyển hướng về trang lỗi
+            response.sendRedirect("error.jsp");
+            return;
+        }
+        
+        // Đặt thông tin người dùng vào request
+        request.setAttribute("user", user);
+        
+        // Chuyển tiếp đến trang JSP hiển thị thông tin người dùng
+        request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
+    } 
 
     /**
      * Handles the HTTP <code>POST</code> method.
