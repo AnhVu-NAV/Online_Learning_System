@@ -70,7 +70,7 @@ public class Slider {
 
     @Override
     public String toString() {
-        return "Slider{" + "image_url=" + image_url + ", backlink_url=" + backlink_url + ", status=" + status + '}';
+        return "Slider{" + id + "image_url=" + image_url + ", backlink_url=" + backlink_url + ", status=" + status + '}';
     }
 
 }

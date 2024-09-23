@@ -29,6 +29,7 @@ public class SliderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SliderDAO sliderDao = new SliderDAO();
+        String choice = request.getParameter("choice");
         Slider slider;
         PrintWriter out = response.getWriter();
         try {
@@ -48,11 +49,28 @@ public class SliderController extends HttpServlet {
                     request.getRequestDispatcher("slider?action=list").forward(request, response);
                 }
             }
+            if (choice != null) {
+                switch (choice) {
+                    case "byID":
+                        request.setAttribute("showAllSlider", sliderDao.getSliderByIdOrder());
+                        request.getRequestDispatcher("slider_list.jsp").forward(request, response);
+                        break;
+                    case "byAccount":
+                        request.setAttribute("showAllSlider", sliderDao.getSliderByIdOrder());
+                        request.getRequestDispatcher("slider?action=list").forward(request, response);
+                        break;
+                    case "byStatus":
+                        request.setAttribute("showAllSlider", sliderDao.getSliderByStatusOrder());
+                        request.getRequestDispatcher("slider?action=list").forward(request, response);
+                        break;
+                }
+            }
+//            String string = filterPage(request, response, choice);
             if ("list".equals(request.getParameter("action"))) { //goi ra bang slider?action=list
                 out.println("oke");
                 Vector<Slider> list = sliderDao.getAllSlider();
                 request.setAttribute("showAllSlider", sliderDao.getSliders(string));
-//                request.setAttribute("showAllSlider", list);
+//                request.setAttribute("showAllSlider", sliderDao.getAllSlider());
                 request.getRequestDispatcher("slider_list.jsp").forward(request, response);
             }
             if (request.getParameter("id") != null) {
@@ -85,7 +103,6 @@ public class SliderController extends HttpServlet {
         String imageUrl = request.getParameter("imageUrl");
         String backlinkUrl = request.getParameter("backlinkUrl");
         String status_raw = request.getParameter("status");
-        String choice = request.getParameter("choice");
         String result = request.getParameter("result");
         SliderDAO sliderDao = new SliderDAO();
         HttpSession sesson = request.getSession();
@@ -110,19 +127,6 @@ public class SliderController extends HttpServlet {
                     request.getRequestDispatcher("slider?action=list").forward(request, response);
                 }
             }
-//            if (choice != null) {
-//                switch (choice) {
-//                    case "byDate":
-//                        
-//                        break;
-//                    case "byId":
-//                        break;
-//                    case "byAccount":
-//                        break;
-//                    case "byStatus":
-//                        break;
-//                }
-//            }
 //            AccountDAO adao = new AccountDAO();
 //            Account account = adao.getAccountById(2); 
             Account account = (Account) sesson.getAttribute("account");
@@ -145,6 +149,49 @@ public class SliderController extends HttpServlet {
             request.getRequestDispatcher("slider_list.jsp").forward(request, response);
         }
     }
+
+//    private String filterPage(HttpServletRequest request, HttpServletResponse response, String choice) throws Exception {
+//        SliderDAO sliderDao = new SliderDAO();
+//        int nrpp = 10;
+//        int totalPage = (sliderDao.getAllSlider().size() + nrpp - 1) / nrpp;
+//        String index_raw = request.getParameter("index");
+//        int index = 1;
+//        if (index_raw != null) {
+//            index = Integer.parseInt(index_raw);
+//        }
+//        String string = "select * from Slider limit " + (index - 1) * nrpp + "," + nrpp;
+//        Vector<Slider> list = sliderDao.getAllSlider();
+//        if (choice != null) {
+//            switch (choice) {
+//                case "byID":
+////                    request.setAttribute("sliderType", sliderDao.getSliderByIdOrder());
+////                request.getRequestDispatcher("slider?action=list").forward(request, response);
+//                    list = sliderDao.getSliderByIdOrder();
+//                    break;
+//                case "byAccount":
+////                    request.setAttribute("sliderType", sliderDao.getSliderByAccountOrder());
+////                request.getRequestDispatcher("slider?action=list").forward(request, response);
+//                    list = sliderDao.getSliderByAccountOrder();
+//                    break;
+//                case "byStatus":
+////                    request.setAttribute("sliderType", sliderDao.getSliderByStatusOrder());
+////                request.getRequestDispatcher("slider?action=list").forward(request, response);
+//                    list = sliderDao.getSliderByStatusOrder();
+//                    break;
+//            }
+//        }
+////        request.setAttribute("sliderType", sliderDao.getAllSlider());
+//        request.setAttribute("sliderType", list);
+//        request.setAttribute("totalPage", totalPage);
+//        request.getRequestDispatcher("slider?action=list").forward(request, response);
+//        if (request.getParameter("action") != null) {
+//            if (request.getParameter("action").equals("next")) {
+//                request.setAttribute("showAllSlider", sliderDao.getSliders(string));
+//                request.getRequestDispatcher("slider?action=list").forward(request, response);
+//            }
+//        }
+//        return string;
+//    }
 
     @Override
     public String getServletInfo() {

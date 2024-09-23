@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class DBContext {
 
-    protected Connection connection;
+    protected static Connection connection;
 
     public DBContext() {
         try {
@@ -34,5 +34,8 @@ public class DBContext {
 
     public static void main(String[] args) {
         new DBContext(); // Just to test the connection
+        if (connection == null) {
+            System.out.println("null"); 
+        }
     }
 }

@@ -20,6 +20,7 @@ public class SliderDAO extends DBContext {
 
     public SliderDAO() {
         this.adao = new AccountDAO();
+        new DBContext();
     }
     // </editor-fold>
 
@@ -93,6 +94,60 @@ public class SliderDAO extends DBContext {
         Statement state = connection.createStatement(
                 ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         ResultSet rs = state.executeQuery(sql);
+        AccountDAO adao = new AccountDAO();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            Account account = adao.getAccountById(rs.getInt("author_id"));
+            String image_url = rs.getString("image_url");
+            String backlink_url = rs.getString("backlink_url");
+            int status = rs.getInt("status");
+            Slider obj = new Slider(account, image_url, backlink_url, status);
+            vector.add(obj);
+        }
+        return vector;
+    }
+
+    public Vector<Slider> getSliderByIdOrder() throws Exception {
+        Vector<Slider> vector = new Vector<Slider>();
+        String sql = "select * from SLider order by id;";
+        PreparedStatement pre = connection.prepareStatement(sql);
+        ResultSet rs = pre.executeQuery(sql);
+        AccountDAO adao = new AccountDAO();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            Account account = adao.getAccountById(rs.getInt("author_id"));
+            String image_url = rs.getString("image_url");
+            String backlink_url = rs.getString("backlink_url");
+            int status = rs.getInt("status");
+            Slider obj = new Slider(account, image_url, backlink_url, status);
+            vector.add(obj);
+        }
+        return vector;
+    }
+
+    public Vector<Slider> getSliderByAccountOrder() throws Exception {
+        Vector<Slider> vector = new Vector<Slider>();
+        String sql = "select * from SLider order by author_id;";
+        PreparedStatement pre = connection.prepareStatement(sql);
+        ResultSet rs = pre.executeQuery(sql);
+        AccountDAO adao = new AccountDAO();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            Account account = adao.getAccountById(rs.getInt("author_id"));
+            String image_url = rs.getString("image_url");
+            String backlink_url = rs.getString("backlink_url");
+            int status = rs.getInt("status");
+            Slider obj = new Slider(account, image_url, backlink_url, status);
+            vector.add(obj);
+        }
+        return vector;
+    }
+
+    public Vector<Slider> getSliderByStatusOrder() throws Exception {
+        Vector<Slider> vector = new Vector<Slider>();
+        String sql = "select * from SLider order by status;";
+        PreparedStatement pre = connection.prepareStatement(sql);
+        ResultSet rs = pre.executeQuery(sql);
         AccountDAO adao = new AccountDAO();
         while (rs.next()) {
             int id = rs.getInt("id");
@@ -184,7 +239,7 @@ public class SliderDAO extends DBContext {
 ////            System.out.println(sdao.getSliderById(sdao.getMaxId()).getImage_url());
 ////            sdao.deleteSlider(1);
 ////            sdao.deleteSlider(2); 
-            for (Slider s : sdao.getAllSlider()) {
+            for (Slider s : sdao.getSliderByAccountOrder()) {
                 System.out.println(s.toString());
             }
 

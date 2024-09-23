@@ -42,12 +42,6 @@
                 padding: 10px 0;
                 font-weight: bold;
             }
-            /*            .search-input {
-                            align-content: center;
-                        }
-                        .search-button {
-                            margin-left: 8px;
-                        }*/
             .action-buttons {
                 margin-left: 16px;
             }
@@ -77,17 +71,17 @@
                 font-weight: bold;
             }
             .search-bar {
-                padding-left: 320px; /* Khoảng cách giữa các thành phần */
+                padding-left: 320px;
             }
             .search-input {
-                width: 300px; /* Điều chỉnh chiều rộng */
-                padding: 10px; /* Khoảng cách bên trong */
+                width: 300px;
+                padding: 10px;
             }
             .image-url {
-                max-width: 400px; /* Giới hạn chiều rộng tối đa */
-                overflow: hidden; /* Ẩn bớt nội dung tràn */
-                text-overflow: ellipsis; /* Hiện dấu '...' cho nội dung tràn */
-                white-space: nowrap; /* Không xuống dòng */
+                max-width: 400px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
         </style>
     </head>
@@ -97,26 +91,22 @@
             <div class="header">
                 <nav class="navbar">
                     <div class="collapse navbar-collapse single-page-nav">
-                        <form action="slider" method="POST">
+                        <form id="filterForm" action="slider" method="GET">
                             <div class="navbar-nav">
                                 <li class="header-title">
                                     <h3 style="color: white">Filter</h3>
                                 </li>
                                 <li class="nav-item">
-                                    <input type="checkbox" value="byDate" name="choice"/>
-                                    <a class="nav-link"><span class="icn"></span>By Date</a>
+                                    <input type="checkbox" value="byID" name="choice" onchange="submitFilter()"/>
+                                    <a class="nav-link" href="#"><span class="icn"></span>By Id</a>
                                 </li>
                                 <li class="nav-item">
-                                    <input type="checkbox" value="byId" name="choice"/>
-                                    <a class="nav-link"><span class="icn"></span>By Id</a>
+                                    <input type="checkbox" value="byAccount" name="choice" onchange="submitFilter()"/>
+                                    <a class="nav-link" href="#"><span class="icn"></span>By Account</a>
                                 </li>
                                 <li class="nav-item">
-                                    <input type="checkbox" value="byAccount" name="choice"/>
-                                    <a class="nav-link"><span class="icn"></span>By Account</a>
-                                </li>
-                                <li class="nav-item">
-                                    <input type="checkbox" value="byStatus" name="choice"/>
-                                    <a class="nav-link"><span class="icn"></span>By Status</a>
+                                    <input type="checkbox" value="byStatus" name="choice" onchange="submitFilter()"/>
+                                    <a class="nav-link" href="#"><span class="icn"></span>By Status</a>
                                 </li>
                             </div>
                         </form>
@@ -143,7 +133,7 @@
                         <section class="row">
                             <div class="container">
                                 <p style="color: red; text-align: left;">${requestScope.error}</p>
-                                <c:set var="id" value="0"/>
+                                <c:set var="number" value="0"/>
                                 <c:if test="${requestScope.showAllSlider ne null}">             
                                     <div class="row slider_detail">
                                         <div class="item col-md-4">
@@ -152,6 +142,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>No.</th>
+                                                            <th>Id</th>
                                                             <th class="image-url">Image Url</th>
                                                             <th class="image-url">Back Link Url</th>
                                                             <th>Status</th>
@@ -163,9 +154,10 @@
                                                     </thead>
                                                     <tbody>
                                                         <c:forEach items="${requestScope.showAllSlider}" var="s">
-                                                            <c:set var="id" value="${id + 1}" />
+                                                            <c:set var="number" value="${number + 1}" />
                                                             <tr>
-                                                                <td>${id}</td> 
+                                                                <td>${number}</td> 
+                                                                <td>${s.getId()}</td> 
                                                                 <td class="image-url">${s.getImage_url()}</td>
                                                                 <td class="image-url">${s.getBacklink_url()}</td>
                                                                 <td>${s.getStatus()}</td>
@@ -283,7 +275,9 @@
         <script src="js/parallax.min.js"></script>
         <script src="js/templatemo-script.js"></script>
         <script>
-
+                                        function submitFilter() {
+                                            document.getElementById('filterForm').submit();
+                                        }
         </script>
     </body>
 </html>
