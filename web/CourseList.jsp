@@ -88,6 +88,27 @@
                                 </form>
                             </div>
                         </div>
+                        <!-- Search Input -->
+                        <input type="text" name="search" class="search-input" placeholder="Search Courses..." 
+                               value="${param.search != null ? param.search : ''}">
+                        <button type="submit" class="search-button">
+                            <i class="fas fa-search"></i>
+                        </button>
+
+                        <!-- Course Categories -->
+                        <h3>Course Categories</h3>
+                        <ul>
+                            <c:forEach var="category" items="${categories}">
+                                <li>
+                                    <input type="checkbox" name="category" value="${category.value}" 
+                                           ${param.category != null && param.category.contains(category.value) ? 'checked' : ''}>
+                                    ${category.value}
+                                </li>
+                            </c:forEach>
+                        </ul>
+
+                        <!-- Submit button for filters (if needed) -->
+                        <button type="submit" class="filter-btn" style="">Filters</button>
                     </form>
                 </div>
             </div>
@@ -121,6 +142,11 @@
                     <div class="sort">
                         <label for="sortSelect">Sort By:</label>
                         <form action="CourseList" method="get">
+                    <h2>We found ${courses.size()} courses for you</h2>
+                    <div class="sort">
+                        <label for="sortSelect">Sort By:</label>
+                        <form action="CourseList" method="get">
+                            <!-- Giữ lại từ khóa tìm kiếm và danh mục đã chọn trong form -->
                             <input type="hidden" name="search" value="${param.search != null ? param.search : ''}">
                             <c:forEach var="category" items="${paramValues.category}">
                                 <input type="hidden" name="category" value="${category}">
@@ -155,6 +181,11 @@
 
                                     </div>
 
+                            <a href="courseDetails?id=${course.id}">
+                                <img src="${course.thumbnailUrl}" class="thumbnail" alt="${course.title}">
+                                <div class="course-info">
+                                    <h3>${course.title}</h3>
+                                    <p>${course.description}</p>
                                     <div class="pricing">
                                         <span class="list-price">$${course.price}</span>
                                         <span class="sale-price">$${course.salePrice}</span>
@@ -192,6 +223,11 @@
                             <button type="submit" class="pagination-btn">Next</button>
                             <input type="hidden" name="page" value="${currentPage + 1}"/>
                         </form>
+                        <a href="CourseList?page=${currentPage - 1}" class="pagination-btn">Previous</a>
+                    </c:if>
+                    <span id="page-info">Page ${currentPage} of ${totalPages}</span>
+                    <c:if test="${currentPage < totalPages}">
+                        <a href="CourseList?page=${currentPage + 1}" class="pagination-btn">Next</a>
                     </c:if>
                 </div>
             </div>

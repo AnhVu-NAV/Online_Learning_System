@@ -67,9 +67,7 @@ public class CourseListController extends HttpServlet {
             throws ServletException, IOException {
         CourseDAO courseDAO = new CourseDAO();
 
-        // Lấy danh sách các Course Categories
         List<Setting> categories = courseDAO.getCourseCategories();
-        request.setAttribute("categories", categories);
 
         // Lấy danh sách các Taglines
         List<Tagline> taglines = courseDAO.getAllTaglines(); // Thêm dòng này
@@ -93,6 +91,17 @@ public class CourseListController extends HttpServlet {
         // Xử lý phân trang
         int page = 1;
         int pageSize = 15; // Giá trị mặc định
+        // Xử lý lọc danh sách khóa học theo danh mục
+        String[] selectedCategories = request.getParameterValues("category");
+        String searchKeyword = request.getParameter("search");
+        String sortOption = request.getParameter("sort");
+
+        // Chuyển selectedCategories thành danh sách
+        List<String> selectedCategoriesList = selectedCategories != null ? Arrays.asList(selectedCategories) : new ArrayList<>();
+
+        // Xử lý phân trang
+        int page = 1;
+        int pageSize = 15;
         try {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
@@ -107,6 +116,7 @@ public class CourseListController extends HttpServlet {
         // Lấy danh sách các khóa học dựa trên danh mục, từ khóa và phân trang
         List<Course> courses = courseDAO.getCoursesByCategoriesAndKeyword(selectedCategoriesList, searchKeyword, sortOption, page, pageSize);
 
+        
         // Tổng số khóa học để tính tổng số trang
         int totalCourses = courseDAO.getTotalCoursesByCategoriesAndKeyword(selectedCategoriesList, searchKeyword);
         int totalPages = (int) Math.ceil((double) totalCourses / pageSize);
@@ -122,6 +132,8 @@ public class CourseListController extends HttpServlet {
         request.setAttribute("showTitle", showTitle); // Truyền trạng thái checkbox
         request.setAttribute("showTagline", showTagline); // Truyền trạng thái checkbox
         request.setAttribute("showPrice", showPrice); // Truyền trạng thái checkbox
+        request.setAttribute("searchKeyword", searchKeyword);
+        request.setAttribute("sortOption", sortOption); 
 
         // Chuyển tiếp tới JSP
         request.getRequestDispatcher("CourseList.jsp").forward(request, response);
