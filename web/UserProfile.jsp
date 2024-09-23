@@ -41,6 +41,7 @@
                         <li><a href="#"><i class='bx bx-cog'></i> Settings</a></li>
                     </ul>
                 </nav>
+                 <!--Your sidebar content here--> 
             </aside>
 
             <!-- Main Content -->
