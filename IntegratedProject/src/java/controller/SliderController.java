@@ -43,6 +43,9 @@ public class SliderController extends HttpServlet {
             String string = "select * from Slider limit " + (index - 1) * nrpp + "," + nrpp;
             request.setAttribute("sliderType", sliderDao.getAllSlider());
             request.setAttribute("totalPage", totalPage);
+//            for (Slider s: sliderDao.getSliders(string)) {
+//                out.println(s.toString());
+//            }
             if (request.getParameter("action") != null) {
                 if (request.getParameter("action").equals("next")) {
                     request.setAttribute("showAllSlider", sliderDao.getSliders(string));
