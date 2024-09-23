@@ -3,10 +3,30 @@
     <type>org.netbeans.modules.web.project</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/web-project/3">
-            <name>SWP391_OnlineLearning</name>
+            <name>IntegratedProject</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
+<<<<<<< HEAD
+            <explicit-platform explicit-source-supported="true"/>
             <web-module-libraries>
                 <library dirs="200">
+<<<<<<< HEAD
+                    <file>${file.reference.jakarta.servlet.jsp.jstl-2.0.0.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jakarta.servlet.jsp.jstl-api-2.0.0.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jaxb-api-2.1.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+=======
+            <web-module-libraries>
+                <library dirs="200">
+>>>>>>> main
+=======
                     <file>${file.reference.activation.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
@@ -15,6 +35,7 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
                     <file>${file.reference.mysql-connector-j-8.4.0.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
@@ -31,11 +52,26 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+<<<<<<< HEAD
+<<<<<<< HEAD
+                    <file>${file.reference.activation.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.javax.mail.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.lombok-1.18.24.jar}</file>
+=======
+=======
                     <file>${file.reference.lombok-1.18.24.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
                     <file>${file.reference.sqljdbc42.jar}</file>
+>>>>>>> main
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">

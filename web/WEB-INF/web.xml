@@ -7,6 +7,11 @@
         <servlet-class>controller.ChangePasswordController</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>controller.LoginSystemController</servlet-class>
+    </servlet>
+=======
         <servlet-name>ForgotPasswordController</servlet-name>
         <servlet-class>controller.ForgotPasswordController</servlet-class>
 =======
@@ -36,12 +41,26 @@
         <servlet-class>controller.BlogListServlet</servlet-class>
     </servlet>
     <!-- Mapping servlet Controller -->
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
     <servlet-mapping>
 <<<<<<< HEAD
         <servlet-name>changePassword</servlet-name>
         <url-pattern>/changePassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CreateNewAccountController</servlet-name>
+        <servlet-class>controller.CreateNewAccountController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateNewAccountController</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+=======
         <servlet-name>ForgotPasswordController</servlet-name>
         <url-pattern>/ForgotPasswordController</url-pattern>
 =======
@@ -84,4 +103,5 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
 </web-app>

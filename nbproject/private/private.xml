@@ -4,6 +4,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/SWP391_Project/IntegratedProject/src/java/dal/SliderDAO.java</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/SWP391_Project/IntegratedProject/src/java/dal/DBContext.java</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/SWP391_Project/IntegratedProject/src/java/controller/SliderController.java</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/SWP391_Project/IntegratedProject/web/slider_list.jsp</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/SWP391_Project/IntegratedProject/src/java/model/Slider.java</file>
+=======
+<<<<<<< HEAD
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
             <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/model/User.java</file>
             <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/dal/UserDAO.java</file>
             <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/ChangePassword.java</file>
@@ -52,6 +62,7 @@
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/dal/AccountDAO.java</file>
 >>>>>>> 089cb18a688ee3ad2f19a8f8e50a2cfdb98964b9
 >>>>>>> 4d0982c745e6175e3e5a1a5b1ff350c362a92147
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
         </group>
     </open-files>
 </project-private>

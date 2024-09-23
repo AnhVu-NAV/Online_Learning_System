@@ -1,5 +1,22 @@
+<<<<<<< HEAD
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package dal;
+<<<<<<< HEAD
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+=======
+=======
 package dal;  
 
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,11 +25,29 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 <<<<<<< HEAD
+>>>>>>> main
+=======
+<<<<<<< HEAD
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
 /**
  *
  * @author AnhVuNAV
  */
 public class DBContext {
+<<<<<<< HEAD
+
+    protected Connection connection;
+
+    public DBContext() {
+        try {
+            String user = "root"; // change this to your MySQL username
+            String pass = "hoan2709"; // change this to your MySQL password
+            String url = "jdbc:mysql://localhost:3306/Learnik"; // change mydb to your database name 
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url, user, pass);
+            System.out.println(connection);
+        } catch (ClassNotFoundException | SQLException ex) {
+=======
     protected Connection connection;
     public DBContext() {
         try {
@@ -23,12 +58,22 @@ public class DBContext {
             connection = DriverManager.getConnection(url, user, pass);
             System.out.println(connection);
         } catch (Exception ex) {
+>>>>>>> main
             ex.printStackTrace();
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public static void main(String[] args) {
+<<<<<<< HEAD
+        new DBContext(); // Just to test the connection
+<<<<<<< HEAD
+//        if (connection == null) {
+//            System.out.println("null"); 
+//        }
+=======
+>>>>>>> main
+=======
         DBContext dbContext = new DBContext();
         if (dbContext.connection != null) {
             System.out.println("Kết nối thành công với cơ sở dữ liệu!");
@@ -91,5 +136,6 @@ public class DBContext {
         }
         return rs;
 >>>>>>> 4d0982c745e6175e3e5a1a5b1ff350c362a92147
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
     }
 }
