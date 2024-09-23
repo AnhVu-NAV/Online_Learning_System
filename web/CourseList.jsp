@@ -22,72 +22,27 @@
             <div class="sidebar">
                 <div class="search-container">
                     <form action="CourseList" method="get">
-                        <div class="Search">
-                            <!-- Search Input -->
-                            <input type="text" name="search" class="search-input" placeholder="Search Courses..." 
-                                   value="${param.search != null ? param.search : ''}">
-                            <button type="submit" class="search-button">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
+                        <!-- Search Input -->
+                        <input type="text" name="search" class="search-input" placeholder="Search Courses..." 
+                               value="${param.search != null ? param.search : ''}">
+                        <button type="submit" class="search-button">
+                            <i class="fas fa-search"></i>
+                        </button>
 
                         <!-- Course Categories -->
-                        <div class="filter">
-                            <div class="filter-category">
-                                <h3>Course Categories</h3>
-                                <ul>
-                                    <c:forEach var="category" items="${categories}">
-                                        <li>
-                                            <input type="checkbox" name="category" value="${category.value}" 
-                                                   ${param.category != null && param.category.contains(category.value) ? 'checked' : ''}>
-                                            ${category.value}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-
-                                <!-- Submit button for filters -->
-                                <button type="submit" class="filter-btn">Filters</button>
-                            </div>
-                            <!--                            <div class="filter-taglines">
-                                                            <h3>Taglines</h3>
-                                                            <ul>
-                            <c:forEach var="tagline" items="${taglines}">  Lấy danh sách tagline từ backend 
+                        <h3>Course Categories</h3>
+                        <ul>
+                            <c:forEach var="category" items="${categories}">
                                 <li>
-                                    <input type="checkbox" name="tagline" value="${tagline.name}" 
-                                ${param.tagline != null && param.tagline.contains(tagline.name) ? 'checked' : ''}>
-                                ${tagline.name}
-                            </li>
+                                    <input type="checkbox" name="category" value="${category.value}" 
+                                           ${param.category != null && param.category.contains(category.value) ? 'checked' : ''}>
+                                    ${category.value}
+                                </li>
                             </c:forEach>
                         </ul>
-                    </div>-->
 
-
-                            <!-- Course Display Customization -->
-                            <div class="customize-display">
-                                <h3>Customize Display Courses</h3>
-                                <form id="courseCustomization">
-                                    <div class="customization-option">
-                                        <h4>Select related course details to display:</h4>
-                                        <label>
-                                            <input type="checkbox" name="showTitle" checked onchange="toggleRelatedCourseField('title')"> 
-                                            Course Title
-                                        </label><br>
-                                        <label>
-                                            <input type="checkbox" name="showSubTitle" checked onchange="toggleRelatedCourseField('title')"> 
-                                            Course SubTitle
-                                        </label><br>
-                                        <label>
-                                            <input type="checkbox" name="showTagline" checked onchange="toggleRelatedCourseField('tagline')"> 
-                                            Tagline
-                                        </label><br>
-                                        <label>
-                                            <input type="checkbox" name="showPrice" checked onchange="toggleRelatedCourseField('price')"> 
-                                            Price
-                                        </label><br>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        <!-- Submit button for filters (if needed) -->
+                        <button type="submit" class="filter-btn" style="">Filters</button>
                     </form>
                 </div>
             </div>
@@ -95,32 +50,11 @@
             <!-- Main Content -->
             <div class="content">
                 <div class="header">
-                    <h1>Course List</h1>
-                </div>
-
-                <div class="Customization">
-                    <!-- Course Per Page Customization -->
-                    <div class="customize">
-                        <h3>Customize Courses Per Page</h3>
-                        <form id="coursePerPageForm" action="CourseList" method="get">
-                            <label for="coursesPerPage">Number of courses per page:</label>
-                            <select id="coursesPerPage" name="coursesPerPage" onchange="this.form.submit()">
-                                <option value="15" ${param.coursesPerPage == '15' ? 'selected' : ''}>15 Courses</option>
-                                <option value="25" ${param.coursesPerPage == '25' ? 'selected' : ''}>25 Courses</option>
-                                <option value="30" ${param.coursesPerPage == '30' ? 'selected' : ''}>30 Courses</option>
-                            </select>
-
-                            <!-- Hidden fields to retain filter parameters -->
-                            <input type="hidden" name="search" value="${param.search != null ? param.search : ''}">
-                            <c:forEach var="category" items="${paramValues.category}">
-                                <input type="hidden" name="category" value="${category}">
-                            </c:forEach>
-                            <input type="hidden" name="sort" value="${param.sort != null ? param.sort : ''}">
-                        </form>
-                    </div>
+                    <h2>We found ${courses.size()} courses for you</h2>
                     <div class="sort">
                         <label for="sortSelect">Sort By:</label>
                         <form action="CourseList" method="get">
+                            <!-- Giữ lại từ khóa tìm kiếm và danh mục đã chọn trong form -->
                             <input type="hidden" name="search" value="${param.search != null ? param.search : ''}">
                             <c:forEach var="category" items="${paramValues.category}">
                                 <input type="hidden" name="category" value="${category}">
@@ -140,21 +74,11 @@
                 <div class="course-grid" id="courseGrid">
                     <c:forEach var="course" items="${courses}">
                         <div class="course-card">
-                            <a href="CourseDetail?courseId=${course.id}">
+                            <a href="courseDetails?id=${course.id}">
                                 <img src="${course.thumbnailUrl}" class="thumbnail" alt="${course.title}">
                                 <div class="course-info">
-                                    <h3 class="course-title">${course.title}</h3>
-                                    <p class="course-subtitle">${course.subtitle}</p>
-                                    <div class="course-tagline">
-                                        <c:forEach var="tagline" items="${course.taglines}">
-                                            <div class="tag">
-                                                <i class="fas fa-tag"></i>
-                                                <span class="tagline">${tagline}</span>
-                                            </div>
-                                        </c:forEach>
-
-                                    </div>
-
+                                    <h3>${course.title}</h3>
+                                    <p>${course.description}</p>
                                     <div class="pricing">
                                         <span class="list-price">$${course.price}</span>
                                         <span class="sale-price">$${course.salePrice}</span>
@@ -169,60 +93,14 @@
                 <!-- Pagination -->
                 <div class="pagination">
                     <c:if test="${currentPage > 1}">
-                        <form action="CourseList" method="get">
-                            <input type="hidden" name="search" value="${param.search != null ? param.search : ''}">
-                            <c:forEach var="category" items="${paramValues.category}">
-                                <input type="hidden" name="category" value="${category}">
-                            </c:forEach>
-                            <input type="hidden" name="sort" value="${param.sort != null ? param.sort : ''}">
-                            <input type="hidden" name="coursesPerPage" value="${param.coursesPerPage != null ? param.coursesPerPage : '15'}">
-                            <button type="submit" class="pagination-btn">Previous</button>
-                            <input type="hidden" name="page" value="${currentPage - 1}"/>
-                        </form>
+                        <a href="CourseList?page=${currentPage - 1}" class="pagination-btn">Previous</a>
                     </c:if>
                     <span id="page-info">Page ${currentPage} of ${totalPages}</span>
                     <c:if test="${currentPage < totalPages}">
-                        <form action="CourseList" method="get">
-                            <input type="hidden" name="search" value="${param.search != null ? param.search : ''}">
-                            <c:forEach var="category" items="${paramValues.category}">
-                                <input type="hidden" name="category" value="${category}">
-                            </c:forEach>
-                            <input type="hidden" name="sort" value="${param.sort != null ? param.sort : ''}">
-                            <input type="hidden" name="coursesPerPage" value="${param.coursesPerPage != null ? param.coursesPerPage : '15'}">
-                            <button type="submit" class="pagination-btn">Next</button>
-                            <input type="hidden" name="page" value="${currentPage + 1}"/>
-                        </form>
+                        <a href="CourseList?page=${currentPage + 1}" class="pagination-btn">Next</a>
                     </c:if>
                 </div>
             </div>
         </div>
-
-        <script>
-            function toggleRelatedCourseField(field) {
-                const relatedCourses = document.querySelectorAll('.course-card'); // Chọn tất cả các khóa học
-                relatedCourses.forEach(course => {
-                    const titleElement = course.querySelector('.course-title');
-                    const subtitleElement = course.querySelector('.course-subtitle');
-                    const taglineElement = course.querySelector('.course-tagline');
-                    const priceElement = course.querySelector('.pricing');
-
-                    // Điều chỉnh hiển thị dựa trên checkbox
-                    const showTitle = document.querySelector('input[name="showTitle"]').checked;
-                    const showSubTitle = document.querySelector('input[name="showSubTitle"]').checked;
-                    const showTagline = document.querySelector('input[name="showTagline"]').checked;
-                    const showPrice = document.querySelector('input[name="showPrice"]').checked;
-
-                    titleElement.style.display = showTitle ? 'block' : 'none';
-                    subtitleElement.style.display = showSubTitle ? 'block' : 'none';
-                    taglineElement.style.display = showTagline ? 'block' : 'none';
-                    priceElement.style.display = showPrice ? 'block' : 'none';
-                });
-            }
-
-            // Gọi hàm toggle khi trang được tải
-            document.addEventListener("DOMContentLoaded", function () {
-                toggleRelatedCourseField(); // Khởi tạo hiển thị ban đầu
-            });
-        </script>
     </body>
 </html>
