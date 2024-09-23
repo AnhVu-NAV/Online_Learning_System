@@ -86,6 +86,9 @@
         <servlet-name>RegisterCourseController</servlet-name>
         <servlet-class>controller.RegisterCourseController</servlet-class>
     </servlet>
+        <servlet-name>CourseListController</servlet-name>
+        <servlet-class>controller.CourseListController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
