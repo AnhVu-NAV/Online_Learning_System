@@ -8,10 +8,9 @@ import java.util.Date;
 
 /**
  *
- * @author 84941
+ * @author AnhVuNAV
  */
 public class Setting {
-
     private int id;
     private int settingTypeId;
     private String value;
@@ -33,6 +32,8 @@ public class Setting {
         this.updatedDate = updatedDate;
     }
 
+
+    // Getters and setters
     public int getId() {
         return id;
     }
@@ -74,7 +75,6 @@ public class Setting {
     }
 
     public Date getCreatedDate() {
-        return createdDate;
     }
 
     public void setCreatedDate(Date createdDate) {
