@@ -104,6 +104,10 @@
     </servlet-mapping>
 
     <!-- Map Controller Servlet -->
+    <servlet>
+        <servlet-name>CourseListController</servlet-name>
+        <servlet-class>controller.CourseListController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
@@ -132,4 +136,8 @@
         <session-timeout>30</session-timeout>
     </session-config>
 
+    <servlet-mapping>
+        <servlet-name>CourseListController</servlet-name>
+        <url-pattern>/CourseList</url-pattern>
+    </servlet-mapping>
 </web-app>
