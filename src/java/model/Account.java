@@ -11,21 +11,39 @@ import java.util.Date;
  * @author AnhVuNAV
  */
 public class Account {
+
     private int id;
     private String email;
-    private String first_name; // first_name
-    private String last_name; // last_name
+    private String first_name;
+    private String last_name;
     private String password;
-    private Date dob; // Ngày sinh
-    private int role_id; // ID vai trò (Foreign key từ Setting)
-    private Date created_date; // Ngày tạo tài khoản
-    private int status; // Trạng thái tài khoản (Active, Inactive, etc.)
-    private String phone; // Số điện thoại
-    private boolean gender; // Giới tính (true: Nam, false: Nữ)
-    private String address; // Địa chỉ
-    private String image_url; // URL ảnh đại diện
+    private Date dob;
+    private int role_id;
+    private Date created_date;
+    private int status;
+    private String phone;
+    private boolean gender;
+    private String address;
+    private String image_url;       
 
-    // Getters và Setters cho tất cả các thuộc tính
+    public Account() {
+    }
+
+    public Account(int id, String email, String first_name, String last_name, String password, Date dob, int role_id, Date created_date, int status, String phone, boolean gender, String address, String image_url) {
+        this.id = id;
+        this.email = email;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.password = password;
+        this.dob = dob;
+        this.role_id = role_id;
+        this.created_date = created_date;
+        this.status = status;
+        this.phone = phone;
+        this.gender = gender;
+        this.address = address;
+        this.image_url = image_url;
+    }
 
     public int getId() {
         return id;

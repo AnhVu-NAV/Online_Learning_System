@@ -4,18 +4,34 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author AnhVuNAV
  */
 public class Setting {
     private int id;
-    private int settingTypeId;
+    private int setting_type_id;
     private String value;
-    private int status;
     private String description;
+    private int status;
+    private Date created_date;
+    private Date updated_date;
 
-    // Getters and setters
+    public Setting() {
+    }
+
+    public Setting(int id, int setting_type_id, String value, String description, int status, Date created_date, Date updated_date) {
+        this.id = id;
+        this.setting_type_id = setting_type_id;
+        this.value = value;
+        this.description = description;
+        this.status = status;
+        this.created_date = created_date;
+        this.updated_date = updated_date;
+    }
+
     public int getId() {
         return id;
     }
@@ -24,12 +40,12 @@ public class Setting {
         this.id = id;
     }
 
-    public int getSettingTypeId() {
-        return settingTypeId;
+    public int getSetting_type_id() {
+        return setting_type_id;
     }
 
-    public void setSettingTypeId(int settingTypeId) {
-        this.settingTypeId = settingTypeId;
+    public void setSetting_type_id(int setting_type_id) {
+        this.setting_type_id = setting_type_id;
     }
 
     public String getValue() {
@@ -40,6 +56,14 @@ public class Setting {
         this.value = value;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -48,11 +72,19 @@ public class Setting {
         this.status = status;
     }
 
-    public String getDescription() {
-        return description;
+    public Date getCreated_date() {
+        return created_date;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCreated_date(Date created_date) {
+        this.created_date = created_date;
+    }
+
+    public Date getUpdated_date() {
+        return updated_date;
+    }
+
+    public void setUpdated_date(Date updated_date) {
+        this.updated_date = updated_date;
     }
 }
