@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 jQuery(document).ready(function() {
   "use strict";
     $('.gallery-slider').slick({
@@ -61,4 +62,23 @@ jQuery(document).ready(function() {
         filter: ':not(.external)',
         updateHash: true
     });
+=======
+$(function() {
+    $(".navbar-toggler").on("click", function(e) {
+        $(".tm-header").toggleClass("show");
+        e.stopPropagation();
+      });
+    
+      $("html").click(function(e) {
+        var header = document.getElementById("tm-header");
+    
+        if (!header.contains(e.target)) {
+          $(".tm-header").removeClass("show");
+        }
+      });
+    
+      $("#tm-nav .nav-link").click(function(e) {
+        $(".tm-header").removeClass("show");
+      });
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
 });

@@ -1,18 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <!-- Khai báo servlet Controller -->
     <servlet>
-        <servlet-name>Controller</servlet-name>
-        <servlet-class>controller.Controller</servlet-class>
+<<<<<<< HEAD
+        <servlet-name>changePassword</servlet-name>
+        <servlet-class>controller.ChangePasswordController</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>controller.LoginSystemController</servlet-class>
     </servlet>
+=======
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <servlet-class>controller.ForgotPasswordController</servlet-class>
+=======
+        <servlet-name>AccountDashboardController</servlet-name>
+        <servlet-class>controller.AccountDashboardController</servlet-class>
+>>>>>>> 4d0982c745e6175e3e5a1a5b1ff350c362a92147
+    </servlet>
+    <servlet>
+        <servlet-name>SettingDashboardController</servlet-name>
+        <servlet-class>controller.SettingDashboardController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CourseListController</servlet-name>
+        <servlet-class>controller.CourseListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserProfileController</servlet-name>
+        <servlet-class>controller.UserProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUserProfileController</servlet-name>
+        <servlet-class>controller.UpdateUserProfileController</servlet-class>
+    </servlet>
+    <!-- Khai báo servlet BlogListServlet -->
+    <servlet>
+        <servlet-name>BlogListServlet</servlet-name>
+        <servlet-class>controller.BlogListServlet</servlet-class>
+    </servlet>
+    <!-- Mapping servlet Controller -->
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
     <servlet-mapping>
-        <servlet-name>Controller</servlet-name>
-        <url-pattern>/Controller</url-pattern>
+<<<<<<< HEAD
+        <servlet-name>changePassword</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
@@ -24,4 +60,48 @@
         <servlet-name>CreateNewAccountController</servlet-name>
         <url-pattern>/create</url-pattern>
     </servlet-mapping>
+=======
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <url-pattern>/ForgotPasswordController</url-pattern>
+=======
+        <servlet-name>AccountDashboardController</servlet-name>
+        <url-pattern>/AccountDashboardController</url-pattern>
+>>>>>>> 4d0982c745e6175e3e5a1a5b1ff350c362a92147
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SettingDashboardController</servlet-name>
+        <url-pattern>/SettingDashboardController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseListController</servlet-name>
+        <url-pattern>/CourseList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/UserProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUserProfileController</servlet-name>
+        <url-pattern>/UpdateUserProfile</url-pattern>
+    </servlet-mapping>
+    <!-- Mapping servlet BlogListServlet -->
+    <servlet-mapping>
+        <servlet-name>BlogListServlet</servlet-name>
+        <url-pattern>/blogList</url-pattern>
+    </servlet-mapping>
+    
+    <filter>
+        <filter-name>AuthorizationFilter</filter-name>
+        <filter-class>filter.AuthorizationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthorizationFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- Cấu hình session -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
 </web-app>

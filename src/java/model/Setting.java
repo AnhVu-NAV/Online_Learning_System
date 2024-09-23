@@ -4,6 +4,7 @@
  */
 package model;
 
+<<<<<<< HEAD
 import java.util.*;
 
 /**
@@ -23,10 +24,27 @@ public class Setting {
     private Vector<Course> courses;
     private Vector<Blog> blogs;
     private Vector<UserLog> userLogs;
+=======
+import java.util.Date;
+
+/**
+ *
+ * @author AnhVuNAV
+ */
+public class Setting {
+    private int id;
+    private int setting_type_id;
+    private String value;
+    private String description;
+    private int status;
+    private Date created_date;
+    private Date updated_date;
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
 
     public Setting() {
     }
 
+<<<<<<< HEAD
     public Setting(int id, SettingType settingTypeId, String value, int status, String description, Date createdDate, Date updatedDate, Vector<Account> accounts, Vector<Course> courses, Vector<Blog> blogs, Vector<UserLog> userLogs) {
         this.id = id;
         this.settingTypeId = settingTypeId;
@@ -50,6 +68,18 @@ public class Setting {
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getter and Setter methods. Click on the + sign on the left to edit the code.">
+=======
+    public Setting(int id, int setting_type_id, String value, String description, int status, Date created_date, Date updated_date) {
+        this.id = id;
+        this.setting_type_id = setting_type_id;
+        this.value = value;
+        this.description = description;
+        this.status = status;
+        this.created_date = created_date;
+        this.updated_date = updated_date;
+    }
+
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
     public int getId() {
         return id;
     }
@@ -58,12 +88,21 @@ public class Setting {
         this.id = id;
     }
 
+<<<<<<< HEAD
     public SettingType getSettingTypeId() {
         return settingTypeId;
     }
 
     public void setSettingTypeId(SettingType settingTypeId) {
         this.settingTypeId = settingTypeId;
+=======
+    public int getSetting_type_id() {
+        return setting_type_id;
+    }
+
+    public void setSetting_type_id(int setting_type_id) {
+        this.setting_type_id = setting_type_id;
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
     }
 
     public String getValue() {
@@ -74,6 +113,7 @@ public class Setting {
         this.value = value;
     }
 
+<<<<<<< HEAD
     public int getStatus() {
         return status;
     }
@@ -82,6 +122,8 @@ public class Setting {
         this.status = status;
     }
 
+=======
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
     public String getDescription() {
         return description;
     }
@@ -90,6 +132,7 @@ public class Setting {
         this.description = description;
     }
 
+<<<<<<< HEAD
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -149,4 +192,29 @@ public class Setting {
         return "Setting{" + "id=" + id + "value=" + value + ", status=" + status + ", description=" + description + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + '}';
     }
 
+=======
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Date getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(Date created_date) {
+        this.created_date = created_date;
+    }
+
+    public Date getUpdated_date() {
+        return updated_date;
+    }
+
+    public void setUpdated_date(Date updated_date) {
+        this.updated_date = updated_date;
+    }
+>>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2
 }

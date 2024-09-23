@@ -11,16 +11,16 @@ import util.PasswordEncoding;
 
 /**
  *
- * @author ADMIN
+ * @author AnhVuNAV
  */
 public class Account {
 
     private int id;
     private String email;
     private Date dob;
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
+    private String first_name;
+    private String last_name;
+    private String phone;
     private String password;
     private Setting role_id;
     private boolean gender;
@@ -31,6 +31,7 @@ public class Account {
     private Vector<Blog> blog;
     private Vector<Slider> slider;
     private Setting setting;
+    private String address;
 
     public Account() {
     }
@@ -70,6 +71,22 @@ public class Account {
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getter and Setter methods. Click on the + sign on the left to edit the code.">
+    public Account(int id, String email, String first_name, String last_name, String password, Date dob, int role_id, Date created_date, int status, String phone, boolean gender, String address, String image_url) {
+        this.id = id;
+        this.email = email;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.password = password;
+        this.dob = dob;
+        this.role_id = role_id;
+        this.created_date = created_date;
+        this.status = status;
+        this.phone = phone;
+        this.gender = gender;
+        this.address = address;
+        this.image_url = image_url;
+    }
+
     public int getId() {
         return id;
     }
@@ -94,28 +111,28 @@ public class Account {
         this.dob = dob;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPassword() {
@@ -126,15 +143,15 @@ public class Account {
         this.password = password;
     }
 
-    public Setting getRoleId() {
+    public Setting getRole_id() {
         return role_id;
     }
 
-    public void setRoleId(Setting roleId) {
-        this.role_id = roleId;
+    public void setRole_id(Setting role_id) {
+        this.role_id = role_id;
     }
 
-    public boolean getGender() {
+    public boolean isGender() {
         return gender;
     }
 
@@ -150,16 +167,12 @@ public class Account {
         this.createdDate = createdDate;
     }
 
-    public void setCreatedDate() {
-        this.createdDate = GetCurrentDate.getCurrentDate();
-    }
-
     public int getStatus() {
         return status;
     }
 
-    public void setStatus(int isActivated) {
-        this.status = isActivated;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getImage_url() {
@@ -201,20 +214,14 @@ public class Account {
     public void setSetting(Setting setting) {
         this.setting = setting;
     }
-    // </editor-fold>
-//
-//    public Date setCreatedDateForNewAccount() {
-//        Date date = new Date(System.currentTimeMillis());
-//        return date;
-//    }
 
-    public String getEncodingPassword(String password) {
-        return PasswordEncoding.getEncodingPassword(password);
+    public String getAddress() {
+        return address;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" + "id=" + id + ", email=" + email + ", dob=" + dob + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", password=" + password + ", role=" + role_id.toString() + ", gender=" + gender + ", createdDate=" + createdDate + ", status=" + status + '}' + ", image_url=" + image_url;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
+    
 }
