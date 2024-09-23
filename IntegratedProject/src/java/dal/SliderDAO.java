@@ -121,6 +121,7 @@ public class SliderDAO extends DBContext {
             String backlink_url = rs.getString("backlink_url");
             int status = rs.getInt("status");
             Slider obj = new Slider(account, image_url, backlink_url, status);
+            obj.setId(id); 
             vector.add(obj);
         }
         return vector;
@@ -139,6 +140,7 @@ public class SliderDAO extends DBContext {
             String backlink_url = rs.getString("backlink_url");
             int status = rs.getInt("status");
             Slider obj = new Slider(account, image_url, backlink_url, status);
+            obj.setId(id); 
             vector.add(obj);
         }
         return vector;
@@ -157,6 +159,7 @@ public class SliderDAO extends DBContext {
             String backlink_url = rs.getString("backlink_url");
             int status = rs.getInt("status");
             Slider obj = new Slider(account, image_url, backlink_url, status);
+            obj.setId(id); 
             vector.add(obj);
         }
         return vector;
