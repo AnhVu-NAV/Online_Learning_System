@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  *
- * @author 84941
+ * @author AnhVuNAV
  */
 public class Setting {
     private int id;
@@ -87,16 +87,4 @@ public class Setting {
     public void setUpdated_date(Date updated_date) {
         this.updated_date = updated_date;
     }
-    
-   
-
-   
-
-    
-    
-    
-    
-    
-    
-    
 }

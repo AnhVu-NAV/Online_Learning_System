@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  *
- * @author 84941
+ * @author AnhVuNAV
  */
 public class Account {
 
@@ -148,17 +148,4 @@ public class Account {
     public void setImage_url(String image_url) {
         this.image_url = image_url;
     }
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
 }
