@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
 <<<<<<< HEAD
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/model/User.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/dal/UserDAO.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/ChangePassword.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/ForgotPasswordController.java</file>
+            <file>file:/D:/SWP-Project/swp391_onlinelearning/web/ForgotPassword.jsp</file>
+=======
+<<<<<<< HEAD
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
         <file>
             <url>build/web/login.jsp</url>
@@ -41,6 +51,7 @@
 >>>>>>> f63c26a6587149f4b62e26e1494a2c92a6e3061a
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/dal/AccountDAO.java</file>
 >>>>>>> 089cb18a688ee3ad2f19a8f8e50a2cfdb98964b9
+>>>>>>> 4d0982c745e6175e3e5a1a5b1ff350c362a92147
         </group>
     </open-files>
 </project-private>

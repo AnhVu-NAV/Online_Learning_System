@@ -7,6 +7,35 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD
+/**
+ *
+ * @author AnhVuNAV
+ */
+public class DBContext {
+    protected Connection connection;
+    public DBContext() {
+        try {
+            String user = "root"; // change this to your MySQL username
+            String pass = "12345"; // change this to your MySQL password
+            String url = "jdbc:mysql://localhost:3306/Learnik"; // change mydb to your database name
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url, user, pass);
+            System.out.println(connection);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void main(String[] args) {
+        DBContext dbContext = new DBContext();
+        if (dbContext.connection != null) {
+            System.out.println("Kết nối thành công với cơ sở dữ liệu!");
+        } else {
+            System.out.println("Kết nối thất bại!");
+        }
+=======
 import java.sql.Connection;  
 import java.sql.DriverManager;  
 import java.sql.SQLException;  
@@ -61,5 +90,6 @@ public class DBContext {
             ex.printStackTrace();
         }
         return rs;
+>>>>>>> 4d0982c745e6175e3e5a1a5b1ff350c362a92147
     }
 }

@@ -2,8 +2,17 @@
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <!-- Khai báo servlet Controller -->
     <servlet>
+<<<<<<< HEAD
+        <servlet-name>changePassword</servlet-name>
+        <servlet-class>controller.ChangePasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <servlet-class>controller.ForgotPasswordController</servlet-class>
+=======
         <servlet-name>AccountDashboardController</servlet-name>
         <servlet-class>controller.AccountDashboardController</servlet-class>
+>>>>>>> 4d0982c745e6175e3e5a1a5b1ff350c362a92147
     </servlet>
     <servlet>
         <servlet-name>SettingDashboardController</servlet-name>
@@ -28,8 +37,17 @@
     </servlet>
     <!-- Mapping servlet Controller -->
     <servlet-mapping>
+<<<<<<< HEAD
+        <servlet-name>changePassword</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <url-pattern>/ForgotPasswordController</url-pattern>
+=======
         <servlet-name>AccountDashboardController</servlet-name>
         <url-pattern>/AccountDashboardController</url-pattern>
+>>>>>>> 4d0982c745e6175e3e5a1a5b1ff350c362a92147
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SettingDashboardController</servlet-name>

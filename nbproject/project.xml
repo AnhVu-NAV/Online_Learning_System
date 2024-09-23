@@ -39,7 +39,19 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+<<<<<<< HEAD
+                    <file>${file.reference.javax.activation-1.2.0.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.javax.mail.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.json-20240303.jar}</file>
+=======
                     <file>${libs.jstl.classpath}</file>
+>>>>>>> 4d0982c745e6175e3e5a1a5b1ff350c362a92147
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
