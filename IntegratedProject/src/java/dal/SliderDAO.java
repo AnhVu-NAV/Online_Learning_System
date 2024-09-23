@@ -110,7 +110,7 @@ public class SliderDAO extends DBContext {
 
     public Vector<Slider> getSliderByIdOrder() throws Exception {
         Vector<Slider> vector = new Vector<Slider>();
-        String sql = "select * from SLider order by id;";
+        String sql = "select * from Slider order by id;";
         PreparedStatement pre = connection.prepareStatement(sql);
         ResultSet rs = pre.executeQuery(sql);
         AccountDAO adao = new AccountDAO();
@@ -129,7 +129,7 @@ public class SliderDAO extends DBContext {
 
     public Vector<Slider> getSliderByAccountOrder() throws Exception {
         Vector<Slider> vector = new Vector<Slider>();
-        String sql = "select * from SLider order by author_id;";
+        String sql = "select * from Slider order by author_id;";
         PreparedStatement pre = connection.prepareStatement(sql);
         ResultSet rs = pre.executeQuery(sql);
         AccountDAO adao = new AccountDAO();
@@ -148,7 +148,7 @@ public class SliderDAO extends DBContext {
 
     public Vector<Slider> getSliderByStatusOrder() throws Exception {
         Vector<Slider> vector = new Vector<Slider>();
-        String sql = "select * from SLider order by status;";
+        String sql = "select * from Slider order by status;";
         PreparedStatement pre = connection.prepareStatement(sql);
         ResultSet rs = pre.executeQuery(sql);
         AccountDAO adao = new AccountDAO();

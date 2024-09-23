@@ -59,7 +59,7 @@ public class SliderController extends HttpServlet {
                         request.getRequestDispatcher("slider_list.jsp").forward(request, response);
                         break;
                     case "byAccount":
-                        request.setAttribute("showAllSlider", sliderDao.getSliderByIdOrder());
+                        request.setAttribute("showAllSlider", sliderDao.getSliderByAccountOrder());
                         request.getRequestDispatcher("slider?action=list").forward(request, response);
                         break;
                     case "byStatus":
