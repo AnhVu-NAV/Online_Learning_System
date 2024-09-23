@@ -44,6 +44,14 @@
         <servlet-name>CourseListController</servlet-name>
         <servlet-class>controller.CourseListController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserProfileController</servlet-name>
+        <servlet-class>controller.UserProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUserProfileController</servlet-name>
+        <servlet-class>controller.UpdateUserProfileController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
@@ -75,5 +83,13 @@
     <servlet-mapping>
         <servlet-name>CourseListController</servlet-name>
         <url-pattern>/CourseList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/UserProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUserProfileController</servlet-name>
+        <url-pattern>/UpdateUserProfile</url-pattern>
     </servlet-mapping>
 </web-app>
