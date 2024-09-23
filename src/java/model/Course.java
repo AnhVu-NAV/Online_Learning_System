@@ -5,7 +5,6 @@
 package model;
 
 import java.sql.Date;
-import java.util.List;
 
 /**
  *
@@ -14,7 +13,6 @@ import java.util.List;
 public class Course {
     private int id;
     private String title;
-    private String subtitle; // Thêm thuộc tính subtitle
     private int expertId;
     private String description;
     private String thumbnailUrl;
@@ -25,7 +23,6 @@ public class Course {
     private Date updatedDate;
     private int categoryId; 
     private float totalDuration;
-    private List<String> taglines; // Thêm thuộc tính để lưu danh sách tagline
     
     public Course() {
     }
@@ -43,7 +40,25 @@ public class Course {
         this.updatedDate = updatedDate;
         this.categoryId = categoryId;
         this.totalDuration = totalDuration;
-    }    
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public float getTotalDuration() {
+        return totalDuration;
+    }
+
+    public void setTotalDuration(float totalDuration) {
+        this.totalDuration = totalDuration;
+    }
+
+    
 
     public int getId() {
         return id;
@@ -59,14 +74,6 @@ public class Course {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
     }
 
     public int getExpertId() {
@@ -101,7 +108,7 @@ public class Course {
         this.numberOfLesson = numberOfLesson;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -109,7 +116,7 @@ public class Course {
         this.price = price;
     }
 
-    public int getSalePrice() {
+    public double getSalePrice() {
         return salePrice;
     }
 
@@ -133,8 +140,6 @@ public class Course {
         this.updatedDate = updatedDate;
     }
 
-    public int getCategoryId() {
-        return categoryId;
-    }
 
+    
 }

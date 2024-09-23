@@ -59,16 +59,6 @@ body {
     color: #555;
 }
 
-.filter{
-    display: flex;  
-    flex-direction: column; 
-    justify-content: center;
-}
-
-.filter-category {
-    margin-left: 20%;
-}
-
 /* Custom Checkbox Styling */
 .sidebar input[type="checkbox"] {
     appearance: none; /* Remove default styling */
@@ -118,17 +108,13 @@ body {
 }
 
 /* Header */
-.header,
-.Customization{
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.header h1 {
-    /*font-size: 28px;*/
-}
 .header h2 {
     font-size: 28px;
     font-weight: bold;
@@ -149,13 +135,6 @@ body {
     margin-top: 20px;
 }
 
-.customize select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-
 /* Individual Course Cards */
 .course-card {
     background-color: #fff;
@@ -163,10 +142,6 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     cursor: pointer;
-    min-height: 420px; /* Đặt chiều cao tối thiểu để các thẻ đồng đều */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Đảm bảo các phần bên trong được phân phối đều */
 }
 
 .course-card:hover {
@@ -177,7 +152,6 @@ body {
 .course-card a {
     text-decoration: none; /* Removes underline */
     color: inherit; /* Inherits color from parent */
-    flex-grow: 1; /* Đảm bảo ảnh và thông tin chiếm toàn bộ chiều cao */
 }
 
 .course-card a:hover {
@@ -194,7 +168,6 @@ body {
 
 .course-info {
     padding: 15px;
-    flex-grow: 1; /* Đảm bảo phần thông tin khóa học mở rộng */
 }
 
 .course-info h3 {
@@ -244,13 +217,11 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    align-self: flex-end; /* Đảm bảo nút "Register" ở cuối thẻ */
 }
 
 .register-btn:hover {
     background-color: #0056b3;
 }
-
 
 /* Pagination Styling */
 .pagination {
@@ -281,12 +252,6 @@ body {
 }
 
 /* Search Bar Container */
-.Search{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
 .search-container {
     display: flex;
     align-items: center;
@@ -297,7 +262,6 @@ body {
 
 /* Search Input */
 .search-input {
-    width: 80%;
     width: 100%;
     padding: 10px 15px;
     border: 1px solid #ddd;
@@ -348,107 +312,6 @@ body {
     background-color: #0056b3;
 }
 
-.sticky-header {
-        position: -webkit-sticky; /* Safari */
-        position: sticky;
-        top: 0;
-        background-color: white; /* Màu nền cho header */
-        z-index: 1000; /* Đảm bảo header luôn ở trên cùng */
-        padding: 10px; /* Khoảng cách bên trong */
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Đổ bóng cho header khi cuộn */
-    }
-    
-/* Điều chỉnh header khi nằm trong phần Customization */
-.Customization .sticky-header {
-    top: 0;
-    z-index: 999;
-    width: 100%;
-}
-
-/* Custom Styles cho phần Customization */
-.Customization {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    background-color: #f4f4f9; /* Màu nền cho phần này */
-    padding: 10px;
-    border-radius: 8px;
-}
-
-.customize-display, .sort {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-/* Customization Section */
-    .customize-display {
-        margin-top: 30px;
-        margin-left: 5%;
-        background-color: #f8f9fa;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .customize-display h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
-        color: #333;
-    }
-
-    .customization-option label {
-        font-size: 14px;
-        color: #333;
-    }
-
-    .customization-option select {
-        width: 100%;
-        padding: 8px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        margin-top: 5px;
-        margin-bottom: 15px;
-    }
-
-   .tag {
-    display: inline-flex;
-    align-items: center;
-    background-color: #f1f1f1; /* Màu nền của thẻ */
-    border-radius: 15px; /* Bo tròn góc nhỏ hơn */
-    padding: 3px 8px; /* Giảm padding để thẻ nhỏ hơn */
-    font-size: 12px; /* Giảm font size */
-    font-weight: 500;
-    color: #333;
-    border: 1px solid #ddd; /* Viền */
-    margin-bottom: 5px; /* Khoảng cách giữa các thẻ */
-    width: auto; /* Đảm bảo thẻ vừa với nội dung */
-    white-space: nowrap; /* Đảm bảo thẻ không bị xuống dòng */
-}
-
-.tag i {
-    font-size: 14px; /* Giảm kích thước của icon */
-    color: #333;
-    margin-right: 5px; /* Giảm khoảng cách giữa icon và text */
-}
-
-.tag:hover {
-    background-color: #e0e0e0; /* Màu nền khi hover */
-    border-color: #aaa; /* Màu viền khi hover */
-    cursor: pointer; /* Con trỏ chuột */
-}
-
-.course-tagline {
-    display: flex;
-    flex-direction: column; /* Sắp xếp các thẻ theo chiều dọc */
-    gap: 3px; /* Giảm khoảng cách giữa các thẻ */
-}
-
-.tagline {
-    text-overflow: ellipsis; /* Đảm bảo text không bị cắt */
-    overflow: hidden;
-    white-space: nowrap; /* Đảm bảo không xuống dòng */
-}
 /* Responsive Layout */
 @media (max-width: 1200px) {
     .course-grid {
@@ -467,10 +330,6 @@ body {
         width: 100%; /* Chiếm toàn bộ chiều rộng */
         margin-left: 0; /* Đặt lại vị trí */
     }
-    .sticky-header {
-        padding: 8px;
-    }
-
 }
 
 @media (max-width: 480px) {
