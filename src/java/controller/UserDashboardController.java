@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.AccountDAO;
+import dal.UserDAO;
 import dal.SettingDAO;
 import dal.SettingTypeDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -16,19 +16,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Vector;
-import model.Account;
+import model.User;
 import model.Setting;
 import model.SettingType;
-import model.Paging;
-import send_email.EmailService;
-import send_email.IJavaMail;
+import sendEmail.EmailService;
+import sendEmail.IJavaMail;
 import util.*;
 
 /**
  *
  * @author 84941
  */
-public class AccountDashboardController extends HttpServlet {
+public class UserDashboardController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,72 +41,72 @@ public class AccountDashboardController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        AccountDAO accountDAO = new AccountDAO();
+        UserDAO userDAO = new UserDAO();
         SettingDAO settingDAO = new SettingDAO();
         SettingTypeDAO settingTypeDAO = new SettingTypeDAO();
         DataConvert dataConvert = new DataConvert();
         String service = request.getParameter("service");
         if (service == null) {
-            service = "viewAllAccount";
+            service = "viewAllUser";
         }
-        if (service.equals("viewAllAccount")) {
+        if (service.equals("viewAllUser")) {
 
             String fillterSubmit = request.getParameter("fillterSubmit");
             //get data
-            Vector<Account> accountVector = null;
+            Vector<User> userVector = null;
             Vector<Setting> settingVector = null;
             SettingType settingType = null;
-            String sql = "select * from account ";
+            String sql = "select * from user ";
             String checked = "sort_by_id";
             if (fillterSubmit != null) {
-                String search_by_name = request.getParameter("search_by_name");
-                String search_by_email = request.getParameter("search_by_email");
-                String search_by_phone = request.getParameter("search_by_phone");
-                String fillter_by_gender = request.getParameter("fillter_by_gender");
-                String fillter_by_role = request.getParameter("fillter_by_role");
-                String fillter_by_status = request.getParameter("fillter_by_status");
-                String sort_by = request.getParameter("sort_by");
-                sql += " where (lower(first_name) like '%" + search_by_name.toLowerCase() + "%' or lower(last_name) like '%" + search_by_name.toLowerCase() + "%' ) "
-                        + " and email like '%" + search_by_email + "%' "
-                        + " and phone like '%" + search_by_phone + "%' ";
-                if (!fillter_by_gender.equals("all")) {
-                    sql += " and gender= " + fillter_by_gender;
+                String searchByName = request.getParameter("searchByName");
+                String searchByEmail = request.getParameter("searchByEmail");
+                String searchByPhone = request.getParameter("searchByPhone");
+                String fillterByGender = request.getParameter("fillterByGender");
+                String fillterByRole = request.getParameter("fillterByRole");
+                String fillterByStatus = request.getParameter("fillterByStatus");
+                String sortBy = request.getParameter("sortBy");
+                sql += " where (lower(first_name) like '%" + searchByName.toLowerCase() + "%' or lower(last_name) like '%" + searchByName.toLowerCase() + "%' ) "
+                        + " and email like '%" + searchByEmail + "%' "
+                        + " and phone like '%" + searchByPhone + "%' ";
+                if (!fillterByGender.equals("all")) {
+                    sql += " and gender= " + fillterByGender;
                 }
-                if (!fillter_by_role.equals("all")) {
-                    sql += " and role_id =" + fillter_by_role;
+                if (!fillterByRole.equals("all")) {
+                    sql += " and role_id =" + fillterByRole;
                 }
-                if (!fillter_by_status.equals("all")) {
-                    sql += " and status =" + fillter_by_status;
+                if (!fillterByStatus.equals("all")) {
+                    sql += " and status =" + fillterByStatus;
                 }
-                if (sort_by != null) {
-                    switch (sort_by) {
-                        case "sort_by_id": {
+                if (sortBy != null) {
+                    switch (sortBy) {
+                        case "sortById": {
                             sql += " order by id asc";
                             break;
                         }
-                        case "sort_by_name": {
+                        case "sortByName": {
                             sql += " order by last_name asc,first_name asc ";
-                            checked = "sort_by_name";
+                            checked = "sortByName";
                             break;
                         }
-                        case "sort_by_gender": {
+                        case "sortByGender": {
                             sql += " order by gender asc ";
-                            checked = "sort_by_gender";
+                            checked = "sortByGender";
                             break;
                         }
-                        case "sort_by_email": {
+                        case "sortByEmail": {
                             sql += " order by email asc ";
-                            checked = "sort_by_email";
+                            checked = "sortByEmail";
                             break;
                         }
-                        case "sort_by_phone": {
+                        case "sortByPhone": {
                             sql += " order by phone asc ";
-                            checked = "sort_by_phone";
+                            checked = "sortByPhone";
                             break;
                         }
-                        case "sort_by_role": {
+                        case "sortByRole": {
                             sql += " order by role_id asc ";
-                            checked = "sort_by_role";
+                            checked = "sortByRole";
                             break;
                         }
                     }
@@ -115,19 +114,19 @@ public class AccountDashboardController extends HttpServlet {
             }
             //paging
             int nrpp=10;
-            accountVector = accountDAO.getAccounts(sql);
-            int totalPage=(accountVector.size()+nrpp-1)/nrpp;
-            String index_raw=request.getParameter("index");
+            userVector = userDAO.getUsers(sql);
+            int totalPage=(userVector.size()+nrpp-1)/nrpp;
+            String indexRaw=request.getParameter("index");
             int index=1;
-            if(index_raw!=null){
-                index=Integer.parseInt(index_raw);
+            if(indexRaw!=null){
+                index=Integer.parseInt(indexRaw);
             }
             sql+=" limit "+(index-1)*nrpp+","+nrpp;
-            accountVector = accountDAO.getAccounts(sql);
-            settingType = settingTypeDAO.getSettingTypeByName("Account Role");
+            userVector = userDAO.getUsers(sql);
+            settingType = settingTypeDAO.getSettingTypeByName("User Role");
             settingVector = settingDAO.getSettings("select * from Setting where setting_type_id=" + settingType.getId());          
             //set data for views
-            request.setAttribute("data", accountVector);
+            request.setAttribute("data", userVector);
             request.setAttribute("setting", settingVector);
             request.setAttribute("checked", checked);
             request.setAttribute("totalPage", totalPage);
@@ -138,14 +137,14 @@ public class AccountDashboardController extends HttpServlet {
 
         }
         if (service.equals("viewUserDetails")) {
-            String id_raw = request.getParameter("id");
-            Account account = accountDAO.getAccountById(Integer.parseInt(id_raw));
+            String idRaw = request.getParameter("id");
+            User user = userDAO.getUserById(Integer.parseInt(idRaw));
             Vector<Setting> settingVector = null;
             SettingType settingType = null;
-            settingType = settingTypeDAO.getSettingTypeByName("Account Role");
+            settingType = settingTypeDAO.getSettingTypeByName("User Role");
             settingVector = settingDAO.getSettings("select * from Setting where setting_type_id=" + settingType.getId());
             //set data for views
-            request.setAttribute("account", account);
+            request.setAttribute("user", user);
             request.setAttribute("setting", settingVector);
             // select view
             RequestDispatcher dispath = request.getRequestDispatcher("jsp/ViewUserDetails.jsp");
@@ -153,59 +152,59 @@ public class AccountDashboardController extends HttpServlet {
             dispath.forward(request, response);
         }
         if (service.equals("addNewUser")) {
-            String first_name = request.getParameter("addNewUserFirstName");
-            String last_name = request.getParameter("addNewUserLastName");
+            String firstName = request.getParameter("addNewUserFirstName");
+            String lastName = request.getParameter("addNewUserLastName");
             Date dob = dataConvert.StringToSqlDate(request.getParameter("addNewUserDob"));
             Boolean gender = Boolean.parseBoolean(request.getParameter("addNewUserGender"));
             String email = request.getParameter("addNewUserEmail");
             String phone = request.getParameter("addNewUserPhone");
             String address = request.getParameter("addNewUserAddress");
-            int role_id = Integer.parseInt(request.getParameter("addNewUserRole"));
-            String password = CreateRandom.generate6_DigitCode();
-            Date created_date = GetTodayDate.getTodayDate();
-            Account account = new Account(0, email, first_name, last_name, PasswordEncryption.EncryptBySHA256(password), dob, role_id, created_date, 2, phone, gender, address, null);
-            accountDAO.insertAccount(account);
-            String subject = "New account successfully created. Please login with your default password";
-            String email_content = "Your default password is " + password;
+            int roleId = Integer.parseInt(request.getParameter("addNewUserRole"));
+            String password = CreateRandom.generate6DigitCode();
+            Date createdDate = GetTodayDate.getTodayDate();
+            User user = new User(0, email, firstName, lastName, PasswordEncryption.EncryptBySHA256(password), dob, roleId, createdDate, 2, phone, gender, address, null);
+            userDAO.insertUser(user);
+            String subject = "New user successfully created. Please login with your default password";
+            String emailContent = "Your default password is " + password;
             IJavaMail emailService = new EmailService();
-            emailService.send(email, subject, email_content);
+            emailService.send(email, subject, emailContent);
             String message = "Add new user successfuly";
             //set data for views
             request.setAttribute("message", message);
             // select view
-            RequestDispatcher dispath = request.getRequestDispatcher("AccountDashboardController?service=viewAllAccount");
+            RequestDispatcher dispath = request.getRequestDispatcher("UserDashboardController?service=viewAllUser");
             //run
             dispath.forward(request, response);
 
         }
-        if (service.equals("updateAccount")) {
-            int account_id = Integer.parseInt(request.getParameter("accountId"));
-            String role_id_raw = request.getParameter("roleId");
-            String status_raw = request.getParameter("status");
-            if (role_id_raw != null) {
-                int role_id = Integer.parseInt(role_id_raw);
-                Account account = accountDAO.getAccountById(account_id);
-                account.setRole_id(role_id);
-                accountDAO.updateAccount(account);
-                String message = "Update account role successfuly";
+        if (service.equals("updateUser")) {
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            String roleIdRaw = request.getParameter("roleId");
+            String statusRaw = request.getParameter("status");
+            if (roleIdRaw != null) {
+                int roleId = Integer.parseInt(roleIdRaw);
+                User user = userDAO.getUserById(userId);
+                user.setRoleId(roleId);
+                userDAO.updateUser(user);
+                String message = "Update user role successfuly";
                 //set data for views
                 request.setAttribute("message", message);
                 // select view
-                RequestDispatcher dispath = request.getRequestDispatcher("AccountDashboardController?service=viewAllAccount");
+                RequestDispatcher dispath = request.getRequestDispatcher("UserDashboardController?service=viewAllUser");
                 //run
                 dispath.forward(request, response);
 
             }
-            if (status_raw != null) {
-                int status = Integer.parseInt(status_raw);
-                Account account = accountDAO.getAccountById(account_id);
-                account.setStatus(status);
-                accountDAO.updateAccount(account);
-                String message = "Update account status successfuly";
+            if (statusRaw != null) {
+                int status = Integer.parseInt(statusRaw);
+                User user = userDAO.getUserById(userId);
+                user.setStatus(status);
+                userDAO.updateUser(user);
+                String message = "Update user status successfuly";
                 //set data for views
                 request.setAttribute("message", message);
                 // select view
-                RequestDispatcher dispath = request.getRequestDispatcher("AccountDashboardController?service=viewAllAccount");
+                RequestDispatcher dispath = request.getRequestDispatcher("UserDashboardController?service=viewAllUser");
                 //run
                 dispath.forward(request, response);
             }

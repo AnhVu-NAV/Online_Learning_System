@@ -31,12 +31,12 @@ public class SettingDAO extends DBContext{
                 + "           (?,?,?,?,?,?)";
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
-            pre.setInt(1, obj.getSetting_type_id());
+            pre.setInt(1, obj.getSettingTypeId());
             pre.setString(2, obj.getValue());
             pre.setInt(3, obj.getStatus());
             pre.setString(4, obj.getDescription());
-            pre.setDate(5, dc.UtilDateToSqlDate(obj.getCreated_date()));
-            pre.setDate(6, dc.UtilDateToSqlDate(obj.getUpdated_date()));
+            pre.setDate(5, dc.UtilDateToSqlDate(obj.getCreatedDate()));
+            pre.setDate(6, dc.UtilDateToSqlDate(obj.getUpdatedDate()));
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -53,13 +53,13 @@ public class SettingDAO extends DBContext{
             ResultSet rs = state.executeQuery(sql);
             while (rs.next()) {
                 int id = rs.getInt(1);
-                int setting_type_id = rs.getInt(2);
+                int settingTypeId = rs.getInt(2);
                 String value = rs.getString(3);
                 int status = rs.getInt(4);
                 String description = rs.getString(5);
-                Date created_date = rs.getDate(6);
-                Date updated_date = rs.getDate(7);
-                Setting obj = new Setting(id, setting_type_id, value, description, status, created_date, updated_date);
+                Date createdDate = rs.getDate(6);
+                Date updatedDate = rs.getDate(7);
+                Setting obj = new Setting(id, settingTypeId, value, description, status, createdDate, updatedDate);
                 vector.add(obj);
 
             }
@@ -84,12 +84,12 @@ public class SettingDAO extends DBContext{
         try {
 
             PreparedStatement pre = connection.prepareStatement(sql);
-            pre.setInt(1, obj.getSetting_type_id());
+            pre.setInt(1, obj.getSettingTypeId());
             pre.setString(2, obj.getValue());
             pre.setInt(3, obj.getStatus());
             pre.setString(4, obj.getDescription());
-            pre.setDate(5, dc.UtilDateToSqlDate(obj.getCreated_date()));
-            pre.setDate(6, dc.UtilDateToSqlDate(obj.getUpdated_date()));
+            pre.setDate(5, dc.UtilDateToSqlDate(obj.getCreatedDate()));
+            pre.setDate(6, dc.UtilDateToSqlDate(obj.getUpdatedDate()));
             pre.setInt(7, obj.getId());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
@@ -97,7 +97,7 @@ public class SettingDAO extends DBContext{
         }
         return n;
     }
-    public Setting getSettingById(int search_id) {
+    public Setting getSettingById(int searchId) {
         Vector<Setting> vector = new Vector<>();
         String sql = "SELECT id"
                 + "      ,setting_type_id"
@@ -107,20 +107,20 @@ public class SettingDAO extends DBContext{
                 + "      ,created_date"
                 + "      ,updated_date"
                 + "  FROM Setting"
-                + "  WHERE Setting.id = " + search_id;
+                + "  WHERE Setting.id = " + searchId;
 
         try {
             Statement state = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = state.executeQuery(sql);
             while (rs.next()) {
                 int id = rs.getInt(1);
-                int setting_type_id = rs.getInt(2);
+                int settingTypeId = rs.getInt(2);
                 String value = rs.getString(3);
                 int status = rs.getInt(4);
                 String description = rs.getString(5);
-                Date created_date = rs.getDate(6);
-                Date updated_date = rs.getDate(7);
-                Setting obj = new Setting(id, setting_type_id, value, description, status, created_date, updated_date);
+                Date createdDate = rs.getDate(6);
+                Date updatedDate = rs.getDate(7);
+                Setting obj = new Setting(id, settingTypeId, value, description, status, createdDate, updatedDate);
                 return obj;
             }
         } catch (SQLException ex) {

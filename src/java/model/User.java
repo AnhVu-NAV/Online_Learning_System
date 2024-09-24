@@ -10,39 +10,39 @@ import java.util.Date;
  *
  * @author 84941
  */
-public class Account {
+public class User {
 
     private int id;
     private String email;
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String password;
     private Date dob;
-    private int role_id;
-    private Date created_date;
+    private int roleId;
+    private Date createdDate;
     private int status;
     private String phone;
     private boolean gender;
     private String address;
-    private String image_url;       
+    private String imageURL;       
 
-    public Account() {
+    public User() {
     }
 
-    public Account(int id, String email, String first_name, String last_name, String password, Date dob, int role_id, Date created_date, int status, String phone, boolean gender, String address, String image_url) {
+    public User(int id, String email, String firstName, String lastName, String password, Date dob, int roleId, Date createdDate, int status, String phone, boolean gender, String address, String imageURL) {
         this.id = id;
         this.email = email;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
         this.dob = dob;
-        this.role_id = role_id;
-        this.created_date = created_date;
+        this.roleId = roleId;
+        this.createdDate = createdDate;
         this.status = status;
         this.phone = phone;
         this.gender = gender;
         this.address = address;
-        this.image_url = image_url;
+        this.imageURL = imageURL;
     }
 
     public int getId() {
@@ -61,20 +61,20 @@ public class Account {
         this.email = email;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -93,20 +93,20 @@ public class Account {
         this.dob = dob;
     }
 
-    public int getRole_id() {
-        return role_id;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
-    public Date getCreated_date() {
-        return created_date;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public int getStatus() {
@@ -141,24 +141,18 @@ public class Account {
         this.address = address;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
-    
-    
 
     
 
     
-
     
-
-    
-
     
 
 }

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
-        <servlet-name>AccountDashboardController</servlet-name>
-        <servlet-class>controller.AccountDashboardController</servlet-class>
+        <servlet-name>UserDashboardController</servlet-name>
+        <servlet-class>controller.UserDashboardController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SettingDashboardController</servlet-name>
         <servlet-class>controller.SettingDashboardController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AccountDashboardController</servlet-name>
-        <url-pattern>/AccountDashboardController</url-pattern>
+        <servlet-name>UserDashboardController</servlet-name>
+        <url-pattern>/UserDashboardController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SettingDashboardController</servlet-name>

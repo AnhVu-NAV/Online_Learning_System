@@ -46,48 +46,48 @@ public class SettingDashboardController extends HttpServlet {
             Vector<Setting> settingVector = null;
             Vector<SettingType> settingTypeVector = null;
             String sql = "select * from setting ";
-            String checked = "sort_by_id";
+            String checked = "sortById";
             if(fillterSubmit!=null){
-                String search_by_value = request.getParameter("search_by_value");
-                String fillter_by_type = request.getParameter("fillter_by_type");
-                String fillter_by_status = request.getParameter("fillter_by_status");
-                String sort_by = request.getParameter("sort_by");
-                sql += " where value like '%" + search_by_value.toLowerCase() + "%' ";
-                if (!fillter_by_type.equals("all")) {
-                    sql += " and setting_type_id= " + fillter_by_type;
+                String searchByValue = request.getParameter("searchByValue");
+                String fillterByType = request.getParameter("fillterByType");
+                String fillterByStatus = request.getParameter("fillterByStatus");
+                String sortBy = request.getParameter("sortBy");
+                sql += " where value like '%" + searchByValue.toLowerCase() + "%' ";
+                if (!fillterByType.equals("all")) {
+                    sql += " and setting_type_id= " + fillterByType;
                 }
-                if (!fillter_by_status.equals("all")) {
-                    sql += " and status =" + fillter_by_status;
+                if (!fillterByStatus.equals("all")) {
+                    sql += " and status =" + fillterByStatus;
                 }
-                if (sort_by != null) {
-                    switch (sort_by) {
-                        case "sort_by_id": {
+                if (sortBy != null) {
+                    switch (sortBy) {
+                        case "sortById": {
                             sql += " order by id asc";
                             break;
                         }
-                        case "sort_by_setting_type": {
+                        case "sortBySettingType": {
                             sql += " order by setting_type_id asc";
-                            checked = "sort_by_setting_type";
+                            checked = "sortBySettingType";
                             break;
                         }
-                        case "sort_by_value": {
+                        case "sortByValue": {
                             sql += " order by value asc ";
-                            checked = "sort_by_value";
+                            checked = "sortByValue";
                             break;
                         }
-                        case "sort_by_created_date": {
+                        case "sortByCreatedDate": {
                             sql += " order by created_date desc";
-                            checked = "sort_by_created_date";
+                            checked = "sortByCreatedDate";
                             break;
                         }
-                        case "sort_by_updated_date": {
+                        case "sortByUpdatedDate": {
                             sql += " order by updated_date desc ";
-                            checked = "sort_by_updated_date";
+                            checked = "sortByUpdatedDate";
                             break;
                         }
-                        case "sort_by_status": {
+                        case "sortByStatus": {
                             sql += " order by status asc ";
-                            checked = "sort_by_status";
+                            checked = "sortByStatus";
                             break;
                         }
                     }
@@ -97,17 +97,17 @@ public class SettingDashboardController extends HttpServlet {
             int nrpp=10;
             settingVector = settingDAO.getSettings(sql);
             int totalPage=(settingVector.size()+nrpp-1)/nrpp;
-            String index_raw=request.getParameter("index");
+            String indexRaw=request.getParameter("index");
             int index=1;
-            if(index_raw!=null){
-                index=Integer.parseInt(index_raw);
+            if(indexRaw!=null){
+                index=Integer.parseInt(indexRaw);
             }
             sql+=" limit "+(index-1)*nrpp+","+nrpp;
             settingVector = settingDAO.getSettings(sql);
             settingTypeVector = settingTypeDAO.getSettingTypes("select*from settingtype");
             //set data for views
             request.setAttribute("data", settingVector);
-            request.setAttribute("setting_type", settingTypeVector);
+            request.setAttribute("settingType", settingTypeVector);
             request.setAttribute("checked", checked);
             request.setAttribute("totalPage", totalPage);
             // select view
@@ -119,8 +119,8 @@ public class SettingDashboardController extends HttpServlet {
         if (service.equals("addNewSetting")) {
             String value = request.getParameter("addNewSettingValue");
             String description = request.getParameter("addNewSettingDescription");
-            int setting_type_id = Integer.parseInt(request.getParameter("addNewSettingSettingType"));
-            Setting setting = new Setting(0, setting_type_id, value, description, 1, GetTodayDate.getTodayDate(), GetTodayDate.getTodayDate());
+            int settingTypeId = Integer.parseInt(request.getParameter("addNewSettingSettingType"));
+            Setting setting = new Setting(0, settingTypeId, value, description, 1, GetTodayDate.getTodayDate(), GetTodayDate.getTodayDate());
             settingDAO.insertSetting(setting);             
             String message = "Add new setting successfuly";
             //set data for views

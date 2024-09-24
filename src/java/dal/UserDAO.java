@@ -4,7 +4,7 @@
  */
 package dal;
 
-import model.Account;
+import model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,14 +17,14 @@ import util.DataConvert;
  *
  * @author 84941
  */
-public class AccountDAO extends DBContext {
+public class UserDAO extends DBContext {
 
     DataConvert dc = new DataConvert();
 
-    //insert new account into database. Attribute id is AUTO_INCREMENT 
-    public int insertAccount(Account obj) {
+    //insert new user into database. Attribute id is AUTO_INCREMENT 
+    public int insertUser(User obj) {
         int n = 0;
-        String sql = "INSERT INTO Account\n"
+        String sql = "INSERT INTO User\n"
                 + "           (email\n"
                 + "           ,first_name\n"
                 + "           ,last_name\n"
@@ -42,17 +42,17 @@ public class AccountDAO extends DBContext {
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setString(1, obj.getEmail());
-            pre.setString(2, obj.getFirst_name());
-            pre.setString(3, obj.getLast_name());
+            pre.setString(2, obj.getFirstName());
+            pre.setString(3, obj.getLastName());
             pre.setString(4, obj.getPassword());
             pre.setDate(5, dc.UtilDateToSqlDate(obj.getDob()));
-            pre.setInt(6, obj.getRole_id());
-            pre.setDate(7, dc.UtilDateToSqlDate(obj.getCreated_date()));
+            pre.setInt(6, obj.getRoleId());
+            pre.setDate(7, dc.UtilDateToSqlDate(obj.getCreatedDate()));
             pre.setInt(8, obj.getStatus());
             pre.setString(9, obj.getPhone());
             pre.setBoolean(10, obj.isGender());
             pre.setString(11, obj.getAddress());
-            pre.setString(12, obj.getImage_url());
+            pre.setString(12, obj.getImageURL());
 
             n = pre.executeUpdate();
         } catch (SQLException ex) {
@@ -62,9 +62,9 @@ public class AccountDAO extends DBContext {
 
     }
 
-    // get an account list based on specific conditions
-    public Vector<Account> getAccounts(String sql) {
-        Vector<Account> vector = new Vector<Account>();
+    // get an user list based on specific conditions
+    public Vector<User> getUsers(String sql) {
+        Vector<User> vector = new Vector<User>();
         try {
             Statement state = connection.createStatement(
                     ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -72,18 +72,18 @@ public class AccountDAO extends DBContext {
             while (rs.next()) {
                 int id = rs.getInt(1);
                 String email = rs.getString(2);
-                String first_name = rs.getString(3);
-                String last_name = rs.getString(4);
+                String firstName = rs.getString(3);
+                String lastName = rs.getString(4);
                 String password = rs.getString(5);
                 Date dob = rs.getDate(6);
-                int role_id = rs.getInt(7);
-                Date created_date = rs.getDate(8);
+                int roleId = rs.getInt(7);
+                Date createdDate = rs.getDate(8);
                 int status = rs.getInt(9);
                 String phone = rs.getString(10);
                 Boolean gender = rs.getBoolean(11);
                 String address = rs.getString(12);
-                String image_url = rs.getString(13);
-                Account obj = new Account(id, email, first_name, last_name, password, dob, role_id, created_date, status, phone, gender, address, image_url);
+                String imageURL = rs.getString(13);
+                User obj = new User(id, email, firstName, lastName, password, dob, roleId, createdDate, status, phone, gender, address, imageURL);
                 vector.add(obj);
 
             }
@@ -95,9 +95,9 @@ public class AccountDAO extends DBContext {
 
     }
 
-    // get all the accounts in the database 
-    public Vector<Account> getAll() {
-        Vector<Account> vector = new Vector<>();
+    // get all the user in the database 
+    public Vector<User> getAll() {
+        Vector<User> vector = new Vector<>();
         String sql = "SELECT id\n"
                 + "      ,email\n"
                 + "      ,first_name\n"
@@ -111,25 +111,25 @@ public class AccountDAO extends DBContext {
                 + "      ,gender\n"
                 + "      ,address\n"
                 + "      ,image_url\n"
-                + "  FROM Account";
+                + "  FROM User";
         try {
             Statement state = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = state.executeQuery(sql);
             while (rs.next()) {
                 int id = rs.getInt(1);
                 String email = rs.getString(2);
-                String first_name = rs.getString(3);
-                String last_name = rs.getString(4);
+                String firstName = rs.getString(3);
+                String lastName = rs.getString(4);
                 String password = rs.getString(5);
                 Date dob = rs.getDate(6);
-                int role_id = rs.getInt(7);
-                Date created_date = rs.getDate(8);
+                int roleId = rs.getInt(7);
+                Date createdDate = rs.getDate(8);
                 int status = rs.getInt(9);
                 String phone = rs.getString(10);
                 Boolean gender = rs.getBoolean(11);
                 String address = rs.getString(12);
-                String image_url = rs.getString(13);
-                Account obj = new Account(id, email, first_name, last_name, password, dob, role_id, created_date, status, phone, gender, address, image_url);
+                String imageURL = rs.getString(13);
+                User obj = new User(id, email, firstName, lastName, password, dob, roleId, createdDate, status, phone, gender, address, imageURL);
                 vector.add(obj);
             }
         } catch (SQLException ex) {
@@ -138,10 +138,10 @@ public class AccountDAO extends DBContext {
         return vector;
     }
 
-    // update Account information based on id
-    public int updateAccount(Account obj) {
+    // update user information based on id
+    public int updateUser(User obj) {
         int n = 0;
-        String sql = "UPDATE Account\n"
+        String sql = "UPDATE User\n"
                 + "   SET email = ?\n"
                 + "      ,first_name = ?\n"
                 + "      ,last_name = ?\n"
@@ -159,17 +159,17 @@ public class AccountDAO extends DBContext {
 
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setString(1, obj.getEmail());
-            pre.setString(2, obj.getFirst_name());
-            pre.setString(3, obj.getLast_name());
+            pre.setString(2, obj.getFirstName());
+            pre.setString(3, obj.getLastName());
             pre.setString(4, obj.getPassword());
             pre.setDate(5, dc.UtilDateToSqlDate(obj.getDob()));
-            pre.setInt(6, obj.getRole_id());
-            pre.setDate(7, dc.UtilDateToSqlDate(obj.getCreated_date()));
+            pre.setInt(6, obj.getRoleId());
+            pre.setDate(7, dc.UtilDateToSqlDate(obj.getCreatedDate()));
             pre.setInt(8, obj.getStatus());
             pre.setString(9, obj.getPhone());
             pre.setBoolean(10, obj.isGender());
             pre.setString(11, obj.getAddress());
-            pre.setString(12, obj.getImage_url());
+            pre.setString(12, obj.getImageURL());
             pre.setInt(13, obj.getId());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
@@ -178,8 +178,8 @@ public class AccountDAO extends DBContext {
         return n;
     }
 
-    public Account getAccountById(int search_id) {
-        Vector<Account> vector = new Vector<>();
+    public User getUserById(int search_id) {
+        Vector<User> vector = new Vector<>();
         String sql = "SELECT id"
                 + "      ,email"
                 + "      ,first_name"
@@ -193,8 +193,8 @@ public class AccountDAO extends DBContext {
                 + "      ,gender"
                 + "      ,address"
                 + "      ,image_url"
-                + "  FROM Account"
-                + "  WHERE Account.id = " + search_id;
+                + "  FROM User"
+                + "  WHERE User.id = " + search_id;
 
         try {
             Statement state = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -202,18 +202,18 @@ public class AccountDAO extends DBContext {
             while (rs.next()) {
                 int id = rs.getInt(1);
                 String email = rs.getString(2);
-                String first_name = rs.getString(3);
-                String last_name = rs.getString(4);
+                String firstName = rs.getString(3);
+                String lastName = rs.getString(4);
                 String password = rs.getString(5);
                 Date dob = rs.getDate(6);
-                int role_id = rs.getInt(7);
-                Date created_date = rs.getDate(8);
+                int roleId = rs.getInt(7);
+                Date createdDate = rs.getDate(8);
                 int status = rs.getInt(9);
                 String phone = rs.getString(10);
                 Boolean gender = rs.getBoolean(11);
                 String address = rs.getString(12);
-                String image_url = rs.getString(13);
-                Account obj = new Account(id, email, first_name, last_name, password, dob, role_id, created_date, status, phone, gender, address, image_url);
+                String imageURL = rs.getString(13);
+                User obj = new User(id, email, firstName, lastName, password, dob, roleId, createdDate, status, phone, gender, address, imageURL);
                 return obj;
             }
         } catch (SQLException ex) {
