@@ -36,12 +36,12 @@ public class SettingTypeDAO extends DBContext{
         return vector;
 
     }
-    public SettingType getSettingTypeByName(String search_name) {
+    public SettingType getSettingTypeByName(String searchName) {
         Vector<SettingType> vector = new Vector<>();
         String sql = "SELECT id"
                 + "      ,name"
                 + "  FROM SettingType"
-                + "  WHERE SettingType.name like '" + search_name+"'";
+                + "  WHERE SettingType.name like '" + searchName+"'";
 
         try {
             Statement state = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);

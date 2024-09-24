@@ -28,19 +28,13 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="AccountDashboardController?service=viewAllAccount" class="sidebar-link">
+                    <a href="${pageContext.request.contextPath}/UserDashboardController?service=viewAllUser" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>Users List</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-list"></i>
-                        <span>Accounts Log</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="SettingDashboardController?service=viewAllSetting" class="sidebar-link">
+                    <a href="${pageContext.request.contextPath}/SettingDashboardController?service=viewAllSetting" class="sidebar-link">
                         <i class="lni lni-cog"></i>
                         <span>Setting List</span>
                     </a>
