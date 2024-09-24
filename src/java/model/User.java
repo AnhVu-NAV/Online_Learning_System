@@ -8,22 +8,26 @@ import java.util.Date;
 
 /**
  *
- * @author AnhVuNAV
+ * @author 84941
  */
 public class User {
+
     private int id;
     private String email;
-    private String firstName; // first_name
-    private String lastName; // last_name
+    private String firstName;
+    private String lastName;
     private String password;
-    private Date dob; // Ngày sinh
-    private int roleId; // ID vai trò (Foreign key từ Setting)
-    private Date createdDate; // Ngày tạo tài khoản
-    private int status; // Trạng thái tài khoản (Active, Inactive, etc.)
-    private String phone; // Số điện thoại
-    private boolean gender; // Giới tính (true: Nam, false: Nữ)
-    private String address; // Địa chỉ
-    private String imageURL; // URL ảnh đại diện
+    private Date dob;
+    private int roleId;
+    private Date createdDate;
+    private int status;
+    private String phone;
+    private boolean gender;
+    private String address;
+    private String imageURL;       
+
+    public User() {
+    }
 
     public User(int id, String email, String firstName, String lastName, String password, Date dob, int roleId, Date createdDate, int status, String phone, boolean gender, String address, String imageURL) {
         this.id = id;
@@ -41,22 +45,6 @@ public class User {
         this.imageURL = imageURL;
     }
 
-    public User() {
-    }
-    
-    
-
-    
-    public User(int id, String firstName, String lastName, String string1, String string2) {
-        this.id = id;
-        this.email = string1;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.imageURL = string2;
-    }
-
-    // Getters và Setters cho tất cả các thuộc tính
-
     public int getId() {
         return id;
     }
@@ -73,6 +61,22 @@ public class User {
         this.email = email;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -87,6 +91,22 @@ public class User {
 
     public void setDob(Date dob) {
         this.dob = dob;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public int getStatus() {
@@ -129,37 +149,10 @@ public class User {
         this.imageURL = imageURL;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
     
     
+    
+
 }

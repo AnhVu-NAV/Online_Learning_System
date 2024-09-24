@@ -124,8 +124,8 @@
 
     <!-- Declare Controller Servlet -->
     <servlet>
-        <servlet-name>AccountDashboardController</servlet-name>
-        <servlet-class>controller.AccountDashboardController</servlet-class>
+        <servlet-name>UserDashboardController</servlet-name>
+        <servlet-class>controller.UserDashboardController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SettingDashboardController</servlet-name>
@@ -172,8 +172,8 @@
         <servlet-class>controller.RegisterCourseController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AccountDashboardController</servlet-name>
-        <url-pattern>/AccountDashboardController</url-pattern>
+        <servlet-name>UserDashboardController</servlet-name>
+        <url-pattern>/UserDashboardController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SettingDashboardController</servlet-name>

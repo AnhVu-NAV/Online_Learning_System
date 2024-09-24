@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.Vector,model.Account" %>
+<%@page import="java.util.Vector,model.User" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -32,14 +32,14 @@
     <body>
         <div class="wrapper">
             <jsp:include page="/component/DashboardSidebar.jsp"></jsp:include>
-            <c:set var="account" value="${requestScope.account}"></c:set>
+            <c:set var="user" value="${requestScope.user}"></c:set>
                 <section style="background-color: #eee;" id="ViewUserDetail" >
                     <div class="container py-5">
                         <div class="row">
                             <div class="col">
                                 <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4">
                                     <ol class="breadcrumb mb-0">
-                                        <li class="breadcrumb-item"><a href="AccountDashboardController?service=viewAllAccount">User List</a></li>
+                                        <li class="breadcrumb-item"><a href="UserDashboardController?service=viewAllUser">User List</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">User Details</li>
                                     </ol>
                                 </nav>
@@ -50,22 +50,22 @@
                             <div class="col-lg-4">
                                 <div class="card mb-4">
                                     <div class="card-body text-center">
-                                        <img src="${account.getImage_url()}" alt="avatar"
+                                        <img src="${user.getImageURL()}" alt="avatar"
                                          class="rounded-circle img-fluid" style="width: 150px;">
-                                    <h5 class="my-3">${account.getFirst_name()} ${account.getLast_name()}</h5>
-                                    <!-- Update account start -->                                                                                                                        
+                                    <h5 class="my-3">${user.getFirstName()} ${user.getLastName()}</h5>
+                                    <!-- Update user start -->                                                                                                                        
                                     <select class="form-select w-100" onchange="window.location.href=this.value">  
                                             <c:forEach items="${requestScope.setting}" var="setting">
-                                                <option value="${pageContext.request.contextPath}/AccountDashboardController?service=updateAccount&accountId=${account.getId()}&roleId=${setting.getId()}" ${account.getRole_id()==setting.getId()?"selected":""} >${setting.getValue()}</option>
+                                                <option value="${pageContext.request.contextPath}/UserDashboardController?service=updateUser&userId=${user.getId()}&roleId=${setting.getId()}" ${user.getRoleId()==setting.getId()?"selected":""} >${setting.getValue()}</option>
                                             </c:forEach>
                                         </select>
                                         <br/>
                                         <div class="d-flex justify-content-center mb-2">
-                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${account.getStatus() == 1 ? 'btn-success' : 'btn-outline-success'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/AccountDashboardController?service=updateAccount&accountId=${account.getId()}&status=1';">Activated</button>
-                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${account.getStatus() == 0 ? 'btn-danger' : 'btn-outline-danger'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/AccountDashboardController?service=updateAccount&accountId=${account.getId()}&status=0';">Deactivated</button>
-                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${account.getStatus() == 2 ? 'btn-warning' : 'btn-outline-warning'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/AccountDashboardController?service=updateAccount&accountId=${account.getId()}&status=2';">Default</button>
+                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${user.getStatus() == 1 ? 'btn-success' : 'btn-outline-success'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/UserDashboardController?service=updateUser&userId=${user.getId()}&status=1';">Activated</button>
+                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${user.getStatus() == 0 ? 'btn-danger' : 'btn-outline-danger'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/UserDashboardController?service=updateUser&userId=${user.getId()}&status=0';">Deactivated</button>
+                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${user.getStatus() == 2 ? 'btn-warning' : 'btn-outline-warning'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/UserDashboardController?service=updateUser&userId=${user.getId()}&status=2';">Default</button>
                                         </div>                                                                           
-                                    <!-- Update account end -->
+                                    <!-- Update user end -->
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                             <p class="mb-0">Full Name</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">${account.getFirst_name()} ${account.getLast_name()}</p>
+                                            <p class="text-muted mb-0">${user.getFirstName()} ${user.getLastName()}</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -88,10 +88,10 @@
                                         <div class="col-sm-9">
                                             <p class="text-muted mb-0">
                                                 <c:choose>
-                                                    <c:when test="${account.isGender() == false}">
+                                                    <c:when test="${user.isGender() == false}">
                                                         Male
                                                     </c:when>
-                                                    <c:when test="${account.isGender() == true}">
+                                                    <c:when test="${user.isGender() == true}">
                                                         Female
                                                     </c:when>                                                       
                                                 </c:choose>
@@ -104,7 +104,7 @@
                                             <p class="mb-0">Email</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">${account.getEmail()}</p>
+                                            <p class="text-muted mb-0">${user.getEmail()}</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -113,7 +113,7 @@
                                             <p class="mb-0">Phone</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">${account.getPhone()}</p>
+                                            <p class="text-muted mb-0">${user.getPhone()}</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -122,7 +122,7 @@
                                             <p class="mb-0">Date of birth</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">${account.getDob()}</p>
+                                            <p class="text-muted mb-0">${user.getDob()}</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -131,7 +131,7 @@
                                             <p class="mb-0">Address</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">${account.getAddress()}</p>
+                                            <p class="text-muted mb-0">${user.getAddress()}</p>
                                         </div>
                                     </div>
                                 </div>
