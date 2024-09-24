@@ -11,25 +11,26 @@ import java.util.Date;
  * @author 84941
  */
 public class Setting {
+
     private int id;
-    private int setting_type_id;
+    private int settingTypeId;
     private String value;
     private String description;
     private int status;
-    private Date created_date;
-    private Date updated_date;
+    private Date createdDate;
+    private Date updatedDate;
 
     public Setting() {
     }
 
-    public Setting(int id, int setting_type_id, String value, String description, int status, Date created_date, Date updated_date) {
+    public Setting(int id, int settingTypeId, String value, String description, int status, Date createdDate, Date updatedDate) {
         this.id = id;
-        this.setting_type_id = setting_type_id;
+        this.settingTypeId = settingTypeId;
         this.value = value;
         this.description = description;
         this.status = status;
-        this.created_date = created_date;
-        this.updated_date = updated_date;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
     }
 
     public int getId() {
@@ -40,12 +41,12 @@ public class Setting {
         this.id = id;
     }
 
-    public int getSetting_type_id() {
-        return setting_type_id;
+    public int getSettingTypeId() {
+        return settingTypeId;
     }
 
-    public void setSetting_type_id(int setting_type_id) {
-        this.setting_type_id = setting_type_id;
+    public void setSettingTypeId(int settingTypeId) {
+        this.settingTypeId = settingTypeId;
     }
 
     public String getValue() {
@@ -72,31 +73,20 @@ public class Setting {
         this.status = status;
     }
 
-    public Date getCreated_date() {
-        return created_date;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public Date getUpdated_date() {
-        return updated_date;
+    public Date getUpdatedDate() {
+        return updatedDate;
     }
 
-    public void setUpdated_date(Date updated_date) {
-        this.updated_date = updated_date;
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
-    
-   
 
-   
-
-    
-    
-    
-    
-    
-    
-    
 }
