@@ -53,7 +53,6 @@
                     <c:choose>
                         <c:when test="${not empty sessionScope.user}">
                             <li class="nav-item active">
-                                <a class="text-wrapper-6 nav-link">Hello, ${sessionScope.fullname}</a>
                             </li>
                             <li class="nav-item active">
                                 <a class="text-wrapper-7 nav-link" href='<c:url value="/home?action=logout"/>'>LOG OUT</a>
