@@ -36,28 +36,8 @@
 
 
             <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/dal/UserDAO.java</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/controller/ForgotPasswordController.java</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/controller/ChangePasswordController.java</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/ForgotPassword.jsp</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/css/style.css</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/css/globals.css</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/component/Header.jsp</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/bloglist.jsp</file>
+            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/dal/DBContext.java</file>
             <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/WEB-INF/web.xml</file>
-            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/controller/BlogListServlet.java</file>
-            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/model/Blogs.java</file>
-            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/blogList.jsp</file>
-            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/dal/BlogDAO.java</file>
-            <file>file:/D:/Học/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/model/Blog.java</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/controller/LoginController.java</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/filter/AuthorizationFilter.java</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/home.jsp</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/login.jsp</file>            
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/controller/HomeController.java</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/controller/DashboardServlet.java</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/admin/dashboard.jsp</file>
-
-
         </group>
     </open-files>
 </project-private>
