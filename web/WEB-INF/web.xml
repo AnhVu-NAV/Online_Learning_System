@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
-    <!-- Khai báo servlet Controller -->
-    <servlet>
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
 
+    <!-- Declare ChangePasswordController Servlet -->
+    <servlet>
         <servlet-name>changePassword</servlet-name>
         <servlet-class>controller.ChangePasswordController</servlet-class>
     </servlet>
+
+    <!-- Declare ForgotPasswordController Servlet -->
     <servlet>
         <servlet-name>ForgotPasswordController</servlet-name>
         <servlet-class>controller.ForgotPasswordController</servlet-class>
@@ -118,24 +122,40 @@
         <servlet-name>ForgotPasswordController</servlet-name>
         <url-pattern>/ForgotPasswordController</url-pattern>
 
+    <!-- Declare Controller Servlet -->
+    <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>controller.Controller</servlet-class>
     </servlet>
-    <!-- Khai báo servlet BlogListServlet -->
+
+    <!-- Declare BlogListServlet -->
     <servlet>
         <servlet-name>BlogListServlet</servlet-name>
         <servlet-class>controller.BlogListServlet</servlet-class>
     </servlet>
-    <!-- Mapping servlet Controller -->
+
+    <!-- Map ChangePasswordController Servlet -->
+    <servlet-mapping>
+        <servlet-name>changePassword</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
+    </servlet-mapping>
+
+    <!-- Map ForgotPasswordController Servlet -->
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <url-pattern>/ForgotPasswordController</url-pattern>
+    </servlet-mapping>
+
+    <!-- Map Controller Servlet -->
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
-    <!-- Mapping servlet BlogListServlet -->
+
+    <!-- Map BlogListServlet -->
     <servlet-mapping>
         <servlet-name>BlogListServlet</servlet-name>
         <url-pattern>/blogList</url-pattern>
-
     </servlet-mapping>
 
     <!-- Declare Controller Servlet -->
@@ -265,4 +285,5 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+
 </web-app>
