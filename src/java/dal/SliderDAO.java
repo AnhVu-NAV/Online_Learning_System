@@ -30,9 +30,9 @@ public class SliderDAO extends DBContext {
                 while (rs.next()) {
                     Slider slider = new Slider();
                     slider.setId(rs.getInt("id"));
-                    slider.setImage_url(rs.getString("image_url"));
+                    slider.setImageURL(rs.getString("image_url"));
                     slider.setAuthorId(rs.getInt("author_id"));
-                    slider.setBacklink_url(rs.getString("backlink_url"));
+                    slider.setBacklinkURL(rs.getString("backlink_url"));
                     slider.setStatus(rs.getInt("status"));
                     list.add(slider);
                 }
@@ -55,9 +55,9 @@ public class SliderDAO extends DBContext {
             try (ResultSet rs = pre.executeQuery()) {
                 if (rs.next()) {
                     slider.setId(rs.getInt("id"));
-                    slider.setImage_url(rs.getString("image_url"));
+                    slider.setImageURL(rs.getString("image_url"));
                     slider.setAuthorId(rs.getInt("author_id"));
-                    slider.setBacklink_url(rs.getString("backlink_url"));
+                    slider.setBacklinkURL(rs.getString("backlink_url"));
                     slider.setStatus(rs.getInt("status"));
                 }
             }
@@ -97,9 +97,9 @@ public class SliderDAO extends DBContext {
                      where id = ?
                      """;
         try (PreparedStatement pre = connection.prepareStatement(sql)) {
-            pre.setString(1, slider.getImage_url());
+            pre.setString(1, slider.getImageURL());
             pre.setInt(2, slider.getAuthorId());
-            pre.setString(3, slider.getBacklink_url());
+            pre.setString(3, slider.getBacklinkURL());
             pre.setInt(4, slider.getStatus());
             pre.setInt(5, id);
             pre.executeUpdate();
@@ -125,9 +125,9 @@ public class SliderDAO extends DBContext {
                       VALUES (? ,? ,? ,?)
                      """;
         try (PreparedStatement pre = connection.prepareStatement(sql)) {
-            pre.setString(1, slider.getImage_url());
+            pre.setString(1, slider.getImageURL());
             pre.setInt(2, slider.getAuthorId());
-            pre.setString(3, slider.getBacklink_url());
+            pre.setString(3, slider.getBacklinkURL());
             pre.setInt(4, slider.getStatus());
             pre.executeUpdate();
         } catch (Exception e) {

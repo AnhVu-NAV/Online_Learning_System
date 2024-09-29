@@ -294,7 +294,7 @@
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Question List
+                        Slider List
                         <!--<small>according to subject topic, course,...</small>-->
                     </h1>
                     <ol class="breadcrumb">
@@ -333,8 +333,8 @@
                                                     <tr>
                                                         <td>${number}</td> 
                                                         <td>${s.getId()}</td> 
-                                                        <td>${s.getImage_url()}</td>
-                                                        <td>${s.getBacklink_url()}</td>
+                                                        <td>${s.getImageURL()}</td>
+                                                        <td>${s.getBacklinkURL()}</td>
                                                         <td>${s.getStatus()}</td>
                                                         <td>Name of author</td>
                                                         <td> 
