@@ -4,13 +4,9 @@
  */
 package dal;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Slider;
+import java.sql.*;
 
 /**
  *
@@ -21,50 +17,74 @@ public class SliderDAO extends DBContext {
     // <editor-fold defaultstate="collapsed" desc="Get Methods">
     public Vector<Slider> getAllSlider() {
         Vector<Slider> list = new Vector();
-        String sql = """
-                     SELECT id ,image_url ,author_id ,backlink_url ,status
-                      FROM Slider
-                     """;
+        String sql = "SELECT id ,image_url ,author_id ,backlink_url ,status\n"
+                + "FROM Slider";
         try (PreparedStatement pre = connection.prepareStatement(sql)) {
             try (ResultSet rs = pre.executeQuery()) {
                 while (rs.next()) {
                     Slider slider = new Slider();
                     slider.setId(rs.getInt("id"));
-                    slider.setImage_url(rs.getString("image_url"));
+                    slider.setImageURL(rs.getString("image_url"));
                     slider.setAuthorId(rs.getInt("author_id"));
-                    slider.setBacklink_url(rs.getString("backlink_url"));
+                    slider.setBacklinkURL(rs.getString("backlink_url"));
                     slider.setStatus(rs.getInt("status"));
                     list.add(slider);
                 }
             }
         } catch (Exception e) {
-            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println(e.getMessage());
         }
         return list;
     }
 
     public Slider getSliderById(int id) {
         Slider slider = new Slider();
-        String sql = """
-                     SELECT id ,image_url ,author_id ,backlink_url ,status
-                      FROM Slider
-                      WHERE id = ?
-                     """;
+        String sql = "SELECT id ,image_url ,author_id ,backlink_url ,status\n"
+                + "FROM Slider\n"
+                + "WHERE id = ?";
         try (PreparedStatement pre = connection.prepareStatement(sql)) {
             pre.setInt(1, id);
             try (ResultSet rs = pre.executeQuery()) {
                 if (rs.next()) {
                     slider.setId(rs.getInt("id"));
-                    slider.setImage_url(rs.getString("image_url"));
+                    slider.setImageURL(rs.getString("image_url"));
                     slider.setAuthorId(rs.getInt("author_id"));
-                    slider.setBacklink_url(rs.getString("backlink_url"));
+                    slider.setBacklinkURL(rs.getString("backlink_url"));
                     slider.setStatus(rs.getInt("status"));
                 }
             }
         } catch (Exception e) {
-            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println(e.getMessage());
         }
         return slider;
+    }
+
+    public Vector<Slider> getSliderBySearching(String request) {
+        Vector<Slider> list = new Vector();
+        String sql = "select * from Slider\n"
+                + "where id = ? or image_url like ? or author_id like ? or backlink_url like ? or status like ?; ";
+        try (PreparedStatement pre = connection.prepareStatement(sql)) {
+            String string = "%" + request + "%";
+            pre.setString(1, request);
+            pre.setString(2, string);
+            pre.setString(3, request);
+            pre.setString(4, string);
+            pre.setString(5, request);
+            try (ResultSet rs = pre.executeQuery()) {
+                while (rs.next()) {
+                    Slider slider = new Slider();
+                    slider.setId(rs.getInt("id"));
+                    slider.setAuthorId(rs.getInt("author_id"));
+                    slider.setImageURL(rs.getString("image_url"));
+                    slider.setBacklinkURL(rs.getString("backlink_url"));
+                    slider.setStatus(rs.getInt("status"));
+                    list.add(slider);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return list;
     }
 
     public Vector<Slider> getSliderByOrder(String query) {
@@ -84,27 +104,25 @@ public class SliderDAO extends DBContext {
                 }
             }
         } catch (Exception e) {
-            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println(e.getMessage());
         }
         return vector;
     }
     // </editor-fold>
 
     public void updateSliderById(int id, Slider slider) {
-        String sql = """
-                     UPDATE Slider
-                      SET image_url = ?, author_id = ?, backlink_url = ?, status = ?
-                     where id = ?
-                     """;
+        String sql = "UPDATE Slider\n"
+                + "SET image_url = ?, author_id = ?, backlink_url = ?, status = ?\n"
+                + "where id = ?";
         try (PreparedStatement pre = connection.prepareStatement(sql)) {
-            pre.setString(1, slider.getImage_url());
+            pre.setString(1, slider.getImageURL());
             pre.setInt(2, slider.getAuthorId());
-            pre.setString(3, slider.getBacklink_url());
+            pre.setString(3, slider.getBacklinkURL());
             pre.setInt(4, slider.getStatus());
             pre.setInt(5, id);
             pre.executeUpdate();
         } catch (Exception e) {
-            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println(e.getMessage());
         }
     }
 
@@ -114,24 +132,25 @@ public class SliderDAO extends DBContext {
             pre.setInt(1, id);
             pre.executeUpdate();
         } catch (Exception e) {
-            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println(e.getMessage());
         }
     }
 
     public void insertSlider(Slider slider) {
-        String sql = """
-                     INSERT INTO Slider
-                      (image_url ,author_id ,backlink_url ,status)
-                      VALUES (? ,? ,? ,?)
-                     """;
+        String sql = "INSERT INTO Slider\n"
+                + "(image_url\n"
+                + ",author_id\n"
+                + ",backlink_url\n"
+                + ",status)\n"
+                + "VALUES (? ,? ,? ,?)";
         try (PreparedStatement pre = connection.prepareStatement(sql)) {
-            pre.setString(1, slider.getImage_url());
+            pre.setString(1, slider.getImageURL());
             pre.setInt(2, slider.getAuthorId());
-            pre.setString(3, slider.getBacklink_url());
+            pre.setString(3, slider.getBacklinkURL());
             pre.setInt(4, slider.getStatus());
             pre.executeUpdate();
         } catch (Exception e) {
-            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println(e.getMessage());
         }
     }
 }
