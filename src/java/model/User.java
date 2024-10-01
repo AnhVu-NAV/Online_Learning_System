@@ -16,54 +16,28 @@ import util.PasswordEncoding;
 public class User {
 
     private int id;
-    private String email;
-    private Date dob;
-    private String firstName;
-    private String lastName;
-    private String phone;
+    private String primaryEmail;
     private String password;
-    private int roleId;
-    private boolean gender;
-    private Date createdDate;
     private int status;
-    private String imageURL;
-    private String address;
+    private Date createdDate;
+    private Date updatedDate;
 
     public User() {
     }
 
-    public User(String email, Date dob, String firstName, String lastName, String phoneNumber, String password, int role_id, boolean gender, int status, String image_url) {
-        this.email = email;
-        this.dob = dob;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phoneNumber;
+    public User(int id, String primaryEmail, String password, int status) {
+        this.id = id;
+        this.primaryEmail = primaryEmail;
         this.password = getEncodingPassword(password);
-        this.roleId = role_id;
-        this.gender = gender;
-        setCreatedDate();
         this.status = status;
-        this.imageURL = image_url;
     }
 
-    public User(int id, String email, String phoneNumber, String password, int role_id) {
-        this.email = email;
-        this.phone = phoneNumber;
+    //use for create account
+    public User(String primaryEmail, String password, int status) {
+        this.primaryEmail = primaryEmail;
         this.password = getEncodingPassword(password);
-        this.roleId = role_id;
-        this.status = 0;
-//        this.imageURL = imageURL;
-    }
-
-    //constructor dung de insert 1 account vao co so du lieu 
-    public User(String email, String phoneNumber, String password, int role_id) {
-        this.email = email;
-        this.phone = phoneNumber;
-        this.password = getEncodingPassword(password);
+        this.status = status;
         setCreatedDate();
-        setRoleId(role_id);
-        this.imageURL = "";
-        this.status = 0;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getter and Setter methods. Click on the + sign on the left to edit the code.">
@@ -75,44 +49,12 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPrimaryEmail() {
+        return primaryEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhoneNumber() {
-        return phone;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phone = phoneNumber;
+    public void setPrimaryEmail(String primaryEmail) {
+        this.primaryEmail = primaryEmail;
     }
 
     public String getPassword() {
@@ -123,58 +65,34 @@ public class User {
         this.password = password;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public int getStatus() {
+        return status;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    public boolean getGender() {
-        return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
     public void setCreatedDate() {
         this.createdDate = GetCurrentDate.getCurrentDate();
     }
 
-    public int getStatus() {
-        return status;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public void setStatus(int isActivated) {
-        this.status = isActivated;
+    public Date getUpdatedDate() {
+        return updatedDate;
     }
 
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String image_url) {
-        this.imageURL = image_url;
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
     // </editor-fold>
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getEncodingPassword(String password) {
         return PasswordEncoding.getEncodingPassword(password);
@@ -182,7 +100,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "Account{" + "id=" + id + ", email=" + email + ", dob=" + dob + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phone + ", password=" + password + ", role=" + roleId + ", gender=" + gender + ", createdDate=" + createdDate + ", status=" + status + '}' + ", image_url=" + imageURL;
+        return "NewUser{" + "id=" + id + ", primaryEmail=" + primaryEmail + ", password=" + password + ", status=" + status + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + '}';
     }
-
 }

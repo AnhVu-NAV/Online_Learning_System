@@ -4,7 +4,6 @@
  */
 package util;
 
-import java.util.Scanner;
 
 /**
  *
@@ -27,7 +26,7 @@ public class InputValidation {
 
     public static String normalFormName(String input) {
         input = removeUnneccessaryBlank(input);
-        String temp[] = input.split(" ");
+        String[] temp = input.split(" ");
         input = "";
         for (int i = 0; i < temp.length; i++) {
             input += String.valueOf(temp[i].charAt(0)).toUpperCase() + temp[i].substring(1);
@@ -92,8 +91,7 @@ public class InputValidation {
 
     public static String getEmail(String string) throws Exception {
         String regex = "^[A-Za-z](.*)([@]{1})(.{2,})(\\.)(.{2,})";//phai bat dau bang chu cai
-        String email = getStringByRegex(string, regex, "Please enter email with format <account name>@<domain>");
-        return email;
+        return getStringByRegex(string, regex, "Please enter email with format <account name>@<domain>");
     }
 
     public static String getPhone(String string) throws Exception {

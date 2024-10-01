@@ -4,6 +4,7 @@
  */
 package util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -18,9 +19,8 @@ public class GetCurrentDate {
         LocalDate localDate = LocalDate.now();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date date = formatter.parse(localDate.toString());
-            return date;
-        } catch (Exception e) {
+            return formatter.parse(localDate.toString());
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         return null;

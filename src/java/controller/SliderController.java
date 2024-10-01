@@ -33,16 +33,16 @@ public class SliderController extends HttpServlet {
         SliderDAO sliderDAO = new SliderDAO();
         String choice = request.getParameter("filter");
         String crud = request.getParameter("crud");
-        int page = 0, numberContentPerPage = 10;
+        int page = 0;
+        int numberContentPerPage = 10;
         int numberPages = 0;
         int start = 0;
         int end = 0;
         Slider slider = null;
-        PrintWriter out = response.getWriter();
         Cookie cookie = null;
         Cookie[] cookies = request.getCookies();
         try {
-            Vector<Slider> list = new Vector();
+            Vector<Slider> list = null;
             for (Cookie c : cookies) {
                 if (c.getName().equals("filter")) {
                     cookie = c;
@@ -161,12 +161,13 @@ public class SliderController extends HttpServlet {
             throws ServletException, IOException {
         String imageUrl = request.getParameter("imageUrl");
         String backlinkUrl = request.getParameter("backlinkUrl");
-        String status_raw = request.getParameter("status");
+        String statusRaw = request.getParameter("status");
         String result = request.getParameter("result");
         SliderDAO sliderDao = new SliderDAO();
         HttpSession sesson = request.getSession();
         PrintWriter out = response.getWriter();
-        int page = 0, numberContentPerPage = 10;
+        int page = 0;
+        int numberContentPerPage = 10;
         int numberPages = 0;
         int start = 0;
         int end = 0;
@@ -203,7 +204,7 @@ public class SliderController extends HttpServlet {
 
             //xu ly add slider 
             if (imageUrl != null && backlinkUrl != null) {
-                status = Integer.parseInt(status_raw);
+                status = Integer.parseInt(statusRaw);
                 slider = new Slider(1, imageUrl, backlinkUrl, status);
                 sliderDao.insertSlider(slider);
 //                request.getRequestDispatcher("slider?filter=id").forward(request, response);

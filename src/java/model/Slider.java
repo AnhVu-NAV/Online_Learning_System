@@ -19,10 +19,10 @@ public class Slider {
     public Slider() {
     }
 
-    public Slider(int authorId, String image_url, String backlink_url, int status) {
+    public Slider(int authorId, String imageURL, String backlinkURL, int status) {
         this.authorId = authorId;
-        this.imageURL = image_url;
-        this.backlinkURL = backlink_url;
+        this.imageURL = imageURL;
+        this.backlinkURL = backlinkURL;
         this.status = status;
     }
 

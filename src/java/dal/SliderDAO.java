@@ -88,17 +88,17 @@ public class SliderDAO extends DBContext {
     }
 
     public Vector<Slider> getSliderByOrder(String query) {
-        Vector<Slider> vector = new Vector<Slider>();
+        Vector<Slider> vector = new Vector();
         String sql = "select * from Slider " + query;
         try (PreparedStatement pre = connection.prepareStatement(sql)) {
             try (ResultSet rs = pre.executeQuery(sql)) {
                 while (rs.next()) {
                     int id = rs.getInt("id");
                     int authorId = rs.getInt("author_id");
-                    String image_url = rs.getString("image_url");
-                    String backlink_url = rs.getString("backlink_url");
+                    String imageURL = rs.getString("image_url");
+                    String backlinkURL = rs.getString("backlink_url");
                     int status = rs.getInt("status");
-                    Slider obj = new Slider(authorId, image_url, backlink_url, status);
+                    Slider obj = new Slider(authorId, imageURL, backlinkURL, status);
                     obj.setId(id);
                     vector.add(obj);
                 }

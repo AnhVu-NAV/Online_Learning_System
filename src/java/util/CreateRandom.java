@@ -12,7 +12,7 @@ import java.security.SecureRandom;
  */
 public class CreateRandom {
 
-    public static String generate6_DigitCode() {
+    public static String generate6DigitCode() {
         // Create a SecureRandom subject 
         SecureRandom random = new SecureRandom();
 

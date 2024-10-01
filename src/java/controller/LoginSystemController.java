@@ -4,7 +4,6 @@
  */
 package controller;
 
-import dal.SliderDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -13,8 +12,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java_email.EmailService;
-import java_email.IJavaMail;
 import model.User;
 import util.PasswordEncoding;
 
@@ -26,11 +23,6 @@ import util.PasswordEncoding;
 public class LoginSystemController extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -38,9 +30,8 @@ public class LoginSystemController extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         UserDAO adao = new UserDAO();
-
         try {
-            User account = adao.getAccountByEmail(email);
+            User account = adao.getUserByPrimaryEmail(email);
             if (account == null) {
                 throw new Exception("This email is not existed");
             } else {
@@ -48,9 +39,6 @@ public class LoginSystemController extends HttpServlet {
                     throw new Exception("Password is incorrect");
                 }
                 session.setAttribute("account", account);
-                SliderDAO sliderDao = new SliderDAO();
-                request.setAttribute("showAllSlider", sliderDao.getAllSlider());
-                request.getRequestDispatcher("slider?action=list").forward(request, response);
             }
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());

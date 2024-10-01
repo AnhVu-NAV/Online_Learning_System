@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.UserDAO;
+import dal.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,9 +16,8 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Vector;
 import java_email.*;
-import model.User;
-import util.CreateRandom;
-import util.InputValidation;
+import model.*;
+import util.*;
 
 /**
  *
@@ -28,6 +27,7 @@ import util.InputValidation;
 public class CreateNewAccountController extends HttpServlet {
 
     private static String randomCode = null;
+    private static String newEmail = null;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,11 +37,11 @@ public class CreateNewAccountController extends HttpServlet {
             if (action != null) {
                 if (action.equals("gmail")) {
                     request.setAttribute("message", "Please check your email!");
-                    request.getRequestDispatcher("create_account.jsp").forward(request, response);
                 }
             }
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
+        } finally {
             request.getRequestDispatcher("create_account.jsp").forward(request, response);
         }
     }
@@ -54,7 +54,6 @@ public class CreateNewAccountController extends HttpServlet {
         String password = request.getParameter("password");
         String rewritePassword = request.getParameter("rewrite_password");
         String code = request.getParameter("code");
-        PrintWriter out = response.getWriter();
         UserDAO adao = new UserDAO();
         HttpSession session = request.getSession();
         try {
@@ -62,11 +61,12 @@ public class CreateNewAccountController extends HttpServlet {
                 if (isEmailExisted(email)) {
                     throw new Exception("This email is already existed");
                 }
-                randomCode = CreateRandom.generate6_DigitCode();
+                randomCode = CreateRandom.generate6DigitCode();
                 request.setAttribute("vetifyCode", "aa");
                 loginByGmailAccount(email, randomCode);
                 request.getRequestDispatcher("create_account.jsp").forward(request, response);
                 session.setAttribute("email", email);
+                newEmail = email;
             } else {
                 if (code != null) {
                     if (code.equals(randomCode)) {
@@ -81,11 +81,18 @@ public class CreateNewAccountController extends HttpServlet {
                     request.setAttribute("vetifyCode", "bb");
                     phoneNumber = InputValidation.getPhone(phoneNumber);
                     if (password.equals(rewritePassword) && InputValidation.getFormattedPassword(password)) {
-                        User account = new User((String) session.getAttribute("email"), phoneNumber, password, 2);
-                        adao.insertAccount(account);
+                        //user: email, password, status
+                        //userDetail: phoneNumber, user id
+                        UserDAO userDAO = new UserDAO();
+                        UserDetailDAO userDetailDAO = new UserDetailDAO();
+                        User user = new User(newEmail, password, 0);
+                        UserDetail userDetail = new UserDetail(userDAO.getIdByEmail(newEmail), phoneNumber);
+                        userDAO.insertAccount(user);
+                        userDetailDAO.insert(userDetail);
+
                         request.getRequestDispatcher("login.jsp").forward(request, response);
                     } else {
-                        out.println("hehe");
+                        throw new Exception("Rewrite-Password is wrong");
                     }
                 }
             }
@@ -97,7 +104,7 @@ public class CreateNewAccountController extends HttpServlet {
 
     private boolean isEmailExisted(String email) throws SQLException {
         UserDAO adao = new UserDAO();
-        Vector<String> list = adao.getAllEmail();
+        Vector<String> list = adao.getAllPrimaryEmail();
         for (String string : list) {
             if (string.equals(email)) {
                 return true;
