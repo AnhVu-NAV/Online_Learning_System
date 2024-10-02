@@ -13,8 +13,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Header</title>
-        <link rel="stylesheet" href="../css/style.css" />
-        <link rel="stylesheet" href="../css/globals.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/globals.css" />
 
     </head>
 
@@ -22,8 +22,7 @@
         <div class="web">
             <div class="div">
                 <div class="overlap">
-                    <img class="man-working-night" src="../img/man-working-night-1.png" />
-                    <!--<img class="man-working-night" src="../../public/images/man-working-night-1.png" />-->
+                    <img class="man-working-night" src="${pageContext.request.contextPath}/img/man-working-night-1.png" alt="home-img" />
                     <div class="group">
                         <p class="text-wrapper">Save for the right education</p>
                         <div class="frame"><div class="text-wrapper-2">Let’s Connect</div></div>
