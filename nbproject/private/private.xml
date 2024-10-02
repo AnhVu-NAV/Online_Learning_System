@@ -2,23 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/util/CreateRandom.java</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/java_email/EmailService.java</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/util/InputValidation.java</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/dal/DBContext.java</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/util/PasswordEncoding.java</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/dal/SliderDAO.java</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/model/Slider.java</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/model/UserDetail.java</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/web/slider.jsp</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/controller/LoginSystemController.java</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/model/User.java</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/web/login.jsp</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/controller/CreateNewAccountController.java</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/util/GetCurrentDate.java</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/dal/UserDAO.java</file>
-            <file>file:/C:/Users/ADMIN/OneDrive/Máy%20tính/swp391_onlinelearning/src/java/dal/UserDetailDAO.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
