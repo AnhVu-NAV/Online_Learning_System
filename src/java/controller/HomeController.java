@@ -67,6 +67,20 @@ public class HomeController extends HttpServlet {
             }
             request.getRequestDispatcher("/home.jsp").forward(request, response);
         }
+
+//        String filter = request.getParameter("filter");
+//
+//        List<Post> filteredPosts;
+//        if ("hot".equals(filter)) {
+//            filteredPosts = postService.getHotPosts();
+//        } else if ("newest".equals(filter)) {
+//            filteredPosts = postService.getNewestPosts();
+//        } else {
+//            filteredPosts = postService.getMostViewedPosts();
+//        }
+//
+//        request.setAttribute("postList", filteredPosts);
+//        request.getRequestDispatcher("/home.jsp").forward(request, response);
     }
 
     @Override
