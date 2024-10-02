@@ -20,14 +20,13 @@ public class User {
     private Date dob;
     private String firstName;
     private String lastName;
-    private String phone;
+    private String phoneNumber;
     private String password;
-    private int roleId;
+    private int role_id;
     private boolean gender;
     private Date createdDate;
     private int status;
-    private String imageURL;
-    private String address;
+    private String image_url;
 
     public User() {
     }
@@ -37,32 +36,32 @@ public class User {
         this.dob = dob;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phone = phoneNumber;
+        this.phoneNumber = phoneNumber;
         this.password = getEncodingPassword(password);
-        this.roleId = role_id;
+        this.role_id = role_id;
         this.gender = gender;
         setCreatedDate();
         this.status = status;
-        this.imageURL = image_url;
+        this.image_url = image_url;
     }
 
     public User(int id, String email, String phoneNumber, String password, int role_id) {
         this.email = email;
-        this.phone = phoneNumber;
+        this.phoneNumber = phoneNumber;
         this.password = getEncodingPassword(password);
-        this.roleId = role_id;
+        this.role_id = role_id;
         this.status = 0;
-//        this.imageURL = imageURL;
+//        this.image_url = image_url;
     }
 
     //constructor dung de insert 1 account vao co so du lieu 
     public User(String email, String phoneNumber, String password, int role_id) {
         this.email = email;
-        this.phone = phoneNumber;
+        this.phoneNumber = phoneNumber;
         this.password = getEncodingPassword(password);
         setCreatedDate();
         setRoleId(role_id);
-        this.imageURL = "";
+        this.image_url = "";
         this.status = 0;
     }
 
@@ -108,11 +107,11 @@ public class User {
     }
 
     public String getPhoneNumber() {
-        return phone;
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phone = phoneNumber;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPassword() {
@@ -124,11 +123,11 @@ public class User {
     }
 
     public int getRoleId() {
-        return roleId;
+        return role_id;
     }
 
     public void setRoleId(int roleId) {
-        this.roleId = roleId;
+        this.role_id = roleId;
     }
 
     public boolean getGender() {
@@ -159,22 +158,14 @@ public class User {
         this.status = isActivated;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImageURL(String image_url) {
-        this.imageURL = image_url;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
     // </editor-fold>
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getEncodingPassword(String password) {
         return PasswordEncoding.getEncodingPassword(password);
@@ -182,7 +173,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "Account{" + "id=" + id + ", email=" + email + ", dob=" + dob + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phone + ", password=" + password + ", role=" + roleId + ", gender=" + gender + ", createdDate=" + createdDate + ", status=" + status + '}' + ", image_url=" + imageURL;
+        return "Account{" + "id=" + id + ", email=" + email + ", dob=" + dob + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", password=" + password + ", role=" + role_id + ", gender=" + gender + ", createdDate=" + createdDate + ", status=" + status + '}' + ", image_url=" + image_url;
     }
 
 }

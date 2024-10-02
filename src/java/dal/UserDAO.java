@@ -51,7 +51,7 @@ public class UserDAO extends DBContext {
                     account.setGender(rs.getBoolean("gender"));
                     account.setFirstName(rs.getString("first_name"));
                     account.setLastName(rs.getString("last_name"));
-                    account.setImageURL(rs.getString("image_url"));
+                    account.setImage_url(rs.getString("image_url"));
                 }
             }
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class UserDAO extends DBContext {
                     account.setGender(rs.getBoolean("gender"));
                     account.setFirstName(rs.getString("first_name"));
                     account.setLastName(rs.getString("last_name"));
-                    account.setImageURL(rs.getString("image_url"));
+                    account.setImage_url(rs.getString("image_url"));
                 }
             }
         } catch (Exception e) {
@@ -148,7 +148,7 @@ public class UserDAO extends DBContext {
                 + "END\n"
                 + "WHERE id = ?;";
         try (PreparedStatement pre = connection.prepareStatement(sql)) {
-            pre.setString(1, account.getImageURL());
+            pre.setString(1, account.getImage_url());
             pre.setString(2, new_image_url);
             pre.setInt(3, account.getId());
             pre.executeUpdate();
@@ -179,7 +179,7 @@ public class UserDAO extends DBContext {
             pre.setInt(4, account.getRoleId());
             pre.setDate(5, DateConvert.convertToSQLDate(account.getCreatedDate()));
             pre.setInt(6, account.getStatus());
-            pre.setString(7, account.getImageURL());
+            pre.setString(7, account.getImage_url());
             pre.executeUpdate();
         } catch (Exception e) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);

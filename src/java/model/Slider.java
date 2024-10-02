@@ -12,8 +12,8 @@ public class Slider {
 
     private int id;
     private int authorId;
-    private String imageURL;
-    private String backlinkURL;
+    private String image_url;
+    private String backlink_url;
     private int status;
 
     public Slider() {
@@ -21,8 +21,8 @@ public class Slider {
 
     public Slider(int authorId, String image_url, String backlink_url, int status) {
         this.authorId = authorId;
-        this.imageURL = image_url;
-        this.backlinkURL = backlink_url;
+        this.image_url = image_url;
+        this.backlink_url = backlink_url;
         this.status = status;
     }
 
@@ -43,20 +43,20 @@ public class Slider {
         this.authorId = authorId;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImageURL(String image_url) {
-        this.imageURL = image_url;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
-    public String getBacklinkURL() {
-        return backlinkURL;
+    public String getBacklink_url() {
+        return backlink_url;
     }
 
-    public void setBacklinkURL(String backlinkURL) {
-        this.backlinkURL = backlinkURL;
+    public void setBacklink_url(String backlink_url) {
+        this.backlink_url = backlink_url;
     }
 
     public int getStatus() {
@@ -70,7 +70,7 @@ public class Slider {
     // </editor-fold>
     @Override
     public String toString() {
-        return "Slider{" + "id=" + id + ", authorId=" + authorId + ", image_url=" + imageURL + ", backlink_url=" + backlinkURL + ", status=" + status + '}';
+        return "Slider{" + "id=" + id + ", authorId=" + authorId + ", image_url=" + image_url + ", backlink_url=" + backlink_url + ", status=" + status + '}';
     }
 
 }
