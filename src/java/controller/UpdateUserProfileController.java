@@ -12,7 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Account;
+import model.User;
 
 /**
  *
@@ -58,7 +58,7 @@ public class UpdateUserProfileController extends HttpServlet {
         int userId = Integer.parseInt(request.getParameter("userId"));
 
         AccountDAO accountDAO = new AccountDAO();
-        Account user = accountDAO.getUserById(userId);
+        User user = accountDAO.getUserById(userId);
 
         if (user == null) {
             response.sendRedirect("error.jsp");
@@ -88,19 +88,19 @@ public class UpdateUserProfileController extends HttpServlet {
         String imageUrl = request.getParameter("image_url");
 
         AccountDAO accountDAO = new AccountDAO();
-        Account user = accountDAO.getUserById(userId);
+        User user = accountDAO.getUserById(userId);
 
         if (user == null) {
             response.sendRedirect("error.jsp");
             return;
         }
 
-        user.setFirst_name(firstName);
-        user.setLast_name(lastName);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
         user.setPhone(phone);
         user.setGender(gender);
         user.setAddress(address);
-        user.setImage_url(imageUrl);
+        user.setImageURL(imageUrl);
 
         accountDAO.updateUser(user);
         response.sendRedirect("UserProfile?userId=" + userId);
