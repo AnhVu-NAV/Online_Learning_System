@@ -14,7 +14,7 @@ import model.User;
  *
  * @author AnhVuNAV
  */
-public class AccountDAO extends DBContext{
+public class UserDAO extends DBContext{
     // Phương thức để lấy thông tin người dùng dựa trên ID
     // Phương thức lấy thông tin người dùng dựa vào ID
     public User getUserById(int id) {

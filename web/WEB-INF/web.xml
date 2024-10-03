@@ -16,6 +16,10 @@
         <servlet-name>UpdateUserProfileController</servlet-name>
         <servlet-class>controller.UpdateUserProfileController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CourseDetailController</servlet-name>
+        <servlet-class>controller.CourseDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
@@ -31,5 +35,9 @@
     <servlet-mapping>
         <servlet-name>UpdateUserProfileController</servlet-name>
         <url-pattern>/UpdateUserProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseDetailController</servlet-name>
+        <url-pattern>/CourseDetail</url-pattern>
     </servlet-mapping>
 </web-app>
