@@ -6,41 +6,24 @@ package model;
 
 /**
  *
- * @author Admin
+ * @author AnhVuNAV
  */
 public class Lesson {
     private int id;
+    private String title;
     private int status;
     private int lessonTypeId;
-    private String title;
-    private int chapterId;
-    private int order;
 
-    // Constructor không đối số
-    public Lesson() {}
-
-    // Constructor đầy đủ
-    public Lesson(int id, int status, int lessonTypeId, String title, int chapterId, int order) {
-        this.id = id;
-        this.status = status;
-        this.lessonTypeId = lessonTypeId;
-        this.title = title;
-        this.chapterId = chapterId;
-        this.order = order;
+    public Lesson() {
     }
 
-
- 
     public Lesson(int id, String title, int status, int lessonTypeId) {
         this.id = id;
+        this.title = title;
         this.status = status;
         this.lessonTypeId = lessonTypeId;
-        this.title = title;
-        this.chapterId = chapterId;
-        this.order = order;
     }
 
-    // Getter và Setter cho các thuộc tính
     public int getId() {
         return id;
     }
@@ -49,7 +32,14 @@ public class Lesson {
         this.id = id;
     }
 
-        // Getter và Setter cho các thuộc tính
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -66,29 +56,5 @@ public class Lesson {
         this.lessonTypeId = lessonTypeId;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getChapterId() {
-        return chapterId;
-    }
-
-    public void setChapterId(int chapterId) {
-        this.chapterId = chapterId;
-    }
-
-    public int getOrder() {
-        return order;
-    }
-
-    public void setOrder(int order) {
-        this.order = order;
-    }
     
 }
-
