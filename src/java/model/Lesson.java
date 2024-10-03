@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author AnhVuNAV
+ * @author Admin
  */
 public class Lesson {
     private int id;
@@ -16,10 +16,9 @@ public class Lesson {
     private int chapterId;
     private int order;
 
-    // Constructor không đối số
+    // Constructors
     public Lesson() {}
 
-    // Constructor đầy đủ
     public Lesson(int id, int status, int lessonTypeId, String title, int chapterId, int order) {
         this.id = id;
         this.status = status;
@@ -29,7 +28,14 @@ public class Lesson {
         this.order = order;
     }
 
-    // Getter và Setter cho các thuộc tính
+
+    public Lesson(int id, String title, int status, int lessonTypeId) {
+        this.id = id;
+        this.title = title;
+        this.status = status;
+        this.lessonTypeId = lessonTypeId;
+    }
+
     public int getId() {
         return id;
     }
@@ -77,4 +83,7 @@ public class Lesson {
     public void setOrder(int order) {
         this.order = order;
     }
+
+   
 }
+
