@@ -389,6 +389,12 @@ public class CourseDAO extends DBContext {
         }
         return relatedCourses;
     }
+    
+    public static void main(String[] args) {
+        CourseDAO c = new CourseDAO();
+        System.out.println(c.getRelatedCourses(7, 6, 1));
+        
+    }
 
     public List<Tagline> getAllTaglines() {
         List<Tagline> taglines = new ArrayList<>();
