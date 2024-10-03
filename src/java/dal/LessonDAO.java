@@ -17,8 +17,7 @@ import model.Lesson;
  *
  * @author AnhVuNAV
  */
-public class LessonDAO extends DBContext {
-
+public class LessonDAO extends DBContext{
     public List<Lesson> getLessonsByCourseId(int courseId) {
         List<Lesson> lessons = new ArrayList<>();
         String sql = "SELECT * FROM Lesson WHERE course_id = ?";
@@ -43,7 +42,6 @@ public class LessonDAO extends DBContext {
     // Lấy danh sách các bài học theo ID chương
     public List<Lesson> getLessonsByChapterId(int chapterId){
         List<Lesson> lessons = new ArrayList<>();
-        String sql = "SELECT * FROM Lesson WHERE chapter_id = ? AND status = 1 ORDER BY `order` ASC";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, chapterId);

@@ -30,12 +30,21 @@ public class Lesson {
     }
 
     // Getter và Setter cho các thuộc tính
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getStatus() {
@@ -54,14 +63,6 @@ public class Lesson {
         this.lessonTypeId = lessonTypeId;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public int getChapterId() {
         return chapterId;
     }
@@ -77,4 +78,5 @@ public class Lesson {
     public void setOrder(int order) {
         this.order = order;
     }
+    
 }

@@ -5,9 +5,9 @@
 package controller;
 
 import dal.ChapterDAO;
+import dal.PricePackageDAO;
 import dal.CourseDAO;
 import dal.LessonDAO;
-import dal.PricePackageDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,11 +17,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Chapter;
 import model.Course;
-import model.Lesson;
 import model.PricePackage;
-
-/**
- *
+ /*
  * @author AnhVuNAV
  */
 public class CourseDetailController extends HttpServlet {
@@ -33,10 +30,8 @@ public class CourseDetailController extends HttpServlet {
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response){
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
