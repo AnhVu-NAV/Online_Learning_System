@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/swp391_onlinelearning.iml" filepath="$PROJECT_DIR$/swp391_onlinelearning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SWP391_OnlineLearning.iml" filepath="$PROJECT_DIR$/.idea/SWP391_OnlineLearning.iml" />
     </modules>
   </component>
 </project>

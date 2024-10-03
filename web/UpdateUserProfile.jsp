@@ -18,7 +18,29 @@
         <div class="content-container">
             <!-- Sidebar -->
             <aside class="sidebar">
-                <!-- Your sidebar content here -->
+                <div class="account-officer">
+                    <img class="profile-img" src="${user.image_url}" alt="${user.first_name} ${user.last_name}">
+                    <div class="profile-details">
+                        <h3>${user.first_name} ${user.last_name}</h3>
+                        <p>Customer Operations</p>
+                    </div>
+                </div>
+                <nav class="menu">
+                    <ul class="menu">
+                        <li><a href="#"><i class='bx bx-grid-alt'></i> Dashboard</a></li>
+                        <li><a href="#"><i class='bx bx-task'></i> Task</a></li>
+                        <li class="submenu">
+                            <a href="#"><i class='bx bx-user'></i> Customers <i class='bx bx-chevron-right'></i></a>
+                            <ul class="submenu-items">
+                                <li><a href="#">All</a></li>
+                                <li><a href="#">Account Upgrade</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#"><i class='bx bx-chat'></i> Chats</a></li>
+                        <li><a href="#"><i class='bx bx-error'></i> Disputes</a></li>
+                        <li><a href="#"><i class='bx bx-cog'></i> Settings</a></li>
+                    </ul>
+                </nav>
             </aside>
 
             <!-- Main Content -->
@@ -27,7 +49,7 @@
                     <button class="back-button" onclick="history.back()">← Back</button>
                     <h1>Update Personal Details</h1>
                 </header>
-                <form action="UpdateUserProfileServlet" method="post">
+                <form action="UpdateUserProfile" method="post">
                     <input type="hidden" name="userId" value="${user.id}" />
                     <section class="personal-section">
                         <div class="personal-details">
@@ -56,7 +78,7 @@
                     <section class="image-section">
                         <h2>Profile Image</h2>
                         <label><strong>Image URL:</strong></label>
-                        <input type="text" name="image_url" value="${user.image_url}" required />
+                        <input type="text" name="image_url" value="${user.image_url}"  />
                     </section>
 
                     <section class="gender-section">
