@@ -5,20 +5,24 @@
 
 package controller;
 
-import dal.UserDAO;
+import dal.CourseDAO;
+import dal.LessonDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.User;
+import java.util.List;
+import model.Course;
+import model.Lesson;
+import model.PricePackage;
 
 /**
  *
  * @author AnhVuNAV
  */
-public class UserProfileController extends HttpServlet {
+public class CourseDetailController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +39,10 @@ public class UserProfileController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserProfileController</title>");  
+            out.println("<title>Servlet CourseDetailController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserProfileController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CourseDetailController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,27 +59,30 @@ public class UserProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        // Lấy thông tin người dùng từ request hoặc session
-        int userId = Integer.parseInt(request.getParameter("userId"));
+        int courseId = Integer.parseInt(request.getParameter("courseId"));
+        
+        // Lấy thông tin khóa học và các phần liên quan
+        CourseDAO courseDAO = new CourseDAO();
+        Course course = courseDAO.getCourseById(courseId);
 
-        // Khởi tạo đối tượng UserDAO
-        UserDAO accountDAO = new UserDAO();
-        
-        // Lấy thông tin chi tiết của người dùng từ cơ sở dữ liệu
-        User user = accountDAO.getUserById(userId);
-        
-        // Kiểm tra nếu người dùng không tồn tại
-        if (user == null) {
-            // Xử lý lỗi hoặc chuyển hướng về trang lỗi
-            response.sendRedirect("error.jsp");
-            return;
-        }
-        
-        // Đặt thông tin người dùng vào request
-        request.setAttribute("user", user);
-        
-        // Chuyển tiếp đến trang JSP hiển thị thông tin người dùng
-        request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
+        LessonDAO lessonDAO = new LessonDAO();
+        List<Lesson> lessons = lessonDAO.getLessonsByCourseId(courseId);
+
+        // Giả định có bảng PricePackage và dao PricePackageDAO để lấy các gói giá của khóa học
+        PricePackage pricePackage = courseDAO.getPricePackageByCourseId(courseId);
+
+        // Lấy các khóa học cùng giảng viên hoặc cùng thể loại
+        List<Course> relatedCourses = courseDAO.getRelatedCourses(course.getCategoryId(), course.getExpertId());
+
+
+        // Đưa dữ liệu vào request
+        request.setAttribute("course", course);
+        request.setAttribute("lessons", lessons);
+        request.setAttribute("pricePackage", pricePackage);
+        request.setAttribute("relatedCourses", relatedCourses);
+
+        // Chuyển tiếp tới trang JSP
+        request.getRequestDispatcher("CourseDetails.jsp").forward(request, response);
     } 
 
     /** 
@@ -97,7 +104,7 @@ public class UserProfileController extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Course Detail";
     }// </editor-fold>
 
 }

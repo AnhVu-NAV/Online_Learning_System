@@ -19,6 +19,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.tomcat.util.codec.binary.Base64;
 import java.util.Date;
+import java.util.Vector;
+import java.sql.Connection;
+import model.User;
 
 /**
  *
@@ -654,5 +657,26 @@ public class UserDAO extends DBContext {
         }
         return encrypted_password;
     }
-
+    
+    
+    // Phương thức cập nhật thông tin người dùng
+    public void updateUser(User user) {
+        String query = "UPDATE Account SET first_name = ?, last_name = ?, phone = ?, gender = ?, address = ?, image_url = ? WHERE id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setString(3, user.getPhone());
+            ps.setBoolean(4, user.isGender());
+            ps.setString(5, user.getAddress());
+            ps.setString(6, user.getImageURL());
+            ps.setInt(7, user.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+//            closeConnection();
+        }
+    }
+    
 }
