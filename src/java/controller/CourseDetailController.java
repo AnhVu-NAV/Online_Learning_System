@@ -71,8 +71,8 @@ public class CourseDetailController extends HttpServlet {
         // Giả định có bảng PricePackage và dao PricePackageDAO để lấy các gói giá của khóa học
         PricePackage pricePackage = courseDAO.getPricePackageByCourseId(courseId);
 
-        // Lấy các khóa học cùng giảng viên hoặc cùng thể loại
-        List<Course> relatedCourses = courseDAO.getRelatedCourses(course.getCategoryId(), course.getExpertId());
+        // Lấy các khóa học liên quan dựa trên category_id và expert_id của khóa học hiện tại
+        List<Course> relatedCourses = courseDAO.getRelatedCourses(course.getCategoryId(), course.getExpertId(), course.getId());
 
 
         // Đưa dữ liệu vào request
