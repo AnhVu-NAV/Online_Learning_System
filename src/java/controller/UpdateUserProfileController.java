@@ -5,7 +5,7 @@
 
 package controller;
 
-import dal.AccountDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -57,7 +57,7 @@ public class UpdateUserProfileController extends HttpServlet {
     throws ServletException, IOException {
         int userId = Integer.parseInt(request.getParameter("userId"));
 
-        AccountDAO accountDAO = new AccountDAO();
+        UserDAO accountDAO = new UserDAO();
         User user = accountDAO.getUserById(userId);
 
         if (user == null) {
@@ -87,7 +87,7 @@ public class UpdateUserProfileController extends HttpServlet {
         String address = request.getParameter("address");
         String imageUrl = request.getParameter("image_url");
 
-        AccountDAO accountDAO = new AccountDAO();
+        UserDAO accountDAO = new UserDAO();
         User user = accountDAO.getUserById(userId);
 
         if (user == null) {
