@@ -159,8 +159,8 @@
                                 </div>
 
                                 <div class="course-price">
-                                    <span class="list-price">₫<fmt:formatNumber value="${relatedCourse.price}" /></span>
-                                    <span class="sale-price">₫<fmt:formatNumber value="${relatedCourse.salePrice}" /></span>
+                                    <span class="list-price">$<fmt:formatNumber value="${relatedCourse.price}" /></span>
+                                    <span class="sale-price">$<fmt:formatNumber value="${relatedCourse.salePrice}" /></span>
                                 </div>
                                 <button class="register-btn primary" onclick="openRegisterPopup('<%= courseId %>')">Register</button>
                             </div>
@@ -244,6 +244,5 @@
             // Khởi tạo khóa học liên quan ban đầu
             updateRelatedCourses(); // Initial load
         </script>
-
     </body>
 </html>
