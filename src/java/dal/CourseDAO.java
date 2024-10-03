@@ -250,29 +250,36 @@ public class CourseDAO extends DBContext {
         return courses;
     }
 
-    public List<Course> getRelatedCourses(int categoryId, int expertId) {
+    public List<Course> getRelatedCourses(int categoryId, int expertId, int courseId) {
         List<Course> relatedCourses = new ArrayList<>();
-        String sql = "SELECT * FROM Course WHERE category_id = ? OR expert_id = ?";
+        String sql = "SELECT * FROM Course WHERE (category_id = ? OR expert_id = ?) AND id != ?";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, categoryId);
             ps.setInt(2, expertId);
-            ResultSet rs = ps.executeQuery();
+            ps.setInt(3, courseId); // Tránh lấy lại chính khóa học hiện tại
 
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Course course = new Course();
                 course.setId(rs.getInt("id"));
                 course.setTitle(rs.getString("title"));
                 course.setDescription(rs.getString("description"));
                 course.setThumbnailUrl(rs.getString("thumbnail_url"));
-                // Thêm các thuộc tính khác nếu cần
+                // Các thuộc tính khác của khóa học
                 relatedCourses.add(course);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return relatedCourses;
+    }
+    
+    public static void main(String[] args) {
+        CourseDAO c = new CourseDAO();
+        System.out.println(c.getRelatedCourses(7, 6, 1));
+        
     }
 
 }
