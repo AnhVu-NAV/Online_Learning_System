@@ -110,10 +110,10 @@
                                 <h4 class="course-title">${relatedCourse.title}</h4>
                                 <p class="course-tagline">${relatedCourse.description}</p>
                                 <div class="course-price">
-                                    <span class="list-price">$<fmt:formatNumber value="${relatedCourse.price}" /></span>
-                                    <span class="sale-price">$<fmt:formatNumber value="${relatedCourse.salePrice}" /></span>
+                                    <span class="list-price">₫<fmt:formatNumber value="${relatedCourse.price}" /></span>
+                                    <span class="sale-price">₫<fmt:formatNumber value="${relatedCourse.salePrice}" /></span>
                                 </div>
-                                <button class="register-btn primary">Register</button>
+                                <button class="register-btn primary" onclick="openRegisterPopup()">Register</button>
                             </div>
                         </c:forEach>
                     </div>
@@ -154,22 +154,22 @@
                 var showTagline = document.querySelector('input[name="showTagline"]').checked;
                 var showPrice = document.querySelector('input[name="showPrice"]').checked;
 
-                relatedCourses.innerHTML = '';
+                var courseCards = relatedCourses.querySelectorAll('.course-card');
+                courseCards.forEach((card, index) => {
+                    if (index < numCourses) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
 
-                for (let i = 0; i < numCourses; i++) {
-                    relatedCourses.innerHTML += `
-                        <div class="course-card">
-                            <img src="course-thumbnail.jpg" alt="Related Course ${i+1}">
-                            <h4 class="course-title course-title-${i+1}" style="display: ${showTitle ? 'block' : 'none'};">Course Title ${i+1}</h4>
-                            <p class="course-tagline course-tagline-${i+1}" style="display: ${showTagline ? 'block' : 'none'};">Tagline for course ${i+1}</p>
-                            <div class="course-price course-price-${i+1}" style="display: ${showPrice ? 'block' : 'none'};">
-                                <span class="list-price">₫1,999,000</span>
-                                <span class="sale-price">₫999,000</span>
-                            </div>
-                            <button class="register-btn primary" onclick="openRegisterPopup()">Register</button>
-                        </div>
-                    `;
-                }
+                    var titleElement = card.querySelector('.course-title');
+                    var taglineElement = card.querySelector('.course-tagline');
+                    var priceElement = card.querySelector('.course-price');
+
+                    titleElement.style.display = showTitle ? 'block' : 'none';
+                    taglineElement.style.display = showTagline ? 'block' : 'none';
+                    priceElement.style.display = showPrice ? 'block' : 'none';
+                });
             }
 
             function toggleRelatedCourseField(field) {
@@ -182,5 +182,6 @@
             // Khởi tạo khóa học liên quan ban đầu
             updateRelatedCourses(); // Initial load
         </script>
+
     </body>
 </html>
