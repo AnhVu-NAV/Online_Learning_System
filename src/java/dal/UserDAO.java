@@ -29,7 +29,6 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import java.util.Date;
 import java.util.Vector;
 import java.sql.Connection;
-import model.User;
 
 /**
  *
@@ -757,6 +756,43 @@ public class UserDAO extends DBContext {
         }
         return encrypted_password;
     }
+    // Phương thức để lấy thông tin người dùng dựa trên ID
+    // Phương thức lấy thông tin người dùng dựa vào ID
+//     public User getUserById(int id) {
+//         String query = "SELECT * FROM Account WHERE id = ?";
+//         try {
+//             // Chuẩn bị câu truy vấn và thiết lập tham số
+//             PreparedStatement ps = connection.prepareStatement(query);
+//             ps.setInt(1, id);
+            
+//             // Thực thi câu truy vấn
+//             ResultSet rs = ps.executeQuery();
+            
+//             // Kiểm tra và lấy kết quả
+//             if (rs.next()) {
+//                 User account = new User();
+//                 account.setId(rs.getInt("id"));
+//                 account.setEmail(rs.getString("email"));
+//                 account.setFirstName(rs.getString("first_name"));
+//                 account.setLastName(rs.getString("last_name"));
+//                 account.setPassword(rs.getString("password"));
+//                 account.setDob(rs.getDate("dob"));
+//                 account.setRoleId(rs.getInt("role_id"));
+//                 account.setCreatedDate(rs.getDate("created_date"));
+//                 account.setStatus(rs.getInt("status"));
+//                 account.setPhone(rs.getString("phone"));
+//                 account.setGender(rs.getBoolean("gender"));
+//                 account.setAddress(rs.getString("address"));
+//                 account.setImageURL(rs.getString("image_url"));
+//                 return account;
+//             }
+//         } catch (SQLException e) {
+//             e.printStackTrace();
+//         } finally {
+// //            closeConnection();
+//         }
+//         return null; // Trả về null nếu không tìm thấy người dùng
+//     }
     
     
     // Phương thức cập nhật thông tin người dùng
