@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.Account;
+import model.User;
 
 /**
  *
@@ -17,7 +17,7 @@ import model.Account;
 public class AccountDAO extends DBContext{
     // Phương thức để lấy thông tin người dùng dựa trên ID
     // Phương thức lấy thông tin người dùng dựa vào ID
-    public Account getUserById(int id) {
+    public User getUserById(int id) {
         String query = "SELECT * FROM Account WHERE id = ?";
         try {
             // Chuẩn bị câu truy vấn và thiết lập tham số
@@ -29,20 +29,20 @@ public class AccountDAO extends DBContext{
             
             // Kiểm tra và lấy kết quả
             if (rs.next()) {
-                Account account = new Account();
+                User account = new User();
                 account.setId(rs.getInt("id"));
                 account.setEmail(rs.getString("email"));
-                account.setFirst_name(rs.getString("first_name"));
-                account.setLast_name(rs.getString("last_name"));
+                account.setFirstName(rs.getString("first_name"));
+                account.setLastName(rs.getString("last_name"));
                 account.setPassword(rs.getString("password"));
                 account.setDob(rs.getDate("dob"));
-                account.setRole_id(rs.getInt("role_id"));
-                account.setCreated_date(rs.getDate("created_date"));
+                account.setRoleId(rs.getInt("role_id"));
+                account.setCreatedDate(rs.getDate("created_date"));
                 account.setStatus(rs.getInt("status"));
                 account.setPhone(rs.getString("phone"));
                 account.setGender(rs.getBoolean("gender"));
                 account.setAddress(rs.getString("address"));
-                account.setImage_url(rs.getString("image_url"));
+                account.setImageURL(rs.getString("image_url"));
                 return account;
             }
         } catch (SQLException e) {
@@ -55,16 +55,16 @@ public class AccountDAO extends DBContext{
     
     
     // Phương thức cập nhật thông tin người dùng
-    public void updateUser(Account user) {
+    public void updateUser(User user) {
         String query = "UPDATE Account SET first_name = ?, last_name = ?, phone = ?, gender = ?, address = ?, image_url = ? WHERE id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, user.getFirst_name());
-            ps.setString(2, user.getLast_name());
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
             ps.setString(3, user.getPhone());
             ps.setBoolean(4, user.isGender());
             ps.setString(5, user.getAddress());
-            ps.setString(6, user.getImage_url());
+            ps.setString(6, user.getImageURL());
             ps.setInt(7, user.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
