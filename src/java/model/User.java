@@ -43,35 +43,45 @@ public class User {
     //Add attribute role from setting
     private Setting role = new Setting();
 
-    public User(String email, String first_name, String last_name, String password,
-            Date dob, int role_id, Date created_date, int status, String phone, int gender, String address, String image_url) {
-        this.email = email;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.password = password;
-        this.dob = dob;
-        this.role_id = role_id;
-        this.created_date = created_date;
-        this.status = status;
-        this.phone = phone;
-        this.gender = this.gender;
-        this.address = address;
-        this.image_url = image_url;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public User(int id, String email, String first_name, String last_name, String password,
-            Date dob, int role_id, Date created_date, int status, String phone, int gender, String address, String image_url) {
-        this.id = id;
-        this.email = email;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.password = password;
-        this.dob = dob;
-        this.role_id = role_id;
-        this.created_date = created_date;
-        this.status = status;
-        this.phone = phone;
-        this.gender = this.gender;
-        this.address = address;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+    
+    
 }
