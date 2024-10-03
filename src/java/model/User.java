@@ -73,6 +73,5 @@ public class User {
         this.phone = phone;
         this.gender = this.gender;
         this.address = address;
-        this.image_url = image_url;
-    }
+
 }
