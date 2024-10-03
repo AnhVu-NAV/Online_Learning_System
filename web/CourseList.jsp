@@ -74,7 +74,7 @@
                 <div class="course-grid" id="courseGrid">
                     <c:forEach var="course" items="${courses}">
                         <div class="course-card">
-                            <a href="courseDetails?id=${course.id}">
+                            <a href="CourseDetail?courseId=${course.id}">
                                 <img src="${course.thumbnailUrl}" class="thumbnail" alt="${course.title}">
                                 <div class="course-info">
                                     <h3>${course.title}</h3>

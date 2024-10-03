@@ -166,21 +166,20 @@
                     var taglineElement = card.querySelector('.course-tagline');
                     var priceElement = card.querySelector('.course-price');
 
-                    titleElement.style.display = showTitle ? 'block' : 'none';
-                    taglineElement.style.display = showTagline ? 'block' : 'none';
-                    priceElement.style.display = showPrice ? 'block' : 'none';
+                    if (titleElement) titleElement.style.display = showTitle ? 'block' : 'none';
+                    if (taglineElement) taglineElement.style.display = showTagline ? 'block' : 'none';
+                    if (priceElement) priceElement.style.display = showPrice ? 'block' : 'none';
                 });
             }
 
             function toggleRelatedCourseField(field) {
-                var elements = document.querySelectorAll(`.course-${field}`);
-                elements.forEach(function (element) {
-                    element.style.display = element.style.display === 'none' ? 'block' : 'none';
-                });
+                updateRelatedCourses();
             }
 
             // Khởi tạo khóa học liên quan ban đầu
-            updateRelatedCourses(); // Initial load
+            document.addEventListener('DOMContentLoaded', (event) => {
+                updateRelatedCourses(); // Initial load
+            });
         </script>
 
     </body>
