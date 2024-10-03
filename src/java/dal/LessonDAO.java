@@ -12,11 +12,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Lesson;
 import model.VideoContent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
+import dal.DBContext;
+import model.Lesson;
 
 /**
  *
- * @author Admin
+ * @author AnhVuNAV
  */
+
 public class LessonDAO extends DBContext {
 
     private static final Logger LOGGER = Logger.getLogger(ChapterDAO.class.getName());
@@ -75,11 +82,24 @@ public class LessonDAO extends DBContext {
         return content;
     }
 
-    public static void main(String[] args) {
-        LessonDAO ldao = new LessonDAO();
+    public List<Lesson> getLessonsByCourseId(int courseId) {
         List<Lesson> lessons = new ArrayList<>();
-        lessons = ldao.getLessonsByChapterId(57);
-        System.out.println(lessons);
- 
+        String sql = "SELECT * FROM Lesson WHERE course_id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, courseId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Lesson lesson = new Lesson();
+                lesson.setId(rs.getInt("id"));
+                lesson.setTitle(rs.getString("title"));
+                lesson.setStatus(rs.getInt("status"));
+                lesson.setLessonTypeId(rs.getInt("lesson_type_id"));
+                lessons.add(lesson);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lessons;
     }
 }
