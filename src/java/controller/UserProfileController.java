@@ -12,7 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Account;
+import model.User;
 
 /**
  *
@@ -62,7 +62,7 @@ public class UserProfileController extends HttpServlet {
         AccountDAO accountDAO = new AccountDAO();
         
         // Lấy thông tin chi tiết của người dùng từ cơ sở dữ liệu
-        Account user = accountDAO.getUserById(userId);
+        User user = accountDAO.getUserById(userId);
         
         // Kiểm tra nếu người dùng không tồn tại
         if (user == null) {
