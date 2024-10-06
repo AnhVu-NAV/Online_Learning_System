@@ -16,9 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Vector;
-import model.User;
-import model.Setting;
-import model.SettingType;
+import model.*;
 import sendEmail.EmailService;
 import sendEmail.IJavaMail;
 import util.*;
@@ -57,7 +55,7 @@ public class UserDashboardController extends HttpServlet {
             Vector<Setting> settingVector = null;
             SettingType settingType = null;
             String sql = "select * from user ";
-            String checked = "sort_by_id";
+            String checked = "sortById";
             if (fillterSubmit != null) {
                 String searchByName = request.getParameter("searchByName");
                 String searchByEmail = request.getParameter("searchByEmail");
@@ -68,7 +66,7 @@ public class UserDashboardController extends HttpServlet {
                 String sortBy = request.getParameter("sortBy");
                 sql += " where (lower(first_name) like '%" + searchByName.toLowerCase() + "%' or lower(last_name) like '%" + searchByName.toLowerCase() + "%' ) "
                         + " and email like '%" + searchByEmail + "%' "
-                        + " and phone like '%" + searchByPhone + "%' ";
+                        + " and (lơwer(first_phone) like '%" + searchByPhone + "%' or lower(second_phone) like '%" + searchByPhone + "%' )";
                 if (!fillterByGender.equals("all")) {
                     sql += " and gender= " + fillterByGender;
                 }
@@ -95,12 +93,12 @@ public class UserDashboardController extends HttpServlet {
                             break;
                         }
                         case "sortByEmail": {
-                            sql += " order by email asc ";
+                            sql += " order by primary_email asc ";
                             checked = "sortByEmail";
                             break;
                         }
                         case "sortByPhone": {
-                            sql += " order by phone asc ";
+                            sql += " order by first_phone asc, second_phone asc ";
                             checked = "sortByPhone";
                             break;
                         }
@@ -113,18 +111,18 @@ public class UserDashboardController extends HttpServlet {
                 }
             }
             //paging
-            int nrpp=10;
+            int nrpp = 10;
             userVector = userDAO.getUsers(sql);
-            int totalPage=(userVector.size()+nrpp-1)/nrpp;
-            String indexRaw=request.getParameter("index");
-            int index=1;
-            if(indexRaw!=null){
-                index=Integer.parseInt(indexRaw);
+            int totalPage = (userVector.size() + nrpp - 1) / nrpp;
+            String indexRaw = request.getParameter("index");
+            int index = 1;
+            if (indexRaw != null) {
+                index = Integer.parseInt(indexRaw);
             }
-            sql+=" limit "+(index-1)*nrpp+","+nrpp;
+            sql += " limit " + (index - 1) * nrpp + "," + nrpp;
             userVector = userDAO.getUsers(sql);
             settingType = settingTypeDAO.getSettingTypeByName("User Role");
-            settingVector = settingDAO.getSettings("select * from Setting where setting_type_id=" + settingType.getId());          
+            settingVector = settingDAO.getSettings("select * from Setting where setting_type_id=" + settingType.getId());
             //set data for views
             request.setAttribute("data", userVector);
             request.setAttribute("setting", settingVector);
@@ -158,11 +156,10 @@ public class UserDashboardController extends HttpServlet {
             Boolean gender = Boolean.parseBoolean(request.getParameter("addNewUserGender"));
             String email = request.getParameter("addNewUserEmail");
             String phone = request.getParameter("addNewUserPhone");
-            String address = request.getParameter("addNewUserAddress");
             int roleId = Integer.parseInt(request.getParameter("addNewUserRole"));
             String password = CreateRandom.generate6DigitCode();
             Date createdDate = GetTodayDate.getTodayDate();
-            User user = new User(0, email, firstName, lastName, PasswordEncryption.EncryptBySHA256(password), dob, roleId, createdDate, 2, phone, gender, address, null);
+            User user = new User(roleId, email, PasswordEncryption.EncryptBySHA256(password), roleId, createdDate, 2, firstName, lastName, dob, gender, phone, "", "", "", phone);
             userDAO.insertUser(user);
             String subject = "New user successfully created. Please login with your default password";
             String emailContent = "Your default password is " + password;

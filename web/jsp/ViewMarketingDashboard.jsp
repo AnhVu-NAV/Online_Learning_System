@@ -51,7 +51,7 @@
                             <!-- Start fillter by date -->
                             <h5 class="mb-3">Fillter by</h5>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="fillterBy" id="fillterBy"  value="fillterByTheLast7Days" ${checked == 'fillterByTheLast7Days' ? 'checked' : ''}>
                                         <label class="form-check-label" for="fillterByTheLast7Days">
@@ -59,7 +59,9 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="fillterBy" id="fillterBy"  value="fillterByTheLastMonth" ${checked == 'fillterByTheLastMonth' ? 'checked' : ''}>
                                         <label class="form-check-label" for="fillterByTheLastMonth">
@@ -67,7 +69,9 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="fillterBy" id="fillterBy"  value="fillterByTheLastQuarter" ${checked == 'fillterByTheLastQuarter' ? 'checked' : ''}>
                                         <label class="form-check-label" for="fillterByTheLastQuarter">
@@ -75,7 +79,9 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="fillterBy" id="fillterBy"  value="fillterByTheLastYear" ${checked == 'fillterByTheLastYear' ? 'checked' : ''}>
                                         <label class="form-check-label" for="fillterByTheLastYear">
@@ -83,10 +89,8 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
-
+                            </div> 
                             <div class="row">
-
                                 <div class="col-md-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="fillterBy" id="fillterBy"  value="fillterByInputDates" ${checked == 'fillterByInputDates' ? 'checked' : ''}>
@@ -105,8 +109,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
-
+                            </div>
                             <!-- End fillter by date -->
                             <br/>
                             <div class="row">
@@ -195,40 +198,12 @@
 
                             </div>
                             <h3 class="fw-bold fs-4 my-3">New Course</h3>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <!-- Start course fillter -->
-                                    <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
-                                        <select class="form-select form-select-lg" name="courseFillter">
-                                            <option value="new">New</option>
-                                            <option value="all">All</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        View pie chart
-                                    </button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">New course</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <jsp:include page="/jsp/NewCoursePieChart.jsp"></jsp:include>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                            <!-- Start course fillter -->
+                            <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
+                                <select class="form-select form-select-lg" name="courseFillter">
+                                    <option value="new">New</option>
+                                    <option value="all">All</option>
+                                </select>
                             </div>
                             <!-- End course fillter -->
                             <br/>
@@ -270,7 +245,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
                                         <label class="form-check-label" for="flexCheckChecked">
-                                            Category
+                                            Status 
                                         </label>
                                     </div>
                                 </div>
@@ -288,7 +263,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
                                         <label class="form-check-label" for="flexCheckChecked">
-                                            Status
+                                            Category
                                         </label>
                                     </div>
                                 </div>
@@ -328,9 +303,9 @@
                                                 <th scope="col">Title</th>
                                                 <th scope="col">Expert</th>
                                                 <th scope="col">Total Duration</th>
-                                                <th scope="col">Category</th>
-                                                <th scope="col">Description</th>
                                                 <th scope="col">Status</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Category</th>
                                                 <th scope="col">Created date</th>
                                                 <th scope="col">Updated date</th>
                                                 <th scope="col">Number of lesson</th>

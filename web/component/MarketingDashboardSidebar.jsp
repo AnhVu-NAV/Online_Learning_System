@@ -42,6 +42,14 @@
                     </a>
                 </li>              
             </ul>
+            <ul class="sidebar-nav">
+                <li class="sidebar-item">
+                    <a href="${pageContext.request.contextPath}/SliderListController?service=viewSliderList" class="sidebar-link">
+                        <i class="lni lni-user"></i>
+                        <span>Post List</span>
+                    </a>
+                </li>              
+            </ul>
             <div class="sidebar-footer">
                 <a href="#" class="sidebar-link">
                     <i class="lni lni-exit"></i>

@@ -21,7 +21,7 @@
     </head>
     <body>
         <div class="wrapper">
-            <jsp:include page="/component/DashboardSidebar.jsp"></jsp:include>
+            <jsp:include page="/component/AdminDashboardSidebar.jsp"></jsp:include>
                 <div class="main">
                     <main class="content px-3 py-4">
                         <div class="container-fluid">
@@ -43,6 +43,23 @@
                                 </div>
                             </c:if>                                            
                             <!-- End message -->
+                            <!-- Profile start -->
+                            <nav class="navbar navbar-expand px-4 py-3">
+                                <div class="navbar-collapse collapse">
+                                    <ul class="navbar-nav ms-auto">
+                                        <li class="nav-item dropdown">
+                                            <c:set var="user" value="${sessionScope.user}"/>
+                                            <a href="" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                                <img src="${user.getImageURL()}" class="avatar img-fluid" alt="">
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end rounded">
+
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <!-- Profile end -->
                             <h3 class="fw-bold fs-4 mb-3">Admin Dashboard</h3>
                             <h3 class="fw-bold fs-4 my-3">Users List</h3>
                             <form action="UserDashboardController" method="post">
@@ -181,7 +198,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- End sorting -->
                                 <br/>
                                 <input type="hidden" name="service" value="viewAllUser">
@@ -199,7 +215,8 @@
                                                 <th scope="col">Full Name</th>
                                                 <th scope="col">Gender</th>
                                                 <th scope="col">Email</th>
-                                                <th scope="col">Phone</th>
+                                                <th scope="col">First Phone</th>
+                                                <th scope="col">Second Phone</th>
                                                 <th scope="col">Role</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">View</th>
@@ -220,8 +237,9 @@
                                                             </c:when>                                                       
                                                         </c:choose>
                                                     </td>
-                                                    <td>${user.getEmail()}</td>
-                                                    <td>${user.getPhone()}</td>
+                                                    <td>${user.getPrimaryEmail()}</td>
+                                                    <td>${user.getFirstPhone()}</td>
+                                                    <td>${user.getSecondPhone()}</td>
                                                     <td>
                                                         <c:forEach items="${requestScope.setting}" var="setting">
                                                             <c:if test="${user.getRoleId()==setting.getId()}">
@@ -252,8 +270,8 @@
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <c:forEach begin="1" end="${requestScope.totalPage}" var="i">
-                                        <li class="page-item"><a class="page-link" href="user?service=user&index=${i}">${i}</a></li>
-                                    </c:forEach>
+                                        <li class="page-item"><a class="page-link" href="UserDashboardController?service=viewAllUser&index=${i}">${i}</a></li>
+                                        </c:forEach>
                                 </ul>
                             </nav>
                             <!-- Registration Form Section start-->
@@ -298,12 +316,6 @@
                                         <div class="col-md-6 mt-md-0 mt-3">
                                             <label for="phone">Phone</label>
                                             <input type="tel" class="form-control w-100" id="addNewUserPhone" name="addNewUserPhone"> 
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mt-md-0 mt-3">
-                                            <label for="firstName">Address</label>
-                                            <input type="text" class="form-control w-100" id="addNewUserAddress" name="addNewUserAddress"> 
                                         </div>
                                     </div>
                                     <div class="my-md-2 my-3">
