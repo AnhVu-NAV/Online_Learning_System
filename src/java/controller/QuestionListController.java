@@ -46,55 +46,49 @@ public class QuestionListController extends HttpServlet {
         String explaination = request.getParameter("explaination");
         String id_raw = request.getParameter("id"); 
 
-//        try {
+        try {
 
             // filter and list
-//            if (action != null) {
-//                switch (action) {
-//                    case "list":
-//                        data = questionDAO.getAllInformationOfQuestions();
-//                        break;
-//                    case "course":
-//                        data = questionDAO.getAllQuestionsByQuery("order by course.title");
-//                        break;
-//                    case "lesson":
-//                        data = questionDAO.getAllQuestionsByQuery("order by lesson.title");
-//                        break;
-//                    case "chapter":
-//                        data = questionDAO.getAllQuestionsByQuery("order by chapter.title");
-//                        break;
-//                    case "status":
-//                        data = questionDAO.getAllQuestionsByQuery("order by chapter.status");
-//                        break;
-//                }
-//            }
+            if (action != null) {
+                switch (action) {
+                    case "list":
+                        data = questionDAO.getAllInformationOfQuestions();
+                        break;
+                    case "course":
+                        data = questionDAO.getAllQuestionsByQuery("order by course.title");
+                        break;
+                    case "lesson":
+                        data = questionDAO.getAllQuestionsByQuery("order by lesson.title");
+                        break;
+                    case "chapter":
+                        data = questionDAO.getAllQuestionsByQuery("order by chapter.title");
+                        break;
+                    case "status":
+                        data = questionDAO.getAllQuestionsByQuery("order by chapter.status");
+                        break;
+                }
+            }
 
             // search
-//            if (result != null) {
-//                data = questionDAO.searchForQuestion(result);
-//            }
-//            request.setAttribute("data", data);
-            out.println(id_raw);
-            out.println(content);
-            out.println(answer);
-            out.println(level_raw);
-            out.println(typeOfQuestion);
-            out.println(explaination);
+            if (result != null) {
+                data = questionDAO.searchForQuestion(result);
+            }
+            request.setAttribute("data", data);
 
             // Edit
-//            if (content != null && answer != null && level_raw != null && typeOfQuestion != null) {
-//                int type = Integer.parseInt(typeOfQuestion);
-//                int level = Integer.parseInt(level_raw);
-//                Question question = new Question();
-//                question.setContent(content);
-//                question.setLevelId(level);
-//                question.setQuestionTypeId(type);
-//            }
-//        } catch (Exception e) {
-//            request.setAttribute("error", e.getMessage());
-//        } finally {
-//            request.getRequestDispatcher("data2.jsp").forward(request, response);
-//        }
+            if (content != null && answer != null && level_raw != null && typeOfQuestion != null) {
+                int type = Integer.parseInt(typeOfQuestion);
+                int level = Integer.parseInt(level_raw);
+                Question question = new Question();
+                question.setContent(content);
+                question.setLevelId(level);
+                question.setQuestionTypeId(type);
+            }
+        } catch (Exception e) {
+            request.setAttribute("error", e.getMessage());
+        } finally {
+            request.getRequestDispatcher("question_list.jsp").forward(request, response);
+        }
     }
 
     @Override
@@ -138,7 +132,7 @@ public class QuestionListController extends HttpServlet {
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
         } finally {
-            request.getRequestDispatcher("data2.jsp").forward(request, response);
+            request.getRequestDispatcher("question_list.jsp").forward(request, response);
         }
     }
 
