@@ -14,6 +14,7 @@ public class Option {
     private int questionId;
     private boolean isTrue;
     private String explanation;
+    private int status;
 
     public Option() {
     }
@@ -55,6 +56,14 @@ public class Option {
 
     public void setExplanation(String explanation) {
         this.explanation = explanation;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     @Override

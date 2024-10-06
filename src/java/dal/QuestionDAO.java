@@ -34,12 +34,12 @@ public class QuestionDAO extends DBContext {
 
     public Map<Question, List<String>> getAllInformationOfQuestions() {
         Map<Question, List<String>> map = new HashMap<>();
-        String sql = "select question.*, option.is_true, option.explaination, course.title as course_title, chapter.title as chapter_title, lesson.title as lesson_title, quiz.title as quiz_title from Question question\n"
+        String sql = "select question.*, `option`.isTrue, `option`.explaination, course.title as course_title, chapter.title as chapter_title, lesson.title as lesson_title, quiz.title as quiz_title from Question question\n"
                 + "inner join Quiz quiz on question.quiz_id = quiz.lesson_id\n"
                 + "inner join Lesson lesson on lesson.id = quiz.lesson_id\n"
                 + "inner join Chapter chapter on chapter.id = lesson.chapter_id\n"
                 + "inner join Course course on course.id = chapter.course_id\n"
-                + "inner join Option option on option.question_id = question.id";
+                + "inner join `Option` `option` on `option`.question_id = question.id";
         try (PreparedStatement pre = connection.prepareStatement(sql); ResultSet resultSet = pre.executeQuery()) {
             while (resultSet.next()) {
 
@@ -54,7 +54,7 @@ public class QuestionDAO extends DBContext {
 
                 // list
                 List<String> listOfTitle = new ArrayList<>();
-                listOfTitle.add(resultSet.getString("is_true"));
+                listOfTitle.add(resultSet.getString("isTrue"));
                 listOfTitle.add(resultSet.getString("explaination"));
                 listOfTitle.add(resultSet.getString("course_title"));
                 listOfTitle.add(resultSet.getString("chapter_title"));
@@ -85,26 +85,21 @@ public class QuestionDAO extends DBContext {
 
     public Map<Question, List<String>> searchForQuestion(String input) {
         Map<Question, List<String>> map = new HashMap<>();
-        String sql = "select question.*, option.is_true, option.explaination, course.title as course_title, chapter.title as chapter_title, lesson.title as lesson_title, quiz.title as quiz_title from Question question\n"
+        String sql = "select question.*, `option`.isTrue, `option`.explaination, course.title as course_title, chapter.title as chapter_title, lesson.title as lesson_title, quiz.title as quiz_title from Question question\n"
                 + "inner join Quiz quiz on question.quiz_id = quiz.lesson_id\n"
                 + "inner join Lesson lesson on lesson.id = quiz.lesson_id\n"
                 + "inner join Chapter chapter on chapter.id = lesson.chapter_id\n"
                 + "inner join Course course on course.id = chapter.course_id\n"
+                + "inner join `Option` `option` on `option`.question_id = question.id\n"
                 + "where question.content like ? or question.id = ? or question.level_id = ?";
         try (PreparedStatement pre = connection.prepareStatement(sql)) {
             int levelOfQuestion = 0;
             switch (input.toLowerCase()) {
-                case "Easy":
-                    levelOfQuestion = 0;
-                    break;
-                case "Normal":
-                    levelOfQuestion = 1;
-                    break;
-                case "Difficulty":
-                    levelOfQuestion = 2;
-                    break;
-                default:
-                    break;
+                case "Easy" -> levelOfQuestion = 0;
+                case "Normal" -> levelOfQuestion = 1;
+                case "Difficulty" -> levelOfQuestion = 2;
+                default -> {
+                }
             }
             String string = "%" + input + "%";
             pre.setString(1, string);
@@ -124,7 +119,7 @@ public class QuestionDAO extends DBContext {
 
                     // list
                     List<String> listOfTitle = new ArrayList<>();
-                    listOfTitle.add(resultSet.getString("is_true"));
+                    listOfTitle.add(resultSet.getString("isTrue"));
                     listOfTitle.add(resultSet.getString("explaination"));
                     listOfTitle.add(resultSet.getString("course_title"));
                     listOfTitle.add(resultSet.getString("chapter_title"));
@@ -142,12 +137,12 @@ public class QuestionDAO extends DBContext {
 
     public Map<Question, List<String>> getAllQuestionsByQuery(String query) {
         Map<Question, List<String>> map = new HashMap<>();
-        String sql = "select question.*, option.is_true, option.explaination, course.title as course_title, chapter.title as chapter_title, lesson.title as lesson_title, quiz.title as quiz_title from Question question\n"
+        String sql = "select question.*, `option`.isTrue, `option`.explaination, course.title as course_title, chapter.title as chapter_title, lesson.title as lesson_title, quiz.title as quiz_title from Question question\n"
                 + "inner join Quiz quiz on question.quiz_id = quiz.lesson_id\n"
                 + "inner join Lesson lesson on lesson.id = quiz.lesson_id\n"
                 + "inner join Chapter chapter on chapter.id = lesson.chapter_id\n"
                 + "inner join Course course on course.id = chapter.course_id\n"
-                + "inner join Option option on option.question_id = question.id\n" + query;
+                + "inner join `Option` `option` on `option`.question_id = question.id\n" + query;
         try (PreparedStatement pre = connection.prepareStatement(sql); ResultSet resultSet = pre.executeQuery()) {
             while (resultSet.next()) {
 
@@ -162,7 +157,7 @@ public class QuestionDAO extends DBContext {
 
                 // list
                 List<String> listOfTitle = new ArrayList<>();
-                listOfTitle.add(resultSet.getString("is_true"));
+                listOfTitle.add(resultSet.getString("isTrue"));
                 listOfTitle.add(resultSet.getString("explaination"));
                 listOfTitle.add(resultSet.getString("course_title"));
                 listOfTitle.add(resultSet.getString("chapter_title"));
@@ -174,5 +169,33 @@ public class QuestionDAO extends DBContext {
             Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return map;
+    }
+
+    public void updateStatus(int status, int id) {
+        String sql = "update Question\n"
+                + "set status = ? \n"
+                + "where id = ?";
+        try (PreparedStatement pre = connection.prepareStatement(sql)) {
+            pre.setInt(1, status);
+            pre.setInt(2, id);
+            pre.executeUpdate();
+        } catch (Exception e) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    public static void main(String[] args) {
+        QuestionDAO questionDAO = new QuestionDAO();
+        Map<Question, List<String>> data = new HashMap<>();
+        data = questionDAO.getAllInformationOfQuestions();
+        for (Question q : data.keySet()) {
+            System.out.println(q.toString());
+        }
+        System.out.println("values");
+        for (List<String> l : data.values()) {
+            for (String s : l) {
+                System.out.println(s);
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
 import model.*;
-import util.ImportFile;
+import util.ImportFileAndNormalizingData;
 
 /**
  *
@@ -38,22 +38,14 @@ public class QuestionListController extends HttpServlet {
         Map<Question, List<String>> data = new HashMap<>();
         String action = request.getParameter("action");
         String result = request.getParameter("result");
-
-        String content = request.getParameter("content");
-        String answer = request.getParameter("answer");
-        String level_raw = request.getParameter("level");
-        String typeOfQuestion = request.getParameter("type");
-        String explaination = request.getParameter("explaination");
-        String id_raw = request.getParameter("id"); 
+        int id;
 
         try {
+            data = questionDAO.getAllInformationOfQuestions();
 
             // filter and list
             if (action != null) {
                 switch (action) {
-                    case "list":
-                        data = questionDAO.getAllInformationOfQuestions();
-                        break;
                     case "course":
                         data = questionDAO.getAllQuestionsByQuery("order by course.title");
                         break;
@@ -66,6 +58,14 @@ public class QuestionListController extends HttpServlet {
                     case "status":
                         data = questionDAO.getAllQuestionsByQuery("order by chapter.status");
                         break;
+                    case "show":
+                        id = Integer.parseInt(request.getParameter("id"));
+                        questionDAO.updateStatus(1, id);
+                        break;
+                    case "hide":
+                        id = Integer.parseInt(request.getParameter("id"));
+                        questionDAO.updateStatus(0, id);
+                        break;
                 }
             }
 
@@ -75,16 +75,7 @@ public class QuestionListController extends HttpServlet {
             }
             request.setAttribute("data", data);
 
-            // Edit
-            if (content != null && answer != null && level_raw != null && typeOfQuestion != null) {
-                int type = Integer.parseInt(typeOfQuestion);
-                int level = Integer.parseInt(level_raw);
-                Question question = new Question();
-                question.setContent(content);
-                question.setLevelId(level);
-                question.setQuestionTypeId(type);
-            }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             request.setAttribute("error", e.getMessage());
         } finally {
             request.getRequestDispatcher("question_list.jsp").forward(request, response);
@@ -96,6 +87,13 @@ public class QuestionListController extends HttpServlet {
             throws ServletException, IOException {
         QuestionDAO questionDAO = new QuestionDAO();
         PrintWriter out = response.getWriter();
+
+        String content = request.getParameter("content");
+        String answer = request.getParameter("answer");
+        String level_raw = request.getParameter("level");
+        String typeOfQuestion = request.getParameter("type");
+        String explaination = request.getParameter("explaination");
+        String id_raw = request.getParameter("id");
 
         try {
             // upload file
@@ -113,31 +111,60 @@ public class QuestionListController extends HttpServlet {
                     //copy to build/web/uploads folder
                     Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 }
-                List<String[]> data = ImportFile.readXlsx(file.getPath());
+                List<String[]> data = ImportFileAndNormalizingData.readXlsx(file.getPath());
+                int count = 1;
                 for (String[] array : data) {
+                    ++count;
                     Question question = new Question();
-                    question.setContent(array[1]);
-                    question.setQuestionTypeId(Integer.parseInt(array[2]));
-                    question.setLevelId(Integer.parseInt(array[3]));
+                    String validContent = ImportFileAndNormalizingData.getContent(array[1], count);
+                    int validQuestionType = ImportFileAndNormalizingData.getTypeOfQuestion(array[2], count);
+                    int levelId = ImportFileAndNormalizingData.getLevelOfQuestion(array[3], count);
+
+                    question.setContent(validContent);
+                    question.setQuestionTypeId(validQuestionType);
+                    question.setLevelId(levelId);
                     String courseTitle = array[6];
                     String quiz = array[7];
                     String lesson = array[8];
                     String chapter = array[9];
 
                     int quizId = getQuizId(courseTitle, quiz, lesson, chapter);
+                    if (quizId == -1) {
+                        throw new Exception("Title of Course, Quiz, Lesson or Chapter is wrong at the line " + count);
+                    }
                     question.setQuizId(quizId);
                     questionDAO.insert(question);
                 }
             }
+
+            // Edit
+//            if (content != null && answer != null && level_raw != null && typeOfQuestion != null && id_raw != null && explaination != null) {
+//                int type = Integer.parseInt(typeOfQuestion);
+//                int level = Integer.parseInt(level_raw);
+//                int id = Integer.parseInt(id_raw);
+//                Question question = new Question();
+//                question.setContent(content);
+//                question.setLevelId(level);
+//                question.setQuestionTypeId(type);
+//
+//                OptionDAO optionDAO = new OptionDAO();
+//                int optionId = optionDAO.getIdByQuestionId(id);
+//                Option option = optionDAO.getOptionById(optionId);
+//                option.setExplanation(explaination);
+//            }
+
         } catch (Exception e) {
-            request.setAttribute("error", e.getMessage());
-        } finally {
-            request.getRequestDispatcher("question_list.jsp").forward(request, response);
+//            request.setAttribute("error", e.getMessage());
+            out.println(e.getMessage());
+//        } finally {
+//            request.getRequestDispatcher("question_list.jsp").forward(request, response);
         }
     }
 
     private int getQuizId(String courseTitle, String quiz, String lesson, String chapter) {
         String query;
+        int quizId = -1;
+
         // get Chapter's id by Chapter's name and Course's title
         ChapterDAO chapterDAO = new ChapterDAO();
         query = "inner join Course course on chapter.course_id = course.id where chapter.title = "
@@ -157,7 +184,7 @@ public class QuestionListController extends HttpServlet {
         query = "inner join Lesson lesson on quiz.lesson_id = lesson.id where quiz.title = "
                 + quiz
                 + " and lesson.id = " + lessonId;
-        int quizId = quizDAO.getIdByRequest(query);
+        quizId = quizDAO.getIdByRequest(query);
 
         return quizId;
     }
@@ -166,5 +193,4 @@ public class QuestionListController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }
-
 }

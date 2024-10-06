@@ -77,70 +77,60 @@
                                     </div>
                                     <div class="box-body">
                                         <p style="color: red;">${requestScope.error}</p>
-                                    <%--<c:if test="${requestScope.data ne null}">--%>
-                                    <table id="example2" class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr id="tableHeader">
-                                                <th>Id</th>
-                                                <th>Content</th>
-                                                <th>True Answer</th>
-                                                <th>Explanation</th>
-                                                <th>Level of difficulty</th>
-                                                <th>Show/Hide</th>
-                                                <th>Edit</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="item" items="${requestScope.data}">
-                                                <c:set var="properties" value="${item}"/>
-                                            <script>
-                                                    var obj = ${properties};
-                                                    var course = obj.getValue().get(2);
-                                                    var chapter = obj.getValue().get(3);
-                                                    var lesson = obj.getValue().get(4);
-                                                    var quiz = obj.getValue().get(5);
-                                            </script>
-                                            <tr id="tableBody">
-                                                <td>${item.getKey().getId()}</td>  <!-- question id  -->
-                                                <td>${item.getKey().getContent()}</td>  <!-- question content  --> 
-                                                <td>${item.getValue().get(0)}</td>  <!-- option is_true  --> 
-                                                <td>${item.getValue().get(1)}</td>  <!-- option explaination  --> 
-                                                <td>  question level_id 
-                                                    <c:if test="${item.getKey().getLevelId() eq 0}">
-                                                        Easy
-                                                    </c:if>
-                                                    <c:if test="${item.getKey().getLevelId() eq 1}">
-                                                        Normal
-                                                    </c:if>
-                                                    <c:if test="${item.getKey().getLevelId() eq 2}">
-                                                        Difficult
-                                                    </c:if>
-                                                </td>
-                                                <td>
-                                                    <a href="#">Show</a><br/> 
-                                                    <a href="#">Hide</a><br/> 
-                                                </td>
-                                                <td><a href="#" data-toggle="modal" data-target="#editQuestionModal">Edit</a></td>
-                                            </tr>
-                                        </c:forEach>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>
-                                                <a href="#" data-toggle="modal" data-target="#editQuestionModal">Edit</a>
-                                                <c:set var="id" value="${item.getKey().getId()}"/>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <%--</c:if>--%>
-                                    <%--<c:if test="${requestScope.data eq null}">--%>
-                                    <!--<p>No data</p>--> 
-                                    <%--</c:if>--%>
+                                    <c:if test="${requestScope.data ne null}">
+                                        <table id="example2" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr id="tableHeader">
+                                                    <th>Id</th>
+                                                    <th>Content</th>
+                                                    <th>True Answer</th>
+                                                    <th>Explanation</th>
+                                                    <th>Level of difficulty</th>
+                                                    <th>Show/Hide</th>
+                                                    <th>Edit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="item" items="${requestScope.data}">
+                                                    <c:set var="properties" value="${item}"/>
+                                                <script>
+                                                var obj = ${properties};
+                                                var course = obj.getValue().get(2);
+                                                var chapter = obj.getValue().get(3);
+                                                var lesson = obj.getValue().get(4);
+                                                var quiz = obj.getValue().get(5);
+                                                var status = obj.getKey().getStatus();
+                                                var id = obj.getKey().getId();
+                                                </script>
+                                                <tr id="tableBody">
+                                                    <td>${item.getKey().getId()}</td>  <!-- question id  -->
+                                                    <td>${item.getKey().getContent()}</td>  <!-- question content  --> 
+                                                    <td>${item.getValue().get(0)}</td>  <!-- option is_true  --> 
+                                                    <td>${item.getValue().get(1)}</td>  <!-- option explaination  --> 
+                                                    <td> <!-- question level_id -->
+                                                        <c:if test="${item.getKey().getLevelId() eq 0}">
+                                                            Easy
+                                                        </c:if>
+                                                        <c:if test="${item.getKey().getLevelId() eq 1}">
+                                                            Normal
+                                                        </c:if>
+                                                        <c:if test="${item.getKey().getLevelId() eq 2}">
+                                                            Difficult
+                                                        </c:if>
+                                                    </td>
+                                                    <td>
+                                                        <a href="QuestionList?action=show">Show</a><br/> 
+                                                        <a href="QuestionList?action=hide">Hide</a><br/> 
+                                                    </td>
+                                                    <td><a href="#" onclick="importData(${item.getKey().getId()})" data-toggle="modal" data-target="#editQuestionModal">Edit</a></td> <!-- checked --> 
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </c:if>
+                                    <c:if test="${requestScope.data eq null}">
+                                        <p>No data</p> 
+                                    </c:if>
                                 </div> 
                             </div>
                         </div>
@@ -181,6 +171,11 @@
             </div>
 
             <!-- Edit --> 
+            <script>
+                function importData(index) {
+                    document.querySelector('input[name="id"]').value = index;
+                }
+            </script>
             <div class="modal fade" id="editQuestionModal" tabindex="-1" role="dialog" aria-labelledby="addQuestionModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -189,8 +184,8 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h3 class="modal-title text-center" id="addQuestionModalLabel">Edit a New Question</h3>
-                            <form action="QuestionList" method="GET">
-                                <input type="hidden" name="id" value="${id}"/> 
+                            <form action="QuestionList" method="POST">
+                                <input type="hidden" name="id" value=""/> 
                                 <table>
                                     <tr>
                                         <td>Content:</td>
@@ -238,86 +233,80 @@
         <script src="lib/plugins/fastclick/fastclick.js"></script>
         <script src="lib/dist/js/app.min.js"></script>
         <script>
-                                                    function updateTable() {
-                                                        const header = document.getElementById("tableHeader");
-                                                        header.innerHTML = "<th>Id</th><th>Content</th><th>True Answer</th><th>Explanation</th><th>Level of difficulty</th><th>Show/Hide</th><th>Edit</th>";
-
-                                                        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-                                                        checkboxes.forEach(checkbox => {
-                                                            switch (checkbox.name) {
-                                                                case "quiz":
-                                                                    header.innerHTML += "<th>Quiz</th>";
-                                                                    break;
-                                                                case "course":
-                                                                    header.innerHTML += "<th>Course</th>";
-                                                                    break;
-                                                                case "lesson":
-                                                                    header.innerHTML += "<th>Lesson</th>";
-                                                                    break;
-                                                                case "chapter":
-                                                                    header.innerHTML += "<th>Chapter</th>";
-                                                                    break;
-                                                                case "status":
-                                                                    header.innerHTML += "<th>Status</th>";
-                                                                    break;
-                                                            }
-                                                        });
-
-                                                        const bodyContent = document.getElementById("tableBody");
-                                                        bodyContent.innerHTML = "";
-
-                                                        const questions = [
-                                                            {
-                                                                id: 1,
-                                                                content: "How about your day?",
-                                                                explanation: "X"
-                                                            },
-                                                        ];
-
-                                                        questions.forEach(question => {
-                                                            let row = "<tr>";
-                                                            row += `<td>` + obj.getKey().getId() + `</td>`;
-                                                            row += `<td>` + obj.getKey().getContent() + `</td>`;
-                                                            row += `<td>` + obj.getValue().get(0) + `</td>`;
-                                                            row += `<td>` + obj.getValue().get(1) + `</td>`;
-                                                            switch (obj.getKey().getLevelId()) {
-                                                                case 0:
-                                                                    row += `<td>Easy</td>`;
-                                                                    break;
-                                                                case 1:
-                                                                    row += `<td>Normal</td>`;
-                                                                    break;
-                                                                case 2:
-                                                                    row += `<td>Difficult</td>`;
-                                                                    break;
-                                                            }
-                                                            row += `<td><a href="#">Show</a><br/><a href="#">Hide</a></td>`;
-                                                            row += `<td><a href="#">Edit</a></td>`;
-
-                                                            checkboxes.forEach(checkbox => {
-                                                                switch (checkbox.name) {
-                                                                    case "quiz":
-                                                                        row += "<td>" + quiz + "</td>";
-                                                                        break;
-                                                                    case "course":
-                                                                        row += "<td>" + course + "</td>";
-                                                                        break;
-                                                                    case "lesson":
-                                                                        row += "<td>" + lesson + "</td>";
-                                                                        break;
-                                                                    case "chapter":
-                                                                        row += "<td>" + chapter + "</td>";
-                                                                        break;
-                                                                    case "status":
-                                                                        row += "<td>" + chapter + "</td>";
-                                                                        break;
-                                                                }
-                                                            });
-
-                                                            row += "</tr>";
-                                                            bodyContent.innerHTML += row;
-                                                        });
-                                                    }
+                function updateTable() {
+                    const header = document.getElementById("tableHeader");
+                    header.innerHTML = "<th>Id</th><th>Content</th><th>True Answer</th><th>Explanation</th><th>Level of difficulty</th><th>Show/Hide</th><th>Edit</th>";
+                    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                    checkboxes.forEach(checkbox => {
+                        switch (checkbox.name) {
+                            case "quiz":
+                                header.innerHTML += "<th>Quiz</th>";
+                                break;
+                            case "course":
+                                header.innerHTML += "<th>Course</th>";
+                                break;
+                            case "lesson":
+                                header.innerHTML += "<th>Lesson</th>";
+                                break;
+                            case "chapter":
+                                header.innerHTML += "<th>Chapter</th>";
+                                break;
+                            case "status":
+                                header.innerHTML += "<th>Status</th>";
+                                break;
+                        }
+                    });
+                    const bodyContent = document.getElementById("tableBody");
+                    bodyContent.innerHTML = "";
+                    const questions = [
+                        {
+                            id: 1,
+                            content: "How about your day?",
+                            explanation: "X"
+                        },
+                    ];
+                    questions.forEach(question => {
+                        let row = "<tr>";
+                        row += `<td>` + obj.getKey().getId() + `</td>`;
+                        row += `<td>` + obj.getKey().getContent() + `</td>`;
+                        row += `<td>` + obj.getValue().get(0) + `</td>`;
+                        row += `<td>` + obj.getValue().get(1) + `</td>`;
+                        switch (obj.getKey().getLevelId()) {
+                            case 0:
+                                row += `<td>Easy</td>`;
+                                break;
+                            case 1:
+                                row += `<td>Normal</td>`;
+                                break;
+                            case 2:
+                                row += `<td>Difficult</td>`;
+                                break;
+                        }
+                        row += `<td><a href="QuestionList?action=show">Show</a><br/><a href="QuestionList?action=hide">Hide</a></td>`;
+                        row += `<td><td><a href="#" onclick="importData(` + id + `)" data-toggle="modal" data-target="#editQuestionModal">Edit</a></td></td>`;
+                        checkboxes.forEach(checkbox => {
+                            switch (checkbox.name) {
+                                case "quiz":
+                                    row += "<td>" + quiz + "</td>";
+                                    break;
+                                case "course":
+                                    row += "<td>" + course + "</td>";
+                                    break;
+                                case "lesson":
+                                    row += "<td>" + lesson + "</td>";
+                                    break;
+                                case "chapter":
+                                    row += "<td>" + chapter + "</td>";
+                                    break;
+                                case "status":
+                                    row += "<td>" + status + "</td>";
+                                    break;
+                            }
+                        });
+                        row += "</tr>";
+                        bodyContent.innerHTML += row;
+                    });
+                }
         </script>
     </body>
 </html>

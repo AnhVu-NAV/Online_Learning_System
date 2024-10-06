@@ -70,6 +70,7 @@ public class CourseDAO extends DBContext {
         return course;
     }
 
+    // test done
     public Vector<Course> getAllCourses() {
         Vector<Course> list = new Vector();
         String sql = "select * from Course";
@@ -122,6 +123,13 @@ public class CourseDAO extends DBContext {
             pre.executeQuery();
         } catch (Exception e) {
             Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
+    public static void main(String[] args) {
+        CourseDAO courseDAO = new CourseDAO();
+        for (Course c: courseDAO.getAllCourses()) {
+            System.out.println(c.toString());
         }
     }
 }
