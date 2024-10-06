@@ -31,7 +31,7 @@
     </head>
     <body>
         <div class="wrapper">
-            <jsp:include page="/component/DashboardSidebar.jsp"></jsp:include>
+            <jsp:include page="/component/AdminDashboardSidebar.jsp"></jsp:include>
             <c:set var="user" value="${requestScope.user}"></c:set>
                 <section style="background-color: #eee;" id="ViewUserDetail" >
                     <div class="container py-5">
@@ -54,17 +54,17 @@
                                          class="rounded-circle img-fluid" style="width: 150px;">
                                     <h5 class="my-3">${user.getFirstName()} ${user.getLastName()}</h5>
                                     <!-- Update user start -->                                                                                                                        
-                                    <select class="form-select w-100" onchange="window.location.href=this.value">  
-                                            <c:forEach items="${requestScope.setting}" var="setting">
-                                                <option value="${pageContext.request.contextPath}/UserDashboardController?service=updateUser&userId=${user.getId()}&roleId=${setting.getId()}" ${user.getRoleId()==setting.getId()?"selected":""} >${setting.getValue()}</option>
-                                            </c:forEach>
-                                        </select>
-                                        <br/>
-                                        <div class="d-flex justify-content-center mb-2">
-                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${user.getStatus() == 1 ? 'btn-success' : 'btn-outline-success'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/UserDashboardController?service=updateUser&userId=${user.getId()}&status=1';">Activated</button>
-                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${user.getStatus() == 0 ? 'btn-danger' : 'btn-outline-danger'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/UserDashboardController?service=updateUser&userId=${user.getId()}&status=0';">Deactivated</button>
-                                            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${user.getStatus() == 2 ? 'btn-warning' : 'btn-outline-warning'} mx-2" onclick="window.location.href='${pageContext.request.contextPath}/UserDashboardController?service=updateUser&userId=${user.getId()}&status=2';">Default</button>
-                                        </div>                                                                           
+                                    <select class="form-select w-100" onchange="window.location.href = this.value">  
+                                        <c:forEach items="${requestScope.setting}" var="setting">
+                                            <option value="${pageContext.request.contextPath}/UserDashboardController?service=updateUser&userId=${user.getId()}&roleId=${setting.getId()}" ${user.getRoleId()==setting.getId()?"selected":""} >${setting.getValue()}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <br/>
+                                    <div class="d-flex justify-content-center mb-2">
+                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${user.getStatus() == 1 ? 'btn-success' : 'btn-outline-success'} mx-2" onclick="window.location.href = '${pageContext.request.contextPath}/UserDashboardController?service=updateUser&userId=${user.getId()}&status=1';">Activated</button>
+                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${user.getStatus() == 0 ? 'btn-danger' : 'btn-outline-danger'} mx-2" onclick="window.location.href = '${pageContext.request.contextPath}/UserDashboardController?service=updateUser&userId=${user.getId()}&status=0';">Deactivated</button>
+                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn ${user.getStatus() == 2 ? 'btn-warning' : 'btn-outline-warning'} mx-2" onclick="window.location.href = '${pageContext.request.contextPath}/UserDashboardController?service=updateUser&userId=${user.getId()}&status=2';">Default</button>
+                                    </div>                                                                           
                                     <!-- Update user end -->
                                 </div>
                             </div>
@@ -101,19 +101,28 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <p class="mb-0">Email</p>
+                                            <p class="mb-0">Primary Email</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">${user.getEmail()}</p>
+                                            <p class="text-muted mb-0">${user.getPrimaryEmail()}</p>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <p class="mb-0">Phone</p>
+                                            <p class="mb-0">First phone</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">${user.getPhone()}</p>
+                                            <p class="text-muted mb-0">${user.getFirstPhone()}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Second phone</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">${user.getSecondPhone()}</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -128,10 +137,19 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <p class="mb-0">Address</p>
+                                            <p class="mb-0">Secondary email</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">${user.getAddress()}</p>
+                                            <p class="text-muted mb-0">${user.getSecondaryEmail()}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Prefer contact</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">${user.getPreferContact()}</p>
                                         </div>
                                     </div>
                                 </div>
