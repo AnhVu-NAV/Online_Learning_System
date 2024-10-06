@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.Vector,model.Setting" %>
+<%@page import="java.util.Vector,model.Setting,model.SettingType" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -42,16 +42,16 @@
     </head>
     <body>
         <div class="wrapper">
-            <jsp:include page="/component/DashboardSidebar.jsp"></jsp:include>
+            <jsp:include page="/component/AdminDashboardSidebar.jsp"></jsp:include>
             <c:set var="setting" value="${requestScope.setting}"></c:set>
-            <section style="background-color: #eee;" id="ViewSettingDetail">
-                <div class="container py-5">
+                <section style="background-color: #eee;" id="ViewSettingDetail">
+                    <div class="container py-5">                     
                     <div class="row">
                         <div class="col">
                             <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4">
                                 <ol class="breadcrumb mb-0">
-                                    <li class="breadcrumb-item"><a href="AccountDashboardController?service=viewAllAccount">User List</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">User Details</li>
+                                    <li class="breadcrumb-item"><a href="SettingDashboardController?service=viewAllSetting">Setting List</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Setting Details</li>
                                 </ol>
                             </nav>
                         </div>
@@ -59,26 +59,35 @@
                     <section id="ViewSettingDetail">
 
                         <div class="form-container">
-                            <form action="SettingDashboardController" method="post">
+                            <form action="${pageContext.request.contextPath}/SettingDashboardController" method="post">
+                                <div class="form-group mb-3">
+                                    <label for="settingValue">Setting ID</label>
+                                    <input type="text" class="form-control" readonly="true" value="${setting.getId()}" name="settingId">
+                                </div>
                                 <div class="form-group mb-3">
                                     <label for="settingType">Setting Type</label>
-                                    <select id="settingType" class="form-control">
-                                        <option value="1">Account Role</option>
-                                        <option value="2">User Log Type</option>
+                                    <select  class="form-control" name="settingTypeId">
+                                        <c:forEach items="${requestScope.settingType}" var="settingType">
+                                            <option value="${settingType.getId()}"  ${setting.getSettingTypeId()==settingType.getId()?"selected":""}>${settingType.getName()}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="settingValue">Value</label>
-                                    <input type="text" class="form-control" id="settingValue" placeholder="Enter setting value">
+                                    <input type="text" class="form-control" value="${setting.getValue()}" name="settingValue">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="settingStatus">Status</label>
-                                    <select id="settingStatus" class="form-control">
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
+                                    <select id="settingStatus" class="form-control" name="settingStatus">
+                                        <option value="1" ${setting.getStatus()==1?"selected":""}>Activated</option>
+                                        <option value="0" ${setting.getStatus()==0?"selected":""}>Deactivated</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100">Submit</button>
+                                <div class="form-group mb-3">
+                                    <label for="settingValue">Description</label>
+                                    <input type="text" class="form-control" name="settingDescription" value="${setting.getDescription()}">
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Update</button>
                                 <input type="hidden" name="service" value="updateSetting">
                             </form>
                         </div>

@@ -15,20 +15,20 @@ public class Setting {
     private int id;
     private int settingTypeId;
     private String value;
-    private String description;
     private int status;
+    private String description;
     private Date createdDate;
     private Date updatedDate;
 
     public Setting() {
     }
 
-    public Setting(int id, int settingTypeId, String value, String description, int status, Date createdDate, Date updatedDate) {
+    public Setting(int id, int settingTypeId, String value, int status, String description, Date createdDate, Date updatedDate) {
         this.id = id;
         this.settingTypeId = settingTypeId;
         this.value = value;
-        this.description = description;
         this.status = status;
+        this.description = description;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
     }
@@ -57,20 +57,20 @@ public class Setting {
         this.value = value;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public int getStatus() {
         return status;
     }
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getCreatedDate() {
@@ -88,5 +88,7 @@ public class Setting {
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
+
+    
 
 }

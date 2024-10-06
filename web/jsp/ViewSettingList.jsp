@@ -21,7 +21,7 @@
     </head>
     <body>
         <div class="wrapper">
-            <jsp:include page="/component/DashboardSidebar.jsp"></jsp:include>
+            <jsp:include page="/component/AdminDashboardSidebar.jsp"></jsp:include>
                 <div class="main">
                     <main class="content px-3 py-4">
                         <div class="container-fluid">
@@ -43,6 +43,23 @@
                                 </div>
                             </c:if>                                            
                             <!-- End message -->
+                            <!-- Profile start -->
+                            <nav class="navbar navbar-expand px-4 py-3">
+                                <div class="navbar-collapse collapse">
+                                    <ul class="navbar-nav ms-auto">
+                                        <li class="nav-item dropdown">
+                                        <c:set var="user" value="${sessionScope.user}"/>
+                                            <a href="" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                                <img src="${user.getImageURL()}" class="avatar img-fluid" alt="">
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end rounded">
+
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <!-- Profile end -->
                             <h3 class="fw-bold fs-4 mb-3">Admin Dashboard</h3>
                             <h3 class="fw-bold fs-4 my-3">Setting List</h3>
                             <form action="SettingDashboardController" method="post">

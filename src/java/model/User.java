@@ -13,38 +13,42 @@ import java.util.Date;
 public class User {
 
     private int id;
-    private String email;
-    private String firstName;
-    private String lastName;
+    private String primaryEmail;
     private String password;
-    private Date dob;
     private int roleId;
     private Date createdDate;
     private int status;
-    private String phone;
+    private String firstName;
+    private String lastName;
+    private Date dob;
     private boolean gender;
-    private String address;
-    private String imageURL;       
+    private String firstPhone;
+    private String secondPhone;
+    private String secondaryEmail;
+    private String imageURL;
+    private String preferContact;
 
     public User() {
     }
 
-    public User(int id, String email, String firstName, String lastName, String password, Date dob, int roleId, Date createdDate, int status, String phone, boolean gender, String address, String imageURL) {
+    public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, boolean gender, String firstPhone, String secondPhone, String secondaryEmail, String imageURL, String preferContact) {
         this.id = id;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.primaryEmail = primaryEmail;
         this.password = password;
-        this.dob = dob;
         this.roleId = roleId;
         this.createdDate = createdDate;
         this.status = status;
-        this.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
         this.gender = gender;
-        this.address = address;
+        this.firstPhone = firstPhone;
+        this.secondPhone = secondPhone;
+        this.secondaryEmail = secondaryEmail;
         this.imageURL = imageURL;
+        this.preferContact = preferContact;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -53,28 +57,12 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPrimaryEmail() {
+        return primaryEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPrimaryEmail(String primaryEmail) {
+        this.primaryEmail = primaryEmail;
     }
 
     public String getPassword() {
@@ -83,14 +71,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
     }
 
     public int getRoleId() {
@@ -117,12 +97,28 @@ public class User {
         this.status = status;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
     public boolean isGender() {
@@ -133,12 +129,28 @@ public class User {
         this.gender = gender;
     }
 
-    public String getAddress() {
-        return address;
+    public String getFirstPhone() {
+        return firstPhone;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setFirstPhone(String firstPhone) {
+        this.firstPhone = firstPhone;
+    }
+
+    public String getSecondPhone() {
+        return secondPhone;
+    }
+
+    public void setSecondPhone(String secondPhone) {
+        this.secondPhone = secondPhone;
+    }
+
+    public String getSecondaryEmail() {
+        return secondaryEmail;
+    }
+
+    public void setSecondaryEmail(String secondaryEmail) {
+        this.secondaryEmail = secondaryEmail;
     }
 
     public String getImageURL() {
@@ -149,10 +161,12 @@ public class User {
         this.imageURL = imageURL;
     }
 
-    
+    public String getPreferContact() {
+        return preferContact;
+    }
 
-    
-    
-    
+    public void setPreferContact(String preferContact) {
+        this.preferContact = preferContact;
+    }
 
 }
