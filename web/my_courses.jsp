@@ -79,6 +79,7 @@
 
         <!-- Search -->
         <div class="container-fluid align-content-sm-center d-flex justify-content-end">
+            
             <!-- Lựa chọn In-progress và Completed -->
             <div class="d-md-inline-flex me-auto">
                 <a href="myCourse?view=in_progress"><h4 class="selection">In-Progress</h4></a> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -102,6 +103,7 @@
                         <h6 class="section-title bg-white text-center text-primary px-3">Courses</h6>
                         <h1 class="mb-5">In Progress</h1>
                     </div>
+                    
                     <!--Course-->
                     <div class="row g-4 justify-content-center">
                         <c:forEach items="${requestScope.in_progress}" var="i">

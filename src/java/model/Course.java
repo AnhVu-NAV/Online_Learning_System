@@ -14,6 +14,7 @@ public class Course {
 
     private int id;
     private String title;
+    private String subtitle;
     private int expertId;
     private float totalDuration;
     private int status;
@@ -22,12 +23,12 @@ public class Course {
     private Date createdDate;
     private Date updatedDate;
     private String thumbnailUrl;
-    private int numberOfLesson;
+    private int numberOfLearner;
 
     public Course() {
     }
 
-    public Course(int id, String title, int expertId, float totalDuration, int status, String description, int categoryId, Date createdDate, Date updatedDate, String thumbnailUrl, int numberOfLesson) {
+    public Course(int id, String title, int expertId, float totalDuration, int status, String description, int categoryId, Date createdDate, Date updatedDate, String thumbnailUrl, int numberOfLearner) {
         this.id = id;
         this.title = title;
         this.expertId = expertId;
@@ -38,7 +39,7 @@ public class Course {
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
         this.thumbnailUrl = thumbnailUrl;
-        this.numberOfLesson = numberOfLesson;
+        this.numberOfLearner = numberOfLearner;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getter and Setter methods. Click on the + sign on the left to edit the code.">
@@ -122,18 +123,26 @@ public class Course {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public int getNumberOfLesson() {
-        return numberOfLesson;
+    public int getNumberOfLearner() {
+        return numberOfLearner;
     }
 
-    public void setNumberOfLesson(int numberOfLesson) {
-        this.numberOfLesson = numberOfLesson;
+    public void setNumberOfLearner(int numberOfLearner) {
+        this.numberOfLearner = numberOfLearner;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
     // </editor-fold>
 
     @Override
     public String toString() {
-        return "Course{" + "id=" + id + ", title=" + title + ", expertId=" + expertId + ", totalDuration=" + totalDuration + ", status=" + status + ", description=" + description + ", categoryId=" + categoryId + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + ", thumbnailUrl=" + thumbnailUrl + ", numberOfLesson=" + numberOfLesson + '}';
+        return "Course{" + "id=" + id + ", title=" + title + ", expertId=" + expertId + ", totalDuration=" + totalDuration + ", status=" + status + ", description=" + description + ", categoryId=" + categoryId + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + ", thumbnailUrl=" + thumbnailUrl + ", numberOfLesson=" + numberOfLearner + '}';
     }
 
 }

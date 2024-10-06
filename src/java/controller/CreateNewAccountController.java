@@ -81,14 +81,10 @@ public class CreateNewAccountController extends HttpServlet {
                     request.setAttribute("vetifyCode", "bb");
                     phoneNumber = InputValidation.getPhone(phoneNumber);
                     if (password.equals(rewritePassword) && InputValidation.getFormattedPassword(password)) {
-                        //user: email, password, status
-                        //userDetail: phoneNumber, user id
+                        
                         UserDAO userDAO = new UserDAO();
-                        UserDetailDAO userDetailDAO = new UserDetailDAO();
-                        User user = new User(newEmail, password, 0);
-                        UserDetail userDetail = new UserDetail(userDAO.getIdByEmail(newEmail), phoneNumber);
-                        userDAO.insertAccount(user);
-                        userDetailDAO.insert(userDetail);
+                        User user = new User(email, password, 0, phoneNumber); 
+                        userDAO.insertAccount(user); 
 
                         request.getRequestDispatcher("login.jsp").forward(request, response);
                     } else {

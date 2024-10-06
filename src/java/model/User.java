@@ -5,7 +5,6 @@
 package model;
 
 import java.util.Date;
-import java.util.Vector;
 import util.GetCurrentDate;
 import util.PasswordEncoding;
 
@@ -18,9 +17,18 @@ public class User {
     private int id;
     private String primaryEmail;
     private String password;
-    private int status;
+    private int roleId;
     private Date createdDate;
-    private Date updatedDate;
+    private int status;
+    private String firstName;
+    private String lastName;
+    private Date dob;
+    private boolean gender;
+    private String firstPhone;
+    private String secondPhone;
+    private String secondaryEmail;
+    private String imageURL;
+    private String preferContact;
 
     public User() {
     }
@@ -33,10 +41,11 @@ public class User {
     }
 
     //use for create account
-    public User(String primaryEmail, String password, int status) {
+    public User(String primaryEmail, String password, int status, String firstPhone) {
         this.primaryEmail = primaryEmail;
         this.password = getEncodingPassword(password);
         this.status = status;
+        this.firstPhone = firstPhone;
         setCreatedDate();
     }
 
@@ -53,8 +62,8 @@ public class User {
         return primaryEmail;
     }
 
-    public void setPrimaryEmail(String primaryEmail) {
-        this.primaryEmail = primaryEmail;
+    public void setPrimaryEmail(String primaryKey) {
+        this.primaryEmail = primaryKey;
     }
 
     public String getPassword() {
@@ -65,6 +74,22 @@ public class User {
         this.password = password;
     }
 
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -73,33 +98,89 @@ public class User {
         this.status = status;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    public String getFirstPhone() {
+        return firstPhone;
+    }
+
+    public void setFirstPhone(String firstPhone) {
+        this.firstPhone = firstPhone;
+    }
+
+    public String getSecondPhone() {
+        return secondPhone;
+    }
+
+    public void setSecondPhone(String secondPhone) {
+        this.secondPhone = secondPhone;
+    }
+
+    public String getSecondaryEmail() {
+        return secondaryEmail;
+    }
+
+    public void setSecondaryEmail(String secondaryEmail) {
+        this.secondaryEmail = secondaryEmail;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public String getPreferContact() {
+        return preferContact;
+    }
+
+    public void setPreferContact(String preferContact) {
+        this.preferContact = preferContact;
+    }    // </editor-fold>
+
+    public String getEncodingPassword(String password) {
+        return PasswordEncoding.getEncodingPassword(password);
     }
 
     public void setCreatedDate() {
         this.createdDate = GetCurrentDate.getCurrentDate();
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-    // </editor-fold>
-
-    public String getEncodingPassword(String password) {
-        return PasswordEncoding.getEncodingPassword(password);
-    }
-
     @Override
     public String toString() {
-        return "NewUser{" + "id=" + id + ", primaryEmail=" + primaryEmail + ", password=" + password + ", status=" + status + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + '}';
+        return "User1{" + "id=" + id + ", primaryEmail=" + primaryEmail + ", password=" + password + ", roleId=" + roleId + ", createdDate=" + createdDate + ", status=" + status + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + ", gender=" + gender + ", firstPhone=" + firstPhone + ", secondPhone=" + secondPhone + ", secondaryEmail=" + secondaryEmail + ", imageURL=" + imageURL + ", preferContact=" + preferContact + '}';
     }
+
 }

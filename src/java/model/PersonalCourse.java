@@ -12,23 +12,27 @@ import java.util.Date;
  */
 public class PersonalCourse {
 
+    private int id;
     private int customerId;
     private int courseId;
     private int status;
     private Date enrollDate;
     private Date expireDate;
     private int progress;
+    private int pricePackageId;
 
     public PersonalCourse() {
     }
 
-    public PersonalCourse(int customerId, int courseId, int status, Date enrollDate, Date expireDate, int progress) {
+    public PersonalCourse(int id, int customerId, int courseId, int status, Date enrollDate, Date expireDate, int progress, int pricePackageId) {
+        this.id = id;
         this.customerId = customerId;
         this.courseId = courseId;
         this.status = status;
         this.enrollDate = enrollDate;
         this.expireDate = expireDate;
         this.progress = progress;
+        this.pricePackageId = pricePackageId;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Getter and Setter methods. Click on the + sign on the left to edit the code.">
@@ -80,11 +84,25 @@ public class PersonalCourse {
         this.progress = progress;
     }
 
-    // </editor-fold>    
-    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPricePackageId() {
+        return pricePackageId;
+    }
+
+    public void setPricePackageId(int pricePackageId) {
+        this.pricePackageId = pricePackageId;
+    }// </editor-fold>    
+
     @Override
     public String toString() {
-        return "PersonalCourse{" + "customerId=" + customerId + ", courseId=" + courseId + ", status=" + status + ", enrollDate=" + enrollDate + ", expireDate=" + expireDate + ", progress=" + progress + '}';
+        return "PersonalCourse{" + "id=" + id + ", customerId=" + customerId + ", courseId=" + courseId + ", status=" + status + ", enrollDate=" + enrollDate + ", expireDate=" + expireDate + ", progress=" + progress + ", pricePackageId=" + pricePackageId + '}';
     }
 
 }
