@@ -59,7 +59,7 @@ public class SettingDAO extends DBContext{
                 String description = rs.getString(5);
                 Date createdDate = rs.getDate(6);
                 Date updatedDate = rs.getDate(7);
-                Setting obj = new Setting(id, settingTypeId, value, description, status, createdDate, updatedDate);
+                Setting obj = new Setting(id, settingTypeId, value, status, description, createdDate, updatedDate);
                 vector.add(obj);
 
             }
@@ -120,7 +120,7 @@ public class SettingDAO extends DBContext{
                 String description = rs.getString(5);
                 Date createdDate = rs.getDate(6);
                 Date updatedDate = rs.getDate(7);
-                Setting obj = new Setting(id, settingTypeId, value, description, status, createdDate, updatedDate);
+                Setting obj = new Setting(id, settingTypeId, value, status, description, createdDate, updatedDate);
                 return obj;
             }
         } catch (SQLException ex) {
