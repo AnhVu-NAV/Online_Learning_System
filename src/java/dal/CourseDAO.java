@@ -94,8 +94,6 @@ public class CourseDAO extends DBContext {
                 + "JOIN Course_Tagline ct ON t.id = ct.tagline_id "
                 + "WHERE ct.course_id = ?";
 
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, courseId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -106,6 +104,71 @@ public class CourseDAO extends DBContext {
         }
         return taglines;
     }
+
+    public List<Course> getCoursesByCategoriesAndKeyword(List<String> categories, String keyword, String sortOption, int page, int pageSize) {
+        List<Course> courses = new ArrayList<>();
+        String query = "SELECT c.*, pp.price, pp.sale_price FROM Course c "
+                + "JOIN PricePackage pp ON c.id = pp.course_id "
+                + "WHERE c.status = 1";
+
+        // Điều kiện lọc theo danh mục và từ khóa
+        if (!categories.isEmpty()) {
+            String categoryFilter = String.join(",", Collections.nCopies(categories.size(), "?"));
+            query += " AND c.category_id IN (SELECT id FROM Setting WHERE value IN (" + categoryFilter + ") AND setting_type_id = 2)";
+        }
+        if (keyword != null && !keyword.isEmpty()) {
+            query += " AND c.title LIKE ?";
+        }
+
+        // Thêm điều kiện sắp xếp
+        if (sortOption != null) {
+            switch (sortOption) {
+                case "latest":
+                    query += " ORDER BY c.updated_date DESC";
+                    break;
+                case "priceLowHigh":
+                    query += " ORDER BY pp.price ASC";
+                    break;
+                case "priceHighLow":
+                    query += " ORDER BY pp.price DESC";
+                    break;
+                default:
+                    query += " ORDER BY c.updated_date DESC";
+                    break;
+            }
+        } else {
+            query += " ORDER BY c.updated_date DESC";
+        }
+
+        query += " LIMIT ?, ?";
+
+        try {
+            stmt.setInt(1, courseId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                taglines.add(rs.getString("name"));
+                Course course = new Course();
+                course.setId(rs.getInt("id"));
+                course.setTitle(rs.getString("title"));
+                course.setTotalDuration(rs.getFloat("total_duration"));
+                course.setSubtitle(rs.getString("subtitle"));
+                course.setCategoryId(rs.getInt("category_id"));
+                course.setCreatedDate(rs.getDate("created_date"));
+                course.setUpdatedDate(rs.getDate("updated_date"));
+                course.setThumbnailUrl(rs.getString("thumbnail_url"));
+                course.setNumberOfLesson(rs.getInt("number_of_learner"));
+                course.setPrice(rs.getInt("price"));
+                course.setSalePrice(rs.getInt("sale_price"));
+
+                // Thêm tagline cho khóa học
+                course.setTaglines(getTaglinesByCourseId(course.getId())); // Đảm bảo rằng bạn đã thêm phương thức setTaglines trong lớp Course
+
+                courses.add(course);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return taglines;
 
         // Điều kiện lọc theo danh mục và từ khóa
         public List<Course> getCoursesByCategoriesAndKeyword(List<String> categories, String keyword, String sortOption, int page, int pageSize) {
@@ -389,11 +452,24 @@ public class CourseDAO extends DBContext {
         }
         return relatedCourses;
     }
-    
-    public static void main(String[] args) {
-        CourseDAO c = new CourseDAO();
-        System.out.println(c.getRelatedCourses(7, 6, 1));
-        
+
+    public List<Tagline> getAllTaglines() {
+        List<Tagline> taglines = new ArrayList<>();
+        String query = "SELECT * FROM Tagline"; // Lấy tất cả tag từ bảng Tagline
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Tagline tagline = new Tagline();
+                tagline.setId(rs.getInt("id"));
+                tagline.setName(rs.getString("name"));
+                taglines.add(tagline);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return taglines;
     }
 
     public List<Tagline> getAllTaglines() {
