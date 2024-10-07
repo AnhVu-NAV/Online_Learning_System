@@ -12,8 +12,11 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/home.jsp</file>
-            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/controller/HomeController.java</file>
+            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/model/Blogs.java</file>
+            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/controller/BlogListServlet.java</file>
+            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/component/BlogItem.jsp</file>
+            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/src/java/dal/BlogDAO.java</file>
+            <file>file:/D:/Hoc/ki%208/swp391/Online_Learning/swp391_onlinelearning/web/BlogList.jsp</file>
         </group>
     </open-files>
 </project-private>
