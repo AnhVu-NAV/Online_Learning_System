@@ -205,17 +205,58 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin-bottom: 10px;
 }
 
+.course-card {
+    width: 30%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column; /* Flex layout */
+    justify-content: space-between; /* Căn đều giữa các phần tử */
+    min-height: 400px; /* Chiều cao tối thiểu để đồng đều giữa các thẻ */
+}
+
 .course-card h4 {
     font-size: 18px;
+    color: #007bff;
     margin-bottom: 10px;
+    min-height: 60px; /* Đặt chiều cao tối thiểu cho tiêu đề */
+}
+
+.course-card h5 {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+    min-height: 40px; /* Đặt chiều cao tối thiểu cho mô tả */
 }
 
 .course-card .course-price {
-    font-size: 16px;
-    color: #e74c3c;
+    font-size: 18px;
     font-weight: bold;
+    color: #e74c3c;
     margin-bottom: 15px;
 }
+
+.course-card .register-btn {
+    padding: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    margin-top: auto; /* Đẩy nút xuống dưới cùng */
+}
+
+.course-card .register-btn:hover {
+    background-color: #0056b3;
+}
+
 
 .slider {
     display: flex;
@@ -520,3 +561,46 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     .register-form .price-package {
         margin-bottom: 15px;
     }
+
+    /* Tagline Styling */
+.course-taglines {
+    margin-top: 20px;
+}
+
+.course-taglines .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.course-taglines .tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.course-taglines .tag i {
+    margin-right: 5px;
+    color: #333;
+}
+
+.course-taglines .tag:hover {
+    background-color: #e0e0e0;
+    border-color: #aaa;
+    cursor: pointer;
+}
+
+.customize-display select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
