@@ -16,9 +16,10 @@ public class Lesson {
     private int chapterId;
     private int order;
 
-    // Constructors
+    // Constructor không đối số
     public Lesson() {}
 
+    // Constructor đầy đủ
     public Lesson(int id, int status, int lessonTypeId, String title, int chapterId, int order) {
         this.id = id;
         this.status = status;
@@ -28,14 +29,7 @@ public class Lesson {
         this.order = order;
     }
 
-
-    public Lesson(int id, String title, int status, int lessonTypeId) {
-        this.id = id;
-        this.title = title;
-        this.status = status;
-        this.lessonTypeId = lessonTypeId;
-    }
-
+    // Getter và Setter cho các thuộc tính
     public int getId() {
         return id;
     }
@@ -83,7 +77,5 @@ public class Lesson {
     public void setOrder(int order) {
         this.order = order;
     }
-
-   
 }
 
