@@ -20,7 +20,6 @@ public class Chapter {
     private int courseId;
     private int status;
     private int duration;
-    
 
     // Danh sách các bài học thuộc chương này
     private List<Lesson> lessons;
