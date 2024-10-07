@@ -137,25 +137,4 @@ public class Course {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public float getTotalDuration() {
-        return totalDuration;
-    }
-
-    public void setTotalDuration(float totalDuration) {
-        this.totalDuration = totalDuration;
-    }
-
-    public List<String> getTaglines() {
-        return taglines;
-    }
-
-    public void setTaglines(List<String> taglines) {
-        this.taglines = taglines;
-    }
-
-    
 }
