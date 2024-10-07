@@ -29,13 +29,7 @@ public class Lesson {
         this.order = order;
     }
 
-    public Lesson(int id, String title, int status, int lessonTypeId) {
-        this.id = id;
-        this.title = title;
-        this.status = status;
-        this.lessonTypeId = lessonTypeId;
-    }
-
+    // Getter và Setter cho các thuộc tính
     public int getId() {
         return id;
     }
