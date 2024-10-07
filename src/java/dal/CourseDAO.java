@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
+import java.util.Arrays;
 import java.util.Collections;
 import model.PricePackage;
 import model.Setting;
@@ -225,9 +226,18 @@ public class CourseDAO extends DBContext {
                 Course course = new Course();
                 course.setId(rs.getInt("id"));
                 course.setTitle(rs.getString("title"));
+                course.setTotalDuration(rs.getFloat("total_duration"));
                 course.setDescription(rs.getString("description"));
-                course.setThumbnailUrl(rs.getString("thumbnail_url"));
+                course.setSubtitle(rs.getString("subtitle"));
                 course.setCategoryId(rs.getInt("category_id"));
+                course.setThumbnailUrl(rs.getString("thumbnail_url"));
+                course.setNumberOfLesson(rs.getInt("number_of_learner"));
+                //
+//                course.setId(rs.getInt("id"));
+//                course.setTitle(rs.getString("title"));
+//                course.setDescription(rs.getString("description"));
+//                course.setThumbnailUrl(rs.getString("thumbnail_url"));
+//                course.setCategoryId(rs.getInt("category_id"));
                 return course;
             }
         } catch (Exception e) {
@@ -277,7 +287,9 @@ public class CourseDAO extends DBContext {
 
     public List<Course> getRelatedCourses(int categoryId, int expertId, int courseId) {
         List<Course> relatedCourses = new ArrayList<>();
-        String sql = "SELECT * FROM Course WHERE (category_id = ? OR expert_id = ?) AND id != ?";
+        String sql = "SELECT c.*, pp.price, pp.sale_price FROM Course c "
+                + "JOIN PricePackage pp ON c.id = pp.course_id "
+                + "WHERE (c.category_id = ? OR c.expert_id = ?) AND c.id != ?";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -290,9 +302,12 @@ public class CourseDAO extends DBContext {
                 Course course = new Course();
                 course.setId(rs.getInt("id"));
                 course.setTitle(rs.getString("title"));
+                course.setSubtitle(rs.getString("subtitle")); // Thêm trường subtitle
                 course.setDescription(rs.getString("description"));
                 course.setThumbnailUrl(rs.getString("thumbnail_url"));
-                // Các thuộc tính khác của khóa học
+                course.setPrice(rs.getInt("price")); // Thêm trường price
+                course.setSalePrice(rs.getInt("sale_price")); // Thêm trường sale_price
+                course.setTaglines(getTaglinesByCourseId(course.getId()));
                 relatedCourses.add(course);
             }
         } catch (SQLException e) {
@@ -318,6 +333,89 @@ public class CourseDAO extends DBContext {
             e.printStackTrace();
         }
         return taglines;
+    }
+
+// Phương thức lấy các khóa học liên quan dựa trên tagline
+    public List<Course> getRelatedCoursesByTaglines(List<String> taglines, int courseId) {
+        List<Course> relatedCourses = new ArrayList<>();
+        if (taglines == null || taglines.isEmpty()) {
+            return relatedCourses;
+        }
+
+        String sql = "SELECT DISTINCT c.*, pp.price, pp.sale_price FROM Course c "
+                + "JOIN Course_Tagline ct ON c.id = ct.course_id "
+                + "JOIN Tagline t ON ct.tagline_id = t.id "
+                + "JOIN PricePackage pp ON c.id = pp.course_id "
+                + "WHERE t.name IN (" + String.join(",", Collections.nCopies(taglines.size(), "?")) + ") "
+                + "AND c.id != ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            int index = 1;
+            for (String tagline : taglines) {
+                ps.setString(index++, tagline);
+            }
+            ps.setInt(index, courseId);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Course course = new Course();
+                course.setId(rs.getInt("id"));
+                course.setTitle(rs.getString("title"));
+                course.setSubtitle(rs.getString("subtitle")); // Thêm trường subtitle
+                course.setDescription(rs.getString("description"));
+                course.setThumbnailUrl(rs.getString("thumbnail_url"));
+                course.setPrice(rs.getInt("price")); // Thêm trường price
+                course.setSalePrice(rs.getInt("sale_price")); // Thêm trường sale_price
+                course.setTaglines(getTaglinesByCourseId(course.getId()));
+                relatedCourses.add(course);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return relatedCourses;
+    }
+
+    public List<Course> getRelatedCoursesByFilters(int categoryId, List<String> taglines, int limit) {
+        List<Course> relatedCourses = new ArrayList<>();
+        String sql = "SELECT c.id, c.title, c.subtitle, pp.price, pp.sale_price, GROUP_CONCAT(t.name) AS taglines "
+                + "FROM Course c "
+                + "JOIN PricePackage pp ON c.id = pp.course_id "
+                + "JOIN Course_Tagline ct ON c.id = ct.course_id "
+                + "JOIN Tagline t ON ct.tagline_id = t.id "
+                + "WHERE c.category_id = ? "
+                + "AND t.name IN (" + String.join(",", Collections.nCopies(taglines.size(), "?")) + ") "
+                + "GROUP BY c.id "
+                + "LIMIT ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, categoryId);
+            for (int i = 0; i < taglines.size(); i++) {
+                ps.setString(2 + i, taglines.get(i));
+            }
+            ps.setInt(2 + taglines.size(), limit);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Course course = new Course();
+                course.setId(rs.getInt("id"));
+                course.setTitle(rs.getString("title"));
+                course.setSubtitle(rs.getString("subtitle"));
+                course.setPrice((int) rs.getDouble("price"));
+                course.setSalePrice((int) rs.getDouble("sale_price"));
+
+                // Lấy danh sách taglines
+                String taglinesStr = rs.getString("taglines");
+                List<String> courseTaglines = Arrays.asList(taglinesStr.split(","));
+                course.setTaglines(courseTaglines);
+
+                relatedCourses.add(course);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return relatedCourses;
     }
 
 }
