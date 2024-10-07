@@ -4,9 +4,11 @@
  */
 package model;
 
+import java.util.List;
+
 /**
  *
- * @author Admin
+ * @author AnhVuNAV
  */
 public class Chapter {
     private int id;
@@ -18,11 +20,14 @@ public class Chapter {
     private int courseId;
     private int status;
     private int duration;
-    
 
-    // Constructors
+    // Danh sách các bài học thuộc chương này
+    private List<Lesson> lessons;
+
+    // Constructor không đối số
     public Chapter() {}
 
+    // Constructor đầy đủ
     public Chapter(int id, int order, String title, String subtitle, String briefInformation, String description, int courseId, int status, int duration) {
         this.id = id;
         this.order = order;
@@ -35,6 +40,7 @@ public class Chapter {
         this.duration = duration;
     }
 
+    // Getter và Setter cho các thuộc tính
     public int getId() {
         return id;
     }
@@ -107,6 +113,11 @@ public class Chapter {
         this.duration = duration;
     }
 
-   
-}
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
 
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
+    }
+}
