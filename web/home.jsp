@@ -20,6 +20,12 @@
         <link href="./css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom styles for this template -->
         <link href="./css/home.css" rel="stylesheet">
+
+
+        <link rel="stylesheet" href="./fontawesome/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+        <link href="./css/templatemo-learnik-blog.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     </head>
     <body>
         <!--//Header-->
@@ -61,6 +67,10 @@
             </c:forEach>
         </div>
 
+
+        <div>
+            <%--<%@ include file="component/BlogItem2.jsp" %>--%>
+        </div>
 
         <!-- Courses -->
         <div id="courses">
