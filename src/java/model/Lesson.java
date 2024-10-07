@@ -39,14 +39,6 @@ public class Lesson {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public int getStatus() {
         return status;
     }
@@ -61,6 +53,14 @@ public class Lesson {
 
     public void setLessonTypeId(int lessonTypeId) {
         this.lessonTypeId = lessonTypeId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getChapterId() {
