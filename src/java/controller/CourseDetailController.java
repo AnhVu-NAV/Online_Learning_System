@@ -4,8 +4,10 @@
  */
 package controller;
 
+import dal.ChapterDAO;
 import dal.CourseDAO;
 import dal.LessonDAO;
+import dal.PricePackageDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Chapter;
 import model.Course;
 import model.Lesson;
 import model.PricePackage;
@@ -62,7 +65,6 @@ public class CourseDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // Lấy courseId từ request, kiểm tra giá trị hợp lệ
             String courseIdParam = request.getParameter("courseId");
             if (courseIdParam == null || courseIdParam.trim().isEmpty()) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing courseId parameter");
@@ -71,40 +73,48 @@ public class CourseDetailController extends HttpServlet {
 
             int courseId = Integer.parseInt(courseIdParam);
 
-            // Lấy thông tin khóa học dựa vào courseId
             CourseDAO courseDAO = new CourseDAO();
             Course course = courseDAO.getCourseById(courseId);
-
-            // Kiểm tra nếu khóa học không tồn tại
             if (course == null) {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Course not found");
                 return;
             }
 
-            // Lấy danh sách các bài học của khóa học
+            ChapterDAO chapterDAO = new ChapterDAO();
             LessonDAO lessonDAO = new LessonDAO();
-            List<Lesson> lessons = lessonDAO.getLessonsByCourseId(courseId);
 
-            // Lấy gói giá của khóa học
+            // Lấy danh sách chương
+            List<Chapter> chapters = chapterDAO.getChaptersByCourseId(courseId);
+
+            // Lấy bài học cho từng chương
+            for (Chapter chapter : chapters) {
+                List<Lesson> lessons = lessonDAO.getLessonsByChapterId(chapter.getId());
+                chapter.setLessons(lessons);
+            }
             PricePackage pricePackage = courseDAO.getPricePackageByCourseId(courseId);
 
-            // Lấy các khóa học liên quan dựa trên category_id và expert_id của khóa học hiện tại
-            List<Course> relatedCourses = courseDAO.getRelatedCourses(course.getCategoryId(), course.getExpertId(), course.getId());
+            // Lấy danh sách taglines
+            List<String> taglines = courseDAO.getTaglinesByCourseId(courseId);
 
-            // Đưa dữ liệu vào request
+            // Lấy các khóa học liên quan dựa trên taglines hoặc category
+            List<Course> relatedCourses = courseDAO.getRelatedCoursesByTaglines(taglines, courseId);
+            if (relatedCourses.isEmpty()) {
+                relatedCourses = courseDAO.getRelatedCourses(course.getCategoryId(), course.getExpertId(), course.getId());
+            }
+            PricePackageDAO pricePackageDAO = new PricePackageDAO();
+            List<PricePackage> pricePackages = pricePackageDAO.getPricePackagesByCourseId(courseId);
             request.setAttribute("course", course);
-            request.setAttribute("lessons", lessons);
+            request.setAttribute("chapters", chapters);
             request.setAttribute("pricePackage", pricePackage);
+            request.setAttribute("pricePackages", pricePackages);
+            request.setAttribute("taglines", taglines);
             request.setAttribute("relatedCourses", relatedCourses);
 
-            // Chuyển tiếp tới trang JSP để hiển thị thông tin
             request.getRequestDispatcher("CourseDetails.jsp").forward(request, response);
 
         } catch (NumberFormatException e) {
-            // Xử lý ngoại lệ khi courseId không phải là số nguyên hợp lệ
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid course ID format");
         } catch (Exception e) {
-            // Xử lý các lỗi khác, trả về mã lỗi 500
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing your request.");
             e.printStackTrace();
         }
