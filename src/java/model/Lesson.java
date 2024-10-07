@@ -33,11 +33,14 @@ public class Lesson {
  
     public Lesson(int id, String title, int status, int lessonTypeId) {
         this.id = id;
-        this.title = title;
         this.status = status;
         this.lessonTypeId = lessonTypeId;
+        this.title = title;
+        this.chapterId = chapterId;
+        this.order = order;
     }
 
+    // Getter và Setter cho các thuộc tính
     public int getId() {
         return id;
     }
