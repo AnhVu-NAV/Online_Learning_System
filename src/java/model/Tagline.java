@@ -12,7 +12,6 @@ public class Tagline {
 
     private int id;
     private String name;
-     private boolean checked; // Add this property
 
     public Tagline() {
     }
@@ -22,15 +21,6 @@ public class Tagline {
         this.name = name;
     }
 
-    // Getter and Setter for 'checked'
-    public boolean isChecked() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-    
     public int getId() {
         return id;
     }
