@@ -107,7 +107,7 @@ public class UserDAO extends DBContext {
     private static final Logger LOGGER = Logger.getLogger(UserDAO.class.getName());
 
     public String updatePass(String email) {
-        String sql = "UPDATE Account SET Password = ? WHERE Email LIKE ?";
+        String sql = "UPDATE User SET Password = ? WHERE Primary_Email LIKE ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             String newPass = generateNewPassword();
             pstmt.setString(1, newPass);
@@ -136,7 +136,7 @@ public class UserDAO extends DBContext {
     }
 
     public void updatePass(String email, String pass) {
-        String sql = "UPDATE Account SET Password = ? WHERE Email LIKE ?";
+        String sql = "UPDATE User SET Password = ? WHERE Primary_Email LIKE ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, pass);
             pstmt.setString(2, email);
@@ -147,7 +147,7 @@ public class UserDAO extends DBContext {
     }
 
     public String checkEmail(String email) {
-        String sql = "SELECT CONCAT(first_name, ' ', last_name) as FullName FROM Account WHERE email = ?";
+        String sql = "SELECT CONCAT(first_name, ' ', last_name) as FullName FROM User WHERE Primary_Email = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, email);
             try (ResultSet rs = pstmt.executeQuery()) {

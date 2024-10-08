@@ -84,7 +84,7 @@ public class ChangePasswordController extends HttpServlet {
         if (nuser.getPassword().equals(old_pass)) {
             if (new_pass.equals(c_new_pass)){
                 UserDAO cus = new UserDAO();
-                cus.updatePass(nuser.getEmail(), new_pass);
+                cus.updatePass(nuser.getPrimaryEmail(), new_pass);
                 response.sendRedirect("ChangePassword.jsp");
             } else {
                 request.setAttribute("error", "You entered confirm password diffent new password!");
