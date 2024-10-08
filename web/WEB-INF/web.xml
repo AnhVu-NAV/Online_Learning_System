@@ -8,6 +8,10 @@
         <servlet-name>ForgotPasswordController</servlet-name>
         <servlet-class>controller.ForgotPasswordController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChapterDisplayController</servlet-name>
+        <servlet-class>controller.ChapterDisplayController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>changePassword</servlet-name>
         <url-pattern>/changePassword</url-pattern>
@@ -15,5 +19,9 @@
     <servlet-mapping>
         <servlet-name>ForgotPasswordController</servlet-name>
         <url-pattern>/ForgotPasswordController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChapterDisplayController</servlet-name>
+        <url-pattern>/ChapterDisplayController</url-pattern>
     </servlet-mapping>
 </web-app>
