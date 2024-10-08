@@ -6,8 +6,6 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,11 +17,40 @@
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/templatemo-learnik-blog.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">  
     </head>
     <body>
         <header class="tm-header" id="tm-header">
-            <!-- Header content remains the same -->
+         <div class="tm-header-wrapper">
+        <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="tm-site-header">
+            <h1 class="text-center">Learnik Blog</h1>
+        </div>
+        <nav class="tm-nav" id="tm-nav">            
+            <ul>
+                <li class="tm-nav-item"><a href="blogList.jsp" class="tm-nav-link">
+                    <i class="fas fa-home"></i>
+                    Blog Home
+                </a></li>
+                <li class="tm-nav-item active"><a href="#" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Single Post
+                </a></li>
+                <li class="tm-nav-item"><a href="about.jsp" class="tm-nav-link">
+                    <i class="fas fa-users"></i>
+                    About Learnik
+                </a></li>
+                <li class="tm-nav-item"><a href="contact.jsp" class="tm-nav-link">
+                    <i class="far fa-comments"></i>
+                    Contact Us
+                </a></li>
+            </ul>
+        </nav>
+        <p class="tm-mb-80 pr-5 text-white">
+            Learnik Blog is a multi-purpose HTML template. Left side is a sticky menu bar, while the right side content scrolls up and down.
+        </p>
+    </div>
         </header>
 
         <div class="container-fluid">
@@ -40,62 +67,59 @@
                     </div>
                 </div>
 
+                <!-- Filter by Category and Hot Sale -->
+                <div class="row tm-row">
+                    <div class="col-12">
+                        <form method="GET" action="blogList.jsp" class="form-inline tm-mb-80">
+                            <label for="filter" class="mr-2">Filter by:</label>
+                            <select name="filter" id="filter" class="form-control mr-4">
+                                <option value="all">All</option>
+                                <option value="campaign">Campaign</option>
+                                <option value="hot-sale">Hot Sale</option>
+                            </select>
+                            <button class="tm-btn tm-btn-primary" type="submit">Apply</button>
+                        </form>
+                    </div>
+                </div>
+
                 <!-- Dynamic Blog Posts Section -->
                 <div class="row tm-row">
                     <c:forEach var="blog" items="${blogList}">
-                        <!--                        <article class="col-12 col-md-6 tm-post">
-                                                    <hr class="tm-hr-primary">
-                                                    <a href="post.jsp?blogId=${blog.blogId}" class="effect-lily tm-post-link tm-pt-60">
-                                                        <div class="tm-post-link-inner">
-                                                            <img src="${blog.thumbnailUrl}" alt="Image" class="img-fluid">
-                                                        </div>
-                                                        <span class="position-absolute tm-new-badge">New</span>
-                                                        <h2 class="tm-pt-30 tm-color-primary tm-post-title">${blog.title}</h2>
-                                                    </a>
-                                                    <p class="tm-pt-30">${blog.briefInfo}</p>
-                                                    <div class="d-flex justify-content-between tm-pt-45">
-                                                        <span class="tm-color-primary">${blog.category}</span>
-                                                        <span class="tm-color-primary">${fn:substring(blog.createdDate.toString(), 0, 10)}</span>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="d-flex justify-content-between">
-                                                        <span>comments</span>
-                                                        <span>by ${blog.authorName}</span>
-                                                    </div>
-                                                </article>-->
-
-                        <jsp:include page="component/BlogItem.jsp">
-                            <jsp:param name="blogId" value="${blog.blogId}" />
-                            <jsp:param name="title" value="${blog.title}" />
-                            <jsp:param name="briefInfo" value="${blog.briefInfo}" />
-                            <jsp:param name="thumbnailUrl" value="${blog.thumbnailUrl}" />
-                            <jsp:param name="category" value="${blog.category}" />
-                            <jsp:param name="createdDate" value="${blog.updatedDate}" />
-                            <jsp:param name="authorName" value="${blog.authorName}" />
-
-                        </jsp:include>
-
+                        <article class="col-12 col-md-6 tm-post">
+                            <hr class="tm-hr-primary">
+                            <a href="blogDetail.jsp?blogId=${blog.blogId}" class="effect-lily tm-post-link tm-pt-60">
+                                <div class="tm-post-link-inner">
+                                    <img src="${blog.thumbnailUrl}" alt="Image" class="img-fluid">
+                                </div>
+                                <span class="position-absolute tm-new-badge">New</span>
+                                <h2 class="tm-pt-30 tm-color-primary tm-post-title">${blog.title}</h2>
+                            </a>
+                            <p class="tm-pt-30">${blog.briefInfo}</p>
+                            <div class="d-flex justify-content-between tm-pt-45">
+                                <span class="tm-color-primary">${blog.category}</span>
+                                <span class="tm-color-primary">${fn:substring(blog.updatedDate.toString(), 0, 10)}</span>
+                            </div>
+                            <hr>
+                        </article>
                     </c:forEach>
                 </div>
 
                 <!-- Pagination -->
                 <div class="row tm-row tm-mt-100 tm-mb-75">
-                    <div class="row tm-row tm-mt-100 tm-mb-75">
-                        <div class="tm-prev-next-wrapper">
-                            <c:if test="${currentPage > 1}">
-                                <a href="blogList?page=${currentPage - 1}" class="mb-2 tm-btn tm-btn-primary tm-prev-next tm-mr-20">Prev</a>
-                            </c:if>
-                            <c:if test="${currentPage <= 1}">
-                                <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled tm-mr-20">Prev</a>
-                            </c:if>
+                    <div class="tm-prev-next-wrapper">
+                        <c:if test="${currentPage > 1}">
+                            <a href="blogList?page=${currentPage - 1}&filter=${filter}" class="mb-2 tm-btn tm-btn-primary tm-prev-next tm-mr-20">Prev</a>
+                        </c:if>
+                        <c:if test="${currentPage <= 1}">
+                            <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled tm-mr-20">Prev</a>
+                        </c:if>
 
-                            <c:if test="${currentPage < noOfPages}">
-                                <a href="blogList?page=${currentPage + 1}" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Next</a>
-                            </c:if>
-                            <c:if test="${currentPage >= noOfPages}">
-                                <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled">Next</a>
-                            </c:if>
-                        </div>
+                        <c:if test="${currentPage < noOfPages}">
+                            <a href="blogList?page=${currentPage + 1}&filter=${filter}" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Next</a>
+                        </c:if>
+                        <c:if test="${currentPage >= noOfPages}">
+                            <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled">Next</a>
+                        </c:if>
                     </div>
 
                     <div class="tm-paging-wrapper">
@@ -104,14 +128,13 @@
                             <ul>
                                 <c:forEach begin="1" end="${noOfPages}" var="i">
                                     <li class="tm-paging-item ${i == currentPage ? 'active' : ''}">
-                                        <a href="blogList?page=${i}" class="mb-2 tm-btn tm-paging-link">${i}</a>
+                                        <a href="blogList?page=${i}&filter=${filter}" class="mb-2 tm-btn tm-paging-link">${i}</a>
                                     </li>
                                 </c:forEach>
                             </ul>
                         </nav>
                     </div>
                 </div>
-
 
                 <!-- Footer -->
                 <footer class="row tm-row">
@@ -130,3 +153,4 @@
         <script src="js/templatemo-script.js"></script>
     </body>
 </html>
+
