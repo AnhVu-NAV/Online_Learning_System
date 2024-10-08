@@ -3,10 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/dal/UserDAO.java</file>
-            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/ForgotPasswordController.java</file>
-            <file>file:/D:/SWP-Project/swp391_onlinelearning/src/java/controller/ChangePasswordController.java</file>
-            <file>file:/D:/SWP-Project/swp391_onlinelearning/web/ForgotPassword.jsp</file>
+            <file>file:/D:/SWP_OnlineLearningProject/swp391_onlinelearning/src/java/dal/DBContext.java</file>
         </group>
     </open-files>
 </project-private>

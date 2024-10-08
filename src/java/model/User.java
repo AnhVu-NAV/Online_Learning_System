@@ -10,147 +10,166 @@ import java.util.Date;
  *
  * @author admin
  */
+
 public class User {
-    int CustomerID;
-    String FirstName;
-    String LastName;
-    String Email;
-    String Password;
-    Date DoB;
-    Date Created_Date;
-    String PhoneNumber;
-    int RoleID;
-    int Status;
-    int Gender;
-    String Address;
-    String image_url;
+    private int id;
+    private String primaryEmail;
+    private String password;
+    private int roleId;
+    private Date createdDate;
+    private int status;
+    private String firstName;
+    private String lastName;
+    private Date dob;
+    private int gender; 
+    private String firstPhone;
+    private String secondPhone;
+    private String secondaryEmail;
+    private String imageUrl;
+    private String preferContact;
 
-    public User(int CustomerID, String FirstName, String LastName, String Email, String Password, Date DoB, Date Created_Date, String PhoneNumber, int RoleID, int Status, int Gender, String Address, String image_url) {
-        this.CustomerID = CustomerID;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.Email = Email;
-        this.Password = Password;
-        this.DoB = DoB;
-        this.Created_Date = Created_Date;
-        this.PhoneNumber = PhoneNumber;
-        this.RoleID = RoleID;
-        this.Status = Status;
-        this.Gender = Gender;
-        this.Address = Address;
-        this.image_url = image_url;
-    }
-
+    // Constructors
     public User() {
     }
 
-    public int getCustomerID() {
-        return CustomerID;
+    public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, int gender, String firstPhone, String secondPhone, String secondaryEmail, String imageUrl, String preferContact) {
+        this.id = id;
+        this.primaryEmail = primaryEmail;
+        this.password = password;
+        this.roleId = roleId;
+        this.createdDate = createdDate;
+        this.status = status;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.gender = gender;
+        this.firstPhone = firstPhone;
+        this.secondPhone = secondPhone;
+        this.secondaryEmail = secondaryEmail;
+        this.imageUrl = imageUrl;
+        this.preferContact = preferContact;
     }
 
-    public String getFirstName() {
-        return FirstName;
+    // Getters and Setters
+    public int getId() {
+        return id;
     }
 
-    public String getLastName() {
-        return LastName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getPrimaryEmail() {
+        return primaryEmail;
+    }
+
+    public void setPrimaryEmail(String primaryEmail) {
+        this.primaryEmail = primaryEmail;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
-    public Date getDoB() {
-        return DoB;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Date getCreated_Date() {
-        return Created_Date;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public String getPhoneNumber() {
-        return PhoneNumber;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
-    public int getRoleID() {
-        return RoleID;
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public int getStatus() {
-        return Status;
+        return status;
     }
 
-    public int getGender() {
-        return Gender;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public String getAddress() {
-        return Address;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setCustomerID(int CustomerID) {
-        this.CustomerID = CustomerID;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setFirstName(String FirstName) {
-        this.FirstName = FirstName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setLastName(String LastName) {
-        this.LastName = LastName;
+    public Date getDob() {
+        return dob;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
-    public void setPassword(String Password) {
-        this.Password = Password;
+    public int isGender() {
+        return gender;
     }
 
-    public void setDoB(Date DoB) {
-        this.DoB = DoB;
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
-    public void setCreated_Date(Date Created_Date) {
-        this.Created_Date = Created_Date;
+    public String getFirstPhone() {
+        return firstPhone;
     }
 
-    public void setPhoneNumber(String PhoneNumber) {
-        this.PhoneNumber = PhoneNumber;
+    public void setFirstPhone(String firstPhone) {
+        this.firstPhone = firstPhone;
     }
 
-    public void setRoleID(int RoleID) {
-        this.RoleID = RoleID;
+    public String getSecondPhone() {
+        return secondPhone;
     }
 
-    public void setStatus(int Status) {
-        this.Status = Status;
+    public void setSecondPhone(String secondPhone) {
+        this.secondPhone = secondPhone;
     }
 
-    public void setGender(int Gender) {
-        this.Gender = Gender;
+    public String getSecondaryEmail() {
+        return secondaryEmail;
     }
 
-    public void setAddress(String Address) {
-        this.Address = Address;
+    public void setSecondaryEmail(String secondaryEmail) {
+        this.secondaryEmail = secondaryEmail;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public String getImageUrl() {
+        return imageUrl;
     }
-    
-    
 
-    
-    
-    
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getPreferContact() {
+        return preferContact;
+    }
+
+    public void setPreferContact(String preferContact) {
+        this.preferContact = preferContact;
+    }
 }
+  
+
