@@ -5,18 +5,20 @@
 
 package controller;
 
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
  * @author AnhVuNAV
  */
-public class Controller extends HttpServlet {
+public class UserProfileController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +35,10 @@ public class Controller extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controller</title>");  
+            out.println("<title>Servlet UserProfileController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Controller at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet UserProfileController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,7 +55,27 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        // Lấy thông tin người dùng từ request hoặc session
+        int userId = Integer.parseInt(request.getParameter("userId"));
+
+        // Khởi tạo đối tượng UserDAO
+        UserDAO accountDAO = new UserDAO();
+        
+        // Lấy thông tin chi tiết của người dùng từ cơ sở dữ liệu
+        User user = accountDAO.getUserById(userId);
+        
+        // Kiểm tra nếu người dùng không tồn tại
+        if (user == null) {
+            // Xử lý lỗi hoặc chuyển hướng về trang lỗi
+            response.sendRedirect("error.jsp");
+            return;
+        }
+        
+        // Đặt thông tin người dùng vào request
+        request.setAttribute("user", user);
+        
+        // Chuyển tiếp đến trang JSP hiển thị thông tin người dùng
+        request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
     } 
 
     /** 

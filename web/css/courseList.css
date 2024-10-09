@@ -1,0 +1,476 @@
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    height: 100vh;
+    overflow: hidden; /* Prevents scrolling of the entire page */
+    padding: 20px; /* Padding around the entire page for top and bottom margin */
+    overflow-y: auto; /* Cho phép cuộn dọc */
+    overflow-x: hidden; /* Ẩn thanh cuộn ngang */
+}
+
+/* Container with fixed sidebar and scrollable content */
+.container {
+    display: flex;
+    max-width: calc(100% - 40px); /* Leave space for the left and right margins (20px on each side) */
+    height: calc(100vh - 40px); /* Full height container minus padding (top and bottom 20px) */
+    margin: 0 auto; /* Centers the container horizontally */
+    border-radius: 10px; /* Rounded corners for the whole container */
+    overflow: hidden; /* Prevents any overflow from the container */
+    max-width: 100%; /* Sử dụng hết chiều rộng màn hình */
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 20%; /* Tăng chiều rộng của sidebar */
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    height: 97%; /* Full height for the sidebar */
+    position: fixed; /* Fixes the sidebar in place */
+    top: 20px; /* Keeps it fixed at the top of the page with padding */
+    left: 20px; /* Keeps it fixed to the left with 20px margin */
+    overflow-y: auto; /* Allows the sidebar to scroll if the content is long */
+}
+
+.sidebar h3 {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.filter{
+    display: flex;  
+    flex-direction: column; 
+    justify-content: center;
+}
+
+.filter-category {
+    margin-left: 20%;
+}
+
+/* Custom Checkbox Styling */
+.sidebar input[type="checkbox"] {
+    appearance: none; /* Remove default styling */
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    margin-right: 8px;
+    vertical-align: middle; /* Align checkbox with text */
+    position: relative;
+}
+
+.sidebar input[type="checkbox"]:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.sidebar input[type="checkbox"]:checked::before {
+    content: "\f00c"; /* FontAwesome check icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    text-align: center;
+    width: 14px;
+    height: 14px;
+}
+
+/* Content Styling - Scrollable area */
+.content {
+    width: 78%; /* Giảm chiều rộng của content */
+    margin-left: 22%; /* Điều chỉnh lại để vừa với sidebar */
+    padding: 20px;
+    padding-left: 40px; /* Added left padding for spacing */
+    padding-right: 40px; /* Added right padding for spacing */
+    box-sizing: border-box;
+    overflow-y: scroll; /* Allows the content to scroll */
+    height: 100%; /* Full height for scrolling */
+    border-radius: 10px; /* Rounded corners for the content area */
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Box shadow for content area */
+}
+
+/* Header */
+.header,
+.Customization{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    /*font-size: 28px;*/
+    font-weight: bold;
+    color: #007bff;
+}
+
+.sort select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Course Cards Grid Layout */
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 courses per row */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.customize select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+/* Individual Course Cards */
+.course-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    min-height: 420px; /* Đặt chiều cao tối thiểu để các thẻ đồng đều */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Đảm bảo các phần bên trong được phân phối đều */
+}
+
+.course-card:hover {
+    transform: translateY(-5px); /* Card lifts on hover */
+}
+
+/* Remove underline for course card links */
+.course-card a {
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Inherits color from parent */
+    flex-grow: 1; /* Đảm bảo ảnh và thông tin chiếm toàn bộ chiều cao */
+}
+
+.course-card a:hover {
+    text-decoration: none; /* Ensures no underline on hover as well */
+    color: inherit; /* Keep the color the same on hover */
+}
+
+.thumbnail {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.course-info {
+    padding: 15px;
+    flex-grow: 1; /* Đảm bảo phần thông tin khóa học mở rộng */
+}
+
+.course-info h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.course-info .instructor, .course-info .students, .course-info .lessons {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.course-info .rating {
+    font-size: 14px;
+    color: #f39c12;
+    margin-bottom: 10px;
+}
+
+/* Pricing Section */
+.pricing {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.pricing .list-price {
+    text-decoration: line-through;
+    margin-right: 10px;
+    color: #999;
+}
+
+.pricing .sale-price {
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+/* Register Button */
+.register-btn {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-end; /* Đảm bảo nút "Register" ở cuối thẻ */
+}
+
+.register-btn:hover {
+    background-color: #0056b3;
+}
+
+
+/* Pagination Styling */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination-btn {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.pagination-btn:hover {
+    background-color: #0056b3;
+}
+
+#page-info {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Search Bar Container */
+.Search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+/* Search Input */
+.search-input {
+    width: 80%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 25px 0 0 25px;
+    outline: none;
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    border-color: #007bff;
+}
+
+/* Search Button */
+.search-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+/* Icon inside the button */
+.search-button i {
+    font-size: 16px;
+}
+
+.filter-btn {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #0056b3;
+}
+
+.sticky-header {
+        position: -webkit-sticky; /* Safari */
+        position: sticky;
+        top: 0;
+        background-color: white; /* Màu nền cho header */
+        z-index: 1000; /* Đảm bảo header luôn ở trên cùng */
+        padding: 10px; /* Khoảng cách bên trong */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Đổ bóng cho header khi cuộn */
+    }
+    
+/* Điều chỉnh header khi nằm trong phần Customization */
+.Customization .sticky-header {
+    top: 0;
+    z-index: 999;
+    width: 100%;
+}
+
+/* Custom Styles cho phần Customization */
+.Customization {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #f4f4f9; /* Màu nền cho phần này */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.customize-display, .sort {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+/* Customization Section */
+    .customize-display {
+        margin-top: 30px;
+        margin-left: 5%;
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .customize-display h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .customization-option label {
+        font-size: 14px;
+        color: #333;
+    }
+
+    .customization-option select {
+        width: 100%;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
+   .tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f1f1f1; /* Màu nền của thẻ */
+    border-radius: 15px; /* Bo tròn góc nhỏ hơn */
+    padding: 3px 8px; /* Giảm padding để thẻ nhỏ hơn */
+    font-size: 12px; /* Giảm font size */
+    font-weight: 500;
+    color: #333;
+    border: 1px solid #ddd; /* Viền */
+    margin-bottom: 5px; /* Khoảng cách giữa các thẻ */
+    width: auto; /* Đảm bảo thẻ vừa với nội dung */
+    white-space: nowrap; /* Đảm bảo thẻ không bị xuống dòng */
+}
+
+.tag i {
+    font-size: 14px; /* Giảm kích thước của icon */
+    color: #333;
+    margin-right: 5px; /* Giảm khoảng cách giữa icon và text */
+}
+
+.tag:hover {
+    background-color: #e0e0e0; /* Màu nền khi hover */
+    border-color: #aaa; /* Màu viền khi hover */
+    cursor: pointer; /* Con trỏ chuột */
+}
+
+.course-tagline {
+    display: flex;
+    flex-direction: column; /* Sắp xếp các thẻ theo chiều dọc */
+    gap: 3px; /* Giảm khoảng cách giữa các thẻ */
+}
+
+.tagline {
+    text-overflow: ellipsis; /* Đảm bảo text không bị cắt */
+    overflow: hidden;
+    white-space: nowrap; /* Đảm bảo không xuống dòng */
+}
+/* Responsive Layout */
+@media (max-width: 1200px) {
+    .course-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: relative; /* Đặt sidebar trở lại luồng bình thường */
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        height: auto; /* Đặt chiều cao tự động */
+        margin-bottom: 20px; /* Khoảng cách dưới để phân cách */
+    }
+    .content {
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        margin-left: 0; /* Đặt lại vị trí */
+    }
+    .sticky-header {
+        padding: 8px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+}
