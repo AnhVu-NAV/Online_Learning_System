@@ -31,7 +31,7 @@
                     courseId = "1"; // Giá trị mặc định nếu không có courseId
                 }
             %>
-            
+
             <!-- Sidebar with Course Info -->
             <div class="course-info">
                 <div class="course-thumbnail">
@@ -53,7 +53,7 @@
                     <span class="list-price">$<fmt:formatNumber value="${pricePackage.price}" /></span>
                     <span class="sale-price">$<fmt:formatNumber value="${pricePackage.salePrice}" /></span>
                 </div>
-                <button class="register-btn primary" onclick="openRegisterPopup('<%= courseId %>')">Register Now</button>
+                <button class="register-btn primary" data-courseid="${course.id}" onclick="openRegisterPopup(this)">Register Now</button>
                 <button class="register-btn secondary">Save for Later</button>
                 <p class="money-back">30-Day Money-Back Guarantee</p>
 
@@ -172,16 +172,16 @@
         </div>
 
         <!-- Popup Register Form -->
-        <%--<%@ include file="RegisterPopup.jsp" %>--%>
-        <jsp:include page="/RegiterPopup.jsp"></jsp:include>
+        <%@ include file="RegisterPopup.jsp" %>
+        <%--<jsp:include page="/RegisterPopup.jsp"></jsp:include>--%>
 
         <script>
             // Function to open the registration popup
-            function openRegisterPopup(courseId) {
+            function openRegisterPopup(button) {
+                const courseId = button.getAttribute('data-courseid');
+                document.getElementById('hiddenCourseId').value = courseId;
                 document.getElementById('registerPopup').style.display = 'flex';
-                document.getElementById('hiddenCourseId').value = courseId;  // Lưu courseId vào input ẩn
             }
-
             // Function to close the registration popup
             function closeRegisterPopup() {
                 document.getElementById('registerPopup').style.display = 'none';
