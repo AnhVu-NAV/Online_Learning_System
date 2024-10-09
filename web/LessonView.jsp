@@ -32,7 +32,6 @@
             #sidebar.hidden {
                 width: 0;
                 padding: 0;
-
                 transform: translateX(-300px);
             }
 
@@ -80,7 +79,7 @@
                 justify-content: space-between;
                 align-items: center;
                 flex-direction: column;
-                
+
             }
 
             .chapter-header {
@@ -88,7 +87,7 @@
                 justify-content: space-between;
                 align-items: center;
                 width: 100%;
-                
+
             }
 
             .chapter-title span {
@@ -150,6 +149,10 @@
                 box-shadow: 0 2px 5px rgba(0,0,0,0.1);  /* Hiệu ứng bóng */
             }
 
+            #header span {
+                font-size: 30px;
+            }
+
         </style>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
@@ -179,13 +182,12 @@
     <body>
         <div id="header">
             <div class="logo">
-                <!-- Bạn có thể thêm ảnh logo nếu muốn, hoặc chỉ là văn bản -->
-                <img src="path_to_logo" alt="Logo" />
-                <span>Tên Trang Web</span>  <!-- Thay bằng tên trang web của bạn -->
+
+                <span>LEARNIK</span>  
             </div>
             <div class="course-name">
                 <!-- Hiển thị tên khóa học -->
-                ${courseName}  <!-- Đảm bảo rằng bạn đã truyền biến 'courseName' từ Servlet -->
+                ${courseName}  
             </div>
         </div>
 
@@ -212,7 +214,7 @@
                     <div class="lesson-list">
                         <c:forEach var="lesson" items="${lessonsMap[chapter.id]}">
                             <div class="lesson">
-                                <a href="#">${lesson.title}</a>
+                                <a href="LessonVideoController?lesson_id=${lesson.id}">${lesson.title}</a>
                             </div>
                         </c:forEach>
                     </div>
@@ -225,8 +227,15 @@
 
 
         <div id="main-content">
-            <h1>Main Content Here</h1>
-            <p>This is the main content area. We will handle this later.</p>
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                        src="https://www.youtube.com/embed/${videocontent.videoId}?list=${videocontent.listId}&index=${videocontent.index_vid}" 
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+            </div>
+
+            
+
         </div>
 
     </body>

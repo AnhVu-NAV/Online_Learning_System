@@ -36,6 +36,10 @@
         <servlet-name>CourseAnalysisServlet</servlet-name>
         <servlet-class>controller.CourseAnalysisServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LessonVideoController</servlet-name>
+        <servlet-class>controller.LessonVideoController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>changePassword</servlet-name>
         <url-pattern>/changePassword</url-pattern>
@@ -67,5 +71,9 @@
     <servlet-mapping>
         <servlet-name>CourseAnalysisServlet</servlet-name>
         <url-pattern>/CourseAnalysis</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonVideoController</servlet-name>
+        <url-pattern>/LessonVideoController</url-pattern>
     </servlet-mapping>
 </web-app>
