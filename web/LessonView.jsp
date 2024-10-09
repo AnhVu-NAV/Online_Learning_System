@@ -1,89 +1,235 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>Course Content</title>
+        <meta charset="UTF-8">
+        <title>Course Chapters and Lessons</title>
         <style>
-            /* Sidebar định dạng */
+            /* CSS cho body */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            /* CSS cho sidebar */
             #sidebar {
-                width: 250px;
-                background-color: #f8f9fa;
-                padding: 15px;
+                width: 300px;
+                background-color: #2c2f33;
+                color: #fff;
+                height: 100vh;
                 position: fixed;
-                height: 100%;
+                left: 0;
+                top: 0;
                 overflow-y: auto;
-            }
-
-            .chapter {
-                margin-bottom: 10px;
-            }
-
-            .chapter-title {
-                font-size: 18px;
-                cursor: pointer;
-                background-color: #007bff;
-                color: white;
+                transition: all 0.3s ease;
                 padding: 10px;
+            }
+
+            /* Khi sidebar ẩn */
+            #sidebar.hidden {
+                width: 0;
+                padding: 0;
+
+                transform: translateX(-300px);
+            }
+
+            /* Nút để ẩn/hiện sidebar */
+            #toggle-btn {
+                position: fixed;
+                top: 15px;
+                left: 300px;
+                font-size: 20px;
+                background-color: #2c2f33;
+                color: #fff;
                 border: none;
-                width: 100%;
-                text-align: left;
+                padding: 10px;
+                cursor: pointer;
+                z-index: 1000;
+                top: 75px;
+            }
+
+            /* Khi sidebar bị ẩn thì nút di chuyển lại gần */
+            #sidebar.hidden + #toggle-btn {
+                left: 0;
+            }
+
+            /* Phần main content */
+            #main-content {
+                margin-left: 300px;
+                padding: 20px;
+                transition: margin-left 0.3s ease;
+                margin-top: 60px;
+            }
+
+            /* Khi sidebar ẩn, nội dung sẽ mở rộng */
+            #sidebar.hidden ~ #main-content {
+                margin-left: 40px;
+            }
+
+            /* Phong cách cho danh sách chapter và lesson */
+            .chapter-title {
+                background-color: #40444b;
+                padding: 10px;
+                margin: 10px 0;
+                cursor: pointer;
                 border-radius: 5px;
-                margin-bottom: 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column;
+                
+            }
+
+            .chapter-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                
+            }
+
+            .chapter-title span {
+                display: inline-block;
+
+            }
+
+
+            .chapter-duration {
+                display: flex;
+                font-size: 12px;
+                color: #bbb;
+                margin-top: 5px;
+                align-self: flex-start;
+
+            }
+
+            .chapter-title:hover {
+                background-color: #546e7a;
             }
 
             .lesson-list {
+                padding-left: 20px;
+                margin-bottom: 10px;
                 display: none;
-                margin-left: 15px;
             }
 
             .lesson {
-                margin-top: 5px;
+                padding: 5px 0;
             }
 
             .lesson a {
+                color: #fff;
                 text-decoration: none;
-                color: #007bff;
             }
+
+            .lesson a:hover {
+                text-decoration: underline;
+            }
+
+            .dropdown-icon {
+                font-size: 12px;
+                margin-left: auto;
+            }
+
+            #header {
+                width: 100%;
+                background-color: #2c2f33;  /* Màu nền tối */
+                color: white;               /* Màu chữ trắng */
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                position: fixed;
+                top: 0;
+                left: 0;
+                padding: 0 20px;
+                z-index: 1000;  /* Đảm bảo header luôn ở trên các thành phần khác */
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);  /* Hiệu ứng bóng */
+            }
+
         </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            // Hiển thị hoặc ẩn danh sách bài học
-            function toggleLessons(chapterId) {
-                var lessonList = document.getElementById('lessons_' + chapterId);
-                if (lessonList.style.display === 'none') {
-                    lessonList.style.display = 'block';
-                } else {
-                    lessonList.style.display = 'none';
-                }
-            }
+            // Script để xử lý ẩn/hiện sidebar
+            $(document).ready(function () {
+                $("#toggle-btn").click(function () {
+                    $("#sidebar").toggleClass("hidden");
+                });
+
+
+
+                // Script để xử lý ẩn/hiện danh sách bài học và đổi icon
+                $(".chapter-title").click(function () {
+                    $(this).next(".lesson-list").slideToggle();
+
+                    // Đổi icon giữa '▼' và '▲'
+                    var icon = $(this).find(".dropdown-icon");
+                    if (icon.text() === "▼") {
+                        icon.text("▲");
+                    } else {
+                        icon.text("▼");
+                    }
+                });
+            });
         </script>
     </head>
     <body>
+        <div id="header">
+            <div class="logo">
+                <!-- Bạn có thể thêm ảnh logo nếu muốn, hoặc chỉ là văn bản -->
+                <img src="path_to_logo" alt="Logo" />
+                <span>Tên Trang Web</span>  <!-- Thay bằng tên trang web của bạn -->
+            </div>
+            <div class="course-name">
+                <!-- Hiển thị tên khóa học -->
+                ${courseName}  <!-- Đảm bảo rằng bạn đã truyền biến 'courseName' từ Servlet -->
+            </div>
+        </div>
+
+        <!-- Sidebar -->
         <div id="sidebar">
-            <h2>Course Chapters</h2>
+            <h2>Nội dung khóa học</h2>
 
-            <!-- Hiển thị danh sách chapters -->
-            <c:if test="${not empty chapters}">
-                <c:forEach var="chapter" items="${chapters}">
-                    <div class="chapter">
-                        <!-- Hiển thị title của chapter -->
-                        <button class="chapter-title" onclick="toggleLessons(${chapter.id})">
-                            ${chapter.title} (${chapter.duration} minutes)
-                        </button>
 
-                        <!-- Hiển thị danh sách bài học nếu có -->
-                       <c:if test="${currentChapterId == chapter.id && not empty lessons}">
-                        <div id="lessons_${chapter.id}" class="lesson-list">
-                            <c:forEach var="lesson" items="${lessons}">
-                                <div class="lesson">
-                                    <a href="#">${lesson.title}</a>
-                                </div>
-                            </c:forEach>
+            <c:forEach var="chapter" items="${chapters}">
+                <div class="chapter">
+                    <div class="chapter-title">
+                        <div class="chapter-header">
+                            <span> ${chapter.title}</span>
+                            <span class="dropdown-icon">▼</span> 
                         </div>
-                    </c:if>
+                        <div class="chapter-duration">
+                            ${chapter.duration} minutes
+                        </div>
                     </div>
-                </c:forEach>
-            </c:if>
 
-            
+
+
+
+                    <div class="lesson-list">
+                        <c:forEach var="lesson" items="${lessonsMap[chapter.id]}">
+                            <div class="lesson">
+                                <a href="#">${lesson.title}</a>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+
+
+        <button id="toggle-btn">☰</button>
+
+
+        <div id="main-content">
+            <h1>Main Content Here</h1>
+            <p>This is the main content area. We will handle this later.</p>
+        </div>
+
     </body>
 </html>
+
+
