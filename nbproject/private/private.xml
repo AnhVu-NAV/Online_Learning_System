@@ -101,18 +101,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/web/CourseDetails.jsp</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/dal/CourseDAO.java</file>
-            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/model/Lesson.java</file>
-            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/model/Chapter.java</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/dal/PricePackageDAO.java</file>
-            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/dal/ChapterDAO.java</file>
-            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/web/css/courseDetail.css</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/dal/UserCourseDAO.java</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/model/UserCourse.java</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/web/CourseList.jsp</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/controller/CourseDetailController.java</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/controller/CourseListController.java</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/controller/RegisterCourseController.java</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/dal/LessonDAO.java</file>
-            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/web/RegiterPopup.jsp</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/model/PricePackage.java</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/web/CourseDetails.jsp</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/web/RegisterPopup.jsp</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/model/Lesson.java</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/model/Chapter.java</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/web/UpdateUserProfile.jsp</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/dal/ChapterDAO.java</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/web/css/courseDetail.css</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/SWP391/Project_SWP/SWP391_OnlineLearning/src/java/controller/UpdateUserProfileController.java</file>
         </group>
     </open-files>
 </project-private>
