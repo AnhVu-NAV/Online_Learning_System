@@ -12,7 +12,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import model.Chapter;
 import model.Lesson;
 
@@ -60,33 +62,27 @@ public class ChapterDisplayController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int courseId = 17;  // Giả định courseId đã được cung cấp
 
-        int courseId = 17;
+        // Lấy danh sách chapter từ cơ sở dữ liệu
+        ChapterDAO cDAO = new ChapterDAO();
+        List<Chapter> chapters = cDAO.getChaptersByCourseId(courseId);
 
-        // Lấy danh sách chapter
-        ChapterDAO cDao = new ChapterDAO();
-        List<Chapter> chapters = cDao.getChaptersByCourseId(courseId);
-        request.setAttribute("chapters", chapters);
+        // Tạo một Map để lưu trữ danh sách bài học theo chapterId
+        Map<Integer, List<Lesson>> lessonsMap = new HashMap<>();
 
-        LessonDAO lDao = new LessonDAO();
+        LessonDAO lDAO = new LessonDAO();
         if (chapters != null && !chapters.isEmpty()) {
             for (Chapter chapter : chapters) {
-                List<Lesson> lessons = lDao.getLessonsByChapterId(chapter.getId());
-
-                // Kiểm tra và in ra log số lượng bài học
-                if (lessons != null && !lessons.isEmpty()) {
-                    System.out.println("Number of lessons for Chapter ID " + chapter.getId() + ": " + lessons.size());
-                    for (Lesson lesson : lessons) {
-                        System.out.println("Lesson Title: " + lesson.getTitle());
-                    }
-                } else {
-                    System.out.println("No lessons found for Chapter ID: " + chapter.getId());
-                }
-
-                // Gán danh sách bài học vào request
-                request.setAttribute("lessons_" + chapter.getId(), lessons);
+                int chapterId = chapter.getId();  
+                List<Lesson> lessons = lDAO.getLessonsByChapterId(chapterId);
+                lessonsMap.put(chapterId, lessons);
             }
         }
+
+        // Gán cả chapters và lessonsMap vào request
+        request.setAttribute("chapters", chapters);
+        request.setAttribute("lessonsMap", lessonsMap);
 
         request.getRequestDispatcher("LessonView.jsp").forward(request, response);
     }

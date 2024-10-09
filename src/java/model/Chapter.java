@@ -18,6 +18,7 @@ public class Chapter {
     private int courseId;
     private int status;
     private int duration;
+    
 
     // Constructors
     public Chapter() {}
