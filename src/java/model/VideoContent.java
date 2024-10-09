@@ -10,19 +10,14 @@ package model;
  */
 public class VideoContent {
     private int lessonId;
-    private String videoUrl;
+    private String videoId;
+    private String listId;
+    private int index_vid;
     private String videoSummary;
     private String description;
 
     // Constructors
     public VideoContent() {}
-
-    public VideoContent(int lessonId, String videoUrl, String videoSummary, String description) {
-        this.lessonId = lessonId;
-        this.videoUrl = videoUrl;
-        this.videoSummary = videoSummary;
-        this.description = description;
-    }
 
     public int getLessonId() {
         return lessonId;
@@ -32,12 +27,28 @@ public class VideoContent {
         this.lessonId = lessonId;
     }
 
-    public String getVideoUrl() {
-        return videoUrl;
+    public String getVideoId() {
+        return videoId;
     }
 
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
+    }
+
+    public String getListId() {
+        return listId;
+    }
+
+    public void setListId(String listId) {
+        this.listId = listId;
+    }
+
+    public int getIndex_vid() {
+        return index_vid;
+    }
+
+    public void setIndex_vid(int index_vid) {
+        this.index_vid = index_vid;
     }
 
     public String getVideoSummary() {

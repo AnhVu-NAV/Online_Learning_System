@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Lesson;
+import model.VideoContent;
 
 /**
  *
@@ -33,6 +34,7 @@ public class LessonDAO extends DBContext {
             while (resultSet.next()) {
 
                 Lesson lesson = new Lesson();
+                lesson.setId(resultSet.getInt("id"));
                 lesson.setTitle(resultSet.getString("title"));
                 lesson.setStatus(resultSet.getInt("status"));  
                 lesson.setLessonTypeId(resultSet.getInt("lesson_type_id"));   
@@ -47,22 +49,37 @@ public class LessonDAO extends DBContext {
 
         return lessons;
     }
+    
+     public VideoContent getVideoContentById(int lessonId) {
+        VideoContent content = null;
+        String query = "SELECT * FROM VideoContent WHERE lesson_id = ?";
+        
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            
+            statement.setInt(1, lessonId);
+            ResultSet rs = statement.executeQuery();
+            
+            if (rs.next()) {
+                content = new VideoContent();
+                content.setLessonId(rs.getInt("lesson_id"));
+                content.setVideoId(rs.getString("video_id"));
+                content.setListId(rs.getString("list_id"));
+                content.setIndex_vid(rs.getInt("index_vid"));
+                content.setVideoSummary(rs.getString("video_summary"));
+                content.setDescription(rs.getString("description"));
+            }
+        } catch (SQLException e) {
+            LOGGER.log(java.util.logging.Level.SEVERE, "Error retrieving content", e);
+        }
+        
+        return content;
+    }
 
     public static void main(String[] args) {
-        LessonDAO lessonDAO = new LessonDAO();
-        int chapterId = 57;  // Thay đổi chapterId này nếu cần
-
-        // Lấy danh sách bài học của chương với chapterId đã chỉ định
-        List<Lesson> lessons = lessonDAO.getLessonsByChapterId(chapterId);
-
-        // Kiểm tra kết quả trả về
-        if (lessons != null && !lessons.isEmpty()) {
-            System.out.println("Số lượng bài học cho chapter ID " + chapterId + ": " + lessons.size());
-            for (Lesson lesson : lessons) {
-                System.out.println("Lesson ID: " + lesson.getId() + ", Title: " + lesson.getTitle());
-            }
-        } else {
-            System.out.println("Không tìm thấy bài học nào cho chapter ID: " + chapterId);
-        }
+        LessonDAO ldao = new LessonDAO();
+        List<Lesson> lessons = new ArrayList<>();
+        lessons = ldao.getLessonsByChapterId(57);
+        System.out.println(lessons);
+ 
     }
 }
