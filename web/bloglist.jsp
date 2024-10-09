@@ -1,5 +1,5 @@
 <%-- 
-    Document   : bloglist
+    Document   : BlogList
     Created on : Sep 16, 2024, 10:57:12 AM
     Author     : mocun
 --%>
@@ -29,7 +29,7 @@
         </div>
         <nav class="tm-nav" id="tm-nav">            
             <ul>
-                <li class="tm-nav-item"><a href="blogList.jsp" class="tm-nav-link">
+                <li class="tm-nav-item"><a href="BlogList.jsp" class="tm-nav-link">
                     <i class="fas fa-home"></i>
                     Blog Home
                 </a></li>
@@ -70,7 +70,7 @@
                 <!-- Filter by Category and Hot Sale -->
                 <div class="row tm-row">
                     <div class="col-12">
-                        <form method="GET" action="blogList.jsp" class="form-inline tm-mb-80">
+                        <form method="GET" action="BlogList.jsp" class="form-inline tm-mb-80">
                             <label for="filter" class="mr-2">Filter by:</label>
                             <select name="filter" id="filter" class="form-control mr-4">
                                 <option value="all">All</option>
