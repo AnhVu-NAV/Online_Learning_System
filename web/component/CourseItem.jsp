@@ -125,13 +125,13 @@
 
 
 <!--Test data-->
-<div class="course-grid" id="courseGrid">
-    <!-- Card 1 -->
-    <div class="course-card">
+<!--<div class="course-grid" id="courseGrid">
+     Card 1 
+    <div class="course-card course-item">
         <a href="courseDetails?id=1">
-            <img src="../img/1.jpg" class="thumbnail" alt="Course 1">
-            <div class="course-info">
-                <h3>Course 1</h3>
+            <img src="./img/about-01.jpg" class="thumbnail" alt="Course 1">
+            <div class="course-info course-item">
+                <h3 class="course-title">Course 1</h3>
                 <p>This is a description for Course 1.</p>
                 <div class="pricing">
                     <span class="list-price">$100</span>
@@ -142,12 +142,12 @@
         <button class="register-btn">Register</button>
     </div>
 
-    <!-- Card 2 -->
-    <div class="course-card">
+     Card 2 
+    <div class="course-card course-item">
         <a href="courseDetails?id=2">
-            <img src="../img/1.jpg" class="thumbnail" alt="Course 2">
+            <img src="./img/img-06.jpg" class="thumbnail" alt="Course 2">
             <div class="course-info">
-                <h3>Course 2</h3>
+                <h3 class="course-title">Course 2</h3>
                 <p>This is a description for Course 2.</p>
                 <div class="pricing">
                     <span class="list-price">$120</span>
@@ -158,13 +158,65 @@
         <button class="register-btn">Register</button>
     </div>
 
-    <!-- Card 3 -->
-    <div class="course-card">
+     Card 3 
+    <div class="course-card course-item">
         <a href="courseDetails?id=3">
-            <img src="../img/1.jpg" class="thumbnail" alt="Course 3">
+            <img src="./img/img-04.jpg" class="thumbnail" alt="Course 3">
             <div class="course-info">
                 <h3>Course 3</h3>
                 <p>This is a description for Course 3.</p>
+                <div class="pricing">
+                    <span class="list-price">$150</span>
+                    <span class="sale-price">$75</span>
+                </div>
+            </div>
+        </a>
+        <button class="register-btn">Register</button>
+    </div>
+</div>-->
+
+
+<!-- CourseItem.jsp -->
+<div class="course-grid" id="courseGrid">
+    <!-- Card 1 -->
+    <div class="course-card course-item">
+        <a href="courseDetails?id=1">
+            <img src="./img/about-01.jpg" class="thumbnail course-thumbnail" alt="Course 1">
+            <div class="course-info">
+                <h3 class="course-title">Course 1</h3>
+                <p class="course-description">This is a description for Course 1.</p>
+                <div class="pricing">
+                    <span class="list-price">$100</span>
+                    <span class="sale-price">$50</span>
+                </div>
+            </div>
+        </a>
+        <button class="register-btn">Register</button>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="course-card course-item">
+        <a href="courseDetails?id=2">
+            <img src="./img/img-06.jpg" class="thumbnail course-thumbnail" alt="Course 2">
+            <div class="course-info">
+                <h3 class="course-title">Course 2</h3>
+                <p class="course-description">This is a description for Course 2.</p>
+                <div class="pricing">
+                    <span class="list-price">$120</span>
+                    <span class="sale-price">$60</span>
+                </div>
+            </div>
+        </a>
+        <button class="register-btn">Register</button>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="course-card course-item">
+        <a href="courseDetails?id=3">
+            <img src="./img/img-04.jpg" class="thumbnail course-thumbnail" alt="Course 3">
+            <div class="course-info">
+                <h3 class="course-title">Course 3</h3>
+                <p class="course-description">This is a description for Course 3.</p>
                 <div class="pricing">
                     <span class="list-price">$150</span>
                     <span class="sale-price">$75</span>

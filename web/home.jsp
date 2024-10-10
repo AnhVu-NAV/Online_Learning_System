@@ -132,13 +132,13 @@
                         <!-- Pagination dropdown -->
                         <div class="col-md-4">
                             <form action="home" method="get" class="form-inline">
-                                 <input type="number" name="pageSize" class="form-control mr-3" min="1" max="100" value="${recordsPerPage}" onchange="this.form.submit()">
-                                <label for="pageSize" class="mr-3">Records per page:</label>
+                                <input type="number" name="pageSize" class="form-control mr-3" min="1" max="100" value="${recordsPerPage}" onchange="this.form.submit()">
+<!--                                <label for="pageSize" class="mr-3">Records per page:</label>
                                 <select name="pageSize" class="form-control mr-3" onchange="this.form.submit()">
                                     <option value="5" ${recordsPerPage == 5 ? 'selected' : ''}>5</option>
                                     <option value="10" ${recordsPerPage == 10 ? 'selected' : ''}>10</option>
                                     <option value="20" ${recordsPerPage == 20 ? 'selected' : ''}>20</option>
-                                </select>
+                                </select>-->
                                 <input type="hidden" name="page" value="${currentPage}">
                             </form>
                         </div>
@@ -188,7 +188,7 @@
 
         <!-- Courses Section -->
         <div class="row mt-5">
-            <div class="col-md-12">
+            <div class="col-md-12" style="margin-left:20%">
                 <h2>Courses</h2>
                 <form action="filterCourses" method="post" class="form-inline mb-4">
                     <select name="filter" class="form-control mr-3" onchange="this.form.submit()">
@@ -201,19 +201,71 @@
                 <!-- Sử dụng CourseItem.jsp để hiển thị mỗi khóa học (course) -->
                 <div class="row">
                     <%--<c:forEach var="course" items="${courseList}">--%>
-                    <div class="col-md-6 mb-4">
+                    <div class="col-md-8 mb-4">
                         <jsp:include page="component/CourseItem.jsp" />
                     </div>
                     <%--</c:forEach>--%>
                 </div>
+
+<!--                 Course display area 
+                <div id="courseList">
+                    <div class="course-item">
+                        <h3 class="course-title">Course Title</h3>
+                        <p class="course-tagline">This is the tagline of the course.</p>
+                        <img class="course-thumbnail" src="img/course-thumbnail.jpg" alt="Course Thumbnail">
+                    </div>
+                </div>-->
+
+
+                <!--                 Show/Hide Course Fields 
+                                    <h3>Show/Hide Course Fields</h3>
+                                    <form action="applyCourseFields" method="post" class="form-inline">
+                                        <label class="mr-3"><input type="checkbox" name="fields" value="title" ${fn:contains(selectedFields, 'title') ? 'checked' : ''}> Title</label>
+                                        <label class="mr-3"><input type="checkbox" name="fields" value="tagline" ${fn:contains(selectedFields, 'tagline') ? 'checked' : ''}> Tagline</label>
+                                        <label class="mr-3"><input type="checkbox" name="fields" value="thumbnail" ${fn:contains(selectedFields, 'thumbnail') ? 'checked' : ''}> Thumbnail</label>
+                                        <button type="submit" class="btn btn-primary ml-3">Apply</button>
+                                    </form>-->
+
                 <!-- Show/Hide Course Fields -->
-                    <h3>Show/Hide Course Fields</h3>
-                    <form action="applyCourseFields" method="post" class="form-inline">
-                        <label class="mr-3"><input type="checkbox" name="fields" value="title" ${fn:contains(selectedFields, 'title') ? 'checked' : ''}> Title</label>
-                        <label class="mr-3"><input type="checkbox" name="fields" value="tagline" ${fn:contains(selectedFields, 'tagline') ? 'checked' : ''}> Tagline</label>
-                        <label class="mr-3"><input type="checkbox" name="fields" value="thumbnail" ${fn:contains(selectedFields, 'thumbnail') ? 'checked' : ''}> Thumbnail</label>
-                        <button type="submit" class="btn btn-primary ml-3">Apply</button>
-                    </form>
+                <!-- Show/Hide Course Fields -->
+                <h3>Show/Hide Course Fields</h3>
+                <form class="form-inline">
+                    <label class="mr-3">
+                        <input type="checkbox" id="toggleTitle" checked> Title
+                    </label>
+                    <label class="mr-3">
+                        <input type="checkbox" id="toggleTagline" checked> Tagline
+                    </label>
+                    <label class="mr-3">
+                        <input type="checkbox" id="toggleThumbnail" checked> Thumbnail
+                    </label>
+                </form>
+
+                <!-- Dynamically Display Courses Based on Selected Fields -->
+                <div class="row mt-4">
+                    <c:forEach var="course" items="${courseList}">
+                        <div class="col-md-6 mb-4">
+                            <div class="course-item">
+                                <!-- Display Title if selected -->
+                                <c:if test="${fn:contains(selectedFields, 'title')}">
+                                    <h4>${course.title}</h4>
+                                </c:if>
+
+                                <!-- Display Tagline if selected -->
+                                <c:if test="${fn:contains(selectedFields, 'tagline')}">
+                                    <p>${course.tagline}</p>
+                                </c:if>
+
+                                <!-- Display Thumbnail if selected -->
+                                <c:if test="${fn:contains(selectedFields, 'thumbnail')}">
+                                    <img src="${course.thumbnailUrl}" alt="${course.title}" class="img-fluid">
+                                </c:if>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+
+
             </div>
         </div>
 
@@ -224,5 +276,38 @@
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+
+        <!-- JavaScript to toggle course fields -->
+        <script>
+                        // Get checkbox elements
+                        const toggleTitle = document.getElementById('toggleTitle');
+                        const toggleTagline = document.getElementById('toggleTagline');
+                        const toggleThumbnail = document.getElementById('toggleThumbnail');
+
+                        // Get course field elements
+                        const courseTitle = document.querySelectorAll('.course-title');
+                        const courseTagline = document.querySelectorAll('.course-tagline');
+                        const courseThumbnail = document.querySelectorAll('.course-thumbnail');
+
+                        // Function to toggle visibility
+                        function toggleVisibility(element, isVisible) {
+                            element.forEach(item => {
+                                item.style.display = isVisible ? 'block' : 'none';
+                            });
+                        }
+
+                        // Add event listeners to checkboxes
+                        toggleTitle.addEventListener('change', () => {
+                            toggleVisibility(courseTitle, toggleTitle.checked);
+                        });
+
+                        toggleTagline.addEventListener('change', () => {
+                            toggleVisibility(courseTagline, toggleTagline.checked);
+                        });
+
+                        toggleThumbnail.addEventListener('change', () => {
+                            toggleVisibility(courseThumbnail, toggleThumbnail.checked);
+                        });
+        </script>
     </body>
 </html>
