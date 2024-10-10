@@ -98,16 +98,6 @@
                             </c:forEach>
                     </ul>
 
-
-                    <!-- Show/Hide Course Fields -->
-                    <h3>Show/Hide Course Fields</h3>
-                    <form action="applyCourseFields" method="post" class="form-inline">
-                        <label class="mr-3"><input type="radio" name="fields" value="title"> Title</label>
-                        <label class="mr-3"><input type="radio" name="fields" value="tagline"> Tagline</label>
-                        <label class="mr-3"><input type="radio" name="fields" value="thumbnail"> Thumbnail</label>
-                        <button type="submit" class="btn btn-primary ml-3">Apply</button>
-                    </form>
-
                     <!-- Contact Us -->
                     <h3>Contact Us</h3>
                     <p>Email: contact@yourwebsite.com</p>
@@ -142,6 +132,7 @@
                         <!-- Pagination dropdown -->
                         <div class="col-md-4">
                             <form action="home" method="get" class="form-inline">
+                                 <input type="number" name="pageSize" class="form-control mr-3" min="1" max="100" value="${recordsPerPage}" onchange="this.form.submit()">
                                 <label for="pageSize" class="mr-3">Records per page:</label>
                                 <select name="pageSize" class="form-control mr-3" onchange="this.form.submit()">
                                     <option value="5" ${recordsPerPage == 5 ? 'selected' : ''}>5</option>
@@ -154,76 +145,84 @@
 
                         <!-- View All Button -->
                         <div class="col-md-4 text-right">
-                        <!-- Explicit URL to blogList page -->
-                        <a href="http://localhost:8080/SWP391_OnlineLearning/blogList" class="btn btn-primary">Xem toàn bộ</a>
+                            <!-- Dynamic URL pointing to blogList -->
+                            <a href="${pageContext.request.contextPath}/blogList" class="btn btn-primary">Xem toàn bộ</a>
+                        </div>
+                    </div>
+
+                    <div class="pagination">
+                        <c:forEach var="pageNum" begin="1" end="${noOfPages}">
+                            <a href="home?page=${pageNum}&pageSize=${recordsPerPage}" class="btn btn-secondary mr-2 ${currentPage == pageNum ? 'active' : ''}">
+                                ${pageNum}
+                            </a>
+                        </c:forEach>
+                    </div>
+
+                    <!-- Dynamic Blog Posts Section -->
+                    <div class="row">
+                        <c:forEach var="blog" items="${blogList}">
+                            <article class="col-12 col-md-6 tm-post">
+                                <hr class="tm-hr-primary">
+                                <a href="blogDetail?blogId=${blog.blogId}" class="effect-lily tm-post-link tm-pt-60">
+                                    <div class="tm-post-link-inner">
+                                        <img src="img/${blog.thumbnailUrl}" alt="${blog.title}" class="img-fluid">
+                                    </div>
+                                    <span class="position-absolute tm-new-badge">New</span>
+                                    <h2 class="tm-pt-30 tm-color-primary tm-post-title">${blog.title}</h2>
+                                </a>
+                                <p class="tm-pt-30">${blog.briefInfo}</p>
+                                <div class="d-flex justify-content-between tm-pt-45">
+                                    <span class="tm-color-primary">${blog.category}</span>
+                                    <span class="tm-color-primary">${fn:substring(blog.updatedDate.toString(), 0, 10)}</span>
+                                </div>
+                                <hr>
+                            </article>
+                        </c:forEach>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="pagination">
-                    <c:forEach var="pageNum" begin="1" end="${noOfPages}">
-                        <a href="home?page=${pageNum}&pageSize=${recordsPerPage}" class="btn btn-secondary mr-2 ${currentPage == pageNum ? 'active' : ''}">
-                            ${pageNum}
-                        </a>
-                    </c:forEach>
-                </div>
 
-                <!-- Dynamic Blog Posts Section -->
+
+
+        <!-- Courses Section -->
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <h2>Courses</h2>
+                <form action="filterCourses" method="post" class="form-inline mb-4">
+                    <select name="filter" class="form-control mr-3" onchange="this.form.submit()">
+                        <option value="newest" ${param.filter == 'newest' ? 'selected' : ''}>Newest</option>
+                        <option value="popular" ${param.filter == 'popular' ? 'selected' : ''}>Most Popular</option>
+                        <option value="hotSale" ${param.filter == 'hotSale' ? 'selected' : ''}>Hot Sale</option>
+                    </select>
+                </form>
+
+                <!-- Sử dụng CourseItem.jsp để hiển thị mỗi khóa học (course) -->
                 <div class="row">
-                    <c:forEach var="blog" items="${blogList}">
-                        <article class="col-12 col-md-6 tm-post">
-                            <hr class="tm-hr-primary">
-                            <a href="blogDetail?blogId=${blog.blogId}" class="effect-lily tm-post-link tm-pt-60">
-                                <div class="tm-post-link-inner">
-                                    <img src="img/${blog.thumbnailUrl}" alt="${blog.title}" class="img-fluid">
-                                </div>
-                                <span class="position-absolute tm-new-badge">New</span>
-                                <h2 class="tm-pt-30 tm-color-primary tm-post-title">${blog.title}</h2>
-                            </a>
-                            <p class="tm-pt-30">${blog.briefInfo}</p>
-                            <div class="d-flex justify-content-between tm-pt-45">
-                                <span class="tm-color-primary">${blog.category}</span>
-                                <span class="tm-color-primary">${fn:substring(blog.updatedDate.toString(), 0, 10)}</span>
-                            </div>
-                            <hr>
-                        </article>
-                    </c:forEach>
+                    <%--<c:forEach var="course" items="${courseList}">--%>
+                    <div class="col-md-6 mb-4">
+                        <jsp:include page="component/CourseItem.jsp" />
+                    </div>
+                    <%--</c:forEach>--%>
                 </div>
+                <!-- Show/Hide Course Fields -->
+                    <h3>Show/Hide Course Fields</h3>
+                    <form action="applyCourseFields" method="post" class="form-inline">
+                        <label class="mr-3"><input type="checkbox" name="fields" value="title" ${fn:contains(selectedFields, 'title') ? 'checked' : ''}> Title</label>
+                        <label class="mr-3"><input type="checkbox" name="fields" value="tagline" ${fn:contains(selectedFields, 'tagline') ? 'checked' : ''}> Tagline</label>
+                        <label class="mr-3"><input type="checkbox" name="fields" value="thumbnail" ${fn:contains(selectedFields, 'thumbnail') ? 'checked' : ''}> Thumbnail</label>
+                        <button type="submit" class="btn btn-primary ml-3">Apply</button>
+                    </form>
             </div>
         </div>
-    </div>
 
+        <!-- Footer -->
+        <footer class="mt-5">
+            <%@ include file="component/Footer.jsp" %>
+        </footer>
 
-
-
-    <!-- Courses Section -->
-    <div class="row mt-5">
-        <div class="col-md-12">
-            <h2>Courses</h2>
-            <form action="filterCourses" method="post" class="form-inline mb-4">
-                <select name="filter" class="form-control mr-3" onchange="this.form.submit()">
-                    <option value="newest" ${param.filter == 'newest' ? 'selected' : ''}>Newest</option>
-                    <option value="popular" ${param.filter == 'popular' ? 'selected' : ''}>Most Popular</option>
-                    <option value="hotSale" ${param.filter == 'hotSale' ? 'selected' : ''}>Hot Sale</option>
-                </select>
-            </form>
-
-            <!-- Sử dụng CourseItem.jsp để hiển thị mỗi khóa học (course) -->
-            <div class="row">
-                <%--<c:forEach var="course" items="${courseList}">--%>
-                <div class="col-md-6 mb-4">
-                    <jsp:include page="component/CourseItem.jsp" />
-                </div>
-                <%--</c:forEach>--%>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="mt-5">
-        <%@ include file="component/Footer.jsp" %>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-</body>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    </body>
 </html>
