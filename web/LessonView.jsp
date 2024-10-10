@@ -63,7 +63,11 @@
                 padding: 20px;
                 transition: margin-left 0.3s ease;
                 margin-top: 60px;
+                min-height: 100vh;
                 background-color: #1e1e1e;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
             }
 
             /* Khi sidebar ẩn, nội dung sẽ mở rộng */
@@ -163,8 +167,8 @@
             }
 
             .video-container iframe {
-                width: 80%;  /* Chiếm 80% màn hình */
-                height: 450px;  /* Chiều cao video */
+                width: 90%;  /* Chiếm 80% màn hình */
+                height: 550px;  /* Chiều cao video */
             }
 
             /* CSS cho phần mô tả video */
@@ -173,17 +177,84 @@
                 padding: 15px;
                 background-color: #2c2f33;
                 border-radius: 8px;
+                margin-bottom: 0;
             }
 
             .video-description h3 {
                 margin-bottom: 10px;
                 font-size: 24px;
+
             }
 
             .video-description p {
                 font-size: 16px;
                 line-height: 1.6;
+                height: 100%;
                 color: #ccc;  /* Màu chữ cho đoạn mô tả */
+            }
+
+            #show-summary-btn {
+                position: absolute;
+                top: 15px;  /* Cách đỉnh màn hình một khoảng nhỏ */
+                right: 20px;  /* Cách cạnh phải của màn hình */
+                background-color: blanchedalmond;  /* Màu xanh chủ đạo */
+                color: black;
+                border: none;
+                padding: 10px 20px;  /* Tăng kích thước padding cho nút */
+                cursor: pointer;
+                border-radius: 8px;  /* Góc bo tròn */
+                font-size: 16px;  /* Tăng kích thước chữ */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Thêm hiệu ứng đổ bóng */
+                transition: background-color 0.3s ease, transform 0.3s ease;  /* Hiệu ứng khi hover */
+                z-index: 1000;  /* Đảm bảo nút luôn hiển thị trên cùng */
+                margin-right: 40px;
+            }
+
+            #show-summary-btn:hover {
+                background-color: #0056b3;  /* Màu xanh đậm hơn khi hover */
+                transform: translateY(-2px);  /* Hiệu ứng di chuyển khi hover */
+            }
+
+            /* CSS cho popup */
+            .popup {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 400px;
+                background-color: #fff;
+                box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+                border-radius: 10px;
+                padding: 20px;
+            }
+
+            .popup-content {
+                position: relative;
+            }
+
+            .popup h3 {
+                margin-top: 0;
+                color: #333;
+            }
+
+            .popup p {
+                color: #555;
+            }
+
+            .close-btn {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 20px;
+                cursor: pointer;
+                color: black;
+            }
+
+            /* Hiển thị khi popup được bật */
+            .popup.show {
+                display: block;
             }
 
         </style>
@@ -210,6 +281,31 @@
                     }
                 });
             });
+
+            // Script để hiển thị và ẩn popup
+            document.addEventListener("DOMContentLoaded", function () {
+                var showSummaryBtn = document.getElementById("show-summary-btn");
+                var popup = document.getElementById("summary-popup");
+                var closeBtn = document.querySelector(".close-btn");
+
+                // Khi nhấn vào nút Show Summary, popup sẽ hiển thị
+                showSummaryBtn.addEventListener("click", function () {
+                    popup.classList.add("show");
+                });
+
+                // Khi nhấn vào nút Close (x), popup sẽ bị ẩn
+                closeBtn.addEventListener("click", function () {
+                    popup.classList.remove("show");
+                });
+
+                // Khi nhấn bên ngoài popup, popup cũng sẽ ẩn
+                window.addEventListener("click", function (event) {
+                    if (event.target === popup) {
+                        popup.classList.remove("show");
+                    }
+                });
+            });
+
         </script>
     </head>
     <body>
@@ -219,9 +315,9 @@
                 <span>LEARNIK</span>  
             </div>
             <div class="course-name">
-                <!-- Hiển thị tên khóa học -->
                 ${courseName}  
             </div>
+            <button id="show-summary-btn">Show Summary</button>
         </div>
 
         <!-- Sidebar -->
@@ -266,7 +362,7 @@
                     <div class="text-html-content">
                         <h3>Welcome</h3>
                         <div class="html-content">
-                            ${textHtmlContent} 
+                            <c:out value="${textHtmlContent}" escapeXml="false"/> 
                         </div>
                     </div>
                 </c:when>
@@ -278,6 +374,14 @@
                                 src="https://www.youtube.com/embed/${videocontent.videoId}?list=${videocontent.listId}&index=${videocontent.index_vid}" 
                                 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                         </iframe>
+                    </div>
+
+                    <div id="summary-popup" class="popup">
+                        <div class="popup-content">
+                            <span class="close-btn">&times;</span>
+                            <h3>Summary</h3>
+                            <p>${videocontent.videoSummary}</p> 
+                        </div>
                     </div>
 
                     <div class="video-description">

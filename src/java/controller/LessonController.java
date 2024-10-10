@@ -60,21 +60,26 @@ public class LessonController extends HttpServlet {
             int lessonId = Integer.parseInt(lessonIdParam);
             LessonDAO lDAO = new LessonDAO();
             if (lessonId == 3 || lessonId == 6 || lessonId == 9 || lessonId == 12 || lessonId == 15) {
-                TextContent textcontent = lDAO.getTextContentById(lessonId);
-                if (textcontent != null) {
-                // Đọc file .html chứa nội dung bài học text_html
-                String textHtmlContent = readHtmlFile(lessonIdParam, request);
-                request.setAttribute("textHtmlContent", textHtmlContent);  
-            } else {
-                request.setAttribute("textHtmlContent", "No HTML content available.");
-            }
+                TextContent textContent = lDAO.getTextContentById(lessonId);
+
+                if (textContent != null) {
+
+                    String textHtmlContent = textContent.getTextContent();
+                    request.setAttribute("textHtmlContent", textHtmlContent);
+                } else {
+                    request.setAttribute("textHtmlContent", "No HTML content available.");
+                }
                 request.getRequestDispatcher("ChapterDisplayController").forward(request, response);
 
             } else {
 
                 VideoContent videocontent = lDAO.getVideoContentById(lessonId);
+                
                 String descriptionContent = readDescriptionFromFile(lessonIdParam, request);
                 videocontent.setDescription(descriptionContent);
+
+                String videoSummary = videocontent.getVideoSummary();
+                videocontent.setVideoSummary(videoSummary);
 
                 request.setAttribute("videocontent", videocontent);
 
