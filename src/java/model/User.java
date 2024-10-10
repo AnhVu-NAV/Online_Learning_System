@@ -93,11 +93,9 @@ public class User {
     private String address; // Địa chỉ
     private String imageURL; // URL ảnh đại diện
 
-    // Getters và Setters cho tất cả các thuộc tính
+    private Setting role = new Setting();
 
-    public int getId() {
         return id;
-    }
 
     public void setId(int id) {
         this.id = id;
@@ -110,16 +108,8 @@ public class User {
     public void setPrimaryEmail(String primaryEmail) {
         this.primaryEmail = primaryEmail;
         }
-    public String getEmail() {
-        return email;
-        }
-
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getFirst_name() {
-        return first_name;
     }
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
@@ -183,7 +173,6 @@ public class User {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public Date getDob() {
@@ -204,11 +193,7 @@ public class User {
     public boolean isGender() {
         return gender;
     }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
-    }
-
+    
     public String getFirstPhone() {
         return firstPhone;
     }
@@ -223,10 +208,6 @@ public class User {
 
     public void setSecondPhone(String secondPhone) {
         this.secondPhone = secondPhone;
-    }
-
-    public String getSecondaryEmail() {
-        return secondaryEmail;
     }
 
     public void setSecondaryEmail(String secondaryEmail) {
@@ -311,7 +292,6 @@ public class User {
     public void setCustomerID(int CustomerID) {
         this.CustomerID = CustomerID;
     }
-
     public void setFirstName(String FirstName) {
         this.FirstName = FirstName;
     }

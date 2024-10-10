@@ -30,7 +30,6 @@ public class Lesson {
     }
 
     // Getter và Setter cho các thuộc tính
-
     public int getId() {
         return id;
     }

@@ -81,7 +81,6 @@
                         <h2>Profile Image</h2>
                         <label><strong>Image URL:</strong></label>
                         <input type="text" name="image_url" value="${user.image_url}"  />
-                        <input type="text" name="image_url" value="${user.image_url}" required />
                     </section>
 
                     <section class="gender-section">

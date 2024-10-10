@@ -671,7 +671,6 @@ public class UserDAO extends DBContext {
 //             // Kiểm tra và lấy kết quả
 //             if (rs.next()) {
 //                 User account = new User();
-//                 account.setId(rs.getInt("id"));
 //                 account.setEmail(rs.getString("email"));
 //                 account.setFirstName(rs.getString("first_name"));
 //                 account.setLastName(rs.getString("last_name"));
@@ -707,8 +706,6 @@ public class UserDAO extends DBContext {
             ps.setString(5, user.getAddress());
             ps.setString(6, user.getImageURL());
             ps.setInt(7, user.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
 //            closeConnection();

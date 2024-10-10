@@ -95,6 +95,8 @@ public class CourseDAO extends DBContext {
                 + "JOIN Course_Tagline ct ON t.id = ct.tagline_id "
                 + "WHERE ct.course_id = ?";
 
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, courseId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
