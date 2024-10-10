@@ -20,40 +20,40 @@
     </head>
     <body>
         <header class="tm-header" id="tm-header">
-         <div class="tm-header-wrapper">
-        <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="tm-site-header">
-            <h1 class="text-center">Learnik Blog</h1>
-        </div>
-        <nav class="tm-nav" id="tm-nav">            
-            <ul>
-                <li class="tm-nav-item"><a href="BlogList.jsp" class="tm-nav-link">
-                    <i class="fas fa-home"></i>
-                    Blog Home
-                </a></li>
-                <li class="tm-nav-item active"><a href="#" class="tm-nav-link">
-                    <i class="fas fa-pen"></i>
-                    Single Post
-                </a></li>
-                <li class="tm-nav-item"><a href="about.jsp" class="tm-nav-link">
-                    <i class="fas fa-users"></i>
-                    About Learnik
-                </a></li>
-                <li class="tm-nav-item"><a href="contact.jsp" class="tm-nav-link">
-                    <i class="far fa-comments"></i>
-                    Contact Us
-                </a></li>
-            </ul>
-        </nav>
-        <p class="tm-mb-80 pr-5 text-white">
-            Learnik Blog is a multi-purpose HTML template. Left side is a sticky menu bar, while the right side content scrolls up and down.
-        </p>
-    </div>
+            <div class="tm-header-wrapper">
+                <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="tm-site-header">
+                    <h1 class="text-center">Learnik Blog</h1>
+                </div>
+                <nav class="tm-nav" id="tm-nav">            
+                    <ul>
+                        <li class="tm-nav-item"><a href="BlogList.jsp" class="tm-nav-link">
+                                <i class="fas fa-home"></i>
+                                Blog Home
+                            </a></li>
+                        <li class="tm-nav-item active"><a href="#" class="tm-nav-link">
+                                <i class="fas fa-pen"></i>
+                                Single Post
+                            </a></li>
+                        <li class="tm-nav-item"><a href="about.jsp" class="tm-nav-link">
+                                <i class="fas fa-users"></i>
+                                About Learnik
+                            </a></li>
+                        <li class="tm-nav-item"><a href="contact.jsp" class="tm-nav-link">
+                                <i class="far fa-comments"></i>
+                                Contact Us
+                            </a></li>
+                    </ul>
+                </nav>
+                <p class="tm-mb-80 pr-5 text-white">
+                    Learnik Blog is a multi-purpose HTML template. Left side is a sticky menu bar, while the right side content scrolls up and down.
+                </p>
+            </div>
         </header>
 
-        <div class="container-fluid">
+        <div class="fluid">
             <main class="tm-main">
                 <!-- Search form -->
                 <div class="row tm-row">
@@ -87,9 +87,10 @@
                     <c:forEach var="blog" items="${blogList}">
                         <article class="col-12 col-md-6 tm-post">
                             <hr class="tm-hr-primary">
-                            <a href="blogDetail.jsp?blogId=${blog.blogId}" class="effect-lily tm-post-link tm-pt-60">
+                           <a href="blogDetail?blogId=${blog.blogId}" class="effect-lily tm-post-link tm-pt-60">
                                 <div class="tm-post-link-inner">
-                                    <img src="${blog.thumbnailUrl}" alt="Image" class="img-fluid">
+                                    <!-- Hiển thị hình ảnh từ thumbnailUrl -->
+                                    <img src="img/${blog.thumbnailUrl}" alt="${blog.title}" class="img-fluid">
                                 </div>
                                 <span class="position-absolute tm-new-badge">New</span>
                                 <h2 class="tm-pt-30 tm-color-primary tm-post-title">${blog.title}</h2>

@@ -129,7 +129,7 @@
     <!-- Card 1 -->
     <div class="course-card">
         <a href="courseDetails?id=1">
-            <img src="https://via.placeholder.com/150" class="thumbnail" alt="Course 1">
+            <img src="../img/1.jpg" class="thumbnail" alt="Course 1">
             <div class="course-info">
                 <h3>Course 1</h3>
                 <p>This is a description for Course 1.</p>
@@ -145,7 +145,7 @@
     <!-- Card 2 -->
     <div class="course-card">
         <a href="courseDetails?id=2">
-            <img src="https://via.placeholder.com/150" class="thumbnail" alt="Course 2">
+            <img src="../img/1.jpg" class="thumbnail" alt="Course 2">
             <div class="course-info">
                 <h3>Course 2</h3>
                 <p>This is a description for Course 2.</p>
@@ -161,7 +161,7 @@
     <!-- Card 3 -->
     <div class="course-card">
         <a href="courseDetails?id=3">
-            <img src="https://via.placeholder.com/150" class="thumbnail" alt="Course 3">
+            <img src="../img/1.jpg" class="thumbnail" alt="Course 3">
             <div class="course-info">
                 <h3>Course 3</h3>
                 <p>This is a description for Course 3.</p>
