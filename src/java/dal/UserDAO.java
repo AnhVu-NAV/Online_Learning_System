@@ -38,7 +38,7 @@ public class UserDAO extends DBContext {
                 + "           ,second_phone\n"
                 + "           ,secondary_email\n"
                 + "           ,image_url\n"
-                + "           ,prefer_contact\n"
+                + "           ,prefer_contact)\n"
                 + "     VALUES\n"
                 + "           (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
