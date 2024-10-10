@@ -13,8 +13,8 @@
         <servlet-class>controller.ChapterDisplayController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LessonVideoController</servlet-name>
-        <servlet-class>controller.LessonVideoController</servlet-class>
+        <servlet-name>LessonController</servlet-name>
+        <servlet-class>controller.LessonController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>changePassword</servlet-name>
@@ -29,7 +29,7 @@
         <url-pattern>/ChapterDisplayController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LessonVideoController</servlet-name>
-        <url-pattern>/LessonVideoController</url-pattern>
+        <servlet-name>LessonController</servlet-name>
+        <url-pattern>/LessonController</url-pattern>
     </servlet-mapping>
 </web-app>

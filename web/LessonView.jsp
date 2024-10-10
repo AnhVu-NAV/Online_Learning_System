@@ -12,6 +12,8 @@
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
+                background-color: #1e1e1e;  /* Đặt màu nền chung */
+                color: #fff;  /* Màu chữ trắng để dễ đọc trên nền tối */
             }
 
             /* CSS cho sidebar */
@@ -61,6 +63,7 @@
                 padding: 20px;
                 transition: margin-left 0.3s ease;
                 margin-top: 60px;
+                background-color: #1e1e1e;
             }
 
             /* Khi sidebar ẩn, nội dung sẽ mở rộng */
@@ -153,6 +156,36 @@
                 font-size: 30px;
             }
 
+            .video-container {
+                width: 100%;  /* Chiếm toàn bộ chiều ngang */
+                display: flex;
+                justify-content: center;  /* Canh giữa */
+            }
+
+            .video-container iframe {
+                width: 80%;  /* Chiếm 80% màn hình */
+                height: 450px;  /* Chiều cao video */
+            }
+
+            /* CSS cho phần mô tả video */
+            .video-description {
+                margin-top: 20px;
+                padding: 15px;
+                background-color: #2c2f33;
+                border-radius: 8px;
+            }
+
+            .video-description h3 {
+                margin-bottom: 10px;
+                font-size: 24px;
+            }
+
+            .video-description p {
+                font-size: 16px;
+                line-height: 1.6;
+                color: #ccc;  /* Màu chữ cho đoạn mô tả */
+            }
+
         </style>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
@@ -214,7 +247,7 @@
                     <div class="lesson-list">
                         <c:forEach var="lesson" items="${lessonsMap[chapter.id]}">
                             <div class="lesson">
-                                <a href="LessonVideoController?lesson_id=${lesson.id}">${lesson.title}</a>
+                                <a href="LessonController?lesson_id=${lesson.id}">${lesson.title}</a>
                             </div>
                         </c:forEach>
                     </div>
@@ -227,16 +260,36 @@
 
 
         <div id="main-content">
-            <div class="video-container">
-                <iframe width="560" height="315" 
-                        src="https://www.youtube.com/embed/${videocontent.videoId}?list=${videocontent.listId}&index=${videocontent.index_vid}" 
-                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                </iframe>
-            </div>
+            <c:choose>
 
-            
+                <c:when test="${not empty textHtmlContent}">
+                    <div class="text-html-content">
+                        <h3>Welcome</h3>
+                        <div class="html-content">
+                            ${textHtmlContent} 
+                        </div>
+                    </div>
+                </c:when>
 
+
+                <c:when test="${not empty videocontent}">
+                    <div class="video-container">
+                        <iframe width="560" height="315" 
+                                src="https://www.youtube.com/embed/${videocontent.videoId}?list=${videocontent.listId}&index=${videocontent.index_vid}" 
+                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div class="video-description">
+                        <h3>Description:</h3>
+                        <p>${videocontent.description}</p> 
+                    </div>
+                </c:when>
+
+
+            </c:choose>
         </div>
+
 
     </body>
 </html>
