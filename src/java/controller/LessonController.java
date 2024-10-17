@@ -60,12 +60,12 @@ public class LessonController extends HttpServlet {
             int lessonId = Integer.parseInt(lessonIdParam);
             LessonDAO lDAO = new LessonDAO();
             if (lessonId == 3 || lessonId == 6 || lessonId == 9 || lessonId == 12 || lessonId == 15) {
-                TextContent textContent = lDAO.getTextContentById(lessonId);
+                String textContent = readHtmlFile(lessonIdParam, request);
 
                 if (textContent != null) {
 
-                    String textHtmlContent = textContent.getTextContent();
-                    request.setAttribute("textHtmlContent", textHtmlContent);
+                    
+                    request.setAttribute("textHtmlContent", textContent);
                 } else {
                     request.setAttribute("textHtmlContent", "No HTML content available.");
                 }
