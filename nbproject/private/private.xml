@@ -8,7 +8,7 @@
             <file>file:/D:/SWP_OnlineLearningProject/swp391_onlinelearning/web/text_descriptions/lesson_3_text.html</file>
             <file>file:/D:/SWP_OnlineLearningProject/swp391_onlinelearning/src/java/controller/LessonController.java</file>
             <file>file:/D:/SWP_OnlineLearningProject/swp391_onlinelearning/web/LessonView.jsp</file>
-            <file>file:/D:/SWP_OnlineLearningProject/swp391_onlinelearning/src/java/dal/UserDAO.java</file>
+            <file>file:/D:/SWP_OnlineLearningProject/swp391_onlinelearning/src/java/controller/ChapterDisplayController.java</file>
         </group>
     </open-files>
 </project-private>
