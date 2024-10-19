@@ -172,7 +172,6 @@ public class CourseDAO extends DBContext {
             e.printStackTrace();
         }
         return taglines;
-    }
 
         // Điều kiện lọc theo danh mục và từ khóa
         public List<Course> getCoursesByCategoriesAndKeyword(List<String> categories, String keyword, String sortOption, int page, int pageSize) {
@@ -476,24 +475,24 @@ public class CourseDAO extends DBContext {
         return taglines;
     }
 
-//    public List<Tagline> getAllTaglines() {
-//        List<Tagline> taglines = new ArrayList<>();
-//        String query = "SELECT * FROM Tagline"; // Lấy tất cả tag từ bảng Tagline
-//
-//        try {
-//            PreparedStatement ps = connection.prepareStatement(query);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                Tagline tagline = new Tagline();
-//                tagline.setId(rs.getInt("id"));
-//                tagline.setName(rs.getString("name"));
-//                taglines.add(tagline);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return taglines;
-//    }
+    public List<Tagline> getAllTaglines() {
+        List<Tagline> taglines = new ArrayList<>();
+        String query = "SELECT * FROM Tagline"; // Lấy tất cả tag từ bảng Tagline
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Tagline tagline = new Tagline();
+                tagline.setId(rs.getInt("id"));
+                tagline.setName(rs.getString("name"));
+                taglines.add(tagline);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return taglines;
+    }
 
 // Phương thức lấy các khóa học liên quan dựa trên tagline
     public List<Course> getRelatedCoursesByTaglines(List<String> taglines, int courseId) {

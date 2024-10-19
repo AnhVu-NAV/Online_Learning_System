@@ -28,31 +28,6 @@ public class Blogs {
     private Date updatedDate;
     private String authorName;
 
-    // Getter và Setter cho thumbnailUrl
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
-    }
-
-    public String getBriefInfo() {
-        return briefInfo;
-    }
-
-    public void setBriefInfo(String briefInfo) {
-        this.briefInfo = briefInfo;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     // toString method
     @Override
     public String toString() {

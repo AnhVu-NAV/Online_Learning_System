@@ -25,7 +25,6 @@ public class LessonDAO extends DBContext {
     private static final Logger LOGGER = Logger.getLogger(ChapterDAO.class.getName());
 
     public List<Lesson> getLessonsByChapterId(int chapterId) {
-        List<Lesson> lessons = new ArrayList<>();
 
         
         String query = "SELECT * FROM Lesson WHERE chapter_id = ? ORDER BY `order`";
@@ -81,10 +80,7 @@ public class LessonDAO extends DBContext {
     public List<Lesson> getLessonsByCourseId(int courseId) {
         List<Lesson> lessons = new ArrayList<>();
         String sql = "SELECT * FROM Lesson WHERE course_id = ?";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, courseId);
-            ResultSet rs = stmt.executeQuery();
+        try{
             while (rs.next()) {
                 Lesson lesson = new Lesson();
                 lesson.setId(rs.getInt("id"));

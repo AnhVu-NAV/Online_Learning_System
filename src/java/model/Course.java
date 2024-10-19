@@ -9,38 +9,23 @@ import java.util.List;
 
 /**
  *
- * @author Admin
+ * @author AnhVuNAV
  */
 public class Course {
     private int id;
     private String title;
     private String subtitle; // Thêm thuộc tính subtitle
     private int expertId;
-    private int totalDuration;
-    private int categoryId;
     private String description;
     private String thumbnailUrl;
-    private int status;
-    private Date updatedDate;
+    private int numberOfLesson;
+    private int price;
+    private int salePrice;
     private Date createdDate;
-    private int numberOfLearners;
+    private Date updatedDate;
+    private int categoryId; 
+    private float totalDuration;
     private List<String> taglines; // Thêm thuộc tính để lưu danh sách tagline
-
-    // Constructors
-    public Course() {}
-
-    public Course(int id, String title, String subtitle, int expertId, int totalDuration, int categoryId, String description, String thumbnailUrl, int status, Date updatedDate, Date createdDate, int numberOfLearners) {
-        this.id = id;
-        this.title = title;
-        this.subtitle = subtitle;
-        this.expertId = expertId;
-        this.totalDuration = totalDuration;
-        this.categoryId = categoryId;
-        this.description = description;
-        this.thumbnailUrl = thumbnailUrl;
-        this.status = status;
-        this.updatedDate = updatedDate;
-    
     
     public Course() {
     }
@@ -138,7 +123,6 @@ public class Course {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
-        this.numberOfLearners = numberOfLearners;
     }
 
     public Date getUpdatedDate() {
@@ -152,23 +136,5 @@ public class Course {
     public int getCategoryId() {
         return categoryId;
     }
-
-    public float getTotalDuration() {
-        return totalDuration;
-    }
-
-    public void setTotalDuration(float totalDuration) {
-        this.totalDuration = totalDuration;
-    }
-
-    public List<String> getTaglines() {
-        return taglines;
-    }
-
-    public void setTaglines(List<String> taglines) {
-        this.taglines = taglines;
-    }
-    
-    
 
 }

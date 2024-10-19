@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author Admin
+ * @author AnhVuNAV
  */
 public class Lesson {
     private int id;
@@ -91,4 +91,3 @@ public class Lesson {
     }
     
 }
-

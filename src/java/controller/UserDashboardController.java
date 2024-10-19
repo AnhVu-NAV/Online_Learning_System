@@ -4,37 +4,33 @@
  */
 package controller;
 
-
 import dal.UserDAO;
+import dal.SettingDAO;
+import dal.SettingTypeDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
-import model.User;
+import java.util.Date;
+import java.util.Vector;
+import model.*;
+import sendEmail.EmailService;
+import sendEmail.IJavaMail;
+import util.*;
 
 /**
  *
-<<<<<<<< HEAD:src/java/controller/ChangePasswordController.java
- * @author admin
+ * @author 84941
  */
-public class ChangePasswordController extends HttpServlet {
+public class UserDashboardController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-========
- * @author 84941
- */
-public class UserListController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
->>>>>>>> 53e8082 (Add model Account, UserLog, Setting, SettingType and their respectively DAO):src/java/controller/UserListController.java
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -43,24 +39,173 @@ public class UserListController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-<<<<<<<< HEAD:src/java/controller/ChangePasswordController.java
-            out.println("<title>Servlet changePass</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet changePass at " + request.getContextPath() + "</h1>");
-========
-            out.println("<title>Servlet UserListController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UserListController at " + request.getContextPath () + "</h1>");
->>>>>>>> 53e8082 (Add model Account, UserLog, Setting, SettingType and their respectively DAO):src/java/controller/UserListController.java
-            out.println("</body>");
-            out.println("</html>");
+        UserDAO userDAO = new UserDAO();
+        SettingDAO settingDAO = new SettingDAO();
+        SettingTypeDAO settingTypeDAO = new SettingTypeDAO();
+        DataConvert dataConvert = new DataConvert();
+        String service = request.getParameter("service");
+        if (service == null) {
+            service = "viewAllUser";
+        }
+        if (service.equals("viewAllUser")) {
+
+            String fillterSubmit = request.getParameter("fillterSubmit");
+            //get data
+            Vector<User> userVector = null;
+            Vector<Setting> settingVector = null;
+            SettingType settingType = null;
+            String sql = "select * from user ";
+            String checked = "sortById";
+            if (fillterSubmit != null) {
+                String searchByName = request.getParameter("searchByName");
+                String searchByEmail = request.getParameter("searchByEmail");
+                String searchByPhone = request.getParameter("searchByPhone");
+                String fillterByGender = request.getParameter("fillterByGender");
+                String fillterByRole = request.getParameter("fillterByRole");
+                String fillterByStatus = request.getParameter("fillterByStatus");
+                String sortBy = request.getParameter("sortBy");
+                sql += " where (lower(first_name) like '%" + searchByName.toLowerCase() + "%' or lower(last_name) like '%" + searchByName.toLowerCase() + "%' ) "
+                        + " and email like '%" + searchByEmail + "%' "
+                        + " and (lơwer(first_phone) like '%" + searchByPhone + "%' or lower(second_phone) like '%" + searchByPhone + "%' )";
+                if (!fillterByGender.equals("all")) {
+                    sql += " and gender= " + fillterByGender;
+                }
+                if (!fillterByRole.equals("all")) {
+                    sql += " and role_id =" + fillterByRole;
+                }
+                if (!fillterByStatus.equals("all")) {
+                    sql += " and status =" + fillterByStatus;
+                }
+                if (sortBy != null) {
+                    switch (sortBy) {
+                        case "sortById": {
+                            sql += " order by id asc";
+                            break;
+                        }
+                        case "sortByName": {
+                            sql += " order by last_name asc,first_name asc ";
+                            checked = "sortByName";
+                            break;
+                        }
+                        case "sortByGender": {
+                            sql += " order by gender asc ";
+                            checked = "sortByGender";
+                            break;
+                        }
+                        case "sortByEmail": {
+                            sql += " order by primary_email asc ";
+                            checked = "sortByEmail";
+                            break;
+                        }
+                        case "sortByPhone": {
+                            sql += " order by first_phone asc, second_phone asc ";
+                            checked = "sortByPhone";
+                            break;
+                        }
+                        case "sortByRole": {
+                            sql += " order by role_id asc ";
+                            checked = "sortByRole";
+                            break;
+                        }
+                    }
+                }
+            }
+            //paging
+            int nrpp = 10;
+            userVector = userDAO.getUsers(sql);
+            int totalPage = (userVector.size() + nrpp - 1) / nrpp;
+            String indexRaw = request.getParameter("index");
+            int index = 1;
+            if (indexRaw != null) {
+                index = Integer.parseInt(indexRaw);
+            }
+            sql += " limit " + (index - 1) * nrpp + "," + nrpp;
+            userVector = userDAO.getUsers(sql);
+            settingType = settingTypeDAO.getSettingTypeByName("User Role");
+            settingVector = settingDAO.getSettings("select * from Setting where setting_type_id=" + settingType.getId());
+            //set data for views
+            request.setAttribute("data", userVector);
+            request.setAttribute("setting", settingVector);
+            request.setAttribute("checked", checked);
+            request.setAttribute("totalPage", totalPage);
+            // select view
+            RequestDispatcher dispath = request.getRequestDispatcher("jsp/ViewUserList.jsp");
+            //run
+            dispath.forward(request, response);
+
+        }
+        if (service.equals("viewUserDetails")) {
+            String idRaw = request.getParameter("id");
+            User user = userDAO.getUserById(Integer.parseInt(idRaw));
+            Vector<Setting> settingVector = null;
+            SettingType settingType = null;
+            settingType = settingTypeDAO.getSettingTypeByName("User Role");
+            settingVector = settingDAO.getSettings("select * from Setting where setting_type_id=" + settingType.getId());
+            //set data for views
+            request.setAttribute("user", user);
+            request.setAttribute("setting", settingVector);
+            // select view
+            RequestDispatcher dispath = request.getRequestDispatcher("jsp/ViewUserDetails.jsp");
+            //run
+            dispath.forward(request, response);
+        }
+        if (service.equals("addNewUser")) {
+            String firstName = request.getParameter("addNewUserFirstName");
+            String lastName = request.getParameter("addNewUserLastName");
+            Date dob = dataConvert.StringToSqlDate(request.getParameter("addNewUserDob"));
+            Boolean gender = Boolean.parseBoolean(request.getParameter("addNewUserGender"));
+            String email = request.getParameter("addNewUserEmail");
+            String phone = request.getParameter("addNewUserPhone");
+            int roleId = Integer.parseInt(request.getParameter("addNewUserRole"));
+            String password = CreateRandom.generate6DigitCode();
+            Date createdDate = GetTodayDate.getTodayDate();
+            User user = new User(roleId, email, PasswordEncryption.EncryptBySHA256(password), roleId, createdDate, 2, firstName, lastName, dob, gender, phone, "", "", "", phone);
+            userDAO.insertUser(user);
+            String subject = "New user successfully created. Please login with your default password";
+            String emailContent = "Your default password is " + password;
+            IJavaMail emailService = new EmailService();
+            emailService.send(email, subject, emailContent);
+            String message = "Add new user successfuly";
+            //set data for views
+            request.setAttribute("message", message);
+            // select view
+            RequestDispatcher dispath = request.getRequestDispatcher("UserDashboardController?service=viewAllUser");
+            //run
+            dispath.forward(request, response);
+
+        }
+        if (service.equals("updateUser")) {
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            String roleIdRaw = request.getParameter("roleId");
+            String statusRaw = request.getParameter("status");
+            if (roleIdRaw != null) {
+                int roleId = Integer.parseInt(roleIdRaw);
+                User user = userDAO.getUserById(userId);
+                user.setRoleId(roleId);
+                userDAO.updateUser(user);
+                String message = "Update user role successfuly";
+                //set data for views
+                request.setAttribute("message", message);
+                // select view
+                RequestDispatcher dispath = request.getRequestDispatcher("UserDashboardController?service=viewAllUser");
+                //run
+                dispath.forward(request, response);
+
+            }
+            if (statusRaw != null) {
+                int status = Integer.parseInt(statusRaw);
+                User user = userDAO.getUserById(userId);
+                user.setStatus(status);
+                userDAO.updateUser(user);
+                String message = "Update user status successfuly";
+                //set data for views
+                request.setAttribute("message", message);
+                // select view
+                RequestDispatcher dispath = request.getRequestDispatcher("UserDashboardController?service=viewAllUser");
+                //run
+                dispath.forward(request, response);
+            }
+
         }
     }
 
@@ -90,28 +235,7 @@ public class UserListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        User nuser = (User) session.getAttribute("us");
-
-        String new_pass = request.getParameter("new_pass");
-        String old_pass = request.getParameter("old_pass");
-        String c_new_pass = request.getParameter("c_new_pass");
-
-        if (nuser.getPassword().equals(old_pass)) {
-            if (new_pass.equals(c_new_pass)){
-                UserDAO cus = new UserDAO();
-                cus.updatePass(nuser.getPrimaryEmail(), new_pass);
-                response.sendRedirect("ChangePassword.jsp");
-            } else {
-                request.setAttribute("error", "You entered confirm password diffent new password!");
-                request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
-            }
-        } else {
-            request.setAttribute("error", "Password is not correct!");
-            request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
-
-        }
-
+        processRequest(request, response);
     }
 
     /**
