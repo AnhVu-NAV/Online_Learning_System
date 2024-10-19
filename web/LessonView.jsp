@@ -59,7 +59,7 @@
 
             /* Phần main content */
             #main-content {
-                margin-left: 300px;
+                margin-left: 333px;
                 padding: 20px;
                 transition: margin-left 0.3s ease;
                 margin-top: 60px;
@@ -360,7 +360,7 @@
 
                 <c:when test="${not empty textHtmlContent}">
                     <div class="text-html-content">
-                        <h3>Welcome</h3>
+                        
                         <div class="html-content">
                             <c:out value="${textHtmlContent}" escapeXml="false"/> 
                         </div>
