@@ -34,6 +34,7 @@ CREATE TABLE User (
     secondary_email VARCHAR(255) NULL,
     image_url VARCHAR(255),
     prefer_contact VARCHAR(255),
+    address VARCHAR(255),	
     foreign key (role_id) references Setting(id)
 );
 CREATE TABLE Userlog (
@@ -58,7 +59,9 @@ CREATE TABLE Blog (
     status INT(10), -- 0 is deactivated, 1 is activated
     created_date DATE,
     updated_date DATE,
-    foreign key (author_id) references User(id)
+    category_id INT(10),
+    foreign key (author_id) references User(id),
+    foreign key (category_id) references Setting(id)
 );
 CREATE TABLE Slider (
     id INT(10) AUTO_INCREMENT PRIMARY KEY,
@@ -101,6 +104,27 @@ CREATE TABLE PricePackage (
     end_date DATE null,
     FOREIGN KEY (course_id) REFERENCES Course(id)
 );
+CREATE TABLE SaleNoteVisualContent (
+    id INT(10) AUTO_INCREMENT PRIMARY KEY,
+    content VARCHAR(255),
+    type TINYINT(1) -- 0 is image, 1 is video
+);
+
+CREATE TABLE SaleNote (
+    id INT(10) AUTO_INCREMENT PRIMARY KEY,
+    text_content VARCHAR(255),
+    created_date DATE,
+    update_date DATE
+);
+
+CREATE TABLE SaleNoteVisualContent_SaleNote (
+    sale_note_id INT(10),
+    sale_note_visual_content_id INT(10),
+    status INT(10), -- 0 is deactiavted, 1 is activated
+    PRIMARY KEY (sale_note_id, sale_note_visual_content_id),
+    FOREIGN KEY (sale_note_id) REFERENCES SaleNote(id) ON DELETE CASCADE,
+    FOREIGN KEY (sale_note_visual_content_id) REFERENCES SaleNoteVisualContent(id) ON DELETE CASCADE
+);
 CREATE TABLE PersonalCourse (
     id INT(10) AUTO_INCREMENT PRIMARY KEY,
     customer_id INT(10),
@@ -110,9 +134,11 @@ CREATE TABLE PersonalCourse (
     progress INT(10),
     status INT(10), -- -1-cancel, 0-submitted, 1-learning, 2-expired, 3-finished
     price_package_id INT(10),
+    sale_note_id INT(10) null,
     FOREIGN KEY (customer_id) REFERENCES User(id),
     FOREIGN KEY (course_id) REFERENCES Course(id),
-    FOREIGN KEY (price_package_id) REFERENCES PricePackage(id)
+    FOREIGN KEY (price_package_id) REFERENCES PricePackage(id),
+    FOREIGN KEY (sale_note_id) REFERENCES SaleNote(id)
 );
 CREATE TABLE Chapter (
     id INT(10) AUTO_INCREMENT PRIMARY KEY,
@@ -166,7 +192,9 @@ CREATE TABLE Quiz (
     pass_rate FLOAT(10, 2),    
     updated_date DATE,
     description VARCHAR(255) null,        
-    subtitle VARCHAR(255) null, 
+    subtitle VARCHAR(255) null,
+    markable_by_ai TINYINT(1) null,
+    markable_by_expert TINYINT(1) null,  
     FOREIGN KEY (lesson_id) REFERENCES Lesson(id)
 );
 CREATE TABLE PersonalQuiz (
@@ -198,6 +226,7 @@ CREATE TABLE Question (
     status INT, -- 0 is deactivated, 1 is deactivated
     content VARCHAR(255),
     question_type_id INT,
+    hint VARCHAR(255) null,
     FOREIGN KEY (quiz_id) REFERENCES Quiz(lesson_id),
     FOREIGN KEY (level_id) REFERENCES Setting(id),
     FOREIGN KEY (question_type_id) REFERENCES Setting(id)
@@ -232,6 +261,8 @@ CREATE TABLE PersonalAnswer (
     personal_question_id INT(10),
     answer VARCHAR(255),
     is_true TINYINT(1),
+    video_content VARCHAR(255) null,
+    img_conten VARCHAR(255) null,
     FOREIGN KEY (personal_question_id) REFERENCES PersonalQuestion(id)
 );
 CREATE TABLE BlogCourse (
@@ -240,6 +271,19 @@ CREATE TABLE BlogCourse (
     primary key (blog_id, course_id),
     FOREIGN KEY (blog_id) REFERENCES Blog(id),
     FOREIGN KEY (course_id) REFERENCES Course(id)
+);
+CREATE TABLE CourseVisualContent (
+    id INT(10) AUTO_INCREMENT PRIMARY KEY,
+    content VARCHAR(255),
+    type TINYINT(1) -- 0 is image, 1 is video
+);
+CREATE TABLE CourseVisualContent_Course (
+    course_visual_content_id INT(10),
+    course_id INT(10),
+    status INT(10), -- 0 is deactive, 1 is active
+    PRIMARY KEY (course_visual_content_id, course_id),
+    FOREIGN KEY (course_visual_content_id) REFERENCES CourseVisualContent(id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES Course(id) ON DELETE CASCADE
 );
 
 INSERT INTO SettingType (name) 
