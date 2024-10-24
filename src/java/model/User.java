@@ -28,51 +28,61 @@ import lombok.ToString;
 public class User {
 
     private int id;
-    private String email;
-    private String first_name;
-    private String last_name;
+    private String primaryEmail;
     private String password;
-    private Date dob;
-    private int role_id;
-    private Date created_date;
+    private int roleId;
+    private Date createdDate;
     private int status;
-    private String phone;
-    private int gender;
+    private String firstName;
+    private String lastName;
+    private Date dob;
+    private boolean gender;
+    private String firstPhone;
+    private String secondPhone;
+    private String secondaryEmail;
+    private String imageURL;
+    private String preferContact;
     private String address;
-    private String image_url;
+
     //Add attribute role from setting
-    private Setting role = new Setting();
-
-    public User(String email, String first_name, String last_name, String password,
-            Date dob, int role_id, Date created_date, int status, String phone, int gender, String address, String image_url) {
-        this.email = email;
-        this.first_name = first_name;
-        this.last_name = last_name;
+//    private Setting role = new Setting();
+    public User(String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, boolean gender,
+            String firstPhone, String secondPhone, String secondaryEmail, String imageURL, String preferContact, String address) {
+        this.primaryEmail = primaryEmail;
         this.password = password;
-        this.dob = dob;
-        this.role_id = role_id;
-        this.created_date = created_date;
+        this.roleId = roleId;
+        this.createdDate = createdDate;
         this.status = status;
-        this.phone = phone;
-        this.gender = this.gender;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.gender = gender;
+        this.firstPhone = firstPhone;
+        this.secondPhone = secondPhone;
+        this.secondaryEmail = secondaryEmail;
+        this.imageURL = imageURL;
+        this.preferContact = preferContact;
         this.address = address;
-        this.image_url = image_url;
     }
 
-    public User(int id, String email, String first_name, String last_name, String password,
-            Date dob, int role_id, Date created_date, int status, String phone, int gender, String address, String image_url) {
+    public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName,
+            Date dob, boolean gender, String firstPhone, String secondPhone, String secondaryEmail, String imageURL, String preferContact, String address) {
         this.id = id;
-        this.email = email;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.primaryEmail = primaryEmail;
         this.password = password;
-        this.dob = dob;
-        this.role_id = role_id;
-        this.created_date = created_date;
+        this.roleId = roleId;
+        this.createdDate = createdDate;
         this.status = status;
-        this.phone = phone;
-        this.gender = this.gender;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.gender = gender;
+        this.firstPhone = firstPhone;
+        this.secondPhone = secondPhone;
+        this.secondaryEmail = secondaryEmail;
+        this.imageURL = imageURL;
+        this.preferContact = preferContact;
         this.address = address;
-        this.image_url = image_url;
     }
+
 }

@@ -47,10 +47,10 @@ public class HomeController extends HttpServlet {
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             } else {
                 // If user is logged in, handle role-based forwarding
-                if (user.getRole_id() == 6) {
+                if (user.getRoleId() == 6) {
                     // Admin user
                     response.sendRedirect(request.getContextPath() + "/admin");
-                } else if (user.getRole_id() == 1) {
+                } else if (user.getRoleId() == 1) {
                     // Customer user
                     response.sendRedirect(request.getContextPath() + "/customer");
                 }
@@ -67,71 +67,53 @@ public class HomeController extends HttpServlet {
 
             // Hiển thị danh sách blog trên trang home
             BlogDAO blogDAO = new BlogDAO();
-//            int page = 1;
-//            int recordsPerPage = 6;
-//            if (request.getParameter("page") != null) {
-//                page = Integer.parseInt(request.getParameter("page"));
-//            }
-//
-//            // Lấy danh sách blog phân trang
-//            List<Blogs> blogList = blogDAO.getPaginatedBlogs((page - 1) * recordsPerPage, recordsPerPage);
-//            int noOfRecords = blogDAO.getNoOfRecords();
-//            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-//
-//            request.setAttribute("blogList", blogList); // Truyền blogList vào request để hiển thị trong JSP
-//            request.setAttribute("currentPage", page);
-//            request.setAttribute("noOfPages", noOfPages);
 
 // Default values for page and page size
-        int page = 1;
-        int recordsPerPage = 6; // Default page size
+            int page = 1;
+            int recordsPerPage = 6; // Default page size
 
-        // Get the 'page' and 'pageSize' parameters from the request
-        try {
-            String pageParam = request.getParameter("page");
-            String pageSizeParam = request.getParameter("pageSize");
+            // Get the 'page' and 'pageSize' parameters from the request
+            try {
+                String pageParam = request.getParameter("page");
+                String pageSizeParam = request.getParameter("pageSize");
 
-            // Update page number
-            if (pageParam != null) {
-                page = Integer.parseInt(pageParam);
+                // Update page number
+                if (pageParam != null) {
+                    page = Integer.parseInt(pageParam);
+                }
+
+                // Update page size (recordsPerPage) if pageSize is provided
+                if (pageSizeParam != null) {
+                    recordsPerPage = Integer.parseInt(pageSizeParam);
+                }
+
+            } catch (NumberFormatException e) {
+                e.printStackTrace(); // In case of invalid page or pageSize values
             }
 
-            // Update page size (recordsPerPage) if pageSize is provided
-            if (pageSizeParam != null) {
-                recordsPerPage = Integer.parseInt(pageSizeParam);
+            try {
+                // Fetch paginated blogs
+                List<Blogs> blogList = blogDAO.getPaginatedBlogs((page - 1) * recordsPerPage, recordsPerPage);
+                int noOfRecords = blogDAO.getNoOfRecords();
+                int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+
+                // Set attributes for the JSP
+                request.setAttribute("blogList", blogList);
+                request.setAttribute("noOfPages", noOfPages);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("recordsPerPage", recordsPerPage);  // Pass the current page size to the JSP
+
+                // Forward to JSP
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
+                dispatcher.forward(request, response);
+
+            } catch (Exception e) {
+                e.printStackTrace();  // Handle exception
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Something went wrong while fetching blog data.");
             }
 
-        } catch (NumberFormatException e) {
-            e.printStackTrace(); // In case of invalid page or pageSize values
-        }
-
-        try {
-            // Fetch paginated blogs
-            List<Blogs> blogList = blogDAO.getPaginatedBlogs((page - 1) * recordsPerPage, recordsPerPage);
-            int noOfRecords = blogDAO.getNoOfRecords();
-            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-
-            // Set attributes for the JSP
-            request.setAttribute("blogList", blogList);
-            request.setAttribute("noOfPages", noOfPages);
-            request.setAttribute("currentPage", page);
-            request.setAttribute("recordsPerPage", recordsPerPage);  // Pass the current page size to the JSP
-
-            // Forward to JSP
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
-            dispatcher.forward(request, response);
-
-        } catch (Exception e) {
-            e.printStackTrace();  // Handle exception
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Something went wrong while fetching blog data.");
-        }
-            
-            
-            
-            
-            
             if (user != null) {
-                String fullname = user.getFirst_name() + " " + user.getLast_name();
+                String fullname = user.getFirstName() + " " + user.getLastName();
                 session.setAttribute("fullname", fullname);
             }
 //            request.getRequestDispatcher("/home.jsp").forward(request, response);
@@ -183,15 +165,15 @@ public class HomeController extends HttpServlet {
             } else {
                 // Login successful, handle role-based forwarding
                 String fullname = (String) session.getAttribute("fullname");
-                if (user.getRole_id() == 6) {
+                if (user.getRoleId() == 6) {
                     // Admin user
 //                    response.sendRedirect(request.getContextPath() + "/dashboard");
                     response.sendRedirect(request.getContextPath() + "/admin/dashboard");
 
-                } else if (user.getRole_id() == 2) {
+                } else if (user.getRoleId() == 2) {
                     // Customer user
                     response.sendRedirect(request.getContextPath() + "/home");
-                } else if (user.getRole_id() == 0) {
+                } else if (user.getRoleId() == 0) {
                     // Default user
                     response.sendRedirect(request.getContextPath() + "/change-password");
                 } else {

@@ -49,7 +49,7 @@ public class UserDAO extends DBContext {
                 int gender = rs.getInt("gender");
                 String address = rs.getString("address");
                 String image_url = rs.getString("image_url");
-                User u = new User(id, email, first_name, last_name, password, dob, role_id, created_date, status, phone, gender, address, image_url);
+                User u = new User(id, image_url, password, role_id, created_date, status, first_name, last_name, dob, true, first_name, phone, email, image_url, phone, address);
                 users.add(u);
             }
             return users;
@@ -88,18 +88,18 @@ public class UserDAO extends DBContext {
             if (rs.next()) {
                 User u = new User();
                 u.setId(rs.getInt("id"));
-                u.setEmail(email);
+                u.setPrimaryEmail(email);
                 u.setPassword(password);
                 u.setStatus(status);
-                u.setFirst_name(rs.getString("first_name"));
-                u.setLast_name(rs.getString("last_name"));
+                u.setFirstName(rs.getString("first_name"));
+                u.setLastName(rs.getString("last_name"));
                 u.setDob(rs.getDate("dob"));
-                u.setRole_id(rs.getInt("role_id"));
-                u.setCreated_date(rs.getDate("created_date"));
-                u.setPhone(rs.getString("phone"));
-                u.setGender(rs.getInt("gender"));
+                u.setRoleId(rs.getInt("role_id"));
+                u.setCreatedDate(rs.getDate("created_date"));
+                u.setFirstPhone(rs.getString("phone"));
+                u.setGender(rs.getBoolean("gender"));
                 u.setAddress(rs.getString("address"));
-                u.setImage_url(rs.getString("image_url"));
+                u.setImageURL(rs.getString("image_url"));
 
                 System.out.println(u);
                 return u;
@@ -152,7 +152,7 @@ public class UserDAO extends DBContext {
                 String address = rs.getString("address");
                 String image_url = rs.getString("image_url");
 
-                User u = new User(id, email, first_name, last_name, password, dob, role_id, created_date, status, phone, gender, address, image_url);
+                User u = new User(id, image_url, password, role_id, created_date, status, first_name, last_name, dob, true, first_name, phone, email, image_url, phone, address);
                 users.add(u);
             }
             return users;
@@ -187,18 +187,18 @@ public class UserDAO extends DBContext {
             if (rs.next()) {
                 User u = new User();
                 u.setId(rs.getInt("id"));
-                u.setEmail(rs.getString("email"));
+                u.setPrimaryEmail(rs.getString("email"));
                 u.setPassword(rs.getString("password"));
                 u.setStatus(rs.getInt("status"));
-                u.setFirst_name(rs.getString("first_name"));
-                u.setLast_name(rs.getString("last_name"));
+                u.setFirstName(rs.getString("first_name"));
+                u.setLastName(rs.getString("last_name"));
                 u.setDob(rs.getDate("dob"));
-                u.setRole_id(rs.getInt("role_id"));
-                u.setCreated_date(rs.getDate("created_date"));
-                u.setPhone(rs.getString("phone"));
-                u.setGender(rs.getInt("gender"));
+                u.setRoleId(rs.getInt("role_id"));
+                u.setCreatedDate(rs.getDate("created_date"));
+                u.setFirstPhone(rs.getString("phone"));
+                u.setGender(rs.getBoolean("gender"));
                 u.setAddress(rs.getString("address"));
-                u.setImage_url(rs.getString("image_url"));
+                u.setImageURL(rs.getString("image_url"));
                 System.out.println(u);
                 return u;
             }
@@ -234,18 +234,18 @@ public class UserDAO extends DBContext {
             while (rs.next()) {
                 User u = new User();
                 u.setId(rs.getInt("id"));
-                u.setEmail(rs.getString("email"));
+                u.setPrimaryEmail(rs.getString("email"));
                 u.setPassword(rs.getString("password"));
                 u.setStatus(rs.getInt("status"));
-                u.setFirst_name(rs.getString("first_name"));
-                u.setLast_name(rs.getString("last_name"));
+                u.setFirstName(rs.getString("first_name"));
+                u.setLastName(rs.getString("last_name"));
                 u.setDob(rs.getDate("dob"));
-                u.setRole_id(rs.getInt("role_id"));
-                u.setCreated_date(rs.getDate("created_date"));
-                u.setPhone(rs.getString("phone"));
-                u.setGender(rs.getInt("gender"));
+                u.setRoleId(rs.getInt("role_id"));
+                u.setCreatedDate(rs.getDate("created_date"));
+                u.setFirstPhone(rs.getString("phone"));
+                u.setGender(rs.getBoolean("gender"));
                 u.setAddress(rs.getString("address"));
-                u.setImage_url(rs.getString("image_url"));
+                u.setImageURL(rs.getString("image_url"));
                 System.out.println(u);
 
                 customers.add(u);
