@@ -30,9 +30,9 @@ public class User {
     private int id;
     private String primaryEmail;
     private String password;
+    private int status;
     private int roleId;
     private Date createdDate;
-    private int status;
     private String firstName;
     private String lastName;
     private Date dob;
@@ -46,7 +46,8 @@ public class User {
 
     //Add attribute role from setting
 //    private Setting role = new Setting();
-    public User(String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, boolean gender,
+    public User(String primaryEmail, String password, int status, int roleId, Date createdDate,  String firstName, String lastName, 
+            Date dob, boolean gender,
             String firstPhone, String secondPhone, String secondaryEmail, String imageURL, String preferContact, String address) {
         this.primaryEmail = primaryEmail;
         this.password = password;

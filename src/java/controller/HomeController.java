@@ -139,11 +139,11 @@ public class HomeController extends HttpServlet {
         String action = request.getParameter("action");
         if (action != null && action.equals("login")) {
             // Handle login via LoginController logic
-            String email = request.getParameter("email");
+            String primary_email = request.getParameter("primary_email");
             String password = request.getParameter("password");
 
             UserDAO userDao = new UserDAO();
-            User user = userDao.getOne(email, password, 1); // Assume not banned for login
+            User user = userDao.getOne(primary_email, password, 1); // Assume not banned for login
 
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
