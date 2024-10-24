@@ -65,24 +65,4 @@ public class User {
         this.address = address;
     }
 
-    public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName,
-            Date dob, boolean gender, String firstPhone, String secondPhone, String secondaryEmail, String imageURL, String preferContact, String address) {
-        this.id = id;
-        this.primaryEmail = primaryEmail;
-        this.password = password;
-        this.roleId = roleId;
-        this.createdDate = createdDate;
-        this.status = status;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.gender = gender;
-        this.firstPhone = firstPhone;
-        this.secondPhone = secondPhone;
-        this.secondaryEmail = secondaryEmail;
-        this.imageURL = imageURL;
-        this.preferContact = preferContact;
-        this.address = address;
-    }
-
 }
