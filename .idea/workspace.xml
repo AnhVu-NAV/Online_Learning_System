@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="SWP391" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f0ca8c8-8092-42a5-ab5f-581041438aea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/SWP391.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/junit_4_13_2_javadoc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/SWP391_OnlineLearning.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SWP391_OnlineLearning.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/build-impl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/build-impl.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/genfiles.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/genfiles.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/controller/UpdateUserProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/controller/UpdateUserProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/dal/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/AccountDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/model/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/UpdateUserProfile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/UpdateUserProfile.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dal/CourseDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/CourseDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/dal/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/dal/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Setting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/Setting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/UserProfile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/UserProfile.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +37,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitLabMergeRequestFiltersHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPENED&quot;,
+    &quot;assignee&quot;: {
+      &quot;type&quot;: &quot;org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue&quot;,
+      &quot;username&quot;: &quot;AnhVu-NAV&quot;,
+      &quot;fullname&quot;: &quot;Nguyen Anh Vu&quot;
+    }
+  }
+}</component>
+  <component name="GitLabMergeRequestsSettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;first&quot;: &quot;https://gitlab.com/swp391_g4_se1876jv/swp391_onlinelearning.git&quot;,
+    &quot;second&quot;: &quot;54b2239c-2d6e-4003-84cb-fdb8d03f01dd&quot;
+  }
+}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -36,34 +68,60 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Tomcat Server.Tomcat 10.1.23.executor&quot;: &quot;Profiler#1&quot;,
-    &quot;Tomcat Server.Tomcat 10.1.231.executor&quot;: &quot;Run&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;VuNAHE186049&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Anh Vu Nguyen/FPT_University/Semester 5/SWP391/Project_SWP/SWP391_OnlineLearning/web/index.html&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.All in SWP391_OnlineLearning.executor": "Run",
+    "JUnit.Unnamed.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Tomcat Server.Tomcat 10.1.23.executor": "Run",
+    "Tomcat Server.Tomcat 10.1.231.executor": "Run",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "VuNAHE186049",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Downloads/TPBank/TPBank",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.40689656",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager">
-    <configuration name="Tomcat 10.1.231" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.231" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+}]]></component>
+  <component name="RunManager" selected="JUnit.All in SWP391_OnlineLearning">
+    <configuration name="All in SWP391_OnlineLearning" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="SWP391_OnlineLearning" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat 10.1.23" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.23" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER" value="false" />
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:63342/SWP391_OnlineLearning/web/index.html" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:9090/SWP391_OnlineLearning/web/index.html" />
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="UPDATING_POLICY" value="restart-server" />
-      <deployment />
+      <deployment>
+        <artifact name="SWP391">
+          <settings>
+            <option name="CONTEXT_PATH" value="/SWP391" />
+          </settings>
+        </artifact>
+      </deployment>
       <server-settings>
         <option name="BASE_DIRECTORY_NAME" value="dc2634df-badf-41d3-a9cd-749e83929564" />
         <option name="DEPLOY_TOMCAT_APPS" value="true" />
         <option name="HTTP_PORT" value="9090" />
+        <option name="PRESERVE_SESSIONS" value="true" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -134,9 +192,15 @@
         </SHUTDOWN>
       </ConfigurationWrapper>
       <method v="2">
-        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="SWP391" />
+        </option>
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.All in SWP391_OnlineLearning" />
+      <item itemvalue="Tomcat Server.Tomcat 10.1.23" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -157,6 +221,8 @@
       <workItem from="1727080786770" duration="137000" />
       <workItem from="1727111225712" duration="12654000" />
       <workItem from="1727339144695" duration="376000" />
+      <workItem from="1729437025897" duration="599000" />
+      <workItem from="1729437650970" duration="10509000" />
     </task>
     <servers />
   </component>
@@ -165,5 +231,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SWP391_OnlineLearning$Tomcat_10_1_23.ic" NAME="Tomcat 10.1.23 Coverage Results" MODIFIED="1727111636078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/SWP391_OnlineLearning$All_in_SWP391_OnlineLearning.ic" NAME="All in SWP391_OnlineLearning Coverage Results" MODIFIED="1729534186059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>

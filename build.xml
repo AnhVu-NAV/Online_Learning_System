@@ -10,6 +10,61 @@
 <project name="SWP391_OnlineLearning" default="default" basedir=".">
     <description>Builds, tests, and runs the project SWP391_OnlineLearning.</description>
     <import file="nbproject/build-impl.xml"/>
+	<!-- Define JUnit classpath -->
+    <path id="junit.classpath">
+        <fileset dir="/path/to/junit/lib">
+            <include name="junit.jar"/>
+        </fileset>
+    </path>
+
+    <!-- Target to run tests -->
+    <target name="test" depends="compile">
+        <junit printsummary="on" haltonfailure="yes">
+            <classpath refid="junit.classpath"/>
+            <batchtest>
+                <fileset dir="test">
+                    <include name="**/*Test.class"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+    
+    <!-- Other build targets -->
+	<property name="jacoco.agent" value="${basedir}/web/lib/org.jacoco.ant-0.8.12.jar"/>
+<property name="jacoco.destfile" value="${build.dir}/jacoco.exec"/>
+
+<target name="test-with-coverage" depends="compile">
+    <junit printsummary="on" haltonfailure="yes">
+        <classpath>
+            <path refid="run.classpath"/>
+            <pathelement location="${jacoco.agent}"/>
+        </classpath>
+        <jvmarg value="-javaagent:${jacoco.agent}=destfile=${jacoco.destfile}"/>
+        <batchtest>
+            <fileset dir="test">
+                <include name="**/*Test.class"/>
+            </fileset>
+        </batchtest>
+    </junit>
+</target>
+
+<target name="jacoco-report" depends="test-with-coverage">
+    <taskdef name="jacocoReport" classname="org.jacoco.ant.ReportTask" classpath="${basedir}/web/lib/org.jacoco.ant-0.8.12.jar"/>
+    <jacocoReport>
+        <executiondata>
+            <file file="${jacoco.destfile}"/>
+        </executiondata>
+        <structure name="Project Name">
+            <classfiles>
+                <fileset dir="${build.classes.dir}"/>
+            </classfiles>
+            <sourcefiles encoding="UTF-8">
+                <fileset dir="src"/>
+            </sourcefiles>
+        </structure>
+        <html destdir="${build.dir}/jacoco-report"/>
+    </jacocoReport>
+</target>
     <!--
 
     There exist several targets which are by default empty and which can be 
@@ -61,6 +116,7 @@
                 <arg file="${dist.jar}"/>
             </exec>
         </target>
+	
 
     Notice that overridden target depends on jar target and not only on 
     compile target as regular run target does. Again, for list of available 
