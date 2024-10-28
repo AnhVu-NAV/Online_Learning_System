@@ -1,0 +1,165 @@
+/* Body Background */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F8F9FA;
+    color: #343A40;
+}
+
+/* Header */
+.Header h1 {
+    font-size: 36px;
+    color: #212529;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.Breadcrumbs {
+    font-size: 14px;
+    color: #6C757D;
+    margin-bottom: 16px;
+}
+
+.Breadcrumbs a {
+    color: #6C757D;
+    text-decoration: none;
+}
+
+.Breadcrumbs span {
+    color: #212529;
+}
+
+/* Table Container */
+.CourseLesson {
+    max-width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Button */
+.Button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #0057FC;
+    border: 1px solid #0057FC;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Searchbox */
+.Searchbox {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    width: 320px;
+    border: 1px solid #CED4DA;
+    border-radius: 8px;
+    background: white;
+    gap: 8px;
+}
+
+.Searchbox input {
+    border: none;
+    outline: none;
+    width: 100%;
+    color: #ADB5BD;
+    font-size: 14px;
+}
+
+/* Table */
+.Table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.Table th, .Table td {
+    padding: 12px;
+    border-bottom: 1px solid #E9ECEF;
+    text-align: left;
+}
+
+.Table th {
+    background-color: #F8F9FA;
+    font-weight: bold;
+    color: #6C757D;
+    text-align: left;
+}
+
+.Table tr:nth-child(even) {
+    background-color: #F8F9FA;
+}
+
+.Table .StatusBadge {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.StatusBadge.Active {
+    background-color: #56BA28;
+}
+
+.StatusBadge.Inactive {
+    background-color: #495057;
+}
+
+/* Icon Button */
+.IconButton {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #CED4DA;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    margin-right: 4px;
+    font-size: 16px;
+    color: #212529;
+}
+
+/* Pagination */
+.Pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.Pagination .PaginationPrev, .Pagination .PaginationNext, .Pagination .PaginationItem {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #CED4DA;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 14px;
+    color: #343A40;
+    cursor: pointer;
+}
+
+.Pagination .PaginationItem.active {
+    border-color: #0057FC;
+    color: #0057FC;
+}
+
+/* Dropdown for Page Size */
+.PageSelect {
+    width: 60px;
+    height: 40px;
+    border: 1px solid #CED4DA;
+    border-radius: 8px;
+    padding: 0 8px;
+}

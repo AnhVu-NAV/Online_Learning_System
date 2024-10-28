@@ -1,0 +1,191 @@
+/* General styling for layout */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #F8F9FA;
+}
+
+.LessonDetails {
+    width: 100%;
+    max-width: 1792px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #F8F9FA;
+}
+
+.Main {
+    width: 100%;
+    max-width: 1500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.PageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+}
+
+.Notification, .Profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #E9ECEF;
+}
+
+.Bell, .Mail, .ChevronDown {
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+
+.Body {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 16px 32px;
+}
+
+.Header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.Title {
+    display: flex;
+    align-items: center;
+    font-size: 46px;
+    color: #212529;
+}
+
+.Breadcrumbs {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #6C757D;
+    text-transform: uppercase;
+}
+
+.BreadcrumbItem, .BreadcrumbSeparator {
+    margin: 0 4px;
+}
+
+.Wrapper {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+
+.Form {
+    flex: 2;
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.FormRow {
+    display: flex;
+    gap: 16px;
+}
+
+.FormSelect, .FormTextField {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.Label, .Required {
+    font-size: 14px;
+    color: #212529;
+}
+
+.Required {
+    color: #FF1F25;
+}
+
+.Select, .Input {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid #CED4DA;
+    border-radius: 8px;
+    background: white;
+}
+
+.SelectAnItem, .Input {
+    flex: 1;
+    color: #343A40;
+    font-size: 14px;
+}
+
+.Footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.Button {
+    padding: 12px 24px;
+    background: #E9ECEF;
+    border-radius: 8px;
+    text-align: center;
+    color: #ADB5BD;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.Button:last-child {
+    background: white;
+    color: #212529;
+    border: 1px solid #CED4DA;
+}
+
+/* Document section styling */
+.Document {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #E9ECEF;
+    padding: 16px;
+}
+
+.Image4 {
+    width: 100%;
+    max-width: 362px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.Wrapper .Button {
+    margin-top: 8px;
+    background: #FFF;
+    border: 1px solid #CED4DA;
+    color: #212529;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    gap: 8px;
+}
+
+.Upload {
+    width: 20px;
+    height: 20px;
+    position: relative;
+}
