@@ -79,13 +79,18 @@ CREATE TABLE Course (
     total_duration INT(10),
     category_id INT(10),
     description VARCHAR(255),
-    thumbnail_url VARCHAR(255),
     status INT(10),
     updated_date DATE,
     created_date DATE,
     number_of_learner INT(10),
     foreign key (category_id) references Setting(id),
     foreign key (expert_id) references User(id)
+);
+CREATE TABLE Course_Thumbnail (
+    id int AUTO_INCREMENT PRIMARY KEY,
+    course_id int,
+    thumbnail_url VARCHAR(255),
+    foreign key (course_id) references Course(id)
 );
 CREATE TABLE Course_Tagline (
     tagline_id INT(10),
@@ -135,6 +140,7 @@ CREATE TABLE PersonalCourse (
     status INT(10), -- -1-cancel, 0-submitted, 1-learning, 2-expired, 3-finished
     price_package_id INT(10),
     sale_note_id INT(10) null,
+    price INT(10) null,
     FOREIGN KEY (customer_id) REFERENCES User(id),
     FOREIGN KEY (course_id) REFERENCES Course(id),
     FOREIGN KEY (price_package_id) REFERENCES PricePackage(id),
