@@ -294,7 +294,7 @@
                                                             <c:when test="${course.getStatus() == 1}">
                                                                 <td>Activated</td>
                                                             </c:when>                                                           
-                                                        </c:choose>
+                                                        </c:choose> 
                                                     </c:if>
                                                     <c:if test="${requestScope.newCourseDisplayDescription=='true'}"><td>${course.getDescription()}</td></c:if>
                                                     <c:if test="${requestScope.newCourseDisplayCategory=='true'}">
