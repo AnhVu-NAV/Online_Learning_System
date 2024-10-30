@@ -15,6 +15,19 @@ public class Setting {
     private int status;
     private String description;
 
+    public Setting() {
+    }
+
+    public Setting(int id, int settingTypeId, String value, int status, String description) {
+        this.id = id;
+        this.settingTypeId = settingTypeId;
+        this.value = value;
+        this.status = status;
+        this.description = description;
+    }
+    
+    
+
     // Getters and setters
     public int getId() {
         return id;
