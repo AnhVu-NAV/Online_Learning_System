@@ -189,3 +189,80 @@ body, html {
     height: 20px;
     position: relative;
 }
+
+/* Đặt kiểu cụ thể cho "Video link" */
+#videoLinkSection .Input {
+    /*width: 100%;*/
+    /*max-width: 500px;*/
+    padding: 8px 12px;
+    border: 1px solid #CED4DA;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #343A40;
+}
+
+/* Đặt kiểu cụ thể cho "HTML content" */
+#htmlContentSection .Input {
+    /*width: 100%;*/
+    /*max-width: 500px;*/
+    height: 150px;
+    padding: 8px 12px;
+    border: 1px solid #CED4DA;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #343A40;
+    resize: none;
+}
+
+/* Thiết lập flex cho FormTextField để hỗ trợ display: flex */
+.FormTextField {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* .StatusBadge class để căn chỉnh chấm và văn bản chính xác */
+.StatusBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px; /* Khoảng cách giữa chấm và chữ */
+    font-weight: bold;
+    padding-left: 10px; /* Tạo khoảng cách giữa chấm và lề trái */
+}
+
+.StatusBadge.Active::before, .StatusBadge.Inactive::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.StatusBadge.Active::before {
+    background-color: green;
+}
+
+.StatusBadge.Inactive::before {
+    background-color: red;
+}
+
+/* Cải thiện nút biểu tượng */
+.IconButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    color: #007bff; /* Màu xanh cho biểu tượng mặc định */
+    transition: color 0.2s;
+}
+
+.IconButton:hover {
+    color: #0056b3; /* Màu xanh đậm khi hover */
+}
+
+.IconButton:focus {
+    outline: none;
+}

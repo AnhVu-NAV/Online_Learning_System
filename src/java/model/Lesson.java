@@ -18,7 +18,8 @@ import lombok.NoArgsConstructor;
 public class Lesson {
     private int lessonId;                    // ID của bài học
     private Course courseId;                 // Tham chiếu đến Course (khoá học)
-    private String name;                     // Tên bài học
+    private String title;                     // Tên bài học
+    private int status;
     private Setting lessonTypeId;       // Loại bài học (tham chiếu đến SubjectTopic)
     private String topic;                    // Chủ đề bài học
     private int order;                       // Thứ tự của bài học
