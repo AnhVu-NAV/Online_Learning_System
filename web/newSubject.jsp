@@ -37,6 +37,7 @@
                     <div id="imagePreview" class="image-preview-container"></div>
                 </div>
 
+
                 <!-- Select danh mục khóa học -->
                 <div class="form-group">
                     <label for="category">Category</label>
@@ -92,6 +93,9 @@
                     </div>
                 </div>
 
+                <!-- Add a hidden input for each description in the form submission -->
+                <div id="hiddenDescriptions"></div>
+
                 <!-- Nút lưu -->
                 <div class="form-footer">
                     <button type="submit" class="submit-btn">Save</button>
@@ -135,6 +139,7 @@
             }
 
             let selectedFiles = [];
+            let imageDescriptions = {}; // Object to store descriptions for each image by index
 
             function previewImages() {
                 const previewContainer = document.getElementById('imagePreview');
@@ -159,7 +164,7 @@
                 // Loop through the accumulated files and create image previews
                 selectedFiles.forEach((file, index) => {
                     if (!file.type.startsWith('image/')) {
-                        return;
+                        return;// Skip non-image files
                     }
 
                     const reader = new FileReader();
@@ -177,11 +182,24 @@
                             removeImage(index);
                         };
 
-                        // Add the image and delete button to a wrapper
+                        // Create a description input for each image
+                        const descriptionInput = document.createElement('input');
+                        descriptionInput.type = 'text';
+                        descriptionInput.classList.add('description-input');
+                        descriptionInput.placeholder = 'Enter description';
+                        descriptionInput.value = imageDescriptions[index] || ''; // Load existing description if available
+
+                        // Update the imageDescriptions object when description changes
+                        descriptionInput.oninput = function () {
+                            imageDescriptions[index] = descriptionInput.value;
+                        };
+
+                        // Add the image, delete button, and description input to a wrapper
                         const wrapper = document.createElement('div');
                         wrapper.classList.add('image-wrapper');
                         wrapper.appendChild(imgElement);
                         wrapper.appendChild(deleteButton);
+                        wrapper.appendChild(descriptionInput);
 
                         previewContainer.appendChild(wrapper);
                     };
@@ -196,9 +214,24 @@
                 updateFileInput();
             }
 
-            // Function to remove an image from the preview
+            function addDescriptionsToForm() {
+                const hiddenDescriptions = document.getElementById('hiddenDescriptions');
+                hiddenDescriptions.innerHTML = ''; // Clear previous hidden inputs
+
+                // Add each description as a hidden input field
+                Object.keys(imageDescriptions).forEach(index => {
+                    const descriptionInput = document.createElement('input');
+                    descriptionInput.type = 'hidden';
+                    descriptionInput.name = 'thumbnailDescription[]'; // Array notation for multiple descriptions
+                    descriptionInput.value = imageDescriptions[index];
+                    hiddenDescriptions.appendChild(descriptionInput);
+                });
+            }
+
+            // Function to remove an image and its description
             function removeImage(index) {
                 selectedFiles.splice(index, 1); // Remove the file from the list
+                delete imageDescriptions[index]; // Remove the description
                 updateFileInput(); // Update the file input after removing an image
                 previewImages(); // Refresh the preview to reflect the change
             }
