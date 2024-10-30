@@ -17,17 +17,87 @@ public class Course {
     private String subtitle; // Thêm thuộc tính subtitle
     private int expertId;
     private String description;
-    private String thumbnailUrl;
-    private int numberOfLesson;
+    private List<String> thumbnailUrl; // New field for storing multiple thumbnail URLs
+    private int numberOfLearner;
+    private int status;
     private int price;
     private int salePrice;
     private Date createdDate;
     private Date updatedDate;
     private int categoryId; 
     private float totalDuration;
+    private String categoryName;
+    private String ownerName;
     private List<String> taglines; // Thêm thuộc tính để lưu danh sách tagline
     
     public Course() {
+    }
+
+    public Course(int id, String title, String subtitle, int expertId, String description, List<String> thumbnailUrl, int numberOfLearner, int status, int price, int salePrice, Date createdDate, Date updatedDate, int categoryId, float totalDuration, String categoryName, String ownerName, List<String> taglines) {
+        this.id = id;
+        this.title = title;
+        this.subtitle = subtitle;
+        this.expertId = expertId;
+        this.description = description;
+        this.thumbnailUrl = thumbnailUrl;
+        this.numberOfLearner = numberOfLearner;
+        this.status = status;
+        this.price = price;
+        this.salePrice = salePrice;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+        this.categoryId = categoryId;
+        this.totalDuration = totalDuration;
+        this.categoryName = categoryName;
+        this.ownerName = ownerName;
+        this.taglines = taglines;
+    }    
+
+    public Course(int id, String title, String subtitle, int expertId, int categoryId, int duration, String description) {
+        this.id = id;
+        this.title = title;
+        this.subtitle = subtitle;
+        this.expertId = expertId;
+        this.description = description;
+        this.categoryId = categoryId;
+    }
+
+    public Course(String title, String subtitle, int expertId, int categoryId, int duration, String description) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.expertId = expertId;
+        this.description = description;
+        this.categoryId = categoryId;
+    }
+
+    public Course(int aInt, String string, String string0, int aInt0, int aInt1, String description, int aInt2) {
+        this.id = aInt;
+        this.title = string;
+        this.subtitle = string0;
+        this.expertId = aInt1;
+        this.description = description;
+        this.status = aInt2;
+        this.categoryId = aInt0;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public Course(String title, String subtitle, int categoryId, int expertId, String description, int status) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public int getId() {
@@ -70,20 +140,22 @@ public class Course {
         this.description = description;
     }
 
-    public String getThumbnailUrl() {
+    // Getter for thumbnailUrls
+    public List<String> getThumbnailUrls() {
         return thumbnailUrl;
     }
 
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
+    // Setter for thumbnailUrls
+    public void setThumbnailUrls(List<String> thumbnailUrls) {
+        this.thumbnailUrl = thumbnailUrls;
     }
 
-    public int getNumberOfLesson() {
-        return numberOfLesson;
+    public int getNumberOfLearner() {
+        return numberOfLearner;
     }
 
-    public void setNumberOfLesson(int numberOfLesson) {
-        this.numberOfLesson = numberOfLesson;
+    public void setNumberOfLearner(int numberOfLearner) {
+        this.numberOfLearner = numberOfLearner;
     }
 
     public int getPrice() {
@@ -141,4 +213,14 @@ public class Course {
     public void setTaglines(List<String> taglines) {
         this.taglines = taglines;
     }
+
+    public int getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
+    
 }
