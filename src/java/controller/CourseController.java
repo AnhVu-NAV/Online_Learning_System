@@ -186,13 +186,21 @@ public class CourseController extends HttpServlet {
 
         // Limit to 5 images
         List<String> imageUrls = new ArrayList<>();
+        // Capture descriptions for each thumbnail image
+        List<String> descriptions = new ArrayList<>();
         for (int i = 0; i < thumbnailParts.length && i < 5; i++) {
             Part part = thumbnailParts[i];
             String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
             String imagePath = "img/" + fileName;
-            // Save the file to the server
+
+            // Save file to the server
             part.write(request.getServletContext().getRealPath("/") + imagePath);
             imageUrls.add(imagePath);
+
+            // Get the description for each image
+            String descriptionParam = "thumbnailDescription" + (i + 1); // Assuming description fields are named sequentially
+            String imageDescription = request.getParameter(descriptionParam);
+            descriptions.add(imageDescription != null ? imageDescription : ""); // Add description or empty if null
         }
 
         // Insert the course into the database
@@ -201,7 +209,7 @@ public class CourseController extends HttpServlet {
 
         // Insert the thumbnail URLs into the Course_Thumbnails table
         if (!imageUrls.isEmpty()) {
-            courseDAO.insertCourseThumbnails(courseId, imageUrls);
+            courseDAO.insertCourseThumbnails(courseId, imageUrls, descriptions);
         }
 
         // Handle taglines
@@ -216,43 +224,42 @@ public class CourseController extends HttpServlet {
 
     // Hiển thị form chỉnh sửa khóa học
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, SQLException, IOException {
-    int id = Integer.parseInt(request.getParameter("id"));
-    Course existingCourse = courseDAO.getCourseById(id);
+        int id = Integer.parseInt(request.getParameter("id"));
+        Course existingCourse = courseDAO.getCourseById(id);
         System.out.println(id);
-    
-    // Check if the course exists
-    if (existingCourse == null) {
-        // Redirect to the course list with an error message
-        request.setAttribute("errorMessage", "The course you're trying to edit does not exist.");
-        request.getRequestDispatcher("CourseController?action=list").forward(request, response);
-        return;
+
+        // Check if the course exists
+        if (existingCourse == null) {
+            // Redirect to the course list with an error message
+            request.setAttribute("errorMessage", "The course you're trying to edit does not exist.");
+            request.getRequestDispatcher("CourseController?action=list").forward(request, response);
+            return;
+        }
+
+        // Get related data such as categories and experts
+        List<Setting> categoryList = settingDAO.getAllCategories();
+        List<User> expertList = userDAO.getExperts();
+        List<Integer> courseTaglineIds = courseDAO.getTaglineIdsByCourseId(id);
+        List<Tagline> taglineList = taglineDAO.getAllTaglines();
+
+        // Set the checked status for the taglines
+        for (Tagline tagline : taglineList) {
+            tagline.setChecked(courseTaglineIds.contains(tagline.getId()));
+        }
+
+        // Get existing thumbnails if any
+        List<String> thumbnailUrls = existingCourse.getThumbnailUrls();
+
+        // Set attributes for the request
+        request.setAttribute("course", existingCourse);
+        request.setAttribute("categoryList", categoryList);
+        request.setAttribute("expertList", expertList);
+        request.setAttribute("taglineList", taglineList);
+        request.setAttribute("thumbnailUrls", thumbnailUrls);
+
+        // Forward to the edit JSP
+        request.getRequestDispatcher("editSubject.jsp").forward(request, response);
     }
-
-    // Get related data such as categories and experts
-    List<Setting> categoryList = settingDAO.getAllCategories();
-    List<User> expertList = userDAO.getExperts();
-    List<Integer> courseTaglineIds = courseDAO.getTaglineIdsByCourseId(id);
-    List<Tagline> taglineList = taglineDAO.getAllTaglines();
-
-    // Set the checked status for the taglines
-    for (Tagline tagline : taglineList) {
-        tagline.setChecked(courseTaglineIds.contains(tagline.getId()));
-    }
-
-    // Get existing thumbnails if any
-    List<String> thumbnailUrls = existingCourse.getThumbnailUrls();
-
-    // Set attributes for the request
-    request.setAttribute("course", existingCourse);
-    request.setAttribute("categoryList", categoryList);
-    request.setAttribute("expertList", expertList);
-    request.setAttribute("taglineList", taglineList);
-    request.setAttribute("thumbnailUrls", thumbnailUrls);
-
-    // Forward to the edit JSP
-    request.getRequestDispatcher("editSubject.jsp").forward(request, response);
-}
-
 
     // Cập nhật khóa học đã tồn tại trong database
     private void updateCourse(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
