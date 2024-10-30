@@ -268,3 +268,54 @@ button[onclick="saveTagline()"] {
     color: #ffffff;
     font-weight: 600;
 }
+
+/* Container for the image preview and description */
+.image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    position: relative;
+}
+
+/* Styling for the image preview */
+.image-preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* Styling for the description input */
+.description-input {
+    width: 100%;
+    padding: 6px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Styling for the delete button */
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Image preview container styling */
+.image-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
