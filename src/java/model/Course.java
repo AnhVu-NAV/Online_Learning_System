@@ -12,6 +12,7 @@ import java.util.List;
  * @author AnhVuNAV
  */
 public class Course {
+
     private int id;
     private String title;
     private String subtitle; // Thêm thuộc tính subtitle
@@ -24,12 +25,13 @@ public class Course {
     private int salePrice;
     private Date createdDate;
     private Date updatedDate;
-    private int categoryId; 
+    private int categoryId;
     private float totalDuration;
     private String categoryName;
     private String ownerName;
     private List<String> taglines; // Thêm thuộc tính để lưu danh sách tagline
-    
+    private List<String> thumbnailDescriptions;
+
     public Course() {
     }
 
@@ -51,7 +53,7 @@ public class Course {
         this.categoryName = categoryName;
         this.ownerName = ownerName;
         this.taglines = taglines;
-    }    
+    }
 
     public Course(int id, String title, String subtitle, int expertId, int categoryId, int duration, String description) {
         this.id = id;
@@ -78,6 +80,14 @@ public class Course {
         this.description = description;
         this.status = aInt2;
         this.categoryId = aInt0;
+    }
+
+    public List<String> getThumbnailDescriptions() {
+        return thumbnailDescriptions;
+    }
+
+    public void setThumbnailDescriptions(List<String> thumbnailDescriptions) {
+        this.thumbnailDescriptions = thumbnailDescriptions;
     }
 
     public String getOwnerName() {
@@ -221,6 +231,5 @@ public class Course {
     public void setStatus(int status) {
         this.status = status;
     }
-    
-    
+
 }
