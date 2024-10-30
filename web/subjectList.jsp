@@ -112,7 +112,7 @@
                     <div class="subjects-per-page">
                         <label for="subjectsPerPage">Subjects per page:</label>
                         <!-- Changed to an input number field -->
-                        <input type="number" id="subjectsPerPage" class="input-number dropdown" value="${subjectsPerPage}" min="1" onchange="changeSubjectsPerPage()">
+                        <input type="number" id="subjectsPerPage" class="input-number" value="${subjectsPerPage}" min="1" onchange="changeSubjectsPerPage()">
                     </div>
 
                     <div class="pagination">
