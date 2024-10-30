@@ -27,6 +27,6 @@ public class LearningMaterial {
     private String title;
     private Date updatedDate;
     private int duration;
-    private String videoContentUrl;
-    private String htmlContent;
+    private String videoUrl;      
+    private String htmlContent;  
 }

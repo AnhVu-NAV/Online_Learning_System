@@ -24,36 +24,55 @@ import java.util.List;
 public class SubjectLessonServlet extends HttpServlet {
     private static final int RECORDS_PER_PAGE = 10;
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        int page = 1;
-        try {
-            if (request.getParameter("page") != null) {
-                page = Integer.parseInt(request.getParameter("page"));
-                if (page < 1) {
-                    page = 1; // Điều chỉnh để trang không bao giờ nhỏ hơn 1
-                }
-            }
-        } catch (NumberFormatException e) {
-            page = 1; // Thiết lập giá trị mặc định nếu có lỗi chuyển đổi
-        }
-        
-        LessonDAO lessonDAO = new LessonDAO();
-        int offset = (page - 1) * RECORDS_PER_PAGE;
-        
-        List<Lesson> lessons = lessonDAO.getPaginatedLessons(offset, RECORDS_PER_PAGE);
-        System.out.println("Number of lessons: " + lessons.size());
-        int noOfRecords = lessonDAO.getNoOfRecords();
-        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / RECORDS_PER_PAGE);
-        
-        request.setAttribute("lessons", lessons);
-        request.setAttribute("currentPage", page);
-        request.setAttribute("noOfPages", noOfPages);
-        
-        // Điều chỉnh đường dẫn tới SubjectLesson.jsp nếu cần
-        request.getRequestDispatcher("SubjectLesson.jsp").forward(request, response);
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+    String searchName = request.getParameter("searchName");
+    String searchType = request.getParameter("searchType");
+
+    int page = 1;
+    if (request.getParameter("page") != null) {
+        page = Integer.parseInt(request.getParameter("page"));
     }
+
+    LessonDAO lessonDAO = new LessonDAO();
+    int offset = (page - 1) * RECORDS_PER_PAGE;
+
+    // Lấy dữ liệu bài học dựa trên tìm kiếm
+    List<Lesson> lessons = lessonDAO.getPaginatedLessons(offset, RECORDS_PER_PAGE, searchName, searchType);
+    int noOfRecords = lessonDAO.getNoOfRecords(searchName, searchType);
+    int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / RECORDS_PER_PAGE);
+
+    // Lấy danh sách các loại bài học cho searchType
+    List<String> lessonTypes = lessonDAO.getAllLessonTypes();
+    request.setAttribute("lessonTypes", lessonTypes);
+
+    request.setAttribute("lessons", lessons);
+    request.setAttribute("currentPage", page);
+    request.setAttribute("noOfPages", noOfPages);
+    request.setAttribute("searchName", searchName);
+    request.setAttribute("searchType", searchType);
+
+    request.getRequestDispatcher("SubjectLesson.jsp").forward(request, response);
+}
+
+//change status
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    String lessonId = request.getParameter("lessonId");
+    String newStatus = request.getParameter("newStatus");
+
+    if (lessonId != null && newStatus != null) {
+        LessonDAO lessonDAO = new LessonDAO();
+        // Chuyển đổi newStatus thành số nguyên trước khi gọi phương thức updateLessonStatus
+        lessonDAO.updateLessonStatus(Integer.parseInt(lessonId), Integer.parseInt(newStatus));
+    }
+
+    // Redirect lại trang SubjectLesson để hiển thị danh sách sau khi cập nhật
+    response.sendRedirect("subjectLesson");
+}
+
+
 }
 
