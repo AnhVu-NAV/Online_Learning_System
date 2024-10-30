@@ -52,7 +52,7 @@
                 <!-- Select chủ sở hữu khóa học -->
                 <div class="form-group">
                     <label for="owner">Owner</label>
-                    <select id="owner" name="ownerId" class="form-input" required>
+                    <select id="owner" name="ownerId" class="form-input" >
                         <c:forEach var="expert" items="${expertList}">
                             <option value="${expert.id}">${expert.firstName} ${expert.lastName}</option>
                         </c:forEach>
