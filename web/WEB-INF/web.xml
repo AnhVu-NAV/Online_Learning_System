@@ -16,6 +16,10 @@
         <servlet-name>LessonController</servlet-name>
         <servlet-class>controller.LessonController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuizHandleController</servlet-name>
+        <servlet-class>controller.QuizHandleController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>changePassword</servlet-name>
         <url-pattern>/changePassword</url-pattern>
@@ -31,5 +35,9 @@
     <servlet-mapping>
         <servlet-name>LessonController</servlet-name>
         <url-pattern>/LessonController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizHandleController</servlet-name>
+        <url-pattern>/QuizHandleController</url-pattern>
     </servlet-mapping>
 </web-app>
