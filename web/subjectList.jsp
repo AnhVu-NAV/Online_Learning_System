@@ -50,6 +50,11 @@
                         <label><input type="checkbox" class="toggle-column" data-column="11" checked> Updated Date</label>
                     </form>
                 </div>
+
+                <!-- Add the Generate AI Button -->
+                <div class="generate-ai-button">
+                    <button onclick="location.href = 'GenerateAI.jsp'" class="generate-ai-btn">Generate AI</button>
+                </div>
             </div>
 
             <!-- Main Content -->
@@ -106,12 +111,8 @@
                 <div class="pagination-section">
                     <div class="subjects-per-page">
                         <label for="subjectsPerPage">Subjects per page:</label>
-                        <select id="subjectsPerPage" class="dropdown" onchange="changeSubjectsPerPage()">
-                            <option value="10" ${subjectsPerPage == 10 ? 'selected' : ''}>10</option>
-                            <option value="20" ${subjectsPerPage == 20 ? 'selected' : ''}>20</option>
-                            <option value="50" ${subjectsPerPage == 50 ? 'selected' : ''}>50</option>
-                            <option value="100" ${subjectsPerPage == 100 ? 'selected' : ''}>100</option>
-                        </select>
+                        <!-- Changed to an input number field -->
+                        <input type="number" id="subjectsPerPage" class="input-number dropdown" value="${subjectsPerPage}" min="1" onchange="changeSubjectsPerPage()">
                     </div>
 
                     <div class="pagination">
