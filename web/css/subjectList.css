@@ -119,6 +119,15 @@ body {
     font-size: 14px;
 }
 
+.input-number{
+    padding: 12px;
+    border-radius: 5px;
+    width: 10px
+    border: 1px solid #ddd;
+    background-color: white;
+    font-size: 14px;
+}
+
 .add-course-btn {
     padding: 12px 20px;
     background-color: #3498db;
@@ -292,4 +301,23 @@ a:focus, button:focus, input:focus, select:focus {
 
 .edit-btn:hover, .add-course-btn:hover {
     background-color: #1c638e;
+}
+
+.generate-ai-button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.generate-ai-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.generate-ai-btn:hover {
+    background-color: #45a049;
 }
