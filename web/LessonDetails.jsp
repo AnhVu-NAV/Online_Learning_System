@@ -62,7 +62,9 @@
                             </div>
                         </c:if>
 
-                        <form action="${lesson != null ? 'updateLesson' : 'createLesson'}" method="post">
+                        <form action="${pageContext.request.contextPath}/${lesson != null ? 'updateLesson' : 'createLesson'}" method="post">
+                           <input type="hidden" name="lessonId" value="${lesson.lessonId}">
+
                             <!-- Title and Type -->
                             <div class="FormRow">
                                 <div class="FormSelect">
