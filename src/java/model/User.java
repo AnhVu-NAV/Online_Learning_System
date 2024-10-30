@@ -25,6 +25,36 @@ public class User {
     private String address; // Địa chỉ
     private String imageURL; // URL ảnh đại diện
 
+    public User(int id, String email, String firstName, String lastName, String password, Date dob, int roleId, Date createdDate, int status, String phone, boolean gender, String address, String imageURL) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.dob = dob;
+        this.roleId = roleId;
+        this.createdDate = createdDate;
+        this.status = status;
+        this.phone = phone;
+        this.gender = gender;
+        this.address = address;
+        this.imageURL = imageURL;
+    }
+
+    public User() {
+    }
+    
+    
+
+    
+    public User(int id, String firstName, String lastName, String string1, String string2) {
+        this.id = id;
+        this.email = string1;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.imageURL = string2;
+    }
+
     // Getters và Setters cho tất cả các thuộc tính
 
     public int getId() {
