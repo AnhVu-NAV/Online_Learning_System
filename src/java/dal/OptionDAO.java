@@ -4,10 +4,42 @@
  */
 package dal;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import model.Option;
+
 /**
  *
  * @author Admin
  */
-public class OptionDAO {
+public class OptionDAO extends DBContext {
+    private static final Logger logger = Logger.getLogger(QuestionDAO.class.getName());
+    public List<Option> getOptionsByQuestionId(int questionId) {
+        List<Option> options = new ArrayList<>();
+        String query = "SELECT * FROM `Option` WHERE question_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, questionId);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                options.add(new Option(
+                    resultSet.getInt("id"),
+                    resultSet.getInt("question_id"),
+                    resultSet.getInt("status"),
+                    resultSet.getBoolean("isTrue"),
+                    resultSet.getString("explanation")
+                ));
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error fetching options for question ID: " + questionId, e);
+        }
+        return options;
+    }
+    
     
 }
