@@ -5,12 +5,17 @@
 
 package controller;
 
+import dal.OptionDAO;
+import dal.QuestionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Option;
+import model.Question;
 
 /**
  *
@@ -51,18 +56,29 @@ public class QuizHandleController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
-    } 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+            int quizId = Integer.parseInt(request.getParameter("quizId"));
+            int questionNumber = Integer.parseInt(request.getParameter("questionNumber"));
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+            // Lấy câu hỏi và các tùy chọn dựa trên quizId và số thứ tự câu hỏi
+            QuestionDAO questionDAO = new QuestionDAO();
+            OptionDAO optionDAO = new OptionDAO();
+            Question question = questionDAO.getQuestionByQuizAndNumber(quizId, questionNumber);
+            List<Option> options = optionDAO.getOptionsByQuestionId(question.getId());
+
+            int totalQuestions = questionDAO.getQuestionCountForQuiz(quizId);
+
+            // Đưa các đối tượng vào request attribute để sử dụng trong JSP
+            request.setAttribute("question", question);
+            request.setAttribute("options", options);
+            request.setAttribute("questionNumber", questionNumber);
+            request.setAttribute("totalQuestions", totalQuestions);
+
+            // Forward tới trang JSP để hiển thị
+            request.getRequestDispatcher("quiz.jsp").forward(request, response);
+        
+    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {

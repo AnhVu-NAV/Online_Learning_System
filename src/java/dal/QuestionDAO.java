@@ -17,12 +17,14 @@ import model.Question;
  */
 public class QuestionDAO extends DBContext {
     private static final Logger logger = Logger.getLogger(QuestionDAO.class.getName());
-    public Question getQuestionById(int questionId) {
-        String query = "SELECT * FROM Question WHERE id = ?";
+    public Question getQuestionByQuizAndNumber(int quizId, int questionNumber) {
+        String query = "SELECT * FROM Question WHERE quiz_id = ? LIMIT ?, 1";
+        
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, questionId);
+            statement.setInt(1, quizId);
+            statement.setInt(2, questionNumber - 1); // SQL LIMIT offset, nên trừ 1 để có đúng vị trí
             ResultSet resultSet = statement.executeQuery();
-
+            
             if (resultSet.next()) {
                 return new Question(
                     resultSet.getInt("id"),
@@ -35,8 +37,25 @@ public class QuestionDAO extends DBContext {
                 );
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error fetching question by ID: " + questionId, e);
+            logger.log(Level.SEVERE, "Error fetching question by quizId and question number", e);
         }
         return null;
+    }
+
+    // Lấy số lượng câu hỏi trong một quiz
+    public int getQuestionCountForQuiz(int quizId) {
+        String query = "SELECT COUNT(*) FROM Question WHERE quiz_id = ?";
+        
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, quizId);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error fetching question count for quizId: " + quizId, e);
+        }
+        return 0;
     }
 }

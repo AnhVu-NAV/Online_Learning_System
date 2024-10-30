@@ -22,6 +22,7 @@ public class OptionDAO extends DBContext {
     public List<Option> getOptionsByQuestionId(int questionId) {
         List<Option> options = new ArrayList<>();
         String query = "SELECT * FROM `Option` WHERE question_id = ?";
+
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, questionId);
             ResultSet resultSet = statement.executeQuery();
@@ -31,7 +32,7 @@ public class OptionDAO extends DBContext {
                     resultSet.getInt("id"),
                     resultSet.getInt("question_id"),
                     resultSet.getInt("status"),
-                    resultSet.getBoolean("isTrue"),
+                    resultSet.getInt("isTrue"),
                     resultSet.getString("explanation")
                 ));
             }
@@ -39,6 +40,29 @@ public class OptionDAO extends DBContext {
             logger.log(Level.SEVERE, "Error fetching options for question ID: " + questionId, e);
         }
         return options;
+    }
+
+    // Lấy một tùy chọn cụ thể theo ID
+    public Option getOptionById(int optionId) {
+        String query = "SELECT * FROM `Option` WHERE id = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, optionId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return new Option(
+                    resultSet.getInt("id"),
+                    resultSet.getInt("question_id"),
+                    resultSet.getInt("status"),
+                    resultSet.getInt("isTrue"),
+                    resultSet.getString("explanation")
+                );
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error fetching option with ID: " + optionId, e);
+        }
+        return null;
     }
     
     

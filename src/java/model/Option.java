@@ -9,16 +9,16 @@ package model;
  * @author Admin
  */
 public class Option {
-    private int id;
+   private int id;
     private int questionId;
     private int status;
-    private boolean isTrue;
+    private int isTrue; // 1 for true, 0 for false in the database
     private String explanation;
 
     // Constructors
     public Option() {}
 
-    public Option(int id, int questionId, int status, boolean isTrue, String explanation) {
+    public Option(int id, int questionId, int status, int isTrue, String explanation) {
         this.id = id;
         this.questionId = questionId;
         this.status = status;
@@ -50,11 +50,11 @@ public class Option {
         this.status = status;
     }
 
-    public boolean isIsTrue() {
+    public int getIsTrue() {
         return isTrue;
     }
 
-    public void setIsTrue(boolean isTrue) {
+    public void setIsTrue(int isTrue) {
         this.isTrue = isTrue;
     }
 
