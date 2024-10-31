@@ -8,7 +8,6 @@ import dal.OptionDAO;
 import dal.QuestionDAO;
 import dal.QuizDAO;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
