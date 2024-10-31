@@ -22,30 +22,66 @@ public class PersonalCourseDAO extends DBContext {
     DataConvert dc = new DataConvert();
 
     public Vector<PersonalCourse> getPersonalCourses(String sql) {
-        Vector<PersonalCourse> vector = new Vector<PersonalCourse>();
-        try {
-            Statement state = connection.createStatement(
-                    ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs = state.executeQuery(sql);
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                int customerId = rs.getInt(2);
-                int courseId = rs.getInt(3);
-                Date enrollDate = rs.getDate(4);
-                Date expireDate = rs.getDate(5);
-                int progress = rs.getInt(6);
-                int status = rs.getInt(7);
-                
-                int pricePackageId = rs.getInt(8);
-                PersonalCourse obj = new PersonalCourse(id, customerId, courseId, enrollDate, expireDate, progress, status, pricePackageId);
-                vector.add(obj);
+        Vector<PersonalCourse> vector = new Vector<>();
+        ResultSet rs = null;
+        PreparedStatement statement = null;
 
+        try {
+            statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            rs = statement.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int customerId = rs.getInt("customer_id");
+                int courseId = rs.getInt("course_id");
+                Date enrollDate = rs.getDate("enroll_date");
+                Date expireDate = rs.getDate("expire_date");
+                int progress = rs.getInt("progress");
+                int status = rs.getInt("status");
+
+                int pricePackageId = rs.getInt("price_package_id");
+                int saleNoteId = rs.getInt("sale_note_id");
+                int price = rs.getInt("price");
+                PersonalCourse obj = new PersonalCourse(id, customerId, courseId, enrollDate, expireDate, progress, status, pricePackageId, saleNoteId, price);
+                vector.add(obj);
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return vector;
-
     }
+
+    public PersonalCourse getPersonalCourseById(int search_id) {
+        String sql = "SELECT id, customer_id, course_id, enroll_date, expire_date, progress, status, price_package_id, sale_note_id, price "
+                + "FROM PersonalCourse "
+                + "WHERE id = " + search_id;
+
+        try {
+            Statement state = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = state.executeQuery(sql);
+
+            // Kiểm tra nếu có bản ghi nào trong ResultSet
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                int customerId = rs.getInt("customer_id");
+                int courseId = rs.getInt("course_id");
+                Date enrollDate = rs.getDate("enroll_date");
+                Date expireDate = rs.getDate("expire_date");
+                int progress = rs.getInt("progress");
+                int status = rs.getInt("status");
+                int pricePackageId = rs.getInt("price_package_id");
+                int saleNoteId = rs.getInt("sale_note_id");
+                int price = rs.getInt("price");
+
+                // Tạo đối tượng PersonalCourse và trả về
+                return new PersonalCourse(id, customerId, courseId, enrollDate, expireDate, progress, status, pricePackageId, saleNoteId, price);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return null; // Trả về null nếu không tìm thấy hoặc có lỗi xảy ra
+    }
+
 }
