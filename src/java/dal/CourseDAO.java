@@ -13,6 +13,8 @@ import java.util.List;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.PricePackage;
 import model.Setting;
 import model.Tagline;
@@ -828,5 +830,16 @@ public class CourseDAO extends DBContext {
             thumbnailUrls.add(resultSet.getString("thumbnail_url"));
         }
         return thumbnailUrls;
+    }
+    
+    public List<String> getAllNameCourseByCategory() throws SQLException{
+        List<String> allNameSubject = new ArrayList<>();
+        String sql = "SELECT title FROM Course WHERE category_id = 7";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            allNameSubject.add(resultSet.getString("title"));
+        }
+        return allNameSubject;
     }
 }
