@@ -21,11 +21,12 @@ public class PersonalCourse {
     private int status;
     private int pricePackageId;
     private int saleNoteId;
+    private int price;
 
     public PersonalCourse() {
     }
 
-    public PersonalCourse(int id, int customerId, int courseId, Date enrollDate, Date expireDate, int progress, int status, int pricePackageId, int saleNoteId) {
+    public PersonalCourse(int id, int customerId, int courseId, Date enrollDate, Date expireDate, int progress, int status, int pricePackageId, int saleNoteId, int price) {
         this.id = id;
         this.customerId = customerId;
         this.courseId = courseId;
@@ -35,17 +36,7 @@ public class PersonalCourse {
         this.status = status;
         this.pricePackageId = pricePackageId;
         this.saleNoteId = saleNoteId;
-    }
-
-    public PersonalCourse(int id, int customerId, int courseId, Date enrollDate, Date expireDate, int progress, int status, int pricePackageId) {
-        this.id = id;
-        this.customerId = customerId;
-        this.courseId = courseId;
-        this.enrollDate = enrollDate;
-        this.expireDate = expireDate;
-        this.progress = progress;
-        this.status = status;
-        this.pricePackageId = pricePackageId;
+        this.price = price;
     }
 
     public int getId() {
@@ -119,5 +110,15 @@ public class PersonalCourse {
     public void setSaleNoteId(int saleNoteId) {
         this.saleNoteId = saleNoteId;
     }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    
 
 }
