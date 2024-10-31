@@ -86,10 +86,11 @@ CREATE TABLE Course (
     foreign key (category_id) references Setting(id),
     foreign key (expert_id) references User(id)
 );
-CREATE TABLE Course_Thumbnail (
+CREATE TABLE Course_Thumbnails (
     id int AUTO_INCREMENT PRIMARY KEY,
     course_id int,
     thumbnail_url VARCHAR(255),
+    description VARCHAR(255) NULL,
     foreign key (course_id) references Course(id)
 );
 CREATE TABLE Course_Tagline (
@@ -112,7 +113,8 @@ CREATE TABLE PricePackage (
 CREATE TABLE SaleNoteVisualContent (
     id INT(10) AUTO_INCREMENT PRIMARY KEY,
     content VARCHAR(255),
-    type TINYINT(1) -- 0 is image, 1 is video
+    type TINYINT(1), -- 0 is image, 1 is video
+    description varchar(255) null
 );
 
 CREATE TABLE SaleNote (
@@ -189,6 +191,7 @@ CREATE TABLE LearningMaterial (
     title VARCHAR(255),
     upload_date DATE,
     duration INT(10),
+    type INT(10),
     FOREIGN KEY (lesson_id) REFERENCES Lesson(id)
 );
 CREATE TABLE Quiz (
@@ -200,7 +203,8 @@ CREATE TABLE Quiz (
     description VARCHAR(255) null,        
     subtitle VARCHAR(255) null,
     markable_by_ai TINYINT(1) null,
-    markable_by_expert TINYINT(1) null,  
+    markable_by_expert TINYINT(1) null,
+    type INT(10),  
     FOREIGN KEY (lesson_id) REFERENCES Lesson(id)
 );
 CREATE TABLE PersonalQuiz (
