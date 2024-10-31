@@ -19,7 +19,6 @@ public class Course {
     private int totalDuration;
     private int categoryId;
     private String description;
-    private String thumbnailUrl;
     private int status;
     private Date updatedDate;
     private Date createdDate;
@@ -28,7 +27,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(int id, String title, String subtitle, int expertId, int totalDuration, int categoryId, String description, String thumbnailUrl, int status, Date updatedDate, Date createdDate, int numberOfLearner) {
+    public Course(int id, String title, String subtitle, int expertId, int totalDuration, int categoryId, String description, int status, Date updatedDate, Date createdDate, int numberOfLearner) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
@@ -36,7 +35,6 @@ public class Course {
         this.totalDuration = totalDuration;
         this.categoryId = categoryId;
         this.description = description;
-        this.thumbnailUrl = thumbnailUrl;
         this.status = status;
         this.updatedDate = updatedDate;
         this.createdDate = createdDate;
@@ -97,14 +95,6 @@ public class Course {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
     }
 
     public int getStatus() {
