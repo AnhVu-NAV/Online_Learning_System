@@ -19,9 +19,9 @@
             <!-- Sidebar -->
             <aside class="sidebar">
                 <div class="account-officer">
-                    <img class="profile-img" src="${user.image_url}" alt="${user.first_name} ${user.last_name}">
+                    <img class="profile-img" src="${user.imageURL}" alt="${user.firstName} ${user.lastName}">
                     <div class="profile-details">
-                        <h3>${user.first_name} ${user.last_name}</h3>
+                        <h3>${user.firstName} ${user.lastName}</h3>
                         <p>Customer Operations</p>
                     </div>
                 </div>
@@ -54,9 +54,9 @@
                 </header>
                 <section class="personal-section">
                     <div class="personal-details">
-                        <img class="verification-photo" src="${user.image_url}" alt="Verification">
+                        <img class="verification-photo" src="${user.imageURL}" alt="Verification">
                         <div class="details">
-                            <p><strong>Name:</strong> ${user.first_name} ${user.last_name}</p>
+                            <p><strong>Name:</strong> ${user.firstName} ${user.lastName}</p>
                             <p><strong>Gender:</strong> ${user.gender ? 'Male' : 'Female'}</p>
                             <p><strong>Date of Birth:</strong> ${user.dob}</p>
                             <p><strong>Nationality:</strong> ${user.address}</p>
