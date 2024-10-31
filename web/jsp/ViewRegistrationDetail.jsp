@@ -42,14 +42,14 @@
     <body>
         <div class="wrapper">
             <jsp:include page="/component/AdminDashboardSidebar.jsp"></jsp:include>
-            <c:set var="setting" value="${requestScope.setting}"></c:set>
+            <c:set var="personalCourse" value="${requestScope.personalCourse}"></c:set>
                 <section style="background-color: #eee;" id="ViewRegistrationDetail">
                     <div class="container py-5">                     
                         <div class="row">
                             <div class="col">
                                 <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4">
                                     <ol class="breadcrumb mb-0">
-                                        <li class="breadcrumb-item"><a href="SaleRegostrationDashboardController?service=viewAllRegistration">Registration List</a></li>
+                                        <li class="breadcrumb-item"><a href="SaleRegistrationDashboardController?service=viewAllRegistration">Registration List</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Registration Details</li>
                                     </ol>
                                 </nav>
@@ -57,52 +57,54 @@
                         </div>
                         <section id="ViewRegistrationDetail">
                             <div class="form-container">
-                                <form action="${pageContext.request.contextPath}/SaleRegostrationDashboardController" method="post">
+                                <form action="${pageContext.request.contextPath}/SaleRegistrationDashboardController" method="post">
                                 <div class="form-group mb-3">
-                                    <label for="settingValue">Subject Title</label>
-                                    <input type="text" class="form-control" readonly="true" value="${setting.getId()}" name="subjectName">
+                                    <label for="settingValue">ID</label>
+                                    <input type="text" class="form-control" readonly="true" value="${personalCourse.getId()}" name="id">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="settingValue">Price</label>
-                                    <input type="text" class="form-control" readonly="true" value="${setting.getId()}" name="subjectName">
+                                    <label for="customerName">Customer Name</label>
+                                    <c:forEach items="${requestScope.userVector}" var="user">
+                                        <c:if test="${user.getId()==personalCourse.getCustomerId()}">
+                                            <input type="text" class="form-control" readonly="true" value="${user.getFirstName()} ${user.getLastName()}" name="customerName">
+                                        </c:if>
+                                    </c:forEach>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="settingValue">Full Name</label>
-                                    <input type="text" class="form-control" value="${setting.getValue()}" name="settingValue">
+                                    <label for="customerEmail">Customer Email</label>
+                                    <c:forEach items="${requestScope.userVector}" var="user">
+                                        <c:if test="${user.getId()==personalCourse.getCustomerId()}">
+                                            <input type="text" class="form-control" readonly="true" value="${user.getPrimaryEmail()}" name="customerEmail">
+                                        </c:if>
+                                    </c:forEach>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="settingValue">Gender</label>
-                                    <input type="text" class="form-control" value="${setting.getValue()}" name="settingValue">
+                                    <label for="enrollDate">Enroll date</label>
+                                    <input type="text" class="form-control" readonly="true" value="${personalCourse.getEnrollDate()}" name="enrollDate">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="settingValue">Email</label>
-                                    <input type="text" class="form-control" value="${setting.getValue()}" name="settingValue">
+                                    <label for="expireDate">Expire date</label>
+                                    <input type="text" class="form-control" readonly="true" value="${personalCourse.getExpireDate()}" name="expireDate">
+                                </div>                                
+                                <div class="form-group mb-3">
+                                    <label for="status">Status</label>
+                                    <input type="text" class="form-control" readonly="true" value="${personalCourse.getStatus()}" name="status">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="settingValue">Phone</label>
-                                    <input type="text" class="form-control" value="${setting.getValue()}" name="settingValue">
+                                    <label for="pricePackageId">Price Package Id</label>
+                                    <input type="text" class="form-control" readonly="true" value="${personalCourse.getPricePackageId()}" name="pricePackageId">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="settingValue">Registration Time</label>
-                                    <input type="text" class="form-control" value="${setting.getValue()}" name="settingValue">
+                                    <label for="pricePackageTitle">Price Package Title</label>
+                                    <c:forEach items="${requestScope.pricePackageVector}" var="pricePackage">
+                                        <c:if test="${pricePackage.getId()==personalCourse.getPricePackageId()}">
+                                            <input type="text" class="form-control" readonly="true" value="${pricePackage.getTitle()}" name="pricePackageTitle">
+                                        </c:if>
+                                    </c:forEach>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="settingStatus">Status</label>
-                                    <select id="settingStatus" class="form-control" name="settingStatus">
-                                        <option value="-1">Cancel</option>
-                                        <option value="0">Submitted</option>
-                                        <option value="1">Learning</option>
-                                        <option value="2">Expired</option>
-                                        <option value="3">Finished</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="settingValue">Valid from</label>
-                                    <input type="text" class="form-control" name="settingDescription" value="${setting.getDescription()}">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="settingValue">Valid to</label>
-                                    <input type="text" class="form-control" name="settingDescription" value="${setting.getDescription()}">
+                                    <label for="progress">Progress</label>
+                                    <input type="text" class="form-control" readonly="true" value="${personalCourse.getProgress()}%" name="progress">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="settingValue">Note</label>
