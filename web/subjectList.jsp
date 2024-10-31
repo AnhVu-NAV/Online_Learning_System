@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Subjects List</title>
         <link rel="stylesheet" href="css/subjectList.css">
+        <link rel="stylesheet" href="css/aiModal.css">
     </head>
     <body>
         <div class="container">
@@ -53,8 +54,10 @@
 
                 <!-- Add the Generate AI Button -->
                 <div class="generate-ai-button">
-                    <button onclick="location.href = 'GenerateAI.jsp'" class="generate-ai-btn">Generate AI</button>
+                    <button id="generateAIAnalysis" class="generate-ai-btn">Generate AI Analysis</button>
+                    <!--<button onclick="location.href = 'GenerateAI.jsp'" class="generate-ai-btn">Generate AI</button>-->
                 </div>
+
             </div>
 
             <!-- Main Content -->
@@ -136,116 +139,210 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal Popup for AI Analysis -->
+            <div id="aiModal" class="modal">
+                <div class="modal-content">
+                    <span id="closeModal" class="close">&times;</span>
+                    <div id="aiResponse"></div> <!-- AI response area -->
+                    <input type="text" id="chatInput" placeholder="Ask a follow-up question">
+                    <button id="sendChat">Submit</button>
+                </div>
+            </div>
+
         </div>
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <script>
-            // Toggle column visibility
-            document.addEventListener('DOMContentLoaded', function () {
-                const checkboxes = document.querySelectorAll('.toggle-column');
-                checkboxes.forEach(checkbox => {
-                    checkbox.addEventListener('change', function () {
-                        const column = document.querySelectorAll('td:nth-child(' + this.dataset.column + '), th:nth-child(' + this.dataset.column + ')');
-                        column.forEach(cell => {
-                            cell.style.display = this.checked ? 'table-cell' : 'none';
-                        });
-                    });
+                            // Toggle column visibility
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const checkboxes = document.querySelectorAll('.toggle-column');
+                                checkboxes.forEach(checkbox => {
+                                    checkbox.addEventListener('change', function () {
+                                        const column = document.querySelectorAll('td:nth-child(' + this.dataset.column + '), th:nth-child(' + this.dataset.column + ')');
+                                        column.forEach(cell => {
+                                            cell.style.display = this.checked ? 'table-cell' : 'none';
+                                        });
+                                    });
 
-                    // Initialize the column visibility based on checkbox state
-                    const column = document.querySelectorAll('td:nth-child(' + checkbox.dataset.column + '), th:nth-child(' + checkbox.dataset.column + ')');
-                    column.forEach(cell => {
-                        cell.style.display = checkbox.checked ? 'table-cell' : 'none';
-                    });
-                });
+                                    // Initialize the column visibility based on checkbox state
+                                    const column = document.querySelectorAll('td:nth-child(' + checkbox.dataset.column + '), th:nth-child(' + checkbox.dataset.column + ')');
+                                    column.forEach(cell => {
+                                        cell.style.display = checkbox.checked ? 'table-cell' : 'none';
+                                    });
+                                });
 
-                // Filter by category functionality
-                const categoryCheckboxes = document.querySelectorAll('.filter-category');
-                categoryCheckboxes.forEach(checkbox => {
-                    checkbox.addEventListener('change', filterByCategory);
-                });
+                                // Filter by category functionality
+                                const categoryCheckboxes = document.querySelectorAll('.filter-category');
+                                categoryCheckboxes.forEach(checkbox => {
+                                    checkbox.addEventListener('change', filterByCategory);
+                                });
 
-                // Function to filter courses by category
-                function filterByCategory() {
-                    const selectedCategories = Array.from(document.querySelectorAll('.filter-category:checked')).map(cb => cb.value);
-                    const rows = document.querySelectorAll('#courseTable tbody tr');
-                    rows.forEach(row => {
-                        const category = row.querySelector('td:nth-child(4)').textContent;
-                        row.style.display = selectedCategories.length === 0 || selectedCategories.includes(category) ? '' : 'none';
-                    });
-                }
-            });
+                                // Function to filter courses by category
+                                function filterByCategory() {
+                                    const selectedCategories = Array.from(document.querySelectorAll('.filter-category:checked')).map(cb => cb.value);
+                                    const rows = document.querySelectorAll('#courseTable tbody tr');
+                                    rows.forEach(row => {
+                                        const category = row.querySelector('td:nth-child(4)').textContent;
+                                        row.style.display = selectedCategories.length === 0 || selectedCategories.includes(category) ? '' : 'none';
+                                    });
+                                }
+                            });
 
-            // Change subjects per page
-            function changeSubjectsPerPage() {
-                const subjectsPerPage = document.getElementById("subjectsPerPage").value;
-                window.location.href = 'CourseController?action=list&subjectsPerPage=' + subjectsPerPage + '&page=1';
-            }
+                            // Change subjects per page
+                            function changeSubjectsPerPage() {
+                                const subjectsPerPage = document.getElementById("subjectsPerPage").value;
+                                window.location.href = 'CourseController?action=list&subjectsPerPage=' + subjectsPerPage + '&page=1';
+                            }
 
-            // Function to filter courses by category
-            function filterByCategory() {
-                const selectedCategories = Array.from(document.querySelectorAll('.filter-category:checked')).map(cb => cb.value);
-                const rows = document.querySelectorAll('#courseTable tbody tr');
+                            // Function to filter courses by category
+                            function filterByCategory() {
+                                const selectedCategories = Array.from(document.querySelectorAll('.filter-category:checked')).map(cb => cb.value);
+                                const rows = document.querySelectorAll('#courseTable tbody tr');
 
-                rows.forEach(row => {
-                    const category = row.querySelector('td:nth-child(4)').textContent;
-                    // Mark the row as hidden or visible based on category filter
-                    row.setAttribute('data-category-visible', selectedCategories.length === 0 || selectedCategories.includes(category) ? 'true' : 'false');
-                });
-            }
+                                rows.forEach(row => {
+                                    const category = row.querySelector('td:nth-child(4)').textContent;
+                                    // Mark the row as hidden or visible based on category filter
+                                    row.setAttribute('data-category-visible', selectedCategories.length === 0 || selectedCategories.includes(category) ? 'true' : 'false');
+                                });
+                            }
 
-            // Function to filter courses by status
-            function filterByStatus() {
-                const selectedStatus = document.getElementById('statusFilter').value;
-                const rows = document.querySelectorAll('#courseTable tbody tr');
+                            // Function to filter courses by status
+                            function filterByStatus() {
+                                const selectedStatus = document.getElementById('statusFilter').value;
+                                const rows = document.querySelectorAll('#courseTable tbody tr');
 
-                rows.forEach(row => {
-                    const status = row.querySelector('td:nth-child(8)').textContent;
-                    // Mark the row as hidden or visible based on status filter
-                    row.setAttribute('data-status-visible', (selectedStatus === 'All' || status === selectedStatus) ? 'true' : 'false');
-                });
-            }
+                                rows.forEach(row => {
+                                    const status = row.querySelector('td:nth-child(8)').textContent;
+                                    // Mark the row as hidden or visible based on status filter
+                                    row.setAttribute('data-status-visible', (selectedStatus === 'All' || status === selectedStatus) ? 'true' : 'false');
+                                });
+                            }
 
-            // Search functionality
-            function filterCourses() {
-                const searchValue = document.getElementById('searchBar').value.toLowerCase();
-                const rows = document.querySelectorAll('#courseTable tbody tr');
+                            // Search functionality
+                            function filterCourses() {
+                                const searchValue = document.getElementById('searchBar').value.toLowerCase();
+                                const rows = document.querySelectorAll('#courseTable tbody tr');
 
-                rows.forEach(row => {
-                    const title = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-                    // Mark the row as hidden or visible based on search filter
-                    row.setAttribute('data-search-visible', title.includes(searchValue) ? 'true' : 'false');
-                });
-            }
+                                rows.forEach(row => {
+                                    const title = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                                    // Mark the row as hidden or visible based on search filter
+                                    row.setAttribute('data-search-visible', title.includes(searchValue) ? 'true' : 'false');
+                                });
+                            }
 
-            // Function to combine all filters
-            function applyFilters() {
-                filterByCategory();
-                filterByStatus();
-                filterCourses();
+                            // Function to combine all filters
+                            function applyFilters() {
+                                filterByCategory();
+                                filterByStatus();
+                                filterCourses();
 
-                // Apply combined filters to determine row visibility
-                const rows = document.querySelectorAll('#courseTable tbody tr');
-                rows.forEach(row => {
-                    const isCategoryVisible = row.getAttribute('data-category-visible') === 'true';
-                    const isStatusVisible = row.getAttribute('data-status-visible') === 'true';
-                    const isSearchVisible = row.getAttribute('data-search-visible') === 'true';
+                                // Apply combined filters to determine row visibility
+                                const rows = document.querySelectorAll('#courseTable tbody tr');
+                                rows.forEach(row => {
+                                    const isCategoryVisible = row.getAttribute('data-category-visible') === 'true';
+                                    const isStatusVisible = row.getAttribute('data-status-visible') === 'true';
+                                    const isSearchVisible = row.getAttribute('data-search-visible') === 'true';
 
-                    // Show the row only if all filters are satisfied
-                    row.style.display = (isCategoryVisible && isStatusVisible && isSearchVisible) ? '' : 'none';
-                });
-            }
+                                    // Show the row only if all filters are satisfied
+                                    row.style.display = (isCategoryVisible && isStatusVisible && isSearchVisible) ? '' : 'none';
+                                });
+                            }
 
-            // Event listeners for filtering
-            document.addEventListener('DOMContentLoaded', function () {
-                // Attach event listeners for the dropdown filters
-                document.getElementById('statusFilter').addEventListener('change', applyFilters);
-                // Attach the event listener to the search bar
-                document.getElementById('searchBar').addEventListener('keyup', applyFilters);
-                // Attach event listeners for category checkboxes
-                document.querySelectorAll('.filter-category').forEach(checkbox => {
-                    checkbox.addEventListener('change', applyFilters);
-                });
-            });
+                            // Event listeners for filtering
+                            document.addEventListener('DOMContentLoaded', function () {
+                                // Attach event listeners for the dropdown filters
+                                document.getElementById('statusFilter').addEventListener('change', applyFilters);
+                                // Attach the event listener to the search bar
+                                document.getElementById('searchBar').addEventListener('keyup', applyFilters);
+                                // Attach event listeners for category checkboxes
+                                document.querySelectorAll('.filter-category').forEach(checkbox => {
+                                    checkbox.addEventListener('change', applyFilters);
+                                });
+                            });
 
+                            // Function to format and display AI response
+                            function formatAIResponse(responseJson) {
+                                console.log("Raw Response:", responseJson); // Debug: Check the raw response
+
+                                // Parse JSON if it's a string
+                                const response = typeof responseJson === 'string' ? JSON.parse(responseJson) : responseJson;
+
+                                // Extract the AI response content
+                                const aiContent = response.choices[0].message.content;
+                                console.log("Formatted Content:", aiContent); // Debug: Check formatted content
+
+                                // Apply HTML formatting
+                                const formattedContent = aiContent
+                                        .replace(/Outdated:/, "<strong>Outdated:</strong>")
+                                        .replace(/Need to be updated with new knowledge:/, "<strong>Need to be updated with new knowledge:</strong>")
+                                        .replace(/\n\d+\./g, match => `<br/><strong>${match}</strong>`)
+                                        .replace(/\n/g, "<br/>");
+
+                                // Set formatted content in the modal
+                                document.getElementById("aiResponse").innerHTML = `<div>${formattedContent}</div>`;
+                            }
+
+
+                            // Xử lí AI 
+                            $(document).ready(function () {
+                                // Show modal and send initial AI query when button is clicked
+                                $("#generateAIAnalysis").click(function () {
+                                    $("#aiModal").show();
+                                    $("#aiResponse").html("Loading analysis...");
+                                    console.log("Opening AI Analysis Modal..."); // Debug
+//                                    $("#aiModal").css("display", "block"); // Force display as block for debugging
+//                                    $("#aiResponse").html("Loading analysis...");
+
+                                    // Fetch course names from the database
+                                    $.ajax({
+                                        url: "CourseAnalysis",
+                                        type: "POST",
+                                        data: {action: "initial"},
+                                        success: function (response) {
+//                                            $("#aiResponse").html(response); // Display initial response
+//                                            $("#aiResponse").html("<p><strong>AI Analysis:</strong> " + response + "</p>");
+//                                            console.log("Response from server:", response); // Debug: Log raw server response
+
+                                            // Temporarily set static content for testing
+//                                            $("#aiResponse").html("<p>This is a test content for AI response area.</p>");
+                                            // Pass response to formatAIResponse for formatting and display
+//                                            formatAIResponse(response);
+                                            $("#aiResponse").html(response)
+                                        },
+                                        error: function () {
+                                            $("#aiResponse").html("Failed to get response from AI.");
+                                        }
+                                    });
+                                });
+
+                                // Send follow-up question
+                                $("#sendChat").click(function () {
+                                    const followUp = $("#chatInput").val();
+                                    $("#chatInput").val(""); // Clear input field
+                                    $("#aiResponse").append("<p><strong>You:</strong> " + followUp + "</p>");
+
+                                    $.ajax({
+                                        url: "CourseAnalysis",
+                                        type: "POST",
+                                        data: {action: "followUp", message: followUp},
+                                        success: function (response) {
+                                            // Pass follow-up response to formatAIResponse
+//                                            $("#aiResponse").append("<p><strong>AI:</strong> </p>");
+                                            formatAIResponse(response);
+                                        },
+                                        error: function () {
+                                            $("#aiResponse").append("<p>Failed to get response from AI.</p>");
+                                        }
+                                    });
+                                });
+
+                                // Close modal
+                                $("#closeModal").click(function () {
+                                    $("#aiModal").hide();
+                                    $("#aiResponse").html(""); // Clear chat history
+                                });
+                            });
 
         </script>
     </body>
