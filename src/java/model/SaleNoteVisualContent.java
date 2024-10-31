@@ -13,11 +13,16 @@ public class SaleNoteVisualContent {
     private int id;
     private String content;
     private boolean type;
+    private String description;
 
-    public SaleNoteVisualContent(int id, String content, boolean type) {
+    public SaleNoteVisualContent() {
+    }
+
+    public SaleNoteVisualContent(int id, String content, boolean type, String description) {
         this.id = id;
         this.content = content;
         this.type = type;
+        this.description = description;
     }
 
     public int getId() {
@@ -43,5 +48,17 @@ public class SaleNoteVisualContent {
     public void setType(boolean type) {
         this.type = type;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
+
+    
 
 }
