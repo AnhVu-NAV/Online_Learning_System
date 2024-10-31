@@ -67,5 +67,20 @@ public class QuizDAO extends DBContext {
         }
         return null;
     }
+    
+     public int getQuizDurationById(int quizId) {
+        String query = "SELECT duration FROM Quiz WHERE lesson_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, quizId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                // Lấy duration từ kết quả truy vấn và trả về
+                return resultSet.getInt("duration"); // Trả về phút
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Trả về 0 nếu không tìm thấy hoặc có lỗi
+    }
    
 }
