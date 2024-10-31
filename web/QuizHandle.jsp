@@ -135,36 +135,77 @@
                 <div class="navigation-title">Quiz Navigation</div>
                 <div class="question-list">
                     <c:forEach var="i" begin="1" end="${totalQuestions}">
+
+                        <c:set var="isAnswered" value="${sessionScope.answeredQuestions != null && sessionScope.answeredQuestions[i] != null}" />
                         <a href="QuizHandleController?quizId=${question.quizId}&questionNumber=${i}">
-                            <button style="${i == questionNumber ? 'background-color: #ddd;' : ''}">
+                            <button
+                                style="<c:if test='${i == questionNumber}'>background-color: #ddd;</c:if> <c:if test='${isAnswered}'>background-color: yellow;</c:if>">
                                 ${i}
                             </button>
-
                         </a>
                     </c:forEach>
                 </div>
+
                 <button class="view-progress-button">View Progress</button>
             </div>
-           
 
             <!-- Question Content -->
             <div class="question-content">
                 <div class="question-title">
                     Câu hỏi ${questionNumber}: ${question.content}
                 </div>
+
+                
+                <c:set var="selectedOption" value="${sessionScope.answeredQuestions[questionNumber]}" />
+
                 <ul class="options">
                     <c:forEach var="option" items="${options}">
                         <li>
-                            <input type="radio" name="option" id="option${option.id}">
+                            
+                            <input type="radio" name="option" id="option${option.id}" value="${option.id}"
+                                   <c:if test="${option.id == selectedOption}">checked</c:if>
+                                   onchange="submitAnswer(${question.quizId}, ${questionNumber}, ${option.id})">
                             <label for="option${option.id}">${option.explanation}</label>
                         </li>
                     </c:forEach>
                 </ul>
-                <div class="action-buttons">
-                    <button class="mark-button">Mark Question</button>
-                    <button class="submit-button">Submit Answer</button>
-                </div>
             </div>
+
         </div>
+
+        <script>
+            function submitAnswer(quizId, questionNumber, selectedOptionId) {
+                if (quizId == null || questionNumber == null || selectedOptionId == null) {
+                    console.error("Một hoặc nhiều biến bị null hoặc undefined:", {quizId, questionNumber, selectedOptionId});
+                    return;
+                }
+
+                const params = "quizId=" + encodeURIComponent(quizId) +
+                        "&questionNumber=" + encodeURIComponent(questionNumber) +
+                        "&selectedOption=" + encodeURIComponent(selectedOptionId);
+
+                console.log("Params:", params);
+
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "QuizHandleController", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                xhr.send(params);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            console.log("Câu trả lời đã được lưu thành công.");
+                        } else {
+                            console.log("Lỗi khi lưu câu trả lời:", xhr.status);
+                        }
+                    }
+                };
+            }
+
+        </script>
+
     </body>
+
+
 </html>
