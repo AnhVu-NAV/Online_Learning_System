@@ -32,29 +32,37 @@
                 <!-- Form tìm kiếm -->
                 <form action="subjectLesson" method="get" style="display: inline;">
                     <input type="text" name="searchName" placeholder="Search by lesson name..." value="${searchName}">
+                    <!-- Bộ lọc loại bài học (Type) -->
                     <select name="searchType">
                         <option value="">All Types</option>
                         <c:forEach var="type" items="${lessonTypes}">
                             <option value="${type}" <c:if test="${type == searchType}">selected</c:if>>${type}</option>
                         </c:forEach>
                     </select>
-                    <button type="submit">Search</button>
-                </form>
-            </div>
 
-            <table class="Table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Lesson</th>
-                        <th>Status</th>
-                        <th>Type</th>
-                        <th>Order</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
+                    <!-- Bộ lọc trạng thái (Status) -->
+                    <select name="searchStatus">
+                        <option value="">All Status</option>
+                        <option value="1" <c:if test="${searchStatus == '1'}">selected</c:if>>Active</option>
+                        <option value="0" <c:if test="${searchStatus == '0'}">selected</c:if>>Inactive</option>
+                        </select>
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
 
-                <tbody>
+                <table class="Table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Lesson</th>
+                            <th>Status</th>
+                            <th>Type</th>
+                            <th>Order</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
                     <c:forEach var="lesson" items="${lessons}">
                         <tr>
                             <td>${lesson.lessonId}</td>

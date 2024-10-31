@@ -23,7 +23,7 @@ public class LessonDAO extends DBContext {
     }
 
     // Lấy danh sách bài học có phân trang
-    public List<Lesson> getPaginatedLessons(int offset, int noOfRecords, String searchName, String searchType) {
+    public List<Lesson> getPaginatedLessons(int offset, int noOfRecords, String searchName, String searchType, String searchStatus) {
         List<Lesson> lessons = new ArrayList<>();
         StringBuilder query = new StringBuilder(
                 "SELECT l.id AS lesson_id, l.title AS lesson_title, l.chapter_id, l.order, l.status, "
@@ -39,6 +39,9 @@ public class LessonDAO extends DBContext {
         if (searchType != null && !searchType.isEmpty()) {
             query.append("AND st.value = ? ");
         }
+        if (searchStatus != null && !searchStatus.isEmpty()) {
+            query.append("AND l.status = ? ");
+        }
 
         query.append("ORDER BY l.id DESC LIMIT ?, ?");
 
@@ -50,6 +53,9 @@ public class LessonDAO extends DBContext {
             if (searchType != null && !searchType.isEmpty()) {
                 pstmt.setString(paramIndex++, searchType);
             }
+            if (searchStatus != null && !searchStatus.isEmpty()) {
+                pstmt.setInt(paramIndex++, Integer.parseInt(searchStatus)); // Chuyển đổi searchStatus sang kiểu số nguyên
+            }
             pstmt.setInt(paramIndex++, offset);
             pstmt.setInt(paramIndex, noOfRecords);
 
@@ -59,9 +65,6 @@ public class LessonDAO extends DBContext {
                 Setting lessonType = Setting.builder()
                         .value(rs.getString("lesson_type_value"))
                         .build();
-
-                // Chuyển đổi trạng thái thành "Active" nếu status = 1, hoặc "Inactive" nếu status = 0
-                String status = rs.getInt("status") == 1 ? "Active" : "Inactive";
 
                 Lesson lesson = Lesson.builder()
                         .lessonId(rs.getInt("lesson_id"))
@@ -108,17 +111,21 @@ public class LessonDAO extends DBContext {
         return materials;
     }
 
-    // Phương thức đếm số lượng bản ghi dựa trên tìm kiếm
-    public int getNoOfRecords(String searchName, String searchType) {
+    // Phương thức đếm số lượng bản ghi dựa trên tìm kiếm và trạng thái
+    public int getNoOfRecords(String searchName, String searchType, String searchStatus) {
         int noOfRecords = 0;
         StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM learnik.lesson l "
                 + "JOIN learnik.setting st ON l.lesson_type_id = st.id WHERE 1=1 ");
 
+        // Thêm điều kiện tìm kiếm nếu có
         if (searchName != null && !searchName.isEmpty()) {
             query.append("AND l.title LIKE ? ");
         }
         if (searchType != null && !searchType.isEmpty()) {
             query.append("AND st.value = ? ");
+        }
+        if (searchStatus != null && !searchStatus.isEmpty()) {
+            query.append("AND l.status = ? ");
         }
 
         try (PreparedStatement pstmt = connection.prepareStatement(query.toString())) {
@@ -127,7 +134,10 @@ public class LessonDAO extends DBContext {
                 pstmt.setString(paramIndex++, "%" + searchName + "%");
             }
             if (searchType != null && !searchType.isEmpty()) {
-                pstmt.setString(paramIndex, searchType);
+                pstmt.setString(paramIndex++, searchType);
+            }
+            if (searchStatus != null && !searchStatus.isEmpty()) {
+                pstmt.setInt(paramIndex, Integer.parseInt(searchStatus)); // Chuyển đổi searchStatus thành số nguyên
             }
 
             ResultSet rs = pstmt.executeQuery();
@@ -186,7 +196,9 @@ public class LessonDAO extends DBContext {
 
     public List<String> getAllLessonTypes() {
         List<String> lessonTypes = new ArrayList<>();
-        String query = "SELECT DISTINCT value FROM learnik.setting WHERE id = 'lesson_type_id'";
+        String query = "SELECT DISTINCT st.value "
+                + "FROM setting st "
+                + "JOIN lesson l ON l.lesson_type_id = st.id";
 
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
             ResultSet rs = pstmt.executeQuery();
