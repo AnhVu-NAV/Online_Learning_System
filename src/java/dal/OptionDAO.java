@@ -33,7 +33,7 @@ public class OptionDAO extends DBContext {
                     resultSet.getInt("question_id"),
                     resultSet.getInt("status"),
                     resultSet.getInt("isTrue"),
-                    resultSet.getString("explanation")
+                    resultSet.getString("explaination")
                 ));
             }
         } catch (SQLException e) {
@@ -56,7 +56,7 @@ public class OptionDAO extends DBContext {
                     resultSet.getInt("question_id"),
                     resultSet.getInt("status"),
                     resultSet.getInt("isTrue"),
-                    resultSet.getString("explanation")
+                    resultSet.getString("explaination")
                 );
             }
         } catch (SQLException e) {
@@ -65,5 +65,5 @@ public class OptionDAO extends DBContext {
         return null;
     }
     
-    
+   
 }

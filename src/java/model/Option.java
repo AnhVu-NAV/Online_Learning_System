@@ -65,5 +65,12 @@ public class Option {
     public void setExplanation(String explanation) {
         this.explanation = explanation;
     }
+
+    @Override
+    public String toString() {
+        return "Option{" + "id=" + id + ", questionId=" + questionId + ", status=" + status + ", isTrue=" + isTrue + ", explanation=" + explanation + '}';
+    }
+    
+    
     
 }

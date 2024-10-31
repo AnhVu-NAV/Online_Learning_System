@@ -97,5 +97,10 @@ public class Quiz {
     public void setType(int type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "Quiz{" + "lessonId=" + lessonId + ", title=" + title + ", duration=" + duration + ", passRate=" + passRate + ", updatedDate=" + updatedDate + ", description=" + description + ", subtitle=" + subtitle + ", type=" + type + '}';
+    }
     
 }

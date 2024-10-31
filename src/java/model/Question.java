@@ -85,5 +85,11 @@ public class Question {
     public void setHint(String hint) {
         this.hint = hint;
     }
+
+    @Override
+    public String toString() {
+        return "Question{" + "id=" + id + ", quizId=" + quizId + ", levelId=" + levelId + ", status=" + status + ", content=" + content + ", questionTypeId=" + questionTypeId + ", hint=" + hint + '}';
+    }
+    
     
 }
