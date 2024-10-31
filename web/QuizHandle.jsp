@@ -374,7 +374,7 @@
                             // Gửi dữ liệu `mark` cùng với `quizId` và `questionNumber`
                             const params = "quizId=" + encodeURIComponent(quizId) +
                                     "&questionNumber=" + encodeURIComponent(questionNumber) +
-                                    "&selectedOption=" + encodeURIComponent(selectedOptionId);
+                                    "&mark=" + encodeURIComponent(isMarked);
                             xhr.send(params);
 
                             xhr.onreadystatechange = function () {
