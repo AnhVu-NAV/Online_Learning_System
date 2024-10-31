@@ -45,6 +45,7 @@
                 font-size: 1.5em;
                 font-weight: bold;
                 color: #333;
+                padding-left: 25px;
             }
             .quiz-navigation {
                 width: 20%;
@@ -221,7 +222,7 @@
         <!-- Quiz Header -->
         <div class="quiz-header">
 
-            <div class="quiz-title">Quiz Title</div>
+            <div class="quiz-title">${quiz.title}</div>
         </div>
 
         <!-- Main Container -->

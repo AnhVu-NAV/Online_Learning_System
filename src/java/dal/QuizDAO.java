@@ -17,6 +17,7 @@ import model.Quiz;
  */
 public class QuizDAO extends DBContext {
     private static final Logger logger = Logger.getLogger(QuizDAO.class.getName());
+    //Lấy tất cả các quiz
     public List<Quiz> getAllQuizzes() {
         List<Quiz> quizzes = new ArrayList<>();
         String query = "SELECT * FROM Quiz";
@@ -67,7 +68,8 @@ public class QuizDAO extends DBContext {
         }
         return null;
     }
-    
+     
+     //Lấy Duration của quiz theo Id
      public int getQuizDurationById(int quizId) {
         String query = "SELECT duration FROM Quiz WHERE lesson_id = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {

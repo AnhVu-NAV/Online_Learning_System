@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dal;
 
 import java.sql.PreparedStatement;
@@ -17,6 +14,7 @@ import model.Question;
  */
 public class QuestionDAO extends DBContext {
     private static final Logger logger = Logger.getLogger(QuestionDAO.class.getName());
+    //Lấy câu hỏi dựa trên id và thứ tự 
     public Question getQuestionByQuizAndNumber(int quizId, int questionNumber) {
         String query = "SELECT * FROM Question WHERE quiz_id = ? LIMIT ?, 1";
         

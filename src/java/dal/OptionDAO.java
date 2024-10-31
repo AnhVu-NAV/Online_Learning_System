@@ -19,6 +19,7 @@ import model.Option;
  */
 public class OptionDAO extends DBContext {
     private static final Logger logger = Logger.getLogger(QuestionDAO.class.getName());
+    //Lấy câu trả lời dựa trên Id
     public List<Option> getOptionsByQuestionId(int questionId) {
         List<Option> options = new ArrayList<>();
         String query = "SELECT * FROM `Option` WHERE question_id = ?";

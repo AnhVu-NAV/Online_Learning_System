@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import model.Option;
 import model.Question;
+import model.Quiz;
 
 /**
  *
@@ -64,8 +65,8 @@ public class QuizHandleController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    //doGet thực hiện trách nhiệm đưa các dữ liệu lên hiển thị trên JSP
     @Override
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int quizId;
         int questionNumber;
@@ -83,6 +84,7 @@ public class QuizHandleController extends HttpServlet {
         QuestionDAO questionDAO = new QuestionDAO();
         OptionDAO optionDAO = new OptionDAO();
         QuizDAO quizDAO = new QuizDAO();
+        Quiz quiz = quizDAO.getQuizById(quizId);
 
         // Lấy câu hỏi và các lựa chọn dựa trên quizId và questionNumber
         Question question = questionDAO.getQuestionByQuizAndNumber(quizId, questionNumber);
@@ -127,6 +129,7 @@ public class QuizHandleController extends HttpServlet {
         request.setAttribute("timeRemaining", timeRemaining);
 
         // Đưa các đối tượng khác vào request attribute để sử dụng trong JSP
+        request.setAttribute("quiz", quiz);
         request.setAttribute("question", question);
         request.setAttribute("options", options);
         request.setAttribute("questionNumber", questionNumber);
@@ -136,7 +139,8 @@ public class QuizHandleController extends HttpServlet {
         // Chuyển tiếp tới QuizHandle.jsp
         request.getRequestDispatcher("QuizHandle.jsp").forward(request, response);
     }
-
+    
+    //doPost thực hiện thu nhận các dữ liệu từ JSP để xử lý sau đó hiển thị lại trên JSP
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Lấy các tham số từ request để xác định câu hỏi hiện tại và hành động
