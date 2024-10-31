@@ -29,6 +29,17 @@ public class Lesson {
         this.order = order;
     }
 
+
+ 
+    public Lesson(int id, String title, int status, int lessonTypeId) {
+        this.id = id;
+        this.status = status;
+        this.lessonTypeId = lessonTypeId;
+        this.title = title;
+        this.chapterId = chapterId;
+        this.order = order;
+    }
+
     // Getter và Setter cho các thuộc tính
     public int getId() {
         return id;
@@ -38,6 +49,7 @@ public class Lesson {
         this.id = id;
     }
 
+        // Getter và Setter cho các thuộc tính
     public int getStatus() {
         return status;
     }
@@ -77,4 +89,5 @@ public class Lesson {
     public void setOrder(int order) {
         this.order = order;
     }
+    
 }

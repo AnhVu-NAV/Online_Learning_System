@@ -18,6 +18,7 @@ import model.User;
 
 /**
  *
+<<<<<<<< HEAD:src/java/controller/ChangePasswordController.java
  * @author admin
  */
 public class ChangePasswordController extends HttpServlet {
@@ -26,6 +27,14 @@ public class ChangePasswordController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
+========
+ * @author 84941
+ */
+public class UserListController extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+>>>>>>>> 53e8082 (Add model Account, UserLog, Setting, SettingType and their respectively DAO):src/java/controller/UserListController.java
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -39,10 +48,17 @@ public class ChangePasswordController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+<<<<<<<< HEAD:src/java/controller/ChangePasswordController.java
             out.println("<title>Servlet changePass</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet changePass at " + request.getContextPath() + "</h1>");
+========
+            out.println("<title>Servlet UserListController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UserListController at " + request.getContextPath () + "</h1>");
+>>>>>>>> 53e8082 (Add model Account, UserLog, Setting, SettingType and their respectively DAO):src/java/controller/UserListController.java
             out.println("</body>");
             out.println("</html>");
         }
@@ -84,7 +100,7 @@ public class ChangePasswordController extends HttpServlet {
         if (nuser.getPassword().equals(old_pass)) {
             if (new_pass.equals(c_new_pass)){
                 UserDAO cus = new UserDAO();
-                cus.updatePass(nuser.getEmail(), new_pass);
+                cus.updatePass(nuser.getPrimaryEmail(), new_pass);
                 response.sendRedirect("ChangePassword.jsp");
             } else {
                 request.setAttribute("error", "You entered confirm password diffent new password!");

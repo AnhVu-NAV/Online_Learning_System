@@ -30,6 +30,21 @@ public class Course {
     public Course() {
     }
 
+    public Course(int id, String title, int expertId, String description, String thumbnailUrl, int numberOfLesson, int price, int salePrice, Date createdDate, Date updatedDate, int categoryId, float totalDuration) {
+        this.id = id;
+        this.title = title;
+        this.expertId = expertId;
+        this.description = description;
+        this.thumbnailUrl = thumbnailUrl;
+        this.numberOfLesson = numberOfLesson;
+        this.price = price;
+        this.salePrice = salePrice;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+        this.categoryId = categoryId;
+        this.totalDuration = totalDuration;
+    }    
+
     public int getId() {
         return id;
     }
@@ -122,23 +137,4 @@ public class Course {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public float getTotalDuration() {
-        return totalDuration;
-    }
-
-    public void setTotalDuration(float totalDuration) {
-        this.totalDuration = totalDuration;
-    }
-
-    public List<String> getTaglines() {
-        return taglines;
-    }
-
-    public void setTaglines(List<String> taglines) {
-        this.taglines = taglines;
-    }
 }

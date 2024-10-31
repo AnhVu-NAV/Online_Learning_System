@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author AnhVuNAV
@@ -14,21 +16,21 @@ public class Setting {
     private String value;
     private int status;
     private String description;
-
+    private Date createdDate;
+    private Date updatedDate;
     public Setting() {
     }
 
-    public Setting(int id, int settingTypeId, String value, int status, String description) {
+    public Setting(int id, int settingTypeId, String value, int status, String description, Date createdDate, Date updatedDate) {
         this.id = id;
         this.settingTypeId = settingTypeId;
         this.value = value;
         this.status = status;
         this.description = description;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
     }
-    
-    
 
-    // Getters and setters
     public int getId() {
         return id;
     }
@@ -68,4 +70,20 @@ public class Setting {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Date getCreatedDate() {
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+    
 }
