@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.Vector,model.PersonalCourse" %>
+<%@page import="java.util.Vector,model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -41,7 +41,9 @@
                                 <div class="alert alert-success" role="alert">
                                     ${pageScope.message}
                                 </div>
-                            </c:if>                                            
+                            </c:if>
+
+
                             <!-- End message -->
                             <!-- Profile start -->
                             <nav class="navbar navbar-expand px-4 py-3">
@@ -71,34 +73,34 @@
                                             <span class="input-group-prepend input-group-text">
                                                 <i class="bi-search"></i>
                                             </span>
-                                            <input type="text" class="form-control form-control-lg" name="searchByCourseId" placeholder="Search by course id" aria-label="Search by course id">
+                                            <input type="text" class="form-control form-control-lg" name="searchByPersonalCourseId" placeholder="Search by personal course id" aria-label="Search by personal course id">
                                         </div>
                                     </div>
                                     <!-- End Search by course id -->
 
-                                    <!-- Search by customer email -->
+                                    <!-- Search by customer id -->
                                     <div class="col-md-4 mb-2 mb-md-0">
-                                        <label class="form-label" for="searchByEmail">Search by customer email</label>
+                                        <label class="form-label" for="searchByCustomerId">Search by customer id</label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-prepend input-group-text">
                                                 <i class="bi-search"></i>
                                             </span>
-                                            <input type="text" class="form-control form-control-lg" name="searchByCustomerEmail" placeholder="Search by customer email" aria-label="Search by customer email">
+                                            <input type="text" class="form-control form-control-lg" name="searchByCustomerId" placeholder="Search by customer id" aria-label="Search by customer id">
                                         </div>
                                     </div>
-                                    <!-- End Search by customer email -->
+                                    <!-- End Search by customer id -->
 
-                                    <!-- Search by course title -->
+                                    <!-- Search by course id -->
                                     <div class="col-md-4 mb-2 mb-md-0">
-                                        <label class="form-label" for="searchByCourseTitle">Search by course title</label>
+                                        <label class="form-label" for="searchByCourseId">Search by course id</label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-prepend input-group-text">
                                                 <i class="bi-search"></i>
                                             </span>
-                                            <input type="text" class="form-control form-control-lg" name="searchByCourseTitle" placeholder="Search by course title" aria-label="Search by course title">
+                                            <input type="text" class="form-control form-control-lg" name="searchByCourseId" placeholder="Search by course id" aria-label="Search by course id">
                                         </div>
                                     </div>
-                                    <!-- End Search by course title -->
+                                    <!-- End Search by course id -->
                                 </div>
 
                                 <div class="row gx-2 gx-md-3 mb-4">
@@ -206,29 +208,29 @@
                                         <!-- Sort by Personal Course ID -->
                                         <div class="col-md-3">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sortBy" id="sortByCourseId" value="sortByCourseId" ${checked == 'sortByCourseId' ? 'checked' : ''}>
-                                            <label class="form-check-label" for="sortByCourseId">
+                                                <input class="form-check-input" type="radio" name="sortBy" id="sortByPersonalCourseId" value="sortByPersonalCourseId" ${checked == 'sortByPersonalCourseId' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="sortByPersonalCourseId">
                                                 Personal course id
                                             </label>
                                         </div>
                                     </div>
 
-                                    <!-- Sort by Customer Email -->
+                                    <!-- Sort by Customer ID -->
                                     <div class="col-md-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="sortBy" id="sortByCustomerEmail" value="sortByCustomerEmail" ${checked == 'sortByCustomerEmail' ? 'checked' : ''}>
-                                            <label class="form-check-label" for="sortByCustomerEmail">
-                                                Customer email
+                                            <input class="form-check-input" type="radio" name="sortBy" id="sortByCustomerId" value="sortByCustomerId" ${checked == 'sortByCustomerId' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="sortByCustomerId">
+                                                Customer id
                                             </label>
                                         </div>
                                     </div>
 
-                                    <!-- Sort by Course Title -->
+                                    <!-- Sort by Course ID -->
                                     <div class="col-md-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="sortBy" id="sortByCourseTitle" value="sortByCourseTitle" ${checked == 'sortByCourseTitle' ? 'checked' : ''}>
-                                            <label class="form-check-label" for="sortByCourseTitle">
-                                                Course title
+                                            <input class="form-check-input" type="radio" name="sortBy" id="sortByCourseId" value="sortByCourseId" ${checked == 'sortByCourseId' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="sortByCourseId">
+                                                Course id
                                             </label>
                                         </div>
                                     </div>
@@ -293,29 +295,29 @@
                                     <!-- Personal course id -->
                                     <div class="col-md-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckCourseId" name="displayCourseId" ${requestScope.displayCourseId == 'true'?'checked':''}>
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckCourseId" name="displayPersonalCourseId" ${requestScope.displayPersonalCourseId == 'true'?'checked':''}>
                                             <label class="form-check-label" for="flexCheckCourseId">
                                                 Personal course id
                                             </label>
                                         </div>
                                     </div>
 
-                                    <!-- Customer email -->
+                                    <!-- Customer ID -->
                                     <div class="col-md-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckCustomerEmail" name="displayCustomerEmail" ${requestScope.displayCustomerEmail == 'true'?'checked':''}>
-                                            <label class="form-check-label" for="flexCheckCustomerEmail">
-                                                Customer email
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckCustomerId" name="displayCustomerId" ${requestScope.displayCustomerId == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckCustomerId">
+                                                Customer ID
                                             </label>
                                         </div>
                                     </div>
 
-                                    <!-- Course title -->
+                                    <!-- Course ID -->
                                     <div class="col-md-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckCourseTitle" name="displayCourseTitle" ${requestScope.displayCourseTitle == 'true'?'checked':''}>
-                                            <label class="form-check-label" for="flexCheckCourseTitle">
-                                                Course title
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckCourseId" name="displayCourseId" ${requestScope.displayCourseId == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckCourseId">
+                                                Course ID
                                             </label>
                                         </div>
                                     </div>
@@ -385,21 +387,38 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr class="highlight">
-                                                <th scope="col">RegistrationId </th>
-                                                <th scope="col">CustomerEmail </th>
-                                                <th scope="col">CourseTitle</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">EnrollDate</th>
-                                                <th scope="col">ExpireDate</th>
-                                                <th scope="col">PricePackageId</th>
-                                                <th scope="col">View</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                                <c:if test="${requestScope.displayPersonalCourseId=='true'}"><th scope="col">Personal Course ID </th></c:if>
+                                                <c:if test="${requestScope.displayCustomerId=='true'}"><th scope="col">Customer ID</th></c:if>
+                                                <c:if test="${requestScope.displayCourseId=='true'}"><th scope="col">Course ID</th></c:if>
+                                                <c:if test="${requestScope.displayPrice=='true'}"><th scope="col">Price</th></c:if>
+                                                <c:if test="${requestScope.displayStatus=='true'}"><th scope="col">Status</th></c:if>
+                                                <c:if test="${requestScope.displayEnrollDate=='true'}"><th scope="col">EnrollDate</th></c:if>
+                                                <c:if test="${requestScope.displayExpireDate=='true'}"><th scope="col">ExpireDate</th></c:if>
+                                                <c:if test="${requestScope.displayPricePackageId=='true'}"><th scope="col">PricePackageId</th></c:if>
+                                                    <th scope="col">View</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${requestScope.personalCourseVector}" var="personalCourse">
+                                                <tr>
+                                                    <c:if test="${requestScope.displayPersonalCourseId=='true'}"><td>${personalCourse.getId()}</td></c:if>
+                                                    <c:if test="${requestScope.displayCustomerId=='true'}"><td>${personalCourse.getCustomerId()}</td></c:if>
+                                                    <c:if test="${requestScope.displayCourseId=='true'}"><td>${personalCourse.getCourseId()}</td></c:if>
+                                                    <c:if test="${requestScope.displayPrice=='true'}"><td>${personalCourse.getPrice()}</td></c:if>
+                                                    <c:if test="${requestScope.displayStatus=='true'}"><td>${personalCourse.getStatus()}</td></c:if>
+                                                    <c:if test="${requestScope.displayEnrollDate=='true'}"><td>${personalCourse.getEnrollDate()}</td></c:if>
+                                                    <c:if test="${requestScope.displayExpireDate=='true'}"><td>${personalCourse.getExpireDate()}</td></c:if>
+                                                    <c:if test="${requestScope.displayPricePackageId=='true'}"><td>${personalCourse.getPricePackageId()}</td></c:if>
+                                                        <td>
+                                                            <a class="btn btn-primary" href="SaleRegistrationDashboardController?service=viewRegistrationDetails&id=${personalCourse.getId()}" role="button">View</a>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
 
                                         </tbody>
                                     </table>
+
+
                                 </div>
                             </div>
                             <!-- Start paging -->
@@ -411,68 +430,137 @@
                                 </ul>
                             </nav>
                             <!-- End paging -->
-                            <!-- Registration Form Section start-->
-                            <h3 class="fw-bold fs-4 my-3">Add new registration</h3>                           
+                            <!-- Recommend course start-->
+                            <h3 class="fw-bold fs-4 my-3">Recommend courses</h3>                           
                             <div class="container">                               
-                                <form class="form" action="SaleRegistrationDashboardController" method="post">
+                                <form class="form" action="SaleRegistrationDashboardController" method="post" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-md-3 mt-md-0 mt-3">
-                                            <label for="addNewRegistrationCustomerId">Customer ID</label>
-                                            <select id="addNewRegistrationCustomerId" class="form-select w-100" name="addNewRegistrationCustomerId" required> 
+                                        <div class="col-md-4 mt-md-0 mt-3">
+                                            <label for="recommendCourseCustomerId">Customer ID</label>
+                                            <select id="recommendCourseCustomerId" class="form-select w-100" name="recommendCourseCustomerId" required> 
                                                 <c:forEach items="${requestScope.customerVector}" var="customer">
-                                                    <option value="${customer.getId()}">${customer.getId()}</option>
+                                                    <option value="${customer.getId()}">${customer.getPrimaryEmail()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
-                                        <div class="col-md-2 mt-md-0 mt-3">
-                                            <p>Or</p>
-                                        </div>
-                                        <div class="col-md-3 mt-md-0 mt-3">
-                                            <label for="addNewRegistrationCustomerEmail">New customer</label>
-                                            <input type="email" class="form-control w-100" id="addNewRegistrationEmail" name="addNewRegistrationEmail" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-md-4 mt-md-0 mt-3">
-                                            <label for="addNewRegistrationEnrollDate">Enroll date</label>
-                                            <input type="date" class="form-control w-100" id="addNewRegistrationEnrollDate" name="addNewRegistrationEnrollDate"> 
-                                        </div>
-                                        <div class="col-md-4 mt-md-0 mt-3">
-                                            <label for="addNewRegistrationExpireDate">Expire date</label>
-                                            <input type="date" class="form-control w-100" id="addNewRegistrationExpireDate" name="addNewRegistrationExpireDate"> 
-                                        </div>
-                                    </div>                                  
-                                    <div class="row">
-                                        <div class="col-md-4 mt-md-0 mt-3">
-                                            <label for="addNewRegistrationCourseId">Course ID</label>
-                                            <select id="addNewRegistrationCourseId" class="form-select w-100" name="addNewRegistrationCourseId" required> 
+                                            <label for="recommendCourseCustomerId">Customer ID</label>
+                                            <select id="recommendCourseCourseId" class="form-select w-100" name="recommendCourseCourseId" required> 
                                                 <c:forEach items="${requestScope.courseVector}" var="course">
-                                                    <option value="${course.getId()}">${course.getId()}</option>
+                                                    <option value="${course.getId()}">${course.getTitle()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
 
-                                        <div class="col-md-4 mt-md-0 mt-3">
-                                            <label for="addNewRegistrationPricePackageId">Price Package Id</label>
-                                            <select id="addNewRegistrationPricePackageId" class="form-select w-100" name="addNewRegistrationPricePackageId" required> 
-                                                <c:forEach items="${requestScope.pricePackageVector}" var="pricePackage">
-                                                    <option value="${pricePackage.getId()}">${pricePackage.getId()}</option>
-                                                </c:forEach>
-                                            </select>
+
+                                    </div>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-md-8 mt-md-0 mt-3">
+                                            <input type="text" class="form-control" placeholder="Note" aria-label="Note" name="recommendCourseTextContent">
                                         </div>
                                     </div>
 
-                                    <input type="hidden" name="service" value="addNewRegistration">
+                                    <!-- Image Upload and Display Section -->
+                                    <div class="row mt-4">
+                                        <!-- Image Upload Input -->
+                                        <div class="col-md-6">
+                                            <label for="courseImages">Add Images</label>
+                                            <input type="file" class="form-control" id="courseImages" name="courseImages" multiple accept="image/*">
+                                        </div>
+
+                                        <!-- Image Preview Section -->
+                                        <div class="col-md-12 mt-3">
+                                            <div id="imagePreview" class="d-flex flex-wrap gap-2">
+                                                <!-- Placeholder for dynamically added image previews -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- JavaScript to handle image preview and deletion -->
+                                    <script>
+                                        const imagePreviewContainer = document.getElementById('imagePreview');
+                                        const imageInput = document.getElementById('courseImages');
+
+                                        imageInput.addEventListener('change', () => {
+                                            imagePreviewContainer.innerHTML = '';
+                                            Array.from(imageInput.files).forEach(file => {
+                                                const reader = new FileReader();
+                                                reader.onload = (event) => {
+                                                    const imgWrapper = document.createElement('div');
+                                                    imgWrapper.classList.add('position-relative');
+
+                                                    const img = document.createElement('img');
+                                                    img.src = event.target.result;
+                                                    img.classList.add('img-thumbnail', 'mb-2');
+                                                    img.style.width = '100px';
+                                                    img.style.height = '100px';
+
+                                                    const deleteBtn = document.createElement('button');
+                                                    deleteBtn.classList.add('btn', 'btn-sm', 'btn-danger', 'position-absolute', 'top-0', 'end-0');
+                                                    deleteBtn.innerHTML = '&times;';
+                                                    deleteBtn.onclick = () => {
+                                                        imgWrapper.remove();
+                                                    };
+
+                                                    imgWrapper.appendChild(img);
+                                                    imgWrapper.appendChild(deleteBtn);
+                                                    imagePreviewContainer.appendChild(imgWrapper);
+                                                };
+                                                reader.readAsDataURL(file);
+                                            });
+                                        });
+                                    </script>
+
+                                    <input type="hidden" name="service" value="recommendCourse">
                                     <div class="col-md-6 mt-md-0 mt-3">
                                         <div class="text-center mt-4">
-                                            <button type="submit" name="addNewRegistrationSubmit" class="btn btn-primary w-100">Add new registration</button> 
+                                            <button type="submit" name="recommendCourse" class="btn btn-primary w-100">Recommend course</button> 
                                         </div>
                                     </div>
 
                                 </form>
                             </div>
-                            <!-- Registration Form Section end-->
+                            <!-- Reconmmend course end-->
+                            <!-- Recommend course using AI start-->
+                            <h3 class="fw-bold fs-4 my-3">Recommend courses using AI</h3>                           
+                            <div class="container">                               
+                                <form class="form" action="SaleRegistrationDashboardController" method="post">
+                                    <div class="row">
+                                        <div class="col-md-4 mt-md-0 mt-3">
+                                            <label for="recommendCourseUsingAICustomerId">Customer ID</label>
+                                            <select id="recommendCourseUsingAICustomerId" class="form-select w-100" name="recommendCourseUsingAICustomerId" required> 
+                                                <c:forEach items="${requestScope.customerVector}" var="customer">
+                                                    <option value="${customer.getId()}">${customer.getPrimaryEmail()}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mt-md-0 mt-3">
+                                            <label for="recommendCourseUsingAICustomerId">Customer ID</label>
+                                            <select id="recommendCourseUsingAICustomerId" class="form-select w-100" name="recommendCourseUsingAICustomerId" required> 
+                                                <c:forEach items="${requestScope.courseVector}" var="course">
+                                                    <option value="${course.getId()}">${course.getTitle()}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+
+                                    </div>  
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-md-8 mt-md-0 mt-3">
+                                            <input type="text" class="form-control" placeholder="AI-Generated Recommendation" aria-label="AI-Generated Recommendation">
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="service" value="recommendCourseUsingAI">
+                                    <div class="col-md-6 mt-md-0 mt-3">
+                                        <div class="text-center mt-4">
+                                            <button type="submit" name="recommendCourseUsingAI" class="btn btn-primary w-100">Recommend course using AI</button> 
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <!-- Reconmmend course using AI end-->
                         </div>
                     </div>
                 </div>
