@@ -244,7 +244,7 @@
                     </c:forEach>
                 </div>
 
-                <div class="timer">Time left: 30:00<span id="timer"></span></div>
+                <div class="timer">Time left: <span id="timer"></span></div>
 
                 <button class="view-progress-button">Submit Answer</button>
             </div>
@@ -286,7 +286,40 @@
 
         </div>
 
+        <div class="action-buttons">
+            <c:choose>
+               
+                <c:when test="${questionNumber == 1}">
+                    <a href="QuizHandleController?quizId=${quizId}&questionNumber=${questionNumber + 1}">
+                        <button class="next-button">Next</button>
+                    </a>
+                </c:when>
+
+               
+                <c:when test="${questionNumber == totalQuestions}">
+                    <a href="QuizHandleController?quizId=${quizId}&questionNumber=${questionNumber - 1}">
+                        <button class="previous-button">Previous</button>
+                    </a>
+                </c:when>
+
+                
+                <c:otherwise>
+                    <a href="QuizHandleController?quizId=${quizId}&questionNumber=${questionNumber - 1}">
+                        <button class="previous-button">Previous</button>
+                    </a>
+                    <a href="QuizHandleController?quizId=${quizId}&questionNumber=${questionNumber + 1}">
+                        <button class="next-button">Next</button>
+                    </a>
+                </c:otherwise>
+            </c:choose>
+        </div>
+
+
+
+
+
         <script>
+            //Hàm để lưu câu trả lời đã lưu
             function submitAnswer(quizId, questionNumber, selectedOptionId) {
                 if (quizId == null || questionNumber == null || selectedOptionId == null) {
                     console.error("Một hoặc nhiều biến bị null hoặc undefined:", {quizId, questionNumber, selectedOptionId});
@@ -314,80 +347,86 @@
                         }
                     }
                 };
+            }
 
-                let timeRemaining = <%= request.getAttribute("timeRemaining") %>;
+            var timeLeft = <%= request.getAttribute("timeRemaining") %>;
 
-                // Cập nhật thời gian hiển thị theo định dạng "mm:ss"
-                function updateTimer() {
-                    console.log("Initial timeRemaining:", timeRemaining);
-                    const minutes = Math.floor(timeRemaining / 60);
-                    const seconds = timeRemaining % 60;
-                    document.getElementById("timer").textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            function startCountdown() {
+                var timerDisplay = document.getElementById("timer");
+                var countdown = setInterval(function () {
+                    // Tính phút và giây
+                    var minutes = Math.floor(timeLeft / 60);
+                    var seconds = timeLeft % 60;
 
-                                // Giảm thời gian còn lại mỗi giây
-                                if (timeRemaining > 0) {
-                                    timeRemaining--;
-                                } else {
-                                    clearInterval(timerInterval);
-                                    alert("Time's up! Submitting your quiz.");
-                                    // Thêm mã gửi bài tự động hoặc chuyển trang nếu cần
-                                }
-                            }
+                    // Định dạng 2 chữ số cho giây
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
 
-                            // Gọi updateTimer mỗi giây
-                            const timerInterval = setInterval(updateTimer, 1000);
-                            // Khởi tạo hiển thị ban đầu
-                            updateTimer();
-                        }
+                    // Hiển thị thời gian còn lại
+                    timerDisplay.innerHTML = minutes + ":" + seconds;
 
-                        const hint = "${question.hint}";
-                        // Hàm để hiển thị hint
-                        function showHint() {
-                            document.getElementById('hintText').textContent = hint;
-                            document.getElementById('hintPopup').style.display = 'block';
-                            document.getElementById('hintOverlay').style.display = 'block';
-                        }
+                    // Kiểm tra nếu hết giờ
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown);
+                        alert("Thời gian đã hết!");
+                        // Điều hướng đến trang khác hoặc gửi form bài thi
+                        // window.location.href = "end_test.jsp";
+                    }
 
-                        // Hàm để ẩn hint
-                        function hideHint() {
-                            document.getElementById('hintPopup').style.display = 'none';
-                            document.getElementById('hintOverlay').style.display = 'none';
-                        }
+                    timeLeft -= 1;
+                }, 1000);
+            }
+
+            window.onload = startCountdown;
 
 
-                        // Biến để lưu trạng thái đánh dấu hiện tại
-                        let isMarked = false;
 
-                        function toggleMark(quizId, questionNumber) {
-                            isMarked = !isMarked; // Đảo trạng thái đánh dấu
+            // Hàm để hiển thị hint
+            function showHint() {
+                const hint = "${question.hint}";
+                document.getElementById('hintText').textContent = hint;
+                document.getElementById('hintPopup').style.display = 'block';
+                document.getElementById('hintOverlay').style.display = 'block';
+            }
 
-                            // Cập nhật màu sắc của nút trong navigation ngay lập tức
-                            const navButton = document.querySelector(`.question-list button[data-question="${questionNumber}"]`);
-                            if (navButton) {
-                                navButton.style.backgroundColor = isMarked ? '#ffa726' : ''; // Màu cam nếu được đánh dấu
-                            }
-
-                            // Gửi yêu cầu POST đến servlet để lưu trạng thái đánh dấu
-                            const xhr = new XMLHttpRequest();
-                            xhr.open("POST", "QuizHandleController", true);
-                            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-                            // Gửi dữ liệu `mark` cùng với `quizId` và `questionNumber`
-                            const params = "quizId=" + encodeURIComponent(quizId) +
-                                    "&questionNumber=" + encodeURIComponent(questionNumber) +
-                                    "&mark=" + encodeURIComponent(isMarked);
-                            xhr.send(params);
-
-                            xhr.onreadystatechange = function () {
-                                if (xhr.readyState === 4 && xhr.status === 200) {
-                                    console.log("Marked status saved successfully");
-                                } else if (xhr.readyState === 4) {
-                                    console.error("Failed to save marked status:", xhr.status);
-                                }
-                            };
-                        }
+            // Hàm để ẩn hint
+            function hideHint() {
+                const hint = "${question.hint}";
+                document.getElementById('hintPopup').style.display = 'none';
+                document.getElementById('hintOverlay').style.display = 'none';
+            }
 
 
+            // Biến để lưu trạng thái đánh dấu hiện tại
+            let isMarked = false;
+
+            function toggleMark(quizId, questionNumber) {
+                isMarked = !isMarked; // Đảo trạng thái đánh dấu
+
+                // Cập nhật màu sắc của nút trong navigation ngay lập tức
+                const navButton = document.querySelector(`.question-list button[data-question="${questionNumber}"]`);
+                if (navButton) {
+                    navButton.style.backgroundColor = isMarked ? '#ffa726' : ''; // Màu cam nếu được đánh dấu
+                }
+
+                // Gửi yêu cầu POST đến servlet để lưu trạng thái đánh dấu
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "QuizHandleController", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                // Gửi dữ liệu `mark` cùng với `quizId` và `questionNumber`
+                const params = "quizId=" + encodeURIComponent(quizId) +
+                        "&questionNumber=" + encodeURIComponent(questionNumber) +
+                        "&mark=" + encodeURIComponent(isMarked);
+                xhr.send(params);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log("Marked status saved successfully");
+                    } else if (xhr.readyState === 4) {
+                        console.error("Failed to save marked status:", xhr.status);
+                    }
+                };
+            }
 
         </script>
 

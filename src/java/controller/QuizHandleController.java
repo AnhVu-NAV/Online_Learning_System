@@ -111,12 +111,12 @@ public class QuizHandleController extends HttpServlet {
         if (answeredQuestions == null) {
             answeredQuestions = new HashMap<>();
         }
-        LocalDateTime startTime = (LocalDateTime) session.getAttribute("startTime_" + quizId);
+        LocalDateTime startTime = (LocalDateTime) session.getAttribute("startTime");
 
         if (startTime == null) {
             // Nếu chưa có `startTime`, đặt `startTime` là thời gian hiện tại và lưu vào session
             startTime = LocalDateTime.now();
-            session.setAttribute("startTime_" + quizId, startTime);
+            session.setAttribute("startTime", startTime);;
         }
 
         // Tính toán thời gian còn lại
