@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import model.Lesson;
 import model.TextContent;
 import model.VideoContent;
 
@@ -59,31 +60,40 @@ public class LessonController extends HttpServlet {
 
             int lessonId = Integer.parseInt(lessonIdParam);
             LessonDAO lDAO = new LessonDAO();
-            if (lessonId == 3 || lessonId == 6 || lessonId == 9 || lessonId == 12 || lessonId == 15) {
-                String textContent = readHtmlFile(lessonIdParam, request);
+            Lesson lesson = lDAO.getLessonById(lessonId);
 
-                if (textContent != null) {
+            if (lesson != null) {
+                if (lesson.getLessonTypeId() == 1) {
+                    // Kiểm tra nếu lessonTypeId là 1
+                    if (lessonId == 3 || lessonId == 6 || lessonId == 9 || lessonId == 12 || lessonId == 15) {
+                        String textContent = readHtmlFile(lessonIdParam, request);
 
-                    
-                    request.setAttribute("textHtmlContent", textContent);
-                } else {
-                    request.setAttribute("textHtmlContent", "No HTML content available.");
+                        if (textContent != null) {
+                            request.setAttribute("textHtmlContent", textContent);
+                        } else {
+                            request.setAttribute("textHtmlContent", "No HTML content available.");
+                        }
+                        request.getRequestDispatcher("ChapterDisplayController").forward(request, response);
+
+                    } else {
+                        VideoContent videocontent = lDAO.getVideoContentById(lessonId);
+
+                        String descriptionContent = readDescriptionFromFile(lessonIdParam, request);
+                        videocontent.setDescription(descriptionContent);
+
+                        String videoSummary = videocontent.getVideoSummary();
+                        videocontent.setVideoSummary(videoSummary);
+
+                        request.setAttribute("videocontent", videocontent);
+                        request.getRequestDispatcher("ChapterDisplayController").forward(request, response);
+                    }
+                } else if (lesson.getLessonTypeId() == 2) {
+                    request.setAttribute("quizId", lessonId); 
+                    request.setAttribute("questionNumber", 1); 
+
+                    // Chuyển tiếp đến QuizController với quizId và questionNumber
+                    request.getRequestDispatcher("QuizHandleController").forward(request, response);
                 }
-                request.getRequestDispatcher("ChapterDisplayController").forward(request, response);
-
-            } else {
-
-                VideoContent videocontent = lDAO.getVideoContentById(lessonId);
-                
-                String descriptionContent = readDescriptionFromFile(lessonIdParam, request);
-                videocontent.setDescription(descriptionContent);
-
-                String videoSummary = videocontent.getVideoSummary();
-                videocontent.setVideoSummary(videoSummary);
-
-                request.setAttribute("videocontent", videocontent);
-
-                request.getRequestDispatcher("ChapterDisplayController").forward(request, response);
             }
         }
     }

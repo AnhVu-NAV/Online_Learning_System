@@ -76,7 +76,7 @@ public class QuizHandleController extends HttpServlet {
             quizId = Integer.parseInt(request.getParameter("quizId"));
             questionNumber = Integer.parseInt(request.getParameter("questionNumber"));
         } catch (NumberFormatException e) {
-            quizId = 16; // Giá trị mặc định để thử nghiệm
+            quizId = 16; 
             questionNumber = 1;
         }
 
@@ -101,7 +101,7 @@ public class QuizHandleController extends HttpServlet {
 
         // Lấy thời lượng của quiz từ cơ sở dữ liệu (trả về phút) và chuyển sang giây
         int durationInMinutes = quizDAO.getQuizDurationById(quizId);
-        int durationInSeconds = durationInMinutes * 60; // Chuyển đổi từ phút sang giây
+        int durationInSeconds = durationInMinutes * 60; 
 
         // Lấy thời gian bắt đầu từ session hoặc đặt thời gian hiện tại nếu chưa có
         HttpSession session = request.getSession();

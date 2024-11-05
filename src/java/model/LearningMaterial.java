@@ -15,16 +15,27 @@ public class LearningMaterial {
     private String title;
     private Date uploadDate;
     private int duration;
+    private int type;
 
-    // Constructors
-    public LearningMaterial() {}
-
-    public LearningMaterial(int lessonId, String title, Date uploadDate, int duration) {
+    public LearningMaterial(int lessonId, String title, Date uploadDate, int duration, int type) {
         this.lessonId = lessonId;
         this.title = title;
         this.uploadDate = uploadDate;
         this.duration = duration;
+        this.type = type;
     }
+
+    // Constructors
+    public LearningMaterial() {}
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
 
     public int getLessonId() {
         return lessonId;

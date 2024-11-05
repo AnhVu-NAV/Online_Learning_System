@@ -18,7 +18,9 @@ import model.Option;
  * @author Admin
  */
 public class OptionDAO extends DBContext {
+
     private static final Logger logger = Logger.getLogger(QuestionDAO.class.getName());
+
     //Lấy câu trả lời dựa trên Id
     public List<Option> getOptionsByQuestionId(int questionId) {
         List<Option> options = new ArrayList<>();
@@ -30,11 +32,12 @@ public class OptionDAO extends DBContext {
 
             while (resultSet.next()) {
                 options.add(new Option(
-                    resultSet.getInt("id"),
-                    resultSet.getInt("question_id"),
-                    resultSet.getInt("status"),
-                    resultSet.getInt("isTrue"),
-                    resultSet.getString("explaination")
+                        resultSet.getInt("id"),
+                        resultSet.getInt("question_id"),
+                        resultSet.getInt("status"),
+                        resultSet.getInt("isTrue"),
+                        resultSet.getString("explaination"),
+                        resultSet.getString("content")
                 ));
             }
         } catch (SQLException e) {
@@ -53,11 +56,12 @@ public class OptionDAO extends DBContext {
 
             if (resultSet.next()) {
                 return new Option(
-                    resultSet.getInt("id"),
-                    resultSet.getInt("question_id"),
-                    resultSet.getInt("status"),
-                    resultSet.getInt("isTrue"),
-                    resultSet.getString("explaination")
+                        resultSet.getInt("id"),
+                        resultSet.getInt("question_id"),
+                        resultSet.getInt("status"),
+                        resultSet.getInt("isTrue"),
+                        resultSet.getString("explaination"),
+                        resultSet.getString("content")
                 );
             }
         } catch (SQLException e) {
@@ -65,6 +69,5 @@ public class OptionDAO extends DBContext {
         }
         return null;
     }
-    
-   
+
 }

@@ -62,8 +62,7 @@ public class SpecialQuizController extends HttpServlet {
     @Override
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-
+       
         response.sendRedirect("ChapterDisplayController");
     }
 

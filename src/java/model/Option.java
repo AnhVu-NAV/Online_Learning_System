@@ -14,17 +14,29 @@ public class Option {
     private int status;
     private int isTrue; // 1 for true, 0 for false in the database
     private String explanation;
+    private String content;
 
     // Constructors
     public Option() {}
 
-    public Option(int id, int questionId, int status, int isTrue, String explanation) {
+    public Option(int id, int questionId, int status, int isTrue, String explanation, String content) {
         this.id = id;
         this.questionId = questionId;
         this.status = status;
         this.isTrue = isTrue;
         this.explanation = explanation;
+        this.content = content;
     }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+   
 
     public int getId() {
         return id;

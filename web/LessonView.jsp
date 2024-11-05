@@ -322,7 +322,7 @@
 
         <!-- Sidebar -->
         <div id="sidebar">
-            <h2>Nội dung khóa học</h2>
+            <h2>Break Tab</h2>
 
 
             <c:forEach var="chapter" items="${chapters}">
@@ -385,7 +385,7 @@
                     </div>
 
                     <div class="video-description">
-                        <h3>Description:</h3>
+                        <h3>Description</h3>
                         <p>${videocontent.description}</p> 
                     </div>
                 </c:when>

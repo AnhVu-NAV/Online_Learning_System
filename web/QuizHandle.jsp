@@ -320,7 +320,7 @@
                             <input type="radio" name="option" id="option${option.id}" value="${option.id}"
                                    <c:if test="${option.id == selectedOption}">checked</c:if>
                                    onchange="submitAnswer(${question.quizId}, ${questionNumber}, ${option.id})">
-                            <label for="option${option.id}">${option.explanation}</label>
+                            <label for="option${option.id}">${option.content}</label>
                         </li>
                     </c:forEach>
                 </ul>

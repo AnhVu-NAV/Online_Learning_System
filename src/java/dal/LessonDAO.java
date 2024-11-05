@@ -49,6 +49,32 @@ public class LessonDAO extends DBContext {
 
         return lessons;
     }
+    
+    public Lesson getLessonById(int lessonId) {
+    Lesson lesson = null;
+    String query = "SELECT * FROM Lesson WHERE id = ?";
+
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
+
+        statement.setInt(1, lessonId);
+        ResultSet rs = statement.executeQuery();
+
+        if (rs.next()) {
+            lesson = new Lesson();
+            lesson.setId(rs.getInt("id"));
+            lesson.setTitle(rs.getString("title"));
+            lesson.setStatus(rs.getInt("status"));
+            lesson.setLessonTypeId(rs.getInt("lesson_type_id"));
+            lesson.setChapterId(rs.getInt("chapter_id"));
+            lesson.setOrder(rs.getInt("order"));
+        }
+    } catch (SQLException e) {
+        LOGGER.log(java.util.logging.Level.SEVERE, "Error retrieving lesson", e);
+    }
+
+    return lesson;
+}
+
 
     public VideoContent getVideoContentById(int lessonId) {
         VideoContent content = null;
@@ -97,9 +123,9 @@ public class LessonDAO extends DBContext {
 
     public static void main(String[] args) {
         LessonDAO ldao = new LessonDAO();
-        List<Lesson> lessons = new ArrayList<>();
-        lessons = ldao.getLessonsByChapterId(57);
-        System.out.println(lessons);
+        Lesson l = new Lesson();
+        l = ldao.getLessonById(13);
+        System.out.println(l);
 
     }
 }
