@@ -155,13 +155,7 @@ public class QuizHandleController extends HttpServlet {
         System.out.println("Received selectedOption: " + selectedOptionParam);
         System.out.println("Received mark: " + markParam);
 
-        // Nếu quizId hoặc questionNumber bị thiếu, trả về lỗi
-        if (quizIdParam == null || quizIdParam.isEmpty()
-                || questionNumberParam == null || questionNumberParam.isEmpty()) {
-            System.out.println("Missing or empty parameters in POST request.");
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
+
 
         // Chuyển đổi các tham số thành số nguyên
         int quizId = Integer.parseInt(quizIdParam);
@@ -214,6 +208,7 @@ public class QuizHandleController extends HttpServlet {
 
         // Đặt trạng thái phản hồi là OK (200) để kết thúc xử lý mà không cần trả về HTML
         response.setStatus(HttpServletResponse.SC_OK);
+        response.sendRedirect("LessonView.jsp");
     }
 
     @Override

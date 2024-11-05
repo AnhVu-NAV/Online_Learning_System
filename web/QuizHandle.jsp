@@ -96,6 +96,7 @@
                 width: 100%;
                 font-weight: bold;
                 transition: background-color 0.3s;
+
             }
             .view-progress-button:hover {
                 background-color: #4756c5;
@@ -215,6 +216,33 @@
                 background: rgba(0, 0, 0, 0.5);
                 z-index: 999;
             }
+            .next-button, .previous-button {
+                background-color: #6366f1;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: bold;
+                transition: background-color 0.3s, box-shadow 0.3s;
+            }
+            .next-button:hover, .previous-button:hover {
+                background-color: #4f46e5;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            .next-button:active, .previous-button:active {
+                background-color: #4338ca;
+            }
+            .action-buttons {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 20px;
+                gap: 10px;
+            }
+            .action-buttons a {
+                text-decoration: none;
+            }
         </style>
 
     </head>
@@ -245,8 +273,33 @@
                 </div>
 
                 <div class="timer">Time left: <span id="timer"></span></div>
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <c:choose>
+                        <c:when test="${questionNumber == 1}">
+                            <a href="QuizHandleController?quizId=${question.quizId}&questionNumber=${questionNumber + 1}">
+                                <button class="next-button">Next</button>
+                            </a>
+                        </c:when>
+                        <c:when test="${questionNumber == totalQuestions}">
+                            <a href="QuizHandleController?quizId=${question.quizId}&questionNumber=${questionNumber - 1}">
+                                <button class="previous-button">Previous</button>
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="QuizHandleController?quizId=${question.quizId}&questionNumber=${questionNumber - 1}">
+                                <button class="previous-button">Previous</button>
+                            </a>
+                            <a href="QuizHandleController?quizId=${question.quizId}&questionNumber=${questionNumber + 1}">
+                                <button class="next-button">Next</button>
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
 
-                <button class="view-progress-button">Submit Answer</button>
+                
+
+
             </div>
             <button class="mark-button" onclick="toggleMark(${question.quizId}, ${questionNumber})">Mark</button>
 
@@ -285,36 +338,12 @@
             </div>
 
         </div>
-
-        <div class="action-buttons">
-            <c:choose>
-               
-                <c:when test="${questionNumber == 1}">
-                    <a href="QuizHandleController?quizId=${quizId}&questionNumber=${questionNumber + 1}">
-                        <button class="next-button">Next</button>
-                    </a>
-                </c:when>
-
-               
-                <c:when test="${questionNumber == totalQuestions}">
-                    <a href="QuizHandleController?quizId=${quizId}&questionNumber=${questionNumber - 1}">
-                        <button class="previous-button">Previous</button>
-                    </a>
-                </c:when>
-
-                
-                <c:otherwise>
-                    <a href="QuizHandleController?quizId=${quizId}&questionNumber=${questionNumber - 1}">
-                        <button class="previous-button">Previous</button>
-                    </a>
-                    <a href="QuizHandleController?quizId=${quizId}&questionNumber=${questionNumber + 1}">
-                        <button class="next-button">Next</button>
-                    </a>
-                </c:otherwise>
-            </c:choose>
-        </div>
-
-
+                <form action="${pageContext.request.contextPath}/QuizHandleController" method="post">
+                    <input type="hidden" name="quizId" value="${question.quizId}">
+                    <input type="hidden" name="questionNumber" value="${questionNumber}">
+                    <!-- Nếu cần các trường khác như selectedOption hoặc mark -->
+                    <button type="submit" class="view-progress-button">Submit Answer</button>
+                </form>
 
 
 

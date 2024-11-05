@@ -45,13 +45,32 @@
             border: 1px solid #ccc;
             resize: vertical;
         }
-        .form-group input[type="file"] {
-            display: block;
-            margin-top: 5px;
+        .upload-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .upload-section {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .preview-container {
+            margin-top: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            
+        }
+        .preview-container img, .preview-container video {
+            max-width: 100%;
+            max-height: 100%;
         }
         .submit-button {
             padding: 10px 20px;
-            background-color: #4CAF50;
+            background-color: #5a67d8;
             color: white;
             border: none;
             border-radius: 5px;
@@ -63,6 +82,26 @@
             background-color: #388E3C;
         }
     </style>
+    <script>
+        function previewFile(input, type) {
+            const file = input.files[0];
+            const previewContainer = document.getElementById(type + 'Preview');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if (type === 'image') {
+                        previewContainer.innerHTML = '<img src="' + e.target.result + '" alt="Image Preview">';
+                    } else if (type === 'video') {
+                        previewContainer.innerHTML = '<video controls><source src="' + e.target.result + '" type="' + file.type + '"></video>';
+                    }
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.innerHTML = 'No file chosen';
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -77,16 +116,18 @@
                 <textarea name="textAnswer" id="textAnswer" placeholder="Nhập câu trả lời của bạn..." required></textarea>
             </div>
 
-            <!-- Trường tải lên ảnh -->
-            <div class="form-group">
-                <label for="image">Add Image:</label>
-                <input type="file" name="image" id="image" accept="image/*">
-            </div>
-
-            <!-- Trường tải lên video -->
-            <div class="form-group">
-                <label for="video">Add Video:</label>
-                <input type="file" name="video" id="video" accept="video/*">
+            <!-- Container cho phần tải lên file -->
+            <div class="upload-container">
+                <div class="upload-section">
+                    <label for="image">Add Image:</label>
+                    <input type="file" name="image" id="image" accept="image/*" onchange="previewFile(this, 'image')">
+                    <div class="preview-container" id="imagePreview">No file chosen</div>
+                </div>
+                <div class="upload-section">
+                    <label for="video">Add Video:</label>
+                    <input type="file" name="video" id="video" accept="video/*" onchange="previewFile(this, 'video')">
+                    <div class="preview-container" id="videoPreview">No file chosen</div>
+                </div>
             </div>
 
             <!-- Nút Submit -->
