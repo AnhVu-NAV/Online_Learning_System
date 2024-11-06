@@ -20,12 +20,12 @@ import java.sql.Connection;
  *
  * @author AnhVuNAV
  */
-
 public class LessonDAO extends DBContext {
 
     private static final Logger LOGGER = Logger.getLogger(ChapterDAO.class.getName());
 
     public List<Lesson> getLessonsByChapterId(int chapterId) {
+        List<Lesson> lessons = new ArrayList<>();
 
         String query = "SELECT * FROM Lesson WHERE chapter_id = ? ORDER BY `order`";
 
@@ -51,32 +51,31 @@ public class LessonDAO extends DBContext {
 
         return lessons;
     }
-    
+
     public Lesson getLessonById(int lessonId) {
-    Lesson lesson = null;
-    String query = "SELECT * FROM Lesson WHERE id = ?";
+        Lesson lesson = null;
+        String query = "SELECT * FROM Lesson WHERE id = ?";
 
-    try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
 
-        statement.setInt(1, lessonId);
-        ResultSet rs = statement.executeQuery();
+            statement.setInt(1, lessonId);
+            ResultSet rs = statement.executeQuery();
 
-        if (rs.next()) {
-            lesson = new Lesson();
-            lesson.setId(rs.getInt("id"));
-            lesson.setTitle(rs.getString("title"));
-            lesson.setStatus(rs.getInt("status"));
-            lesson.setLessonTypeId(rs.getInt("lesson_type_id"));
-            lesson.setChapterId(rs.getInt("chapter_id"));
-            lesson.setOrder(rs.getInt("order"));
+            if (rs.next()) {
+                lesson = new Lesson();
+                lesson.setId(rs.getInt("id"));
+                lesson.setTitle(rs.getString("title"));
+                lesson.setStatus(rs.getInt("status"));
+                lesson.setLessonTypeId(rs.getInt("lesson_type_id"));
+                lesson.setChapterId(rs.getInt("chapter_id"));
+                lesson.setOrder(rs.getInt("order"));
+            }
+        } catch (SQLException e) {
+            LOGGER.log(java.util.logging.Level.SEVERE, "Error retrieving lesson", e);
         }
-    } catch (SQLException e) {
-        LOGGER.log(java.util.logging.Level.SEVERE, "Error retrieving lesson", e);
+
+        return lesson;
     }
-
-    return lesson;
-}
-
 
     public VideoContent getVideoContentById(int lessonId) {
         VideoContent content = null;
@@ -106,7 +105,7 @@ public class LessonDAO extends DBContext {
     public List<Lesson> getLessonsByCourseId(int courseId) {
         List<Lesson> lessons = new ArrayList<>();
         String sql = "SELECT * FROM Lesson WHERE course_id = ?";
-        try{
+        try {
             while (rs.next()) {
                 Lesson lesson = new Lesson();
                 lesson.setId(rs.getInt("id"));
@@ -120,6 +119,7 @@ public class LessonDAO extends DBContext {
         }
         return lessons;
     }
+
     public TextContent getTextContentById(int lessonId) {
         TextContent textContent = null;
         String query = "SELECT * FROM TextContent WHERE lesson_id = ?";
@@ -134,7 +134,7 @@ public class LessonDAO extends DBContext {
                 textContent.setTextContent(resultSet.getString("text_content"));
             }
         } catch (SQLException e) {
-           LOGGER.log(java.util.logging.Level.SEVERE, "Error retrieving content", e);
+            LOGGER.log(java.util.logging.Level.SEVERE, "Error retrieving content", e);
         }
 
         return textContent;
@@ -149,7 +149,7 @@ public class LessonDAO extends DBContext {
     }
 
     // Lấy danh sách các bài học theo ID chương
-    public List<Lesson> getLessonsByChapterId(int chapterId){
+    public List<Lesson> getLessonsByChapterId(int chapterId) {
         List<Lesson> lessons = new ArrayList<>();
         String sql = "SELECT * FROM Lesson WHERE chapter_id = ? AND status = 1 ORDER BY `order` ASC";
         try {

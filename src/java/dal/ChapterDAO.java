@@ -53,26 +53,26 @@ public class ChapterDAO extends DBContext {
         return chapters;
     }
 
-    public List<Chapter> getChaptersByCourseId(int courseId) {
-        List<Chapter> chapters = new ArrayList<>();
-        String sql = "SELECT * FROM Chapter WHERE course_id = ? AND status = 1 ORDER BY `order` ASC";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, courseId);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Chapter chapter = new Chapter();
-                chapter.setId(rs.getInt("id"));
-                chapter.setOrder(rs.getInt("order"));
-                chapter.setTitle(rs.getString("title"));
-                chapter.setSubtitle(rs.getString("subtitle"));
-                chapter.setDuration(rs.getInt("duration"));
-                chapters.add(chapter);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return chapters;
-    }
+//    public List<Chapter> getChaptersByCourseId(int courseId) {
+//        List<Chapter> chapters = new ArrayList<>();
+//        String sql = "SELECT * FROM Chapter WHERE course_id = ? AND status = 1 ORDER BY `order` ASC";
+//        try {
+//            PreparedStatement ps = connection.prepareStatement(sql);
+//            ps.setInt(1, courseId);
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                Chapter chapter = new Chapter();
+//                chapter.setId(rs.getInt("id"));
+//                chapter.setOrder(rs.getInt("order"));
+//                chapter.setTitle(rs.getString("title"));
+//                chapter.setSubtitle(rs.getString("subtitle"));
+//                chapter.setDuration(rs.getInt("duration"));
+//                chapters.add(chapter);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return chapters;
+//    }
 
 }

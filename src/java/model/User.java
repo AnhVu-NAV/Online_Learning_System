@@ -24,7 +24,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-
 public class User {
 
     private int id;
@@ -36,25 +35,14 @@ public class User {
     private String firstName;
     private String lastName;
     private Date dob;
-    private boolean gender;
+    private int gender;
     private String firstPhone;
     private String secondPhone;
     private String secondaryEmail;
-    private String imageURL;
+    private String imageUrl;
     private String preferContact;
-    int CustomerID;
-    String FirstName;
-    String LastName;
-    String Email;
-    String Password;
-    Date DoB;
-    Date Created_Date;
-    String PhoneNumber;
-    int RoleID;
-    int Status;
-    int Gender;
-    String Address;
-    String image_url;
+    private String address;
+    private String imageURL;
 
     //Add attribute role from setting
     private Setting role = new Setting();
@@ -62,7 +50,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, boolean gender, String firstPhone, String secondPhone, String secondaryEmail, String imageURL, String preferContact) {
+    public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, int gender, String firstPhone, String secondPhone, String secondaryEmail, String imageURL, String preferContact) {
         this.id = id;
         this.primaryEmail = primaryEmail;
         this.password = password;
@@ -78,25 +66,6 @@ public class User {
         this.secondaryEmail = secondaryEmail;
         this.imageURL = imageURL;
         this.preferContact = preferContact;
-    }
-    private int id;
-    private String primaryEmail;
-    private String password;
-    private int roleId;
-    private Date createdDate;
-    private int status;
-    private String firstName;
-    private String lastName;
-    private Date dob;
-    private int gender; 
-    private String firstPhone;
-    private String secondPhone;
-    private String secondaryEmail;
-    private String imageUrl;
-    private String preferContact;
-    private String address;
-
-    public User() {
     }
 
     public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, int gender, String firstPhone, String secondPhone, String secondaryEmail, String imageUrl, String preferContact, String address) {
@@ -118,7 +87,6 @@ public class User {
         this.address = address;
     }
 
-
     public int getId() {
         return id;
     }
@@ -133,17 +101,6 @@ public class User {
 
     public void setPrimaryEmail(String primaryEmail) {
         this.primaryEmail = primaryEmail;
-    }
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
     }
 
     public String getPassword() {
@@ -253,5 +210,5 @@ public class User {
     public void setAddress(String address) {
         this.address = address;
     }
-    
+
 }

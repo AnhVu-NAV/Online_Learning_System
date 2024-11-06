@@ -12,6 +12,7 @@ import java.util.List;
  * @author AnhVuNAV
  */
 public class Course {
+
     private int id;
     private String title;
     private String subtitle; // Thêm thuộc tính subtitle
@@ -23,12 +24,12 @@ public class Course {
     private int salePrice;
     private Date createdDate;
     private Date updatedDate;
-    private int categoryId; 
+    private int categoryId;
     private float totalDuration;
     private List<String> taglines; // Thêm thuộc tính để lưu danh sách tagline
-
     private int status;
     private int numberOfLearner;
+
     public Course() {
     }
 
@@ -45,7 +46,7 @@ public class Course {
         this.updatedDate = updatedDate;
         this.categoryId = categoryId;
         this.totalDuration = totalDuration;
-    }    
+    }
 
     public int getId() {
         return id;
@@ -139,20 +140,60 @@ public class Course {
         return categoryId;
     }
 
+    public float getTotalDuration() {
+        return totalDuration;
+    }
+
+    public void setTotalDuration(float totalDuration) {
+        this.totalDuration = totalDuration;
+    }
+
+    public List<String> getTaglines() {
+        return taglines;
+    }
+
+    public void setTaglines(List<String> taglines) {
+        this.taglines = taglines;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getNumberOfLearner() {
+        return numberOfLearner;
+    }
+
+    public void setNumberOfLearner(int numberOfLearner) {
+        this.numberOfLearner = numberOfLearner;
+    }
+
     @Override
     public String toString() {
-        return "Course{"
-                + "id=" + id
-                + ", title='" + title + '\''
-                + ", subtitle='" + subtitle + '\''
-                + ", expertId=" + expertId
-                + ", totalDuration=" + totalDuration
-                + ", categoryId=" + categoryId
-                + ", description='" + description + '\''
-                + ", status=" + status
-                + ", updatedDate=" + updatedDate
-                + ", createdDate=" + createdDate
-                + ", numberOfLearner=" + numberOfLearner
-                + '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Course{");
+        sb.append("id=").append(id);
+        sb.append(", title=").append(title);
+        sb.append(", subtitle=").append(subtitle);
+        sb.append(", expertId=").append(expertId);
+        sb.append(", description=").append(description);
+        sb.append(", thumbnailUrl=").append(thumbnailUrl);
+        sb.append(", numberOfLesson=").append(numberOfLesson);
+        sb.append(", price=").append(price);
+        sb.append(", salePrice=").append(salePrice);
+        sb.append(", createdDate=").append(createdDate);
+        sb.append(", updatedDate=").append(updatedDate);
+        sb.append(", categoryId=").append(categoryId);
+        sb.append(", totalDuration=").append(totalDuration);
+        sb.append(", taglines=").append(taglines);
+        sb.append(", status=").append(status);
+        sb.append(", numberOfLearner=").append(numberOfLearner);
+        sb.append('}');
+        return sb.toString();
     }
+
 }

@@ -9,11 +9,13 @@ package model;
  * @author Admin
  */
 public class TextContent {
+
     private int lessonId;
     private String textContent;
 
     // Constructors
-    public TextContent() {}
+    public TextContent() {
+    }
 
     public TextContent(int lessonId, String textContent) {
         this.lessonId = lessonId;
@@ -36,6 +38,4 @@ public class TextContent {
         this.textContent = textContent;
     }
 
-   
 }
-

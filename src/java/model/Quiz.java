@@ -11,6 +11,7 @@ import java.util.Date;
  * @author Admin
  */
 public class Quiz {
+
     private int lessonId;
     private String title;
     private int duration;
@@ -22,7 +23,7 @@ public class Quiz {
 
     public Quiz() {
     }
-    
+
     public Quiz(int lessonId, String title, int duration, float passRate, Date updatedDate, String description, String subtitle, int type) {
         this.lessonId = lessonId;
         this.title = title;
@@ -102,5 +103,5 @@ public class Quiz {
     public String toString() {
         return "Quiz{" + "lessonId=" + lessonId + ", title=" + title + ", duration=" + duration + ", passRate=" + passRate + ", updatedDate=" + updatedDate + ", description=" + description + ", subtitle=" + subtitle + ", type=" + type + '}';
     }
-    
+
 }

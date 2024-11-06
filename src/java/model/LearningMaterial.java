@@ -11,6 +11,7 @@ import java.util.Date;
  * @author Admin
  */
 public class LearningMaterial {
+
     private int lessonId;
     private String title;
     private Date uploadDate;
@@ -26,7 +27,8 @@ public class LearningMaterial {
     }
 
     // Constructors
-    public LearningMaterial() {}
+    public LearningMaterial() {
+    }
 
     public int getType() {
         return type;
@@ -35,7 +37,6 @@ public class LearningMaterial {
     public void setType(int type) {
         this.type = type;
     }
-
 
     public int getLessonId() {
         return lessonId;
@@ -69,6 +70,4 @@ public class LearningMaterial {
         this.duration = duration;
     }
 
-   
 }
-

@@ -11,34 +11,29 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 /**
  *
  * @author AnhVuNAV
  */
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Lesson {
+
     private int id;
     private int status;
     private String title;
     private int chapterId;
     private int lessonId;                    // ID của bài học
     private Course courseId;                 // Tham chiếu đến Course (khoá học)
-    private String title;                     // Tên bài học
-    private int status;
-    private Setting lessonTypeId;       // Loại bài học (tham chiếu đến SubjectTopic)
+//    private Setting lessonTypeId;       // Loại bài học (tham chiếu đến SubjectTopic)
     private String topic;                    // Chủ đề bài học
     private int order;                       // Thứ tự của bài học
     private Vector<LearningMaterial> learningMaterials; // Danh sách tài liệu học
     private Date createdAt;         // Thời gian tạo
     private Date updatedAt;         // Thời gian cập nhật
-
-    // Constructor không đối số
-    public Lesson() {}
+    private int lessonTypeId;
 
     // Constructor đầy đủ
     public Lesson(int id, int status, int lessonTypeId, String title, int chapterId, int order) {
@@ -50,8 +45,6 @@ public class Lesson {
         this.order = order;
     }
 
-
- 
     public Lesson(int id, String title, int status, int lessonTypeId) {
         this.id = id;
         this.status = status;
@@ -70,7 +63,7 @@ public class Lesson {
         this.id = id;
     }
 
-        // Getter và Setter cho các thuộc tính
+    // Getter và Setter cho các thuộc tính
     public int getStatus() {
         return status;
     }
@@ -110,7 +103,5 @@ public class Lesson {
     public void setOrder(int order) {
         this.order = order;
     }
-    
+
 }
-
-
