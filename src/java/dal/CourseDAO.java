@@ -158,26 +158,28 @@ public class CourseDAO extends DBContext {
             query.append(" AND c.title LIKE ?");
         }
 
+        // Add GROUP BY clause before ORDER BY
+        query.append(" GROUP BY c.id, c.title, c.subtitle, c.description, c.category_id, c.expert_id, "
+                + "c.number_of_learner, c.status, c.created_date, c.updated_date");
+
         // Add sorting
         if (sortOption == null) {
             sortOption = "default";
         }
         switch (sortOption) {
             case "priceLowHigh":
-                query.append(" ORDER BY pp.price ASC");
+                query.append(" ORDER BY price ASC");
                 break;
             case "priceHighLow":
-                query.append(" ORDER BY pp.price DESC");
+                query.append(" ORDER BY price DESC");
                 break;
             default:
                 query.append(" ORDER BY c.updated_date DESC");
                 break;
         }
 
-        // Group by and limit for pagination
-        query.append(" GROUP BY c.id, c.title, c.subtitle, c.description, c.category_id, c.expert_id, "
-                + "c.number_of_learner, c.status, c.created_date, c.updated_date "
-                + "LIMIT ?, ?");
+        // Add LIMIT for pagination
+        query.append(" LIMIT ?, ?");
 
         try {
             PreparedStatement ps = connection.prepareStatement(query.toString());
@@ -353,15 +355,15 @@ public class CourseDAO extends DBContext {
 
     public List<Course> getRelatedCourses(int categoryId, int expertId, int courseId) {
         List<Course> relatedCourses = new ArrayList<>();
-        String sql = "SELECT c.*, GROUP_CONCAT(cth.thumbnail_url) AS thumbnail_urls, pp.price, pp.sale_price "
+        String sql = "SELECT c.*, GROUP_CONCAT(cth.thumbnail_url) AS thumbnail_urls, "
+                + "MIN(pp.price) AS price, MIN(pp.sale_price) AS sale_price "
                 + "FROM Course c "
                 + "LEFT JOIN Course_Thumbnails cth ON c.id = cth.course_id "
                 + "LEFT JOIN PricePackage pp ON c.id = pp.course_id "
                 + "WHERE (c.category_id = ? OR c.expert_id = ?) AND c.id != ? "
                 + "GROUP BY c.id";
 
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, categoryId);
             ps.setInt(2, expertId);
             ps.setInt(3, courseId); // Exclude the current course
@@ -371,17 +373,17 @@ public class CourseDAO extends DBContext {
                 Course course = new Course();
                 course.setId(rs.getInt("id"));
                 course.setTitle(rs.getString("title"));
-                course.setSubtitle(rs.getString("subtitle")); // Added subtitle
+                course.setSubtitle(rs.getString("subtitle"));
                 course.setDescription(rs.getString("description"));
                 course.setExpertId(rs.getInt("expert_id"));
                 course.setTotalDuration(rs.getFloat("total_duration"));
                 course.setNumberOfLearner(rs.getInt("number_of_learner"));
                 course.setCreatedDate(rs.getDate("created_date"));
                 course.setUpdatedDate(rs.getDate("updated_date"));
-                course.setPrice(rs.getInt("price")); // Added price
-                course.setSalePrice(rs.getInt("sale_price")); // Added sale price
+                course.setPrice(rs.getInt("price")); // Giá đã sửa
+                course.setSalePrice(rs.getInt("sale_price")); // Giá khuyến mãi đã sửa
 
-                // Handle multiple thumbnail URLs
+                // Xử lý danh sách URL thumbnail
                 String thumbnailUrls = rs.getString("thumbnail_urls");
                 if (thumbnailUrls != null) {
                     List<String> thumbnailUrlList = Arrays.asList(thumbnailUrls.split(","));
@@ -390,7 +392,7 @@ public class CourseDAO extends DBContext {
                     course.setThumbnailUrls(new ArrayList<>());
                 }
 
-                // Retrieve and set taglines for the course
+                // Lấy và đặt taglines cho khóa học
                 course.setTaglines(getTaglinesByCourseId(course.getId()));
 
                 relatedCourses.add(course);
@@ -771,7 +773,7 @@ public class CourseDAO extends DBContext {
                         int courseId = generatedKeys.getInt(1);
 
                         // Insert the thumbnail URLs for the course
-                         insertCourseThumbnails(courseId, course.getThumbnailUrls(), course.getThumbnailDescriptions());
+                        insertCourseThumbnails(courseId, course.getThumbnailUrls(), course.getThumbnailDescriptions());
 
                         // Return the new course ID
                         return courseId;
@@ -831,8 +833,8 @@ public class CourseDAO extends DBContext {
         }
         return thumbnailUrls;
     }
-    
-    public List<String> getAllNameCourseByCategory() throws SQLException{
+
+    public List<String> getAllNameCourseByCategory() throws SQLException {
         List<String> allNameSubject = new ArrayList<>();
         String sql = "SELECT title FROM Course WHERE category_id = 7";
         PreparedStatement statement = connection.prepareStatement(sql);
