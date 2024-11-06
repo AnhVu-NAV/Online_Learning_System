@@ -63,7 +63,7 @@ public class UserProfileController extends HttpServlet {
             UserDAO userDAO = new UserDAO();
 
             // Get user details from the database
-            User user = userDAO.getUserById(userId);
+            User user = userDAO.getUserByID(userId);
 
             // Handle case where user is not found
             if (user == null) {

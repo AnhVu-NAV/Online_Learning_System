@@ -42,7 +42,7 @@ public class User {
     private String imageUrl;
     private String preferContact;
     private String address;
-    private String imageURL;
+    private String imageURL = imageUrl;
 
     //Add attribute role from setting
     private Setting role = new Setting();
@@ -82,6 +82,40 @@ public class User {
         this.imageUrl = imageUrl;
         this.preferContact = preferContact;
         this.address = address;
+    }
+
+    public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, boolean gender, String firstPhone, String secondPhone, String secondaryEmail, String imageURL, String preferContact) {
+        this.id = id;
+        this.primaryEmail = primaryEmail;
+        this.password = password;
+        this.roleId = roleId;
+        this.createdDate = createdDate;
+        this.status = status;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.gender = Gender(gender);
+        this.firstPhone = firstPhone;
+        this.secondPhone = secondPhone;
+        this.secondaryEmail = secondaryEmail;
+        this.imageUrl = imageURL;
+        this.preferContact = preferContact;
+    }
+
+    public boolean isGender() {
+        if(gender == 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    public int Gender(boolean gender) {
+        if(gender == false){
+            return 0;
+        }else{
+            return 1;
+        }
     }
 
 }

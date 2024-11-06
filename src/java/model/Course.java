@@ -4,7 +4,7 @@
  */
 package model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import lombok.ToString;
 
@@ -92,6 +92,20 @@ public class Course {
         this.description = description;
         this.status = status;
         this.categoryId = categoryId;
+    }
+
+    public Course(int id, String title, String subtitle, int expertId, int totalDuration, int categoryId, String description, int status, java.util.Date updatedDate, java.util.Date createdDate, int numberOfLearner) {
+        this.id = id;
+        this.title = title;
+        this.subtitle = subtitle;
+        this.expertId = expertId;
+        this.description = description;
+        this.numberOfLearner = numberOfLearner;
+        this.status = status;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+        this.categoryId = categoryId;
+        this.totalDuration = totalDuration;
     }
 
     public int getId() {

@@ -43,7 +43,8 @@ public class PricePackageDAO extends DBContext {
         }
         return pricePackages;
     }
-
+    
+    //VuLH
     public Vector<PricePackage> getPricePackages(String sql) {
         Vector<PricePackage> vector = new Vector<PricePackage>();
         try {

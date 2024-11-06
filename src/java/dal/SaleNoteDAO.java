@@ -19,6 +19,7 @@ import util.DataConvert;
  */
 public class SaleNoteDAO extends DBContext{
 
+    //VuLH
     DataConvert dc = new DataConvert();
 
     // Insert new sale note into database. Attribute id is AUTO_INCREMENT 

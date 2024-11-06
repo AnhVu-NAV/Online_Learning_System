@@ -86,7 +86,7 @@ public class SettingDAO extends DBContext {
         return categoriesList; // Trả về danh sách các danh mục
     }
 
-    //
+    //VuLH
     DataConvert dc = new DataConvert();
 
     //insert new setting into database. Attribute id is AUTO_INCREMENT 

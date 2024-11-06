@@ -59,7 +59,7 @@ public class UpdateUserProfileController extends HttpServlet {
         int userId = Integer.parseInt(request.getParameter("userId"));
 
         UserDAO userDAO = new UserDAO();
-        User user = userDAO.getUserById(userId);
+        User user = userDAO.getUserByID(userId);
 
         if (user == null) {
             response.sendRedirect("error.jsp");
@@ -96,7 +96,7 @@ public class UpdateUserProfileController extends HttpServlet {
             Date dob = request.getParameter("dob") != null ? new java.text.SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dob")) : null;
 
             UserDAO userDAO = new UserDAO();
-            User user = userDAO.getUserById(userId);
+            User user = userDAO.getUserByID(userId);
 
             if (user == null) {
                 response.sendRedirect("error.jsp");
@@ -115,7 +115,7 @@ public class UpdateUserProfileController extends HttpServlet {
             user.setPreferContact(preferContact);
             user.setDob(dob);
 
-            userDAO.updateUser(user);
+            userDAO.updateUserProfile(user);
             response.sendRedirect("UserProfile?userId=" + userId);
         } catch (Exception e) {
             e.printStackTrace();
