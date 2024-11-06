@@ -48,414 +48,561 @@
                             </c:if>                                           
                             <!-- End error message -->
                             <h3 class="fw-bold fs-4 mb-3">Marketing Dashboard</h3>
-                            <!-- Start fillter by date -->
-                            <h5 class="mb-3">Fillter by</h5>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="fillterBy" id="fillterBy"  value="fillterByTheLast7Days" ${checked == 'fillterByTheLast7Days' ? 'checked' : ''}>
-                                        <label class="form-check-label" for="fillterByTheLast7Days">
-                                            The last 7 days
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="fillterBy" id="fillterBy"  value="fillterByTheLastMonth" ${checked == 'fillterByTheLastMonth' ? 'checked' : ''}>
-                                        <label class="form-check-label" for="fillterByTheLastMonth">
-                                            The last month
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="fillterBy" id="fillterBy"  value="fillterByTheLastQuarter" ${checked == 'fillterByTheLastQuarter' ? 'checked' : ''}>
-                                        <label class="form-check-label" for="fillterByTheLastQuarter">
-                                            The last quarter
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="fillterBy" id="fillterBy"  value="fillterByTheLastYear" ${checked == 'fillterByTheLastYear' ? 'checked' : ''}>
-                                        <label class="form-check-label" for="fillterByTheLastYear">
-                                            The last year
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-
-                                <div class="col-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="fillterBy" id="fillterBy"  value="fillterByInputDates" ${checked == 'fillterByInputDates' ? 'checked' : ''}>
-                                        <label class="form-check-label" for="fillterByInputDates">
-                                            Date range
-                                        </label>
-                                        <div class="row mt-3" id="dateRangeInputs">
-                                            <div class="col-md-6">
-                                                <label for="startDate">Start Date:</label>
-                                                <input type="date" class="form-control" id="startDate" name="startDate">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="endDate">End Date:</label>
-                                                <input type="date" class="form-control" id="endDate" name="endDate">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-
-                            <!-- End fillter by date -->
                             <br/>
-                            <div class="row">
-                                <div class="col-12 col-md-4 ">
-                                    <div class="card border-0">
-                                        <div class="card-body py-4">
-                                            <h5 class="mb-2 fw-bold">
-                                                New Course
-                                            </h5>
-                                            <div class="mb-0">
-                                                <p class="mb-2 fw-bold">
-                                                    Total:
-                                                </p>
-                                                <span class="badge text-success me-2">
-                                                    +10
-                                                </span>
-                                                <span class=" fw-bold">
-                                                    For the last 7 day
-                                                </span>
-                                            </div>
+                            
+                            
+                            <!-- New course start -->
+                            <h3 class="fw-bold fs-4 my-3">New Course</h3>
+                            <form action="MarketingDashboardController" method="post">
+                                <!-- Start filler by date -->
+                                <h5 class="mb-3">Filler by: </h5>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newCourseFillterBy" id="newCourseFillterBy"  value="fillterByTheLast7Days" ${newCourseFillterBy == 'fillterByTheLast7Days' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLast7Days">
+                                                The last 7 days
+                                            </label>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12 col-md-4 ">
-                                    <div class="card  border-0">
-                                        <div class="card-body py-4">
-                                            <h5 class="mb-2 fw-bold">
-                                                New Registrations
-                                            </h5>
-                                            <p class="mb-2 fw-bold">
-                                                Total:
-                                            </p>
-                                            <div class="mb-0">
-                                                <span class="badge text-success me-2">
-                                                    +10
-                                                </span>
-                                                <span class="fw-bold">
-                                                    For the last 7 day
-                                                </span>
-                                            </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newCourseFillterBy" id="newCourseFillterBy"  value="fillterByThisMonth" ${newCourseFillterBy == 'fillterByThisMonth' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastMonth">
+                                                This month
+                                            </label>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12 col-md-4 ">
-                                    <div class="card border-0">
-                                        <div class="card-body py-4">
-                                            <h5 class="mb-2 fw-bold">
-                                                Revenues
-                                            </h5>
-                                            <p class="mb-2 fw-bold">
-                                                Total:
-                                            </p>
-                                            <div class="mb-0">
-                                                <span class="badge text-success me-2">
-                                                    +10.0%
-                                                </span>
-                                                <span class="fw-bold">
-                                                    For the last 7 day
-                                                </span>
-                                            </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newCourseFillterBy" id="newCourseFillterBy"  value="fillterByThisQuarter" ${newCourseFillterBy == 'fillterByThisQuarter' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastQuarter">
+                                                This quarter
+                                            </label>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-md-4 ">
-                                    <div class="card border-0">
-                                        <div class="card-body py-4">
-                                            <h5 class="mb-2 fw-bold">
-                                                New Customers
-                                            </h5>
-                                            <p class="mb-2 fw-bold">
-                                                Total:
-                                            </p>
-                                            <div class="mb-0">
-                                                <span class="badge text-success me-2">
-                                                    +100
-                                                </span>
-                                                <span class=" fw-bold">
-                                                    For the last 7 day
-                                                </span>
-                                            </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newCourseFillterBy" id="newCourseFillterBy"  value="fillterByThisYear" ${newCourseFillterBy == 'fillterByThisYear' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastYear">
+                                                This year
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
 
-                            </div>
-                            <h3 class="fw-bold fs-4 my-3">New Course</h3>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <!-- Start course fillter -->
-                                    <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
-                                        <select class="form-select form-select-lg" name="courseFillter">
-                                            <option value="new">New</option>
-                                            <option value="all">All</option>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newCourseFillterBy" id="newCourseFillterBy"  value="fillterByDateRange" ${newCourseFillterBy == 'fillterByDateRange' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByDateRange">
+                                                Date range
+                                            </label>
+                                            <div class="row mt-3" id="dateRangeInputs">
+                                                <div class="col-md-6">
+                                                    <label for="startDate">Start Date:</label>
+                                                    <input type="date" class="form-control" id="startDate" name="newCourseStartDate">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="endDate">End Date:</label>
+                                                    <input type="date" class="form-control" id="endDate" name="newCourseEndDate">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newCourseFillterBy" id="newCourseFillterBy"  value="allTime" ${newCourseFillterBy == 'allTime' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastYear">
+                                                All time
+                                            </label>
+                                        </div>
+                                    </div>        
+                                </div> 
+
+                                <!-- End filler by date -->                                                               
+                                <br/>
+                                <div class="row">
+                                    <!-- Fillter by status start -->
+                                    <div class="col-md-3">
+                                        <label class="form-label visually-hidden" for="newCourseFillterByStatus">Select status</label>
+                                        <select class="form-select form-select-lg" name="newCourseFillterByStatus" aria-label="Select status">
+                                            <option value="all" selected>All status</option>
+                                            <option value="0">Deactivate</option>
+                                            <option value="1">Activated</option>                                            
+                                        </select>                                        
+                                    </div>
+                                    <!-- Fillter by status end --> 
+                                    <!-- Fillter by category start -->
+                                    <div class="col-md-3">
+                                        <label class="form-label visually-hidden" for="newCourseFillterByCategory">Select category</label>
+                                        <select class="form-select form-select-lg" name="newCourseFillterByCategory" aria-label="Select category">
+                                            <option value="all" selected>All category</option>
+                                            <c:forEach items="${requestScope.categoryVector}" var="setting">
+                                                <option value="${setting.getId()}">${setting.getValue()}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
+                                    <!-- Fillter by category end -->
                                 </div>
-                                <div class="col-md-6">
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        View pie chart
-                                    </button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">New course</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <jsp:include page="/jsp/NewCoursePieChart.jsp"></jsp:include>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
+                                <br/>
+                                <!-- Start choosing field  -->
+                                <h5 class="mb-3">Display fields: </h5>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newCourseDisplayID" ${requestScope.newCourseDisplayID == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                ID
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" name="newCourseDisplayTitle" ${requestScope.newCourseDisplayTitle == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Title
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" name="newCourseDisplaySubTitle" ${requestScope.newCourseDisplaySubTitle == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Subtitle
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" name="newCourseDisplayExpert" ${requestScope.newCourseDisplayExpert == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Expert
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" name="newCourseDisplayTotalDuration" ${requestScope.newCourseDisplayTotalDuration == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Total Duration
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" name="newCourseDisplayStatus" ${requestScope.newCourseDisplayStatus == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Status
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" name="newCourseDisplayDescription" ${requestScope.newCourseDisplayDescription == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Description
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" name="newCourseDisplayCategory" ${requestScope.newCourseDisplayCategory == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Category
+                                            </label>
+                                        </div>
+                                    </div>   
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" name="newCourseDisplayCreatedDate" ${requestScope.newCourseDisplayCreatedDate == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Created date
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" name="newCourseDisplayUpdatedDate" ${requestScope.newCourseDisplayUpdatedDate == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Updated date
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" name="newCourseDisplayThumbnail" ${requestScope.newCourseDisplayThumbnail == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Thumbnail
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" name="newCourseDisplayNumberOfLearner" ${requestScope.newCourseDisplayNumberOfLearner == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Number of learner
+                                            </label>
+                                        </div>
+                                    </div>                               
+                                </div>
+                                <!-- End choosing field  -->
+                                <br/>
+                                <input class="btn btn-primary" type="submit" value="Submit" name="newCourseSubmit">
+                            </form>
+
+                            <br/>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr class="highlight">
+                                                <c:if test="${requestScope.newCourseDisplayID=='true'}"><th scope="col">ID</th></c:if>
+                                                <c:if test="${requestScope.newCourseDisplayTitle=='true'}"><th scope="col">Title</th></c:if> 
+                                                <c:if test="${requestScope.newCourseDisplaySubTitle=='true'}"><th scope="col">Subtitle</th></c:if> 
+                                                <c:if test="${requestScope.newCourseDisplayExpert=='true'}"><th scope="col">Expert</th></c:if> 
+                                                <c:if test="${requestScope.newCourseDisplayTotalDuration=='true'}"><th scope="col">Total Duration</th></c:if>
+                                                <c:if test="${requestScope.newCourseDisplayStatus=='true'}"><th scope="col">Status</th></c:if>                                                        
+                                                <c:if test="${requestScope.newCourseDisplayDescription=='true'}"><th scope="col">Description</th></c:if>     
+                                                <c:if test="${requestScope.newCourseDisplayCategory=='true'}"><th scope="col">Category</th></c:if>
+                                                <c:if test="${requestScope.newCourseDisplayCreatedDate=='true'}"><th scope="col">Created date</th></c:if>
+                                                <c:if test="${requestScope.newCourseDisplayUpdatedDate=='true'}"><th scope="col">Updated date</th></c:if>
+                                                <c:if test="${requestScope.newCourseDisplayThumbnail=='true'}"><th scope="col">Thumbnail</th></c:if>
+                                                <c:if test="${requestScope.newCourseDisplayNumberOfLearner=='true'}"><th scope="col">Number of learner</th></c:if>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${requestScope.newCourseVector}" var="course">
+                                                <tr>
+                                                    <c:if test="${requestScope.newCourseDisplayID=='true'}"><td>${course.getId()}</td></c:if>
+                                                    <c:if test="${requestScope.newCourseDisplayTitle=='true'}"><td>${course.getTitle()}</td></c:if>
+                                                    <c:if test="${requestScope.newCourseDisplaySubTitle=='true'}"><td>${course.getSubtitle()}</td></c:if>
+                                                    <c:if test="${requestScope.newCourseDisplayExpert=='true'}">
+                                                        <c:forEach items="${requestScope.userVector}" var="user">
+                                                            <c:if test="${course.getExpertId()==user.getId()}"><td>${user.getFirstName()} ${user.getLastName()}</td></c:if>
+                                                        </c:forEach>
+                                                    </c:if>
+                                                    <c:if test="${requestScope.newCourseDisplayTotalDuration=='true'}"><td>${course.getTotalDuration()}</td></c:if>
+                                                    <c:if test="${requestScope.newCourseDisplayStatus=='true'}">
+                                                        <c:choose>
+                                                            <c:when test="${course.getStatus() == 0}">
+                                                                <td>Deactivated</td>
+                                                            </c:when>
+                                                            <c:when test="${course.getStatus() == 1}">
+                                                                <td>Activated</td>
+                                                            </c:when>                                                           
+                                                        </c:choose> 
+                                                    </c:if>
+                                                    <c:if test="${requestScope.newCourseDisplayDescription=='true'}"><td>${course.getDescription()}</td></c:if>
+                                                    <c:if test="${requestScope.newCourseDisplayCategory=='true'}">
+                                                        <c:forEach items="${requestScope.settingVector}" var="setting">
+                                                            <c:if test="${course.getCategoryId()==setting.getId()}"><td>${setting.getValue()}</td></c:if>
+                                                        </c:forEach>
+                                                    </c:if>
+                                                    <c:if test="${requestScope.newCourseDisplayCreatedDate=='true'}"><td>${course.getCreatedDate()}</td></c:if>
+                                                    <c:if test="${requestScope.newCourseDisplayUpdatedDate=='true'}"><td>${course.getUpdatedDate()}</td></c:if>
+                                                    <c:if test="${requestScope.newCourseDisplayThumbnail=='true'}"><td>${course.getThumbnailUrl()}</td></c:if>
+                                                    <c:if test="${requestScope.newCourseDisplayNumberOfLearner=='true'}"><td>${course.getNumberOfLearner()}</td></c:if>
+                                                    </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>    
+                            <!-- New course end -->                    
+                            <!-- New registrations start -->
+                            <h3 class="fw-bold fs-4 my-3">New Registrations</h3>
+                            <form action="MarketingDashboardController" method="post">
+                                <!-- Start filler by date -->
+                                <h5 class="mb-3">Filler by: </h5>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newRegistrationFillterBy" id="newRegistrationFillterBy"  value="fillterByTheLast7Days" ${newRegistrationFillterBy == 'fillterByTheLast7Days' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLast7Days">
+                                                The last 7 days
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newRegistrationFillterBy" id="newRegistrationFillterBy"  value="fillterByThisMonth" ${newRegistrationFillterBy == 'fillterByThisMonth' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastMonth">
+                                                This month
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newRegistrationFillterBy" id="newRegistrationFillterBy"  value="fillterByThisQuarter" ${newRegistrationFillterBy == 'fillterByThisQuarter' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastQuarter">
+                                                This quarter
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newRegistrationFillterBy" id="newRegistrationFillterBy"  value="fillterByThisYear" ${newRegistrationFillterBy == 'fillterByThisYear' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastYear">
+                                                This year
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
 
-                            </div>
-                            <!-- End course fillter -->
-                            <br/>
-                            <!-- Start choosing field  -->
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            ID
-                                        </label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newRegistrationFillterBy" id="newRegistrationFillterBy"  value="fillterByDateRange" ${newRegistrationFillterBy == 'fillterByDateRange' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByDateRange">
+                                                Date range
+                                            </label>
+                                            <div class="row mt-3" id="dateRangeInputs">
+                                                <div class="col-md-6">
+                                                    <label for="startDate">Start Date:</label>
+                                                    <input type="date" class="form-control" id="startDate" name="newRegistrationStartDate">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="endDate">End Date:</label>
+                                                    <input type="date" class="form-control" id="endDate" name="newRegistrationEndDate">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newRegistrationFillterBy" id="newRegistrationFillterBy"  value="allTime" ${newRegistrationFillterBy == 'allTime' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastYear">
+                                                All time
+                                            </label>
+                                        </div>
+                                    </div>        
+                                </div> 
+
+                                <!-- End filler by date --> 
+                                <br/>
+                                <!-- Fillter by status start -->
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="form-label visually-hidden" for="newRegistrationsFillterByStatus">Select status</label>
+                                        <select class="form-select form-select-lg" name="newRegistrationsFillterByStatus" aria-label="Select status">
+                                            <option value="all" selected>All status</option>
+                                            <option value="0">Cancel</option>
+                                            <option value="1">Learning</option>
+                                            <option value="1">Expired</option> 
+                                            <option value="1">Finished</option> 
+                                        </select>                                        
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Title
-                                        </label>
+
+                                <!-- Fillter by status end -->
+                                <br/>
+                                <!-- Start choosing field -->
+                                <h5 class="mb-3">Display fields: </h5>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newRegistrationDisplayId" ${requestScope.newRegistrationDisplayId == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                ID
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newRegistrationDisplayCustomer" ${requestScope.newRegistrationDisplayCustomer == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Customer
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newRegistrationDisplayCourseId" ${requestScope.newRegistrationDisplayCourseId == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Course Id
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newRegistrationDisplayEnrollDate" ${requestScope.newRegistrationDisplayEnrollDate == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Enroll date
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Expert
-                                        </label>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newRegistrationDisplayExpireDate" ${requestScope.newRegistrationDisplayExpireDate == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Expire package
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newRegistrationDisplayStatus" ${requestScope.newRegistrationDisplayStatus == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Status
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newRegistrationDisplayProgress" ${requestScope.newRegistrationDisplayProgress == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Progress
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newRegistrationDisplayPricePackageId" ${requestScope.newRegistrationDisplayPricePackageId == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Price Package Id
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Total Duration
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Category
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Description
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Status
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Created date
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Updated date
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Number of lesson
-                                        </label>
-                                    </div>
-                                </div>                               
-                            </div>
-                            <!-- End choosing field  -->
+                                <!-- End choosing field -->
+                                <br/>
+                                <input class="btn btn-primary" type="submit" value="Submit" name="newRegistrationSubmit">
+
+                            </form>
                             <br/>
                             <div class="row">
                                 <div class="col-12">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr class="highlight">
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Title</th>
-                                                <th scope="col">Expert</th>
-                                                <th scope="col">Total Duration</th>
-                                                <th scope="col">Category</th>
-                                                <th scope="col">Description</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Created date</th>
-                                                <th scope="col">Updated date</th>
-                                                <th scope="col">Number of lesson</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Java Programming</td>
-                                                <td>Charlie Davis</td>
-                                                <td>20 hours</td>
-                                                <td>Activated</td>
-                                                <td>Java course for beginners</td>
-                                                <td>Technology</td>
-                                                <td>2023-01-01</td>
-                                                <td>2023-01-10</td>
-                                                <td>10</td>
-                                            </tr>
+                                                <c:if test="${requestScope.newRegistrationDisplayId=='true'}"><th scope="col">ID</th></c:if>
+                                                <c:if test="${requestScope.newRegistrationDisplayCustomer=='true'}"><th scope="col">Customer</th></c:if>
+                                                <c:if test="${requestScope.newRegistrationDisplayCourseId=='true'}"><th scope="col">Course ID</th></c:if>
+                                                <c:if test="${requestScope.newRegistrationDisplayEnrollDate=='true'}"><th scope="col">Enroll Date</th></c:if>
+                                                <c:if test="${requestScope.newRegistrationDisplayExpireDate=='true'}"><th scope="col">Expire Date</th></c:if>
+                                                <c:if test="${requestScope.newRegistrationDisplayStatus=='true'}"><th scope="col">Status</th></c:if>
+                                                <c:if test="${requestScope.newRegistrationDisplayProgress=='true'}"><th scope="col">Progress</th></c:if>
+                                                <c:if test="${requestScope.newRegistrationDisplayPricePackageId=='true'}"><th scope="col">Price Package Id</th></c:if>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${requestScope.newRegistrationVector}" var="personalCourse">
+                                                <tr>
+                                                    <c:if test="${requestScope.newRegistrationDisplayId=='true'}"><td>${personalCourse.getId()}</td></c:if>
+                                                    <c:if test="${requestScope.newRegistrationDisplayCustomer=='true'}">
+                                                        <c:forEach items="${requestScope.userVector}" var="user">
+                                                            <c:if test="${personalCourse.getCustomerId()==user.getId()}"><td>${user.getFirstName()} ${user.getLastName()}</td></c:if>
+                                                        </c:forEach>
+                                                    </c:if>
+                                                    <c:if test="${requestScope.newRegistrationDisplayCourseId=='true'}"><td>${personalCourse.getCourseId()}</td></c:if>
+                                                    <c:if test="${requestScope.newRegistrationDisplayEnrollDate=='true'}"><td>${personalCourse.getEnrollDate()}</td></c:if>
+                                                    <c:if test="${requestScope.newRegistrationDisplayExpireDate=='true'}"><td>${personalCourse.getExpireDate()}</td></c:if>
+                                                    <c:if test="${requestScope.newRegistrationDisplayStatus=='true'}">
+                                                        <c:choose>
+                                                            <c:when test="${personalCourse.getStatus() == 0}">
+                                                                <td>Cancel</td>
+                                                            </c:when>
+                                                            <c:when test="${personalCourse.getStatus() == 1}">
+                                                                <td>Learning</td>
+                                                            </c:when>
+                                                            <c:when test="${personalCourse.getStatus() == 2}">
+                                                                <td>Expired</td>
+                                                            </c:when>
+                                                            <c:when test="${personalCourse.getStatus() == 3}">
+                                                                <td>Finished</td>
+                                                            </c:when>
+                                                        </c:choose>
+                                                    </c:if>
+                                                    <c:if test="${requestScope.newRegistrationDisplayProgress=='true'}"><td>${personalCourse.getProgress()}</td></c:if>
+                                                    <c:if test="${requestScope.newRegistrationDisplayPricePackageId=='true'}"><td>${personalCourse.getPricePackageId()}</td></c:if>
+                                                    </tr>
+
+                                            </c:forEach>
 
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <h3 class="fw-bold fs-4 my-3">New Registrations</h3>
-                            <!-- Start registration fillter -->
-                            <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
-                                <select class="form-select form-select-lg" name="registrationFillter">
-                                    <option value="1">Success</option>
-                                    <option value="0">Cancel</option>
-                                    <option value="2">Submitted</option>
-                                </select>
-                            </div>
-                            <!-- End registration fillter -->
-                            <br/>
-                            <!-- Start choosing field -->
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Customer
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Course
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Status
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Price package
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Enroll date
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Expire date
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End choosing field -->
-                            <br/>
-                            <div class="row">
-                                <div class="col-12">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr class="highlight">
-                                                <th scope="col">Customer</th>
-                                                <th scope="col">Course</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Price package</th>
-                                                <th scope="col">Enroll date</th>
-                                                <th scope="col">Expire date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>John Doe</th>
-                                                <td>Java programming</td>
-                                                <td>Submitted</td>
-                                                <td>Basic package</td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                            <!-- Revenue start -->                    
                             <h3 class="fw-bold fs-4 my-3">Revenues</h3>
-                            <!-- Start revenue fillter -->
-                            <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
-                                <select class="form-select form-select-lg" name="revenuesFillter">
-                                    <option value="total">Total</option>
-                                    <option value="byDateRange">By date range</option>
-                                </select>
-                            </div>
-                            <!-- End revenue fillter -->
+                            <form action="MarketingDashboardController" method="post">
+                                <!-- Start filler by date -->
+                                <h5 class="mb-3">Filler by: </h5>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="revenueFillterBy" id="revenueFillterBy"  value="fillterByTheLast7Days" ${revenueFillterBy == 'fillterByTheLast7Days' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLast7Days">
+                                                The last 7 days
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="revenueFillterBy" id="revenueFillterBy"  value="fillterByThisMonth" ${revenueFillterBy == 'fillterByThisMonth' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastMonth">
+                                                This month
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="revenueFillterBy" id="revenueFillterBy"  value="fillterByThisQuarter" ${revenueFillterBy == 'fillterByThisQuarter' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastQuarter">
+                                                This quarter
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="revenueFillterBy" id="revenueFillterBy"  value="fillterByThisYear" ${revenueFillterBy == 'fillterByThisYear' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastYear">
+                                                This year
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="revenueFillterBy" id="revenueFillterBy"  value="fillterByDateRange" ${revenueFillterBy == 'fillterByDateRange' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByDateRange">
+                                                Date range
+                                            </label>
+                                            <div class="row mt-3" id="dateRangeInputs">
+                                                <div class="col-md-6">
+                                                    <label for="startDate">Start Date:</label>
+                                                    <input type="date" class="form-control" id="startDate" name="revenueStartDate">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="endDate">End Date:</label>
+                                                    <input type="date" class="form-control" id="endDate" name="revenueEndDate">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="revenueFillterBy" id="revenueFillterBy"  value="allTime" ${revenueFillterBy == 'allTime' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastYear">
+                                                All time
+                                            </label>
+                                        </div>
+                                    </div>        
+                                </div> 
+
+                                <!-- End filler by date --> 
+                                <br/>
+                                <input class="btn btn-primary" type="submit" value="Submit" name="revenueSubmit">
+                            </form>
                             <br/>
                             <div class="row">
                                 <div class="col-12">
@@ -467,106 +614,254 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">Technology</th>
-                                                <td>1000000VND</td>
-                                            </tr>
+                                            
+                                            <c:forEach items="${requestScope.revenueByCourseCategoryIdVector}" var="revenueByCourseCategoryId">
+                                                <tr>
+                                                    <th scope="col">
+                                                        <c:forEach items="${requestScope.categoryVector}" var="setting">
+                                                            <c:if test="${revenueByCourseCategoryId.getCourseCategoryId()==setting.getId()}">${setting.getValue()}</c:if>
+                                                        </c:forEach>
+                                                    </th>
+                                                    <th scope="col">
+                                                        ${revenueByCourseCategoryId.getRevenue()}
+                                                    </th>
+                                                    <c:set var="totalRevenue" value="${totalRevenue + revenueByCourseCategoryId.getRevenue()}" />
+                                                </tr>
+                                            </c:forEach>
                                             <tr>
                                                 <th scope="row">All course</th>
-                                                <td>100000000VND</td>
+                                                <td>${totalRevenue}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                            <!-- Revenue end -->
+
+
                             <h3 class="fw-bold fs-4 my-3">New Customer</h3>
-                            <!-- Start customer fillter -->
-                            <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
-                                <select class="form-select form-select-lg" name="revenuesCustomer">
-                                    <option value="all">All</option>
-                                    <option value="registered">Registered at least 1 course</option>
-                                    <option value="notRegistered">Have not registered any course</option>
-                                </select>
-                            </div>
-                            <!-- End customer fillter -->
-                            <br/>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="col-md-4">
+                            <form action="MarketingDashboardController" method="post"> 
+                                <!-- Start filler by date -->
+                                <h5 class="mb-3">Filler by: </h5>
+                                <div class="row">
+                                    <div class="col-md-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <input class="form-check-input" type="radio" name="newCustomerFillterBy" id="newCustomerFillterBy"  value="fillterByTheLast7Days" ${newCustomerFillterBy == 'fillterByTheLast7Days' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLast7Days">
+                                                The last 7 days
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newCustomerFillterBy" id="newCustomerFillterBy"  value="fillterByThisMonth" ${newCustomerFillterBy == 'fillterByThisMonth' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastMonth">
+                                                This month
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newCustomerFillterBy" id="newCustomerFillterBy"  value="fillterByThisQuarter" ${newCustomerFillterBy == 'fillterByThisQuarter' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastQuarter">
+                                                This quarter
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newCustomerFillterBy" id="newCustomerFillterBy"  value="fillterByThisYear" ${newCustomerFillterBy == 'fillterByThisYear' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastYear">
+                                                This year
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newCustomerFillterBy" id="newCustomerFillterBy"  value="fillterByDateRange" ${newCustomerFillterBy == 'fillterByDateRange' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByDateRange">
+                                                Date range
+                                            </label>
+                                            <div class="row mt-3" id="dateRangeInputs">
+                                                <div class="col-md-6">
+                                                    <label for="startDate">Start Date:</label>
+                                                    <input type="date" class="form-control" id="startDate" name="newCustomerStartDate">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="endDate">End Date:</label>
+                                                    <input type="date" class="form-control" id="endDate" name="newCustomerEndDate">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="newCustomerFillterBy" id="newCustomerFillterBy"  value="allTime" ${newCustomerFillterBy == 'allTime' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="fillterByTheLastYear">
+                                                All time
+                                            </label>
+                                        </div>
+                                    </div>        
+                                </div> 
+                                <!-- End filler by date -->  
+                                <br/>
+
+                                <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
+                                    <select class="form-select form-select-lg" name="newCustomerFillterByRegistration">
+                                        <option value="all" selected="">All</option>
+                                        <option value="registered">Registered at least 1 course</option>
+                                        <option value="notRegistered">Have not registered any course</option>
+                                    </select>
+                                </div>
+                                <br/>
+                                <!-- Fields display start -->
+                                <h5 class="mb-3">Display fields: </h5>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newCustomerDisplayId" ${requestScope.newCustomerDisplayId == 'true'?'checked':''}>
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 ID
                                             </label>
                                         </div>
                                     </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newCustomerDisplayEmail" ${requestScope.newCustomerDisplayEmail == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Email
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newCustomerDisplayCreateDate" ${requestScope.newCustomerDisplayCreateDate == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Created date
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newCustomerDisplayStatus" ${requestScope.newCustomerDisplayStatus == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Status
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newCustomerDisplayFirstName" ${requestScope.newCustomerDisplayFirstName == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                First Name
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newCustomerDisplayLastName" ${requestScope.newCustomerDisplayLastName == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Last Name
+                                            </label>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Full name
-                                        </label>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newCustomerDisplayDob" ${requestScope.newCustomerDisplayDob == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Dob
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newCustomerDisplayGender" ${requestScope.newCustomerDisplayGender == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Gender
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newCustomerDisplayImageUrl" ${requestScope.newCustomerDisplayImageUrl == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Image 
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="newCustomerDisplayPreferContact" ${requestScope.newCustomerDisplayPreferContact == 'true'?'checked':''}>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Prefer Contact
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Dob
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Email
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Contact
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Phone
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
+                                <!-- Fields display end -->
+                                <br/>
+                                <input class="btn btn-primary" type="submit" value="Submit" name="newCustomerSubmit">
+                            </form>
                             <br/>
                             <div class="row">
                                 <div class="col-12">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr class="highlight">
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Full Name</th>
-                                                <th scope="col">Dob</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Contact</th>
-                                                <th scope="col">Phone</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>John Doe</td>
-                                                <td>1999-01-01</td>
-                                                <td>customer1@example.com</td>
-                                                <td>customer2@example.com</td>
-                                                <td>0987654321</td>
-                                            </tr>
+                                                <c:if test="${requestScope.newCustomerDisplayId=='true'}"><th scope="col">ID</th></c:if>
+                                                <c:if test="${requestScope.newCustomerDisplayEmail=='true'}"><th scope="col">Email</th></c:if>
+                                                <c:if test="${requestScope.newCustomerDisplayCreateDate=='true'}"><th scope="col">Created date</th></c:if>
+                                                <c:if test="${requestScope.newCustomerDisplayStatus=='true'}"><th scope="col">Status</th></c:if>
+                                                <c:if test="${requestScope.newCustomerDisplayFirstName=='true'}"><th scope="col">First Name</th></c:if>
+                                                <c:if test="${requestScope.newCustomerDisplayLastName=='true'}"><th scope="col">Last Name</th></c:if>
+                                                <c:if test="${requestScope.newCustomerDisplayDob=='true'}"><th scope="col">Dob</th></c:if>
+                                                <c:if test="${requestScope.newCustomerDisplayGender=='true'}"><th scope="col">Gender</th></c:if>
+                                                <c:if test="${requestScope.newCustomerDisplayImageUrl=='true'}"><th scope="col">Image</th></c:if>
+                                                <c:if test="${requestScope.newCustomerDisplayPreferContact=='true'}"><th scope="col">Prefer Contact</th></c:if>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            <c:forEach items="${requestScope.newCustomerVector}" var="user">
+                                                <tr>
+                                                    <c:if test="${requestScope.newCustomerDisplayId=='true'}"><td>${user.getId()}</td></c:if>
+                                                    <c:if test="${requestScope.newCustomerDisplayEmail=='true'}"><td>${user.getPrimaryEmail()}</td></c:if>
+                                                    <c:if test="${requestScope.newCustomerDisplayCreateDate=='true'}"><td>${user.getCreatedDate()}</td></c:if>
+                                                    <c:if test="${requestScope.newCustomerDisplayStatus=='true'}">
+                                                        <c:choose>
+                                                            <c:when test="${user.getStatus() == 0}">
+                                                                <td>Deactivated</td>
+                                                            </c:when>
+                                                            <c:when test="${user.getStatus() == 1}">
+                                                                <td>Activated</td>
+                                                            </c:when>                                                           
+                                                        </c:choose>
+                                                    </c:if>
+                                                    <c:if test="${requestScope.newCustomerDisplayFirstName=='true'}"><td>${user.getFirstName()}</td></c:if>        
+                                                    <c:if test="${requestScope.newCustomerDisplayLastName=='true'}"><td>${user.getLastName()}</td></c:if> 
+                                                    <c:if test="${requestScope.newCustomerDisplayDob=='true'}"><td>${user.getDob()}</td></c:if> 
+                                                    <c:if test="${requestScope.newCustomerDisplayGender=='true'}">
+                                                        <c:choose>
+                                                            <c:when test="${user.isGender() == false}">
+                                                                <td>Male</td>
+                                                            </c:when>
+                                                            <c:when test="${user.isGender() == true}">
+                                                                <td>Female</td>
+                                                            </c:when>                                                           
+                                                        </c:choose>
+                                                    </c:if>
+                                                    <c:if test="${requestScope.newCustomerDisplayImageUrl=='true'}"><td>${user.getImageURL()}</td></c:if>     
+                                                    <c:if test="${requestScope.newCustomerDisplayPreferContact=='true'}"><td>${user.getPreferContact()}</td></c:if>
+                                                    </tr>
+                                            </c:forEach>
+
                                         </tbody>
                                     </table>
                                 </div>

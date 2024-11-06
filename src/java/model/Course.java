@@ -26,7 +26,9 @@ public class Course {
     private int categoryId; 
     private float totalDuration;
     private List<String> taglines; // Thêm thuộc tính để lưu danh sách tagline
-    
+
+    private int status;
+    private int numberOfLearner;
     public Course() {
     }
 

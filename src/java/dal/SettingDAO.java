@@ -129,4 +129,37 @@ public class SettingDAO extends DBContext{
         return null;
 
     }
+    
+    public Setting getSettingBySettingTypeIdAndValue(int searchSettingTypeId, String searchValue) {
+        Vector<Setting> vector = new Vector<>();
+        String sql = "SELECT id"
+                + "      ,setting_type_id"
+                + "      ,value"
+                + "      ,status"
+                + "      ,description"
+                + "      ,created_date"
+                + "      ,updated_date"
+                + "  FROM Setting"
+                + "  WHERE Setting.setting_type_id = " + searchSettingTypeId +" and Setting.value like '"+searchValue+"'";
+
+        try {
+            Statement state = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = state.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                int settingTypeId = rs.getInt(2);
+                String value = rs.getString(3);
+                int status = rs.getInt(4);
+                String description = rs.getString(5);
+                Date createdDate = rs.getDate(6);
+                Date updatedDate = rs.getDate(7);
+                Setting obj = new Setting(id, settingTypeId, value, status, description, createdDate, updatedDate);
+                return obj;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+
+    }
 }

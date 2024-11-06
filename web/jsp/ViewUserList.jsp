@@ -267,6 +267,7 @@
                                     </table>
                                 </div>
                             </div>
+                            <!-- Start paging -->
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <c:forEach begin="1" end="${requestScope.totalPage}" var="i">
@@ -274,6 +275,7 @@
                                         </c:forEach>
                                 </ul>
                             </nav>
+                            <!-- End paging -->
                             <!-- Registration Form Section start-->
                             <h3 class="fw-bold fs-4 my-3">Add new user</h3>                           
                             <div class="wrapper rounded bg-white p-4">                               

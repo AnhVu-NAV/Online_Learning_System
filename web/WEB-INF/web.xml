@@ -74,6 +74,14 @@
         <servlet-name>SettingDashboardController</servlet-name>
         <servlet-class>controller.SettingDashboardController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MarketingDashboardController</servlet-name>
+        <servlet-class>controller.MarketingDashboardController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaleRegistrationDashboardController</servlet-name>
+        <servlet-class>controller.SaleRegistrationDashboardController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserDashboardController</servlet-name>
         <url-pattern>/UserDashboardController</url-pattern>
@@ -313,4 +321,12 @@
         <session-timeout>30</session-timeout>
     </session-config>
 
+    <servlet-mapping>
+        <servlet-name>MarketingDashboardController</servlet-name>
+        <url-pattern>/MarketingDashboardController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaleRegistrationDashboardController</servlet-name>
+        <url-pattern>/SaleRegistrationDashboardController</url-pattern>
+    </servlet-mapping>
 </web-app>
