@@ -52,10 +52,10 @@ public class EmailService implements IJavaMail{
         
     }
     
-//    public static void main(String[] args) {
-//        IJavaMail emailService = new EmailService();
-//        emailService.send("vulhhe130330@fpt.edu.vn", "test", "test");
-//    }
+    public static void main(String[] args) {
+        IJavaMail emailService = new EmailService();
+        emailService.send("vulhhe130330@fpt.edu.vn", "test", "test");
+    }
     
 
     
