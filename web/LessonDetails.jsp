@@ -123,15 +123,15 @@
                     </div>
 
                     <!-- Document Preview Section -->
-                    <div class="Document">
+<!--                    <div class="Document">
                         <img class="Image4" src="https://via.placeholder.com/362x322" alt="Document Preview"/>
                         <div class="ReplaceFileButtonWrapper">
                             <button class="Button">
-                                <span>&#128190;</span> <!-- Icon for file upload -->
+                                <span>&#128190;</span>  Icon for file upload 
                                 <span>REPLACE ANOTHER FILE</span>
                             </button>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
