@@ -378,6 +378,9 @@
 
 
                                 <br/>
+                                <label for="numberInput">Enter number of records per page</label>
+                                <input type="number" id="nrpp" name="nrpp" min="1" max="100" step="1" required value="${requestScope.nrpp}">
+                                <br/>
                                 <input type="hidden" name="service" value="viewAllRegistration">
                                 <button type="submit" name="fillterSubmit"  value="submit" class="btn btn-outline-primary">Submit</button>
                             </form> 
@@ -425,7 +428,7 @@
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <c:forEach begin="1" end="${requestScope.totalPage}" var="i">
-                                        <li class="page-item"><a class="page-link" href="SaleRegistrationDashboardController?service=viewRegistration&index=${i}">${i}</a></li>
+                                        <li class="page-item"><a class="page-link" href="SaleRegistrationDashboardController?service=viewAllRegistration&index=${i}">${i}</a></li>
                                         </c:forEach>
                                 </ul>
                             </nav>
@@ -436,15 +439,15 @@
                                 <form class="form" action="SaleRegistrationDashboardController" method="post" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-4 mt-md-0 mt-3">
-                                            <label for="recommendCourseCustomerId">Customer ID</label>
-                                            <select id="recommendCourseCustomerId" class="form-select w-100" name="recommendCourseCustomerId" required> 
+                                            <label for="recommendCourseCustomerEmail">Customer Email</label>
+                                            <select id="recommendCourseCustomerEmail" class="form-select w-100" name="recommendCourseCustomerEmail" required> 
                                                 <c:forEach items="${requestScope.customerVector}" var="customer">
-                                                    <option value="${customer.getId()}">${customer.getPrimaryEmail()}</option>
+                                                    <option value="${customer.getPrimaryEmail()}">${customer.getPrimaryEmail()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
                                         <div class="col-md-4 mt-md-0 mt-3">
-                                            <label for="recommendCourseCustomerId">Customer ID</label>
+                                            <label for="recommendCourseCustomerId">Course Title</label>
                                             <select id="recommendCourseCourseId" class="form-select w-100" name="recommendCourseCourseId" required> 
                                                 <c:forEach items="${requestScope.courseVector}" var="course">
                                                     <option value="${course.getId()}">${course.getTitle()}</option>
@@ -459,57 +462,7 @@
                                         <div class="col-md-8 mt-md-0 mt-3">
                                             <input type="text" class="form-control" placeholder="Note" aria-label="Note" name="recommendCourseTextContent">
                                         </div>
-                                    </div>
-
-                                    <!-- Image Upload and Display Section -->
-                                    <div class="row mt-4">
-                                        <!-- Image Upload Input -->
-                                        <div class="col-md-6">
-                                            <label for="courseImages">Add Images</label>
-                                            <input type="file" class="form-control" id="courseImages" name="courseImages" multiple accept="image/*">
-                                        </div>
-
-                                        <!-- Image Preview Section -->
-                                        <div class="col-md-12 mt-3">
-                                            <div id="imagePreview" class="d-flex flex-wrap gap-2">
-                                                <!-- Placeholder for dynamically added image previews -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- JavaScript to handle image preview and deletion -->
-                                    <script>
-                                        const imagePreviewContainer = document.getElementById('imagePreview');
-                                        const imageInput = document.getElementById('courseImages');
-
-                                        imageInput.addEventListener('change', () => {
-                                            imagePreviewContainer.innerHTML = '';
-                                            Array.from(imageInput.files).forEach(file => {
-                                                const reader = new FileReader();
-                                                reader.onload = (event) => {
-                                                    const imgWrapper = document.createElement('div');
-                                                    imgWrapper.classList.add('position-relative');
-
-                                                    const img = document.createElement('img');
-                                                    img.src = event.target.result;
-                                                    img.classList.add('img-thumbnail', 'mb-2');
-                                                    img.style.width = '100px';
-                                                    img.style.height = '100px';
-
-                                                    const deleteBtn = document.createElement('button');
-                                                    deleteBtn.classList.add('btn', 'btn-sm', 'btn-danger', 'position-absolute', 'top-0', 'end-0');
-                                                    deleteBtn.innerHTML = '&times;';
-                                                    deleteBtn.onclick = () => {
-                                                        imgWrapper.remove();
-                                                    };
-
-                                                    imgWrapper.appendChild(img);
-                                                    imgWrapper.appendChild(deleteBtn);
-                                                    imagePreviewContainer.appendChild(imgWrapper);
-                                                };
-                                                reader.readAsDataURL(file);
-                                            });
-                                        });
-                                    </script>
+                                    </div>                                   
 
                                     <input type="hidden" name="service" value="recommendCourse">
                                     <div class="col-md-6 mt-md-0 mt-3">
@@ -521,46 +474,7 @@
                                 </form>
                             </div>
                             <!-- Reconmmend course end-->
-                            <!-- Recommend course using AI start-->
-                            <h3 class="fw-bold fs-4 my-3">Recommend courses using AI</h3>                           
-                            <div class="container">                               
-                                <form class="form" action="SaleRegistrationDashboardController" method="post">
-                                    <div class="row">
-                                        <div class="col-md-4 mt-md-0 mt-3">
-                                            <label for="recommendCourseUsingAICustomerId">Customer ID</label>
-                                            <select id="recommendCourseUsingAICustomerId" class="form-select w-100" name="recommendCourseUsingAICustomerId" required> 
-                                                <c:forEach items="${requestScope.customerVector}" var="customer">
-                                                    <option value="${customer.getId()}">${customer.getPrimaryEmail()}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 mt-md-0 mt-3">
-                                            <label for="recommendCourseUsingAICustomerId">Customer ID</label>
-                                            <select id="recommendCourseUsingAICustomerId" class="form-select w-100" name="recommendCourseUsingAICustomerId" required> 
-                                                <c:forEach items="${requestScope.courseVector}" var="course">
-                                                    <option value="${course.getId()}">${course.getTitle()}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
 
-                                    </div>  
-                                    <br/>
-                                    <div class="row">
-                                        <div class="col-md-8 mt-md-0 mt-3">
-                                            <input type="text" class="form-control" placeholder="AI-Generated Recommendation" aria-label="AI-Generated Recommendation">
-                                        </div>
-                                    </div>
-
-                                    <input type="hidden" name="service" value="recommendCourseUsingAI">
-                                    <div class="col-md-6 mt-md-0 mt-3">
-                                        <div class="text-center mt-4">
-                                            <button type="submit" name="recommendCourseUsingAI" class="btn btn-primary w-100">Recommend course using AI</button> 
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div>
-                            <!-- Reconmmend course using AI end-->
                         </div>
                     </div>
                 </div>

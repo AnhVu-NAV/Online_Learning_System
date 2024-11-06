@@ -129,4 +129,20 @@ public class Course {
         this.numberOfLearner = numberOfLearner;
     }
 
+    @Override
+    public String toString() {
+        return "Course{"
+                + "id=" + id
+                + ", title='" + title + '\''
+                + ", subtitle='" + subtitle + '\''
+                + ", expertId=" + expertId
+                + ", totalDuration=" + totalDuration
+                + ", categoryId=" + categoryId
+                + ", description='" + description + '\''
+                + ", status=" + status
+                + ", updatedDate=" + updatedDate
+                + ", createdDate=" + createdDate
+                + ", numberOfLearner=" + numberOfLearner
+                + '}';
+    }
 }

@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Vector;
 import util.DataConvert;
 import model.*;
+import sendEmail.EmailService;
+import sendEmail.IJavaMail;
 
 /**
  *
@@ -157,6 +159,10 @@ public class SaleRegistrationDashboardController extends HttpServlet {
             }
             //paging
             int nrpp = 10;
+            String nrppRaw = request.getParameter("nrpp");
+            if(nrppRaw!=null){
+                 nrpp = Integer.parseInt(nrppRaw);
+            }
             personalCourseVector = personalCourseDAO.getPersonalCourses(sql);
             int totalPage = (personalCourseVector.size() + nrpp - 1) / nrpp;
             String indexRaw = request.getParameter("index");
@@ -179,6 +185,7 @@ public class SaleRegistrationDashboardController extends HttpServlet {
             request.setAttribute("customerVector", customerVector);
             request.setAttribute("checked", checked);
             request.setAttribute("totalPage", totalPage);
+            request.setAttribute("nrpp", nrpp);
 
             // select view
             RequestDispatcher dispath = request.getRequestDispatcher("jsp/ViewRegistrationList.jsp");
@@ -187,26 +194,24 @@ public class SaleRegistrationDashboardController extends HttpServlet {
 
         }
         if (service.equals("recommendCourse")) {
-            // Tạo đường dẫn thư mục lưu ảnh trong project
-            String uploadPath = imageUploadDirectory;
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+            String recommendCourseCustomerEmail = request.getParameter("recommendCourseCustomerEmail");
+            int recommendCourseCourseId = Integer.parseInt(request.getParameter("recommendCourseCourseId"));
+            String recommendCourseTextContent = request.getParameter("recommendCourseTextContent");
+            Course course = courseDAO.getCourseById(recommendCourseCourseId);
+            if (recommendCourseTextContent == null) {
+                recommendCourseTextContent = "";
             }
+            String subject = "Recommend course for you";
+            String emailContent = recommendCourseTextContent+"\n"+course.toString();
+            IJavaMail emailService = new EmailService();
+            emailService.send(recommendCourseCustomerEmail, subject, emailContent);
+            //set data for view 
+            request.setAttribute("message", "Recommend course successfully");
 
-            // Danh sách lưu tên ảnh
-            List<String> imageFileNames = new ArrayList<>();
-
-            // Duyệt qua tất cả các phần của file upload
-            for (Part part : request.getParts()) {
-                if ("courseImages".equals(part.getName()) && part.getSize() > 0) {
-                    String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-                    imageFileNames.add(fileName);
-                    // Lưu ảnh vào thư mục uploadPath
-                    part.write(uploadPath + File.separator + fileName);
-                }
-            }
-
+            // select view
+            RequestDispatcher dispath = request.getRequestDispatcher("SaleRegistrationDashboardController?service=viewAllRegistration");
+            //run
+            dispath.forward(request, response);
         }
         if (service.equals("viewRegistrationDetails")) {
             String idRaw = request.getParameter("id");
