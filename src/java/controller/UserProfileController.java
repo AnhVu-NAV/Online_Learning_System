@@ -55,27 +55,35 @@ public class UserProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        // Lấy thông tin người dùng từ request hoặc session
-        int userId = Integer.parseInt(request.getParameter("userId"));
+         try {
+            // Parse user ID from request
+            int userId = Integer.parseInt(request.getParameter("userId"));
 
-        // Khởi tạo đối tượng UserDAO
-        UserDAO accountDAO = new UserDAO();
-        
-        // Lấy thông tin chi tiết của người dùng từ cơ sở dữ liệu
-        User user = accountDAO.getUserById(userId);
-        
-        // Kiểm tra nếu người dùng không tồn tại
-        if (user == null) {
-            // Xử lý lỗi hoặc chuyển hướng về trang lỗi
-            response.sendRedirect("error.jsp");
-            return;
+            // Instantiate UserDAO to retrieve user data
+            UserDAO userDAO = new UserDAO();
+
+            // Get user details from the database
+            User user = userDAO.getUserById(userId);
+
+            // Handle case where user is not found
+            if (user == null) {
+                response.sendRedirect("error.jsp");
+                return;
+            }
+
+            // Set user information as a request attribute
+            request.setAttribute("user", user);
+
+            // Forward request to UserProfile.jsp
+            request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
+        } catch (NumberFormatException e) {
+            // Handle invalid user ID format
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid user ID format");
+        } catch (Exception e) {
+            // Handle unexpected exceptions
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing your request.");
         }
-        
-        // Đặt thông tin người dùng vào request
-        request.setAttribute("user", user);
-        
-        // Chuyển tiếp đến trang JSP hiển thị thông tin người dùng
-        request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
     } 
 
     /** 
