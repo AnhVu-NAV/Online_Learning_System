@@ -5,6 +5,7 @@
 package controller;
 
 import dal.LessonDAO;
+import dal.QuizDAO;
 import jakarta.servlet.ServletContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import model.Lesson;
+import model.Quiz;
 import model.TextContent;
 import model.VideoContent;
 
@@ -59,6 +61,7 @@ public class LessonController extends HttpServlet {
         if (lessonIdParam != null && !lessonIdParam.isEmpty()) {
 
             int lessonId = Integer.parseInt(lessonIdParam);
+            request.setAttribute("currentLessonId", lessonId);
             LessonDAO lDAO = new LessonDAO();
             Lesson lesson = lDAO.getLessonById(lessonId);
 
@@ -88,31 +91,48 @@ public class LessonController extends HttpServlet {
                         request.getRequestDispatcher("ChapterDisplayController").forward(request, response);
                     }
                 } else if (lesson.getLessonTypeId() == 2) {
-                    request.setAttribute("quizId", lessonId); 
-                    request.setAttribute("questionNumber", 1); 
+                    QuizDAO quizDAO = new QuizDAO();
+                    Quiz quiz = quizDAO.getQuizById(lessonId); 
 
-                    // Chuyển tiếp đến QuizController với quizId và questionNumber
-                    request.getRequestDispatcher("QuizHandleController").forward(request, response);
+                    if (quiz != null) {
+                        if (quiz.getType() == 1) {
+                            
+                            request.setAttribute("quizId", lessonId);
+                            request.setAttribute("questionNumber", 1); // Bắt đầu từ câu hỏi đầu tiên
+                            request.getRequestDispatcher("QuizHandleController").forward(request, response);
+
+                        } else if (quiz.getType() == 2) {
+                            
+                           request.getRequestDispatcher("SpecialQuizController").forward(request, response);
+                        }
+                    }
                 }
             }
+            
         }
+        
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        @Override
+        protected void doPost
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
+
+    
 
     private String readDescriptionFromFile(String lessonId, HttpServletRequest request) throws IOException {
         // Sử dụng ServletContext để lấy đường dẫn tuyệt đối đến thư mục chứa các file .txt

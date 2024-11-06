@@ -105,12 +105,12 @@
 </head>
 <body>
     <div class="container">
-        <!-- Tiêu đề câu hỏi -->
+      
         <div class="question-title">Câu hỏi: Hãy viết về chủ đề "Lợi ích của việc học ngoại ngữ".</div>
 
         <!-- Form cho người dùng trả lời -->
         <form action="SpecialQuizController" method="post" enctype="multipart/form-data">
-            <!-- Trường nhập câu trả lời dạng văn bản -->
+            
             <div class="form-group">
                 <label for="textAnswer">Your Answer:</label>
                 <textarea name="textAnswer" id="textAnswer" placeholder="Nhập câu trả lời của bạn..." required></textarea>
@@ -131,7 +131,7 @@
             </div>
 
             <!-- Nút Submit -->
-            <button type="submit" class="submit-button">Submit</button>
+            <button type="submit" class="submit-button">Continue</button>
         </form>
     </div>
 </body>

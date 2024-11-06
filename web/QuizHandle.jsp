@@ -307,7 +307,7 @@
             <!-- Question Content -->
             <div class="question-content">
                 <div class="question-title">
-                    Câu hỏi ${questionNumber}: ${question.content}
+                    Question ${questionNumber}: ${question.content}
                 </div>
 
 

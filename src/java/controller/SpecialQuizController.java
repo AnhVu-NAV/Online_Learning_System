@@ -56,11 +56,11 @@ public class SpecialQuizController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("SpecialQuizHandle.jsp").forward(request, response);
     }
+    
 
     @Override
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        
         response.sendRedirect("ChapterDisplayController");

@@ -123,12 +123,21 @@
             }
 
             .lesson {
+                display: flex;
+                align-items: center;
                 padding: 5px 0;
+                border-bottom: 1px solid #ccc;
             }
 
             .lesson a {
                 color: #fff;
                 text-decoration: none;
+                margin-left: 10px;
+            }
+
+            .lesson a.current-lesson {
+                font-weight: bold;
+                color: #5a67d8; /* Màu bôi đậm cho bài học hiện tại */
             }
 
             .lesson a:hover {
@@ -259,14 +268,14 @@
 
         </style>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Đảm bảo jQuery được tải -->
+
         <script>
             // Script để xử lý ẩn/hiện sidebar
             $(document).ready(function () {
                 $("#toggle-btn").click(function () {
                     $("#sidebar").toggleClass("hidden");
                 });
-
-
 
                 // Script để xử lý ẩn/hiện danh sách bài học và đổi icon
                 $(".chapter-title").click(function () {
@@ -304,9 +313,28 @@
                         popup.classList.remove("show");
                     }
                 });
+
+                // Lưu trạng thái hoàn thành cho các checkbox
+                const lessons = document.querySelectorAll('.lesson input[type="checkbox"]');
+                lessons.forEach(checkbox => {
+                    const lessonId = checkbox.id.replace("completed_", "");
+                    const isCompleted = localStorage.getItem("completed_" + lessonId) === "true";
+                    checkbox.checked = isCompleted;
+
+                    // Gán sự kiện toggleCompleted cho từng checkbox
+                    checkbox.addEventListener("change", function () {
+                        toggleCompleted(lessonId);
+                    });
+                });
             });
 
+            // Hàm lưu trạng thái hoàn thành của bài học vào localStorage
+            function toggleCompleted(lessonId) {
+                const checkbox = document.getElementById("completed_" + lessonId);
+                localStorage.setItem("completed_" + lessonId, checkbox.checked);
+            }
         </script>
+
     </head>
     <body>
         <div id="header">
@@ -343,8 +371,9 @@
                     <div class="lesson-list">
                         <c:forEach var="lesson" items="${lessonsMap[chapter.id]}">
                             <div class="lesson">
-                                <a href="LessonController?lesson_id=${lesson.id}">${lesson.title}</a>
-                            </div>
+                                <input type="checkbox" id="completed_${lesson.id}" name="completed_${lesson.id}" onclick="toggleCompleted(${lesson.id})">
+                                <a href="LessonController?lesson_id=${lesson.id}"class="<c:if test='${currentLessonId == lesson.id}'>current-lesson</c:if>">${lesson.title}</a>
+                                </div>
                         </c:forEach>
                     </div>
                 </div>
@@ -360,7 +389,7 @@
 
                 <c:when test="${not empty textHtmlContent}">
                     <div class="text-html-content">
-                        
+
                         <div class="html-content">
                             <c:out value="${textHtmlContent}" escapeXml="false"/> 
                         </div>

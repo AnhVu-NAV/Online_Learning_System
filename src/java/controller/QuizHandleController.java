@@ -208,7 +208,7 @@ public class QuizHandleController extends HttpServlet {
 
         // Đặt trạng thái phản hồi là OK (200) để kết thúc xử lý mà không cần trả về HTML
         response.setStatus(HttpServletResponse.SC_OK);
-        response.sendRedirect("LessonView.jsp");
+        response.sendRedirect("ChapterDisplayController");
     }
 
     @Override
