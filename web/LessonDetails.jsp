@@ -14,14 +14,14 @@
         <script>
             window.onload = function () {
                 handleLessonTypeChange(); // Kiểm tra và hiển thị các phần tử khi trang tải
+                updatePreview(); // Hiển thị preview ban đầu nếu có nội dung
             };
-            // JavaScript function to handle the lesson type selection change
+
             function handleLessonTypeChange() {
                 const lessonType = document.getElementById('lessonType').value;
                 const videoLinkSection = document.getElementById('videoLinkSection');
                 const htmlContentSection = document.getElementById('htmlContentSection');
 
-                // Display relevant sections based on selected lesson type
                 if (lessonType === 'LearningMaterial') {
                     videoLinkSection.style.display = 'flex';
                     htmlContentSection.style.display = 'flex';
@@ -31,6 +31,10 @@
                 }
             }
 
+            function updatePreview() {
+                const htmlContent = document.getElementById('html_content').value;
+                document.getElementById('preview').innerHTML = htmlContent;
+            }
         </script>
     </head>
     <body>
@@ -63,7 +67,7 @@
                         </c:if>
 
                         <form action="${pageContext.request.contextPath}/${lesson != null ? 'updateLesson' : 'createLesson'}" method="post">
-                           <input type="hidden" name="lessonId" value="${lesson.lessonId}">
+                            <input type="hidden" name="lessonId" value="${lesson.lessonId}">
 
                             <!-- Title and Type -->
                             <div class="FormRow">
@@ -108,10 +112,11 @@
                             <!-- HTML Content Section for Learning Material -->
                             <div class="FormTextField" id="htmlContentSection" style="display: ${lesson != null && lesson.lessonTypeId != null && lesson.lessonTypeId.value == 'LearningMaterial' ? 'flex' : 'none'};">
                                 <label class="Label">HTML content<span class="Required">*</span></label>
-                                <textarea class="Input" name="html_content" rows="5">${lesson != null && lesson.learningMaterials != null && lesson.learningMaterials.size() > 0 ? lesson.learningMaterials[0].htmlContent : ''}</textarea>
+                                <textarea class="Input" name="html_content" id="html_content" rows="5" oninput="updatePreview()">
+                                    ${lesson != null && lesson.learningMaterials != null && lesson.learningMaterials.size() > 0 ? lesson.learningMaterials[0].htmlContent : ''}
+                                </textarea>
                                 <span class="Extra">The HTML should be 10 characters.</span>
                             </div>
-
 
                             <!-- Footer buttons -->
                             <div class="Footer">
@@ -132,8 +137,13 @@
                             </button>
                         </div>
                     </div>-->
+                    <div class="Document">
+                        <h3>HTML Content Preview:</h3>
+                        <div id="preview" class="PreviewBox"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </body>
 </html>
+

@@ -25,7 +25,5 @@ public class SubjectTopic {
     private String title;
     private Vector<Lesson> lessons;
 
-    public SubjectTopic() {
-    }
     
 }
