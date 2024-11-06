@@ -6,11 +6,13 @@ package model;
 
 import java.sql.Date;
 import java.util.List;
+import lombok.ToString;
 
 /**
  *
  * @author AnhVuNAV
  */
+@ToString
 public class Course {
 
     private int id;
@@ -18,7 +20,9 @@ public class Course {
     private String subtitle; // Thêm thuộc tính subtitle
     private int expertId;
     private String description;
-    private String thumbnailUrl;
+    private List<String> thumbnailUrl; // New field for storing multiple thumbnail URLs
+    private int numberOfLearner;
+    private int status;
     private int numberOfLesson;
     private int price;
     private int salePrice;
@@ -26,26 +30,68 @@ public class Course {
     private Date updatedDate;
     private int categoryId;
     private float totalDuration;
+    private String categoryName;
+    private String ownerName;
     private List<String> taglines; // Thêm thuộc tính để lưu danh sách tagline
-    private int status;
-    private int numberOfLearner;
+    private List<String> thumbnailDescriptions;
 
     public Course() {
     }
 
-    public Course(int id, String title, int expertId, String description, String thumbnailUrl, int numberOfLesson, int price, int salePrice, Date createdDate, Date updatedDate, int categoryId, float totalDuration) {
+    public Course(int id, String title, String subtitle, int expertId, String description, List<String> thumbnailUrl, int numberOfLearner, int status, int price, int salePrice, Date createdDate, Date updatedDate, int categoryId, float totalDuration, String categoryName, String ownerName, List<String> taglines) {
         this.id = id;
         this.title = title;
+        this.subtitle = subtitle;
         this.expertId = expertId;
         this.description = description;
         this.thumbnailUrl = thumbnailUrl;
-        this.numberOfLesson = numberOfLesson;
+        this.numberOfLearner = numberOfLearner;
+        this.status = status;
         this.price = price;
         this.salePrice = salePrice;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
         this.categoryId = categoryId;
         this.totalDuration = totalDuration;
+        this.categoryName = categoryName;
+        this.ownerName = ownerName;
+        this.taglines = taglines;
+    }
+
+    public Course(int id, String title, String subtitle, int expertId, int categoryId, int duration, String description) {
+        this.id = id;
+        this.title = title;
+        this.subtitle = subtitle;
+        this.expertId = expertId;
+        this.description = description;
+        this.categoryId = categoryId;
+    }
+
+    public Course(String title, String subtitle, int expertId, int categoryId, int duration, String description) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.expertId = expertId;
+        this.description = description;
+        this.categoryId = categoryId;
+    }
+
+    public Course(int aInt, String string, String string0, int aInt0, int aInt1, String description, int aInt2) {
+        this.id = aInt;
+        this.title = string;
+        this.subtitle = string0;
+        this.expertId = aInt1;
+        this.description = description;
+        this.status = aInt2;
+        this.categoryId = aInt0;
+    }
+
+    public Course(String title, String subtitle, int categoryId, int ownerId, String description, int status) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.expertId = ownerId;
+        this.description = description;
+        this.status = status;
+        this.categoryId = categoryId;
     }
 
     public int getId() {
@@ -88,12 +134,36 @@ public class Course {
         this.description = description;
     }
 
-    public String getThumbnailUrl() {
+    public List<String> getThumbnailUrl() {
         return thumbnailUrl;
     }
 
-    public void setThumbnailUrl(String thumbnailUrl) {
+    public void setThumbnailUrl(List<String> thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public List<String> getThumbnailDescriptions() {
+        return thumbnailDescriptions;
+    }
+
+    public void setThumbnailDescriptions(List<String> thumbnailDescriptions) {
+        this.thumbnailDescriptions = thumbnailDescriptions;
     }
 
     public int getNumberOfLesson() {
@@ -140,6 +210,10 @@ public class Course {
         return categoryId;
     }
 
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public float getTotalDuration() {
         return totalDuration;
     }
@@ -172,28 +246,12 @@ public class Course {
         this.numberOfLearner = numberOfLearner;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Course{");
-        sb.append("id=").append(id);
-        sb.append(", title=").append(title);
-        sb.append(", subtitle=").append(subtitle);
-        sb.append(", expertId=").append(expertId);
-        sb.append(", description=").append(description);
-        sb.append(", thumbnailUrl=").append(thumbnailUrl);
-        sb.append(", numberOfLesson=").append(numberOfLesson);
-        sb.append(", price=").append(price);
-        sb.append(", salePrice=").append(salePrice);
-        sb.append(", createdDate=").append(createdDate);
-        sb.append(", updatedDate=").append(updatedDate);
-        sb.append(", categoryId=").append(categoryId);
-        sb.append(", totalDuration=").append(totalDuration);
-        sb.append(", taglines=").append(taglines);
-        sb.append(", status=").append(status);
-        sb.append(", numberOfLearner=").append(numberOfLearner);
-        sb.append('}');
-        return sb.toString();
+    public List<String> getThumbnailUrls() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrls(List<String> thumbnailUrls) {
+        this.thumbnailUrl = thumbnailUrls;
     }
 
 }

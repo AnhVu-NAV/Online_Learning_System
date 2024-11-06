@@ -15,6 +15,7 @@ import model.Tagline;
  */
 public class TaglineDAO extends DBContext {
 
+    //VuNA
     // Lấy tất cả các tagline
     public List<Tagline> getAllTaglines() throws SQLException {
         List<Tagline> taglinesList = new ArrayList<>();

@@ -12,6 +12,7 @@ public class Tagline {
 
     private int id;
     private String name;
+    private boolean checked; // Add this property
 
     public Tagline() {
     }
@@ -36,4 +37,13 @@ public class Tagline {
     public void setName(String name) {
         this.name = name;
     }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
 }

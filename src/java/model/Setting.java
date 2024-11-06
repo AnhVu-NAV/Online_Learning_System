@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package model;
 
 import java.util.Date;
@@ -15,12 +14,12 @@ import lombok.NoArgsConstructor;
  *
  * @author AnhVuNAV
  */
-
- @Data
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Setting {
+
     private int id;
     private int settingTypeId;
     private String value;
@@ -28,17 +27,13 @@ public class Setting {
     private String description;
     private Date createdDate;
     private Date updatedDate;
-    public Setting() {
-    }
 
-    public Setting(int id, int settingTypeId, String value, int status, String description, Date createdDate, Date updatedDate) {
+    public Setting(int id, int settingTypeId, String value, int status, String description) {
         this.id = id;
         this.settingTypeId = settingTypeId;
         this.value = value;
         this.status = status;
         this.description = description;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
     }
 
     public int getId() {
@@ -81,9 +76,6 @@ public class Setting {
         this.description = description;
     }
 
-    public Date getCreatedDate() {
-    }
-
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
@@ -95,5 +87,5 @@ public class Setting {
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
-    
+
 }

@@ -74,7 +74,7 @@ public class CourseDetailController extends HttpServlet {
             int courseId = Integer.parseInt(courseIdParam);
 
             CourseDAO courseDAO = new CourseDAO();
-            Course course = courseDAO.getCourseById(courseId);
+            Course course = courseDAO.getCourseByID(courseId);
             if (course == null) {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Course not found");
                 return;
@@ -88,9 +88,9 @@ public class CourseDetailController extends HttpServlet {
             LessonDAO lessonDAO = new LessonDAO();
 
             // Get chapters and lessons
-            List<Chapter> chapters = chapterDAO.getChaptersByCourseId(courseId);
+            List<Chapter> chapters = chapterDAO.getChaptersByCourseID(courseId);
             for (Chapter chapter : chapters) {
-                List<Lesson> lessons = lessonDAO.getLessonsByChapterId(chapter.getId());
+                List<Lesson> lessons = lessonDAO.getLessonsByChapterID(chapter.getId());
                 chapter.setLessons(lessons);
             }
 
