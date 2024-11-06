@@ -67,32 +67,15 @@ public class CourseListController extends HttpServlet {
             throws ServletException, IOException {
         CourseDAO courseDAO = new CourseDAO();
 
-        // Lấy danh sách các Course Categories
-        List<Setting> categories = courseDAO.getCourseCategories();
-        request.setAttribute("categories", categories);
-
-        // Lấy danh sách các Taglines
-        List<Tagline> taglines = courseDAO.getAllTaglines(); // Thêm dòng này
-        request.setAttribute("taglines", taglines); // Đặt danh sách tagline vào request
-
-        // Xử lý lọc danh sách khóa học theo danh mục
-        String[] selectedCategories = request.getParameterValues("category");
-        String[] selectedTaglines = request.getParameterValues("tagline"); // Lấy các tagline đã chọn
+        // Fetch search and filter parameters
         String searchKeyword = request.getParameter("search");
+        String[] selectedCategories = request.getParameterValues("category");
+        String[] selectedTaglines = request.getParameterValues("tagline");
         String sortOption = request.getParameter("sort");
-
-        // Lấy trạng thái checkbox từ request
-        String showTitle = request.getParameter("showTitle");
-        String showTagline = request.getParameter("showTagline");
-        String showPrice = request.getParameter("showPrice");
-
-        // Chuyển selectedCategories thành danh sách
-        List<String> selectedCategoriesList = selectedCategories != null ? Arrays.asList(selectedCategories) : new ArrayList<>();
-        List<String> selectedTaglinesList = selectedTaglines != null ? Arrays.asList(selectedTaglines) : new ArrayList<>();
-
-        // Xử lý phân trang
         int page = 1;
-        int pageSize = 15; // Giá trị mặc định
+        int pageSize = 15;
+
+        // Handle pagination and page size
         try {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
@@ -101,28 +84,103 @@ public class CourseListController extends HttpServlet {
                 pageSize = Integer.parseInt(request.getParameter("coursesPerPage"));
             }
         } catch (NumberFormatException e) {
-            page = 1; // Mặc định về trang 1 nếu lỗi định dạng
+            page = 1; // Default to page 1 if parsing fails
         }
 
-        // Lấy danh sách các khóa học dựa trên danh mục, từ khóa và phân trang
+        // Handle null values
+        if (searchKeyword == null) {
+            searchKeyword = "";
+        }
+
+        // Convert parameters to lists
+        List<String> selectedCategoriesList = selectedCategories != null ? Arrays.asList(selectedCategories) : new ArrayList<>();
+        List<String> selectedTaglinesList = selectedTaglines != null ? Arrays.asList(selectedTaglines) : new ArrayList<>();
+
+        // Fetch the courses based on filters
         List<Course> courses = courseDAO.getCoursesByCategoriesAndKeyword(selectedCategoriesList, searchKeyword, sortOption, page, pageSize);
 
-        // Tổng số khóa học để tính tổng số trang
+        // Fetch the total number of courses for pagination
         int totalCourses = courseDAO.getTotalCoursesByCategoriesAndKeyword(selectedCategoriesList, searchKeyword);
         int totalPages = (int) Math.ceil((double) totalCourses / pageSize);
 
-        // Đặt các thuộc tính cho request để chuyển tới JSP
+        // Fetch categories and taglines for filters
+        List<Setting> categories = courseDAO.getCourseCategories();
+        List<Tagline> taglines = courseDAO.getAllTaglines();
+
+        // After fetching courses from the database
+        System.out.println("Number of courses fetched: " + courses.size());
+        for (Course course : courses) {
+            System.out.println("Course ID: " + course.getId() + ", Title: " + course.getTitle());
+        }
+        // Set attributes for the request
         request.setAttribute("courses", courses);
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPages", totalPages);
+        request.setAttribute("categories", categories);
+        request.setAttribute("taglines", taglines);
         request.setAttribute("selectedCategories", selectedCategoriesList);
-        request.setAttribute("selectedTaglines", selectedTaglinesList); // Truyền danh sách tagline đã chọn
+        request.setAttribute("selectedTaglines", selectedTaglinesList);
         request.setAttribute("searchKeyword", searchKeyword);
         request.setAttribute("sortOption", sortOption);
-        request.setAttribute("showTitle", showTitle); // Truyền trạng thái checkbox
-        request.setAttribute("showTagline", showTagline); // Truyền trạng thái checkbox
-        request.setAttribute("showPrice", showPrice); // Truyền trạng thái checkbox
 
+        // Forward to JSP
+//        CourseDAO courseDAO = new CourseDAO();
+//
+//        // Lấy danh sách các Course Categories
+//        List<Setting> categories = courseDAO.getCourseCategories();
+//        request.setAttribute("categories", categories);
+//
+//        // Lấy danh sách các Taglines
+//        List<Tagline> taglines = courseDAO.getAllTaglines(); // Thêm dòng này
+//        request.setAttribute("taglines", taglines); // Đặt danh sách tagline vào request
+//
+//        // Xử lý lọc danh sách khóa học theo danh mục
+//        String[] selectedCategories = request.getParameterValues("category");
+//        String[] selectedTaglines = request.getParameterValues("tagline"); // Lấy các tagline đã chọn
+//        String searchKeyword = request.getParameter("search");
+//        String sortOption = request.getParameter("sort");
+//
+//        // Lấy trạng thái checkbox từ request
+//        String showTitle = request.getParameter("showTitle");
+//        String showTagline = request.getParameter("showTagline");
+//        String showPrice = request.getParameter("showPrice");
+//
+//        // Chuyển selectedCategories thành danh sách
+//        List<String> selectedCategoriesList = selectedCategories != null ? Arrays.asList(selectedCategories) : new ArrayList<>();
+//        List<String> selectedTaglinesList = selectedTaglines != null ? Arrays.asList(selectedTaglines) : new ArrayList<>();
+//
+//        // Xử lý phân trang
+//        int page = 1;
+//        int pageSize = 15; // Giá trị mặc định
+//        try {
+//            if (request.getParameter("page") != null) {
+//                page = Integer.parseInt(request.getParameter("page"));
+//            }
+//            if (request.getParameter("coursesPerPage") != null) {
+//                pageSize = Integer.parseInt(request.getParameter("coursesPerPage"));
+//            }
+//        } catch (NumberFormatException e) {
+//            page = 1; // Mặc định về trang 1 nếu lỗi định dạng
+//        }
+//
+//        // Lấy danh sách các khóa học dựa trên danh mục, từ khóa và phân trang
+//        List<Course> courses = courseDAO.getCoursesByCategoriesAndKeyword(selectedCategoriesList, searchKeyword, sortOption, page, pageSize);
+//
+//        // Tổng số khóa học để tính tổng số trang
+//        int totalCourses = courseDAO.getTotalCoursesByCategoriesAndKeyword(selectedCategoriesList, searchKeyword);
+//        int totalPages = (int) Math.ceil((double) totalCourses / pageSize);
+//
+//        // Đặt các thuộc tính cho request để chuyển tới JSP
+//        request.setAttribute("courses", courses);
+//        request.setAttribute("currentPage", page);
+//        request.setAttribute("totalPages", totalPages);
+//        request.setAttribute("selectedCategories", selectedCategoriesList);
+//        request.setAttribute("selectedTaglines", selectedTaglinesList); // Truyền danh sách tagline đã chọn
+//        request.setAttribute("searchKeyword", searchKeyword);
+//        request.setAttribute("sortOption", sortOption);
+//        request.setAttribute("showTitle", showTitle); // Truyền trạng thái checkbox
+//        request.setAttribute("showTagline", showTagline); // Truyền trạng thái checkbox
+//        request.setAttribute("showPrice", showPrice); // Truyền trạng thái checkbox
         // Chuyển tiếp tới JSP
         request.getRequestDispatcher("CourseList.jsp").forward(request, response);
     }

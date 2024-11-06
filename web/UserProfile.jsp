@@ -5,88 +5,113 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User Profile</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="css/userProfile.css">
-</head>
-<body>
-    <div class="page-container">
-        <div class="content-container">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <div class="account-officer">
-                    <img class="profile-img" src="${user.image_url}" alt="${user.first_name} ${user.last_name}">
-                    <div class="profile-details">
-                        <h3>${user.first_name} ${user.last_name}</h3>
-                        <p>Customer Operations</p>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Profile</title>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="css/userProfile.css">
+    </head>
+    <body>
+        <div class="ccontainer">
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <div class="top-page">
+                    <div>
+                    <button class="btn btn-back" onclick="history.back()">← Back</button>
+                    </div>
+                    <div>
+                    <h2>User Profile</h2>
                     </div>
                 </div>
-                <nav class="menu">
-                    <ul class="menu">
-                        <li><a href="#"><i class='bx bx-grid-alt'></i> Dashboard</a></li>
-                        <li><a href="#"><i class='bx bx-task'></i> Task</a></li>
-                        <li class="submenu">
-                            <a href="#"><i class='bx bx-user'></i> Customers <i class='bx bx-chevron-right'></i></a>
-                            <ul class="submenu-items">
-                                <li><a href="#">All</a></li>
-                                <li><a href="#">Account Upgrade</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><i class='bx bx-chat'></i> Chats</a></li>
-                        <li><a href="#"><i class='bx bx-error'></i> Disputes</a></li>
-                        <li><a href="#"><i class='bx bx-cog'></i> Settings</a></li>
-                    </ul>
-                </nav>
-                 <!--Your sidebar content here--> 
-            </aside>
 
-            <!-- Main Content -->
-            <main class="main-content">
-                <header class="header">
-                    <button class="back-button" onclick="history.back()">← Back</button>
-                    <h1>Personal Details</h1>
+            </div>
+            <div class="profile-container">
+
+                <!-- Profile Card - Left Side -->
+                <div class="profile-card">
+                    <img src="${user.imageUrl}" alt="Profile Image" class="profile-image">
+                    <h1 class="profile-name">${user.firstName} ${user.lastName}</h1>
+                    <div class="profile-contact">
+                        <p><strong>Email:</strong> ${user.primaryEmail}</p>
+                        <p><strong>Phone:</strong> ${user.firstPhone}</p>
+                        <p><strong>Gender:</strong> 
+                        <c:choose>
+                            <c:when test="${user.gender == 1}">Male</c:when>
+                            <c:when test="${user.gender == 2}">Female</c:when>
+                            <c:otherwise>Other</c:otherwise>
+                        </c:choose>
+                        </p>
+                        <p><strong>Date of Birth:</strong> ${user.dob}</p>
+                    </div>
                     <a href="UpdateUserProfile?userId=${user.id}">
-                        <button class="next-profile-button">Update Profile →</button>
+                        <button class="btn btn-update">Update Profile</button>
                     </a>
-                </header>
-                <section class="personal-section">
-                    <div class="personal-details">
-                        <img class="verification-photo" src="${user.image_url}" alt="Verification">
-                        <div class="details">
-                            <p><strong>Name:</strong> ${user.first_name} ${user.last_name}</p>
-                            <p><strong>Gender:</strong> ${user.gender ? 'Male' : 'Female'}</p>
-                            <p><strong>Date of Birth:</strong> ${user.dob}</p>
-                            <p><strong>Nationality:</strong> ${user.address}</p>
+                </div>
+
+                <!-- Details Cards - Right Side -->
+                <div class="details-container">
+
+                    <!-- Contact Details Card -->
+                    <div class="details-card">
+                        <div class="card-header">
+                            <h2 class="card-title">Contact Details</h2>
+                        </div>
+                        <div class="details-list">
+                            <div class="details-item">
+                                <div class="item-label">
+                                    <i class='bx bx-envelope'></i>
+                                    <span>Primary Email</span>
+                                </div>
+                                <span class="item-status status-active">${user.primaryEmail}</span>
+                            </div>
+                            <c:if test="${not empty user.secondaryEmail}">
+                                <div class="details-item">
+                                    <div class="item-label">
+                                        <i class='bx bx-envelope'></i>
+                                        <span>Secondary Email</span>
+                                    </div>
+                                    <span class="item-status">${user.secondaryEmail}</span>
+                                </div>
+                            </c:if>
+                            <div class="details-item">
+                                <div class="item-label">
+                                    <i class='bx bx-phone'></i>
+                                    <span>Primary Phone</span>
+                                </div>
+                                <span class="item-status status-active">${user.firstPhone}</span>
+                            </div>
+                            <c:if test="${not empty user.secondPhone}">
+                                <div class="details-item">
+                                    <div class="item-label">
+                                        <i class='bx bx-phone'></i>
+                                        <span>Secondary Phone</span>
+                                    </div>
+                                    <span class="item-status">${user.secondPhone}</span>
+                                </div>
+                            </c:if>
+                            <div class="details-item">
+                                <div class="item-label">
+                                    <i class='bx bx-home'></i>
+                                    <span>Address</span>
+                                </div>
+                                <span class="item-status">${user.address}</span>
+                            </div>
+                            <div class="details-item">
+                                <div class="item-label">
+                                    <i class='bx bx-chat'></i>
+                                    <span>Preferred Contact</span>
+                                </div>
+                                <span class="item-status status-active">${user.preferContact}</span>
+                            </div>
                         </div>
                     </div>
-                </section>
-
-                <section class="address-section">
-                    <h2>Address</h2>
-                    <p><strong>Address Line:</strong> ${user.address}</p>
-                </section>
-
-                <section class="contact-section">
-                    <h2>Contact Details</h2>
-                    <p><strong>Phone Number:</strong> ${user.phone}</p>
-                    <p><strong>Email:</strong> ${user.email}</p>
-                </section>
-
-                <!-- Account Tier Section -->
-                <section class="account-tier-section">
-                    <h2>Account Tier</h2>
-                    <div class="account-tier">
-                        <label><input type="radio" name="tier" checked> Tier 1 (Current)</label>
-                        <label><input type="radio" name="tier"> Tier 2</label>
-                        <label><input type="radio" name="tier"> Tier 3</label>
-                    </div>
-                </section>
-            </main>
+                </div>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

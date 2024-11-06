@@ -80,36 +80,32 @@ public class CourseDetailController extends HttpServlet {
                 return;
             }
 
+            // Get all thumbnail URLs for the course
+            List<String> thumbnailUrls = courseDAO.getThumbnailUrlsByCourseId(courseId);
+            course.setThumbnailUrls(thumbnailUrls);
+
             ChapterDAO chapterDAO = new ChapterDAO();
             LessonDAO lessonDAO = new LessonDAO();
 
-            // Lấy danh sách chương
+            // Get chapters and lessons
             List<Chapter> chapters = chapterDAO.getChaptersByCourseId(courseId);
-
-            // Lấy bài học cho từng chương
             for (Chapter chapter : chapters) {
                 List<Lesson> lessons = lessonDAO.getLessonsByChapterId(chapter.getId());
                 chapter.setLessons(lessons);
             }
-            PricePackage pricePackage = courseDAO.getPricePackageByCourseId(courseId);
 
-            // Lấy danh sách taglines
-            List<String> taglines = courseDAO.getTaglinesByCourseId(courseId);
-
-            // Lấy các khóa học liên quan dựa trên taglines hoặc category
-            List<Course> relatedCourses = courseDAO.getRelatedCoursesByTaglines(taglines, courseId);
-            if (relatedCourses.isEmpty()) {
-                relatedCourses = courseDAO.getRelatedCourses(course.getCategoryId(), course.getExpertId(), course.getId());
-            }
+            // Get price packages
             PricePackageDAO pricePackageDAO = new PricePackageDAO();
             List<PricePackage> pricePackages = pricePackageDAO.getPricePackagesByCourseId(courseId);
+
+            // Set attributes for the JSP
             request.setAttribute("course", course);
             request.setAttribute("chapters", chapters);
-            request.setAttribute("pricePackage", pricePackage);
             request.setAttribute("pricePackages", pricePackages);
-            request.setAttribute("taglines", taglines);
-            request.setAttribute("relatedCourses", relatedCourses);
-
+            request.setAttribute("taglines", courseDAO.getTaglinesByCourseId(courseId));
+            request.setAttribute("relatedCourses", courseDAO.getRelatedCourses(course.getCategoryId(), course.getExpertId(), course.getId()));
+            System.out.println("Related Courses: " + courseDAO.getRelatedCourses(course.getCategoryId(), course.getExpertId(), course.getId()));
+            // Forward to the JSP
             request.getRequestDispatcher("CourseDetails.jsp").forward(request, response);
 
         } catch (NumberFormatException e) {

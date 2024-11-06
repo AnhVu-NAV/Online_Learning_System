@@ -54,7 +54,10 @@
 
                 <!-- Add the Generate AI Button -->
                 <div class="generate-ai-button">
-                    <button id="generateAIAnalysis" class="generate-ai-btn">Generate AI Analysis</button>
+                    <button id="generateAIAnalysis" class="generate-ai-btn">
+                        <img src="img/AI_Logo_Light.svg" alt="AI Icon" class="ai-icon"> <!-- Use a sparkle icon here, e.g., Unicode sparkle character -->
+                        AI-Powered Changes
+                    </button>
                     <!--<button onclick="location.href = 'GenerateAI.jsp'" class="generate-ai-btn">Generate AI</button>-->
                 </div>
 
@@ -278,9 +281,12 @@
                                         .replace(/Need to be updated with new knowledge:/, "<strong>Need to be updated with new knowledge:</strong>")
                                         .replace(/\n\d+\./g, match => `<br/><strong>${match}</strong>`)
                                         .replace(/\n/g, "<br/>");
+                                
+                                console.log(formattedContent);
+                                return formattedContent;
 
                                 // Set formatted content in the modal
-                                document.getElementById("aiResponse").innerHTML = `<div>${formattedContent}</div>`;
+//                                document.getElementById("aiResponse").innerHTML = `<div>${formattedContent}</div>`;
                             }
 
 
@@ -307,8 +313,8 @@
                                             // Temporarily set static content for testing
 //                                            $("#aiResponse").html("<p>This is a test content for AI response area.</p>");
                                             // Pass response to formatAIResponse for formatting and display
-//                                            formatAIResponse(response);
-                                            $("#aiResponse").html(response)
+                                            formatAIResponse(response);
+                                            $("#aiResponse").html(formatAIResponse(response))
                                         },
                                         error: function () {
                                             $("#aiResponse").html("Failed to get response from AI.");
@@ -330,6 +336,8 @@
                                             // Pass follow-up response to formatAIResponse
 //                                            $("#aiResponse").append("<p><strong>AI:</strong> </p>");
                                             formatAIResponse(response);
+//                                            $("#aiResponse").html(response)
+                                            $("#aiResponse").html(formatAIResponse(response))
                                         },
                                         error: function () {
                                             $("#aiResponse").append("<p>Failed to get response from AI.</p>");

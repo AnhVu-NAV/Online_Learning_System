@@ -141,20 +141,28 @@
                     <c:forEach var="course" items="${courses}">
                         <div class="course-card">
                             <a href="CourseDetail?courseId=${course.id}">
-                                <img src="${course.thumbnailUrl}" class="thumbnail" alt="${course.title}">
+                                <c:if test="${course.thumbnailUrls != null && !course.thumbnailUrls.isEmpty()}">
+                                    <img src="${course.thumbnailUrls[0]}" class="thumbnail" alt="${course.title}">
+                                </c:if>
+                                <c:if test="${course.thumbnailUrls == null || course.thumbnailUrls.isEmpty()}">
+                                    <img src="default-thumbnail.jpg" class="thumbnail" alt="${course.title}">
+                                </c:if>
                                 <div class="course-info">
                                     <h3 class="course-title">${course.title}</h3>
                                     <p class="course-subtitle">${course.subtitle}</p>
                                     <div class="course-tagline">
-                                        <c:forEach var="tagline" items="${course.taglines}">
-                                            <div class="tag">
-                                                <i class="fas fa-tag"></i>
-                                                <span class="tagline">${tagline}</span>
-                                            </div>
-                                        </c:forEach>
-
+                                        <c:if test="${course.taglines != null && !course.taglines.isEmpty()}">
+                                            <c:forEach var="tagline" items="${course.taglines}">
+                                                <div class="tag">
+                                                    <i class="fas fa-tag"></i>
+                                                    <span class="tagline">${tagline}</span>
+                                                </div>
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="${course.taglines == null || course.taglines.isEmpty()}">
+                                            <p>No taglines available.</p>
+                                        </c:if>
                                     </div>
-
                                     <div class="pricing">
                                         <span class="list-price">$${course.price}</span>
                                         <span class="sale-price">$${course.salePrice}</span>
@@ -165,6 +173,7 @@
                         </div>
                     </c:forEach>
                 </div>
+
 
                 <!-- Pagination -->
                 <div class="pagination">

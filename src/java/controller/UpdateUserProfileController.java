@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Date;
 import model.User;
 
 /**
@@ -68,11 +69,8 @@ public class UserListController extends HttpServlet {
     throws ServletException, IOException {
         int userId = Integer.parseInt(request.getParameter("userId"));
 
-        UserDAO accountDAO = new UserDAO();
-        User user = accountDAO.getUserById(userId);
-        Account user = accountDAO.getUserById(userId);
-        AccountDAO accountDAO = new AccountDAO();
-        User user = accountDAO.getUserById(userId);
+        UserDAO userDAO = new UserDAO();
+        User user = userDAO.getUserById(userId);
 
         if (user == null) {
             response.sendRedirect("error.jsp");
@@ -92,33 +90,47 @@ public class UserListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int userId = Integer.parseInt(request.getParameter("userId"));
-        String firstName = request.getParameter("first_name");
-        String lastName = request.getParameter("last_name");
-        String phone = request.getParameter("phone");
-        boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
-        String address = request.getParameter("address");
-        String imageUrl = request.getParameter("image_url");
+         try {
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            String firstName = request.getParameter("firstName");
+            String lastName = request.getParameter("lastName");
+            String primaryEmail = request.getParameter("primaryEmail");
+            String secondaryEmail = request.getParameter("secondaryEmail");
+            String firstPhone = request.getParameter("firstPhone");
+            String secondPhone = request.getParameter("secondPhone");
+            String genderParam = request.getParameter("gender");
+            int gender = genderParam != null ? Integer.parseInt(genderParam) : 3; // Default to 'Other'
+            String address = request.getParameter("address");
+            String imageUrl = request.getParameter("imageFile"); // File upload handling might need additional code
+            String preferContact = request.getParameter("preferContact");
+            Date dob = request.getParameter("dob") != null ? new java.text.SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dob")) : null;
 
-        UserDAO accountDAO = new UserDAO();
-        User user = accountDAO.getUserById(userId);
-        AccountDAO accountDAO = new AccountDAO();
-        User user = accountDAO.getUserById(userId);
+            UserDAO userDAO = new UserDAO();
+            User user = userDAO.getUserById(userId);
 
-        if (user == null) {
+            if (user == null) {
+                response.sendRedirect("error.jsp");
+                return;
+            }
+
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setPrimaryEmail(primaryEmail);
+            user.setSecondaryEmail(secondaryEmail);
+            user.setFirstPhone(firstPhone);
+            user.setSecondPhone(secondPhone);
+            user.setGender(gender);
+            user.setAddress(address);
+            user.setImageUrl(imageUrl);
+            user.setPreferContact(preferContact);
+            user.setDob(dob);
+
+            userDAO.updateUser(user);
+            response.sendRedirect("UserProfile?userId=" + userId);
+        } catch (Exception e) {
+            e.printStackTrace();
             response.sendRedirect("error.jsp");
-            return;
         }
-
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setPhone(phone);
-        user.setGender(gender);
-        user.setAddress(address);
-        user.setImageURL(imageUrl);
-
-        accountDAO.updateUser(user);
-        response.sendRedirect("UserProfile?userId=" + userId);
     }
 
     /** 

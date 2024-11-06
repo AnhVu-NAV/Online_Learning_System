@@ -19,6 +19,43 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <!-- Custom CSS -->
         <link rel="stylesheet" href="css/courseDetail.css">
+        <style>
+            /* Slider styling */
+            .slider-container {
+                position: relative;
+                max-width: 100%;
+                margin: auto;
+                overflow: hidden;
+            }
+            .slider {
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+            }
+            .slider img {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 5px;
+                border-radius: 5px;
+            }
+            .prev, .next {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 24px;
+                cursor: pointer;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: white;
+                border: none;
+                padding: 10px;
+                border-radius: 50%;
+            }
+            .prev {
+                left: 10px;
+            }
+            .next {
+                right: 10px;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -34,8 +71,15 @@
 
             <!-- Sidebar with Course Info -->
             <div class="course-info">
-                <div class="course-thumbnail">
-                    <img src="${course.thumbnailUrl}" alt="Course Image">
+                <!-- Slider container -->
+                <div class="slider-container">
+                    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+                    <div class="slider" id="slider">
+                        <c:forEach var="thumbnail" items="${course.thumbnailUrls}">
+                            <img src="${thumbnail}" alt="Course Thumbnail">
+                        </c:forEach>
+                    </div>
+                    <button class="next" onclick="changeSlide(1)">&#10095;</button>
                 </div>
                 <h2 class="course-title-detail">${course.title}</h2>
                 <h4 class="course-tagline-detail">${course.subtitle}</h4>
@@ -50,9 +94,13 @@
                     <span class="rating-number">4.5 (8,377 ratings) <br> 51,887 students</span>
                 </div>
                 <div class="course-price-detail">
-                    <span class="list-price">$<fmt:formatNumber value="${pricePackage.price}" /></span>
-                    <span class="sale-price">$<fmt:formatNumber value="${pricePackage.salePrice}" /></span>
+                    <c:if test="${not empty pricePackages}">
+                        <c:set var="pricePackage" value="${pricePackages[0]}" />
+                        <span class="list-price">$<fmt:formatNumber value="${pricePackage.price}" /></span>
+                        <span class="sale-price">$<fmt:formatNumber value="${pricePackage.salePrice}" /></span>
+                    </c:if>
                 </div>
+
                 <button class="register-btn primary" data-courseid="${course.id}" onclick="openRegisterPopup(this)">Register Now</button>
                 <button class="register-btn secondary">Save for Later</button>
                 <p class="money-back">30-Day Money-Back Guarantee</p>
@@ -109,15 +157,13 @@
                 <div class="course-content">
                     <h3>Course content</h3>
                     <div class="sections">
-                        <!-- Lặp qua các chương -->
                         <c:forEach var="chapter" items="${chapters}">
                             <div class="section">
                                 <h4>${chapter.title}</h4>
                                 <h5>${chapter.subtitle}</h5>
                                 <ul>
-                                    <!-- Lặp qua các bài học của từng chương -->
                                     <c:forEach var="lesson" items="${chapter.lessons}">
-                                        <li>Lesson Title: ${lesson.title} 
+                                        <li>Lesson Title: ${lesson.title}
                                             <span>Lesson Type: ${lesson.lessonTypeId == 1 ? 'Learning Material' : 'Quiz'}</span>
                                         </li>
                                     </c:forEach>
@@ -127,7 +173,6 @@
                     </div>
                     <button class="view-all">View All Sections</button>
                 </div>
-
 
                 <!-- Course Taglines -->
                 <div class="course-taglines">
@@ -146,8 +191,11 @@
                     <h3>Related Courses</h3>
                     <div class="courses-list slider" id="relatedCourses">
                         <c:forEach var="relatedCourse" items="${relatedCourses}">
-                            <div class="course-card">
-                                <img src="${relatedCourse.thumbnailUrl}" alt="Related Course ${relatedCourse.title}">
+                            <!-- Sử dụng thẻ <a> để bọc toàn bộ nội dung khóa học liên quan -->
+                            <a href="CourseDetail?courseId=${relatedCourse.id}" class="course-card">
+                                <c:if test="${not empty relatedCourse.thumbnailUrls}">
+                                    <img src="${relatedCourse.thumbnailUrls[0]}" alt="Related Course ${relatedCourse.title}">
+                                </c:if>
                                 <h4 class="course-title">${relatedCourse.title}</h4>
                                 <h5 class="course-subtitle">${relatedCourse.subtitle}</h5>
 
@@ -162,12 +210,13 @@
                                     <span class="list-price">$<fmt:formatNumber value="${relatedCourse.price}" /></span>
                                     <span class="sale-price">$<fmt:formatNumber value="${relatedCourse.salePrice}" /></span>
                                 </div>
-                                <button class="register-btn primary" onclick="openRegisterPopup('<%= courseId %>')">Register</button>
-                            </div>
+                                <!-- Button có thể không cần thiết khi sử dụng <a> -->
+                            </a>
                         </c:forEach>
-
                     </div>
                 </div>
+
+
             </div>
         </div>
 
@@ -176,6 +225,45 @@
         <%--<jsp:include page="/RegisterPopup.jsp"></jsp:include>--%>
 
         <script>
+            let currentSlideIndex = 0;
+            let autoSlideInterval;
+
+            function changeSlide(direction) {
+                const slider = document.getElementById('slider');
+                const slides = slider.querySelectorAll('img');
+                const totalSlides = slides.length;
+
+                currentSlideIndex += direction;
+                if (currentSlideIndex < 0) {
+                    currentSlideIndex = totalSlides - 1;
+                } else if (currentSlideIndex >= totalSlides) {
+                    currentSlideIndex = 0;
+                }
+
+                const slideWidth = slides[0].clientWidth + 10; // Image width + margin
+                slider.style.transform = `translateX(-${currentSlideIndex * slideWidth}px)`;
+            }
+
+// Tự động chuyển slide mỗi 3 giây (3000ms)
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(() => {
+                    changeSlide(1); // Chuyển sang slide tiếp theo
+                }, 3000); // 3000ms = 3 giây
+            }
+
+// Dừng tự động chuyển slide khi hover vào slider
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+
+// Bắt đầu tự động chuyển slide khi trang tải
+            window.onload = function () {
+                startAutoSlide();
+            };
+
+// Thêm sự kiện dừng/tự động chuyển slide khi hover vào slider
+            document.getElementById('slider').addEventListener('mouseenter', stopAutoSlide);
+            document.getElementById('slider').addEventListener('mouseleave', startAutoSlide);
             // Function to open the registration popup
             function openRegisterPopup(button) {
                 const courseId = button.getAttribute('data-courseid');
