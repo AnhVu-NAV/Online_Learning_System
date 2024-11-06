@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dal;
 
 import java.sql.Connection;
@@ -13,95 +9,89 @@ import java.util.List;
 import model.User;
 
 /**
- *
+ * UserDAO class for accessing and managing user data in the database.
+ * 
  * @author AnhVuNAV
  */
 public class UserDAO extends DBContext {
 
-    // Phương thức để lấy thông tin người dùng dựa trên ID
-    // Phương thức lấy thông tin người dùng dựa vào ID
+    // Method to get user details by ID
     public User getUserById(int id) {
         String query = "SELECT * FROM User WHERE id = ?";
         try {
-            // Chuẩn bị câu truy vấn và thiết lập tham số
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, id);
-
-            // Thực thi câu truy vấn
             ResultSet rs = ps.executeQuery();
-
-            // Kiểm tra và lấy kết quả
             if (rs.next()) {
-                User account = new User();
-                account.setId(rs.getInt("id"));
-                account.setEmail(rs.getString("primary_email"));
-                account.setFirstName(rs.getString("first_name"));
-                account.setLastName(rs.getString("last_name"));
-                account.setPassword(rs.getString("password"));
-                account.setDob(rs.getDate("dob"));
-                account.setRoleId(rs.getInt("role_id"));
-                account.setCreatedDate(rs.getDate("created_date"));
-                account.setStatus(rs.getInt("status"));
-                account.setPhone(rs.getString("first_phone"));
-                account.setGender(rs.getBoolean("gender"));
-//                account.setAddress(rs.getString("address"));
-                account.setImageURL(rs.getString("image_url"));
-                return account;
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setPrimaryEmail(rs.getString("primary_email"));
+                user.setPassword(rs.getString("password"));
+                user.setRoleId(rs.getInt("role_id"));
+                user.setCreatedDate(rs.getDate("created_date"));
+                user.setStatus(rs.getInt("status"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setDob(rs.getDate("dob"));
+                user.setGender(rs.getInt("gender"));
+                user.setFirstPhone(rs.getString("first_phone"));
+                user.setSecondPhone(rs.getString("second_phone"));
+                user.setSecondaryEmail(rs.getString("secondary_email"));
+                user.setImageUrl(rs.getString("image_url"));
+                user.setPreferContact(rs.getString("prefer_contact"));
+                user.setAddress(rs.getString("address"));
+                return user;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-//            closeConnection();
         }
-        return null; // Trả về null nếu không tìm thấy người dùng
+        return null; // Return null if the user is not found
     }
 
-    // Phương thức cập nhật thông tin người dùng
+    // Method to update user details
     public void updateUser(User user) {
-        String query = "UPDATE User SET first_name = ?, last_name = ?, phone = ?, gender = ?, address = ?, image_url = ? WHERE id = ?";
+        String query = "UPDATE User SET primary_email = ?, created_date = ?, first_name = ?, last_name = ?, dob = ?, gender = ?, first_phone = ?, second_phone = ?, secondary_email = ?, image_url = ?, prefer_contact = ?, address = ? WHERE id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, user.getFirstName());
-            ps.setString(2, user.getLastName());
-            ps.setString(3, user.getPhone());
-            ps.setBoolean(4, user.isGender());
-            ps.setString(5, user.getAddress());
-            ps.setString(6, user.getImageURL());
-            ps.setInt(7, user.getId());
+            ps.setString(1, user.getPrimaryEmail());
+            ps.setDate(2, new java.sql.Date(user.getCreatedDate().getTime()));
+            ps.setString(3, user.getFirstName());
+            ps.setString(4, user.getLastName());
+            ps.setDate(5, new java.sql.Date(user.getDob().getTime()));
+            ps.setInt(6, user.getGender());
+            ps.setString(7, user.getFirstPhone());
+            ps.setString(8, user.getSecondPhone());
+            ps.setString(9, user.getSecondaryEmail());
+            ps.setString(10, user.getImageUrl());
+            ps.setString(11, user.getPreferContact());
+            ps.setString(12, user.getAddress());
+            ps.setInt(13, user.getId());
+            
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-//            closeConnection();
         }
     }
 
-    public List<User> getExperts() throws SQLException {
-        // Khởi tạo danh sách để lưu trữ các chuyên gia
+    // Method to get a list of experts
+    public List<User> getExperts() {
         List<User> expertsList = new ArrayList<>();
-
-        // Câu truy vấn SQL để lấy danh sách người dùng có vai trò là 'Expert'
-        String sql = "SELECT * FROM User WHERE role_id = (SELECT id FROM Setting WHERE value = 'Expert' AND setting_type_id = 1)";
-
-        // Chuẩn bị câu lệnh truy vấn SQL
-        PreparedStatement statement = connection.prepareStatement(sql);
-
-        // Thực thi truy vấn
-        ResultSet resultSet = statement.executeQuery();
-
-        // Lặp qua từng bản ghi kết quả để tạo đối tượng User và thêm vào danh sách
-        while (resultSet.next()) {
-            User expert = new User(
-                    resultSet.getInt("id"),
-                    resultSet.getString("first_name"),
-                    resultSet.getString("last_name"),
-                    resultSet.getString("primary_email"),
-                    resultSet.getString("image_url")
-            );
-            expertsList.add(expert); // Thêm chuyên gia vào danh sách
+        String query = "SELECT * FROM User WHERE role_id = (SELECT id FROM Setting WHERE value = 'Expert' AND setting_type_id = 1)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User expert = new User();
+                expert.setId(rs.getInt("id"));
+                expert.setPrimaryEmail(rs.getString("primary_email"));
+                expert.setFirstName(rs.getString("first_name"));
+                expert.setLastName(rs.getString("last_name"));
+                expert.setImageUrl(rs.getString("image_url"));
+                expertsList.add(expert);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        return expertsList; // Trả về danh sách chuyên gia
+        return expertsList;
     }
-
 }
