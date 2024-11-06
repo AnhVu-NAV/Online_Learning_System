@@ -13,6 +13,7 @@ import java.util.List;
 
 @WebServlet(urlPatterns = {"/subjectLesson"})
 public class SubjectLessonServlet extends HttpServlet {
+
     private static final int RECORDS_PER_PAGE = 10;
 
     @Override
@@ -22,19 +23,35 @@ public class SubjectLessonServlet extends HttpServlet {
         String searchName = request.getParameter("searchName");
         String searchType = request.getParameter("searchType");
         String searchStatus = request.getParameter("searchStatus"); // Lấy searchStatus từ request
+        String recordsParam = request.getParameter("records");
 
         int page = 1;
+        int recordsPerPage = 10;
+
         if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
         }
 
+        //get no of record from user
+        // Kiểm tra giá trị recordsParam để đảm bảo nó là số hợp lệ
+        if (recordsParam != null && !recordsParam.trim().isEmpty()) {
+            try {
+                recordsPerPage = Integer.parseInt(recordsParam);
+                if (recordsPerPage < 1) { // Nếu số bản ghi nhỏ hơn 1, dùng giá trị mặc định
+                    recordsPerPage = 10;
+                }
+            } catch (NumberFormatException e) {
+                recordsPerPage = 10; // Nếu không thể chuyển thành số, dùng giá trị mặc định
+            }
+        }
+
         LessonDAO lessonDAO = new LessonDAO();
-        int offset = (page - 1) * RECORDS_PER_PAGE;
+        int offset = (page - 1) * recordsPerPage;
 
         // Lấy dữ liệu bài học dựa trên tìm kiếm, bao gồm cả searchStatus
-        List<Lesson> lessons = lessonDAO.getPaginatedLessons(offset, RECORDS_PER_PAGE, searchName, searchType, searchStatus);
+        List<Lesson> lessons = lessonDAO.getPaginatedLessons(offset, recordsPerPage, searchName, searchType, searchStatus);
         int noOfRecords = lessonDAO.getNoOfRecords(searchName, searchType, searchStatus); // Đếm bản ghi có searchStatus
-        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / RECORDS_PER_PAGE);
+        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 
         // Lấy danh sách các loại bài học cho searchType
         List<String> lessonTypes = lessonDAO.getAllLessonTypes();
@@ -43,6 +60,7 @@ public class SubjectLessonServlet extends HttpServlet {
         request.setAttribute("lessons", lessons);
         request.setAttribute("currentPage", page);
         request.setAttribute("noOfPages", noOfPages);
+        request.setAttribute("records", recordsPerPage);
         request.setAttribute("searchName", searchName);
         request.setAttribute("searchType", searchType);
         request.setAttribute("searchStatus", searchStatus); // Đặt thuộc tính searchStatus cho JSP
