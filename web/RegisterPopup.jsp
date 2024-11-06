@@ -1,9 +1,3 @@
-<%-- 
-    Document   : RegisterPopup
-    Created on : Oct 6, 2024, 10:56:15 PM
-    Author     : AnhVuNAV
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!-- Popup Background -->
@@ -34,22 +28,22 @@
             <div id="phoneSection">
                 <label for="phone1" style="display: block">Phone 1:</label> 
                 <input type="text" id="phone1" style="width: 100%" name="phone1" placeholder="Enter your phone number">
-                <label for="phone2" class="phone2" style="display: none;">Phone 2:</label> 
-                <input type="text" class="phone2" name="phone2" placeholder="Enter your second phone number" style="display: none; width: 100%;">
-                <button type="button" class="add-btn" onclick="addPhone()">+ Add another phone</button>
+                <label for="phone2" id="labelPhone2" class="phone2" style="display: none;">Phone 2:</label> 
+                <input type="text" id="phone2" class="phone2" name="phone2" placeholder="Enter your second phone number" style="display: none; width: 100%;">
+                <button type="button" class="add-btn" id="addPhoneBtn" onclick="addPhone()">+ Add another phone</button>
             </div>
 
             <div id="emailSection">
                 <label for="email1" style="display: block">Email 1:</label>
                 <input type="email" id="email1" style="width: 100%" name="email1" placeholder="Enter your email">
-                <label for="email2" class="email2" style="display: none;">Email 2:</label>
-                <input type="email" class="email2" name="email2" placeholder="Enter your second email" style="display: none; width: 100%;">
-                <button type="button" class="add-btn" onclick="addEmail()">+ Add another email</button>
+                <label for="email2" id="labelEmail2" class="email2" style="display: none;">Email 2:</label>
+                <input type="email" id="email2" class="email2" name="email2" placeholder="Enter your second email" style="display: none; width: 100%;">
+                <button type="button" class="add-btn" id="addEmailBtn" onclick="addEmail()">+ Add another email</button>
             </div>
 
             <label for="contactMethod">Preferred Contact Method:</label>
             <select id="contactMethod" name="contactMethod">
-                <!-- Các option này sẽ được cập nhật động -->
+                <!-- Options will be dynamically updated -->
             </select>
 
             <label for="gender">Gender:</label>
@@ -66,92 +60,59 @@
 </div>
 
 <script>
-   // Function to add a second email field
-function addEmail() {
-    const email2Elements = document.getElementsByClassName('email2');
-    for (let i = 0; i < email2Elements.length; i++) {
-        if (email2Elements[i].style.display === 'none') {
-            email2Elements[i].style.display = 'block'; // Hiển thị email thứ 2
-            // Thêm sự kiện lắng nghe cho email2 sau khi nó hiển thị
-            email2Elements[i].addEventListener('input', updateContactMethodOptions);
-        } else {
-            alert('Maximum 2 emails allowed');
+    function addPhone() {
+        document.getElementById('labelPhone2').style.display = 'block';
+        document.getElementById('phone2').style.display = 'block';
+        document.getElementById('addPhoneBtn').style.display = 'none';
+        updateContactMethodDropdown();
+    }
+
+    function addEmail() {
+        document.getElementById('labelEmail2').style.display = 'block';
+        document.getElementById('email2').style.display = 'block';
+        document.getElementById('addEmailBtn').style.display = 'none';
+        updateContactMethodDropdown();
+    }
+
+    function updateContactMethodDropdown() {
+        const phone1 = document.getElementById('phone1').value.trim();
+        const phone2 = document.getElementById('phone2').value.trim();
+        const email1 = document.getElementById('email1').value.trim();
+        const email2 = document.getElementById('email2').value.trim();
+        const contactMethod = document.getElementById('contactMethod');
+
+        // Clear existing options
+        contactMethod.innerHTML = '';
+
+        if (phone1) {
+            const option = document.createElement('option');
+            option.value = 'phone1';
+            option.textContent = 'Phone 1';
+            contactMethod.appendChild(option);
+        }
+        if (phone2) {
+            const option = document.createElement('option');
+            option.value = 'phone2';
+            option.textContent = 'Phone 2';
+            contactMethod.appendChild(option);
+        }
+        if (email1) {
+            const option = document.createElement('option');
+            option.value = 'email1';
+            option.textContent = 'Email 1';
+            contactMethod.appendChild(option);
+        }
+        if (email2) {
+            const option = document.createElement('option');
+            option.value = 'email2';
+            option.textContent = 'Email 2';
+            contactMethod.appendChild(option);
         }
     }
-    updateContactMethodOptions(); // Cập nhật dropdown sau khi hiển thị email thứ 2
-}
 
-// Function to add a second phone field
-function addPhone() {
-    const phone2Elements = document.getElementsByClassName('phone2');
-    for (let i = 0; i < phone2Elements.length; i++) {
-        if (phone2Elements[i].style.display === 'none') {
-            phone2Elements[i].style.display = 'block';
-            // Thêm sự kiện lắng nghe cho phone2 sau khi nó hiển thị
-            phone2Elements[i].addEventListener('input', updateContactMethodOptions);
-        } else {
-            alert('Maximum 2 phones allowed');
-        }
-    }
-    updateContactMethodOptions(); // Cập nhật dropdown sau khi hiển thị phone thứ 2
-}
-
-// Function to update the contact method dropdown based on entered values
-function updateContactMethodOptions() {
-    const contactMethod = document.getElementById('contactMethod');
-    const email1 = document.getElementById('email1').value;
-    const email2Element = document.querySelector('.email2');
-    const email2 = email2Element ? email2Element.value : ''; // Kiểm tra nếu tồn tại email2
-    const phone1 = document.getElementById('phone1').value;
-    const phone2Element = document.querySelector('.phone2');
-    const phone2 = phone2Element ? phone2Element.value : ''; // Kiểm tra nếu tồn tại phone2
-
-    // Xóa tất cả các tùy chọn hiện tại trong dropdown
-    contactMethod.innerHTML = '';
-
-    // Thêm vào các lựa chọn tùy thuộc vào giá trị đã nhập
-    if (email1) {
-        const optionEmail1 = document.createElement('option');
-        optionEmail1.value = 'email1';
-        optionEmail1.text = 'Email 1';
-        contactMethod.add(optionEmail1);
-    }
-    if (email2) {
-        const optionEmail2 = document.createElement('option');
-        optionEmail2.value = 'email2';
-        optionEmail2.text = 'Email 2';
-        contactMethod.add(optionEmail2);
-    }
-    if (phone1) {
-        const optionPhone1 = document.createElement('option');
-        optionPhone1.value = 'phone1';
-        optionPhone1.text = 'Phone 1';
-        contactMethod.add(optionPhone1);
-    }
-    if (phone2) {
-        const optionPhone2 = document.createElement('option');
-        optionPhone2.value = 'phone2';
-        optionPhone2.text = 'Phone 2';
-        contactMethod.add(optionPhone2);
-    }
-}
-
-// Lắng nghe sự kiện nhập liệu trên các trường và cập nhật dropdown
-document.getElementById('email1').addEventListener('input', updateContactMethodOptions);
-document.getElementById('phone1').addEventListener('input', updateContactMethodOptions);
-
-// Function to open and close the popup
-function openRegisterPopup() {
-    document.getElementById('registerPopup').style.display = 'flex';
-}
-
-function closeRegisterPopup() {
-    document.getElementById('registerPopup').style.display = 'none';
-}
-
-// Call this on page load to ensure the contact method dropdown is populated
-window.onload = function() {
-    updateContactMethodOptions();
-};
-
+    // Event listeners to update contact method dropdown on input change
+    document.getElementById('phone1').addEventListener('input', updateContactMethodDropdown);
+    document.getElementById('phone2').addEventListener('input', updateContactMethodDropdown);
+    document.getElementById('email1').addEventListener('input', updateContactMethodDropdown);
+    document.getElementById('email2').addEventListener('input', updateContactMethodDropdown);
 </script>
