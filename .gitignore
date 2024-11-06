@@ -1,3 +1,12 @@
+/build/
+/dist/
+*.xml
+nbproject/private/private.properties
+nbproject/private/private.xml
+nbproject/project.properties
+nbproject/private/private.xml
+/nbproject/private/
+
 # NetBeans specific folders
 nbproject/private/
 build/

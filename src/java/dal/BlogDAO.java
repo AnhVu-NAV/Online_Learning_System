@@ -70,4 +70,31 @@ public class BlogDAO extends DBContext {
 
         return noOfRecords;
     }
+
+    public Blogs getBlogById(int blogId) {
+    Blogs blog = null;
+    String query = "SELECT b.*, CONCAT(u.first_name, ' ', u.last_name) AS authorName FROM Blog b JOIN User u ON b.author_id = u.id WHERE b.id = ?";
+
+    try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+        pstmt.setInt(1, blogId);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            blog = new Blogs();
+            blog.setBlogId(rs.getInt("id"));
+            blog.setAuthorId(rs.getInt("author_id"));
+            blog.setTitle(rs.getString("title"));
+            blog.setContent(rs.getString("content"));
+            blog.setBriefInfo(rs.getString("brief_info"));
+            blog.setThumbnailUrl(rs.getString("thumbnail_url"));
+            blog.setCreatedDate(rs.getTimestamp("created_date"));
+            blog.setUpdatedDate(rs.getTimestamp("updated_date"));
+            blog.setAuthorName(rs.getString("authorName"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return blog;
+}
 }

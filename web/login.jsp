@@ -35,7 +35,7 @@
                 <h2>Hello,Again</h2>
                 <p>We are happy to have you back.</p>
                 <form action="<c:url value="/login"/>" id="formLogin" method="POST">
-                    <input type="text" name="email" id="email" placeholder="Email address" class="input-field">
+                    <input type="text" name="primary_email" id="primary_email" placeholder="Email address" class="input-field">
                     <input type="password" name="password" id="password" placeholder="Password" class="input-field">
                     <div class="remember-forgot">
                         <label><input type="checkbox" name="remember"> Remember Me</label>

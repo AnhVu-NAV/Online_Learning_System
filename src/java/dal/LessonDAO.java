@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -13,7 +14,6 @@ import java.sql.SQLException;
 import model.Lesson;
 import model.VideoContent;
 import java.sql.Connection;
-import model.Lesson;
 
 /**
  *
@@ -116,4 +116,61 @@ public class LessonDAO extends DBContext {
         }
         return lessons;
     }
+
+    public void updateLesson(int lessonId, String title, String type, int chapterId, int order, String videoLink, String htmlContent) throws SQLException {
+        String updateLessonQuery = "UPDATE lesson SET title = ?, lesson_type_id = ?, chapter_id = ?, `order` = ? WHERE id = ?";
+        System.out.println("Updating lesson with ID: " + lessonId); // kiểm tra id
+
+        try (PreparedStatement pstmt = connection.prepareStatement(updateLessonQuery)) {
+            // Cập nhật thông tin cơ bản của lesson
+            pstmt.setString(1, title);
+            pstmt.setInt(2, getLessonTypeId(type)); // Lấy ID của type từ bảng setting
+            pstmt.setInt(3, chapterId);
+            pstmt.setInt(4, order);
+            pstmt.setInt(5, lessonId); // Thêm lessonId vào câu truy vấn
+            pstmt.executeUpdate();
+
+            // Cập nhật thông tin liên quan đến LearningMaterial nếu type là "LearningMaterial"
+            if ("LearningMaterial".equals(type)) {
+                updateLearningMaterial(lessonId, videoLink, htmlContent);
+            }
+            System.out.println("Lesson updated successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error updating lesson: " + e.getMessage());
+            throw e; // Ném lỗi để servlet bắt được và hiển thị
+        }
+    }
+
+    private int getLessonTypeId(String type) throws SQLException {
+        String query = "SELECT id FROM setting WHERE value = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setString(1, type);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        }
+        throw new SQLException("Type not found in setting table: " + type); // Thông báo chi tiết hơn
+    }
+
+    private void updateLearningMaterial(int lessonId, String videoLink, String htmlContent) throws SQLException {
+        String updateVideoQuery = "UPDATE VideoContent SET video_url = ? WHERE lesson_id = ?";
+        String updateTextContentQuery = "UPDATE TextContent SET text_content = ? WHERE lesson_id = ?";
+
+        // Cập nhật video content nếu có video link
+        try (PreparedStatement videoStmt = connection.prepareStatement(updateVideoQuery)) {
+            videoStmt.setString(1, videoLink);
+            videoStmt.setInt(2, lessonId);
+            videoStmt.executeUpdate();
+        }
+
+        // Cập nhật HTML content nếu có htmlContent
+        try (PreparedStatement textStmt = connection.prepareStatement(updateTextContentQuery)) {
+            textStmt.setString(1, htmlContent);
+            textStmt.setInt(2, lessonId);
+            textStmt.executeUpdate();
+        }
+    }
+
 }
