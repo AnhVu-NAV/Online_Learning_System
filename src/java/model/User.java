@@ -12,50 +12,44 @@ import java.util.Date;
  */
 public class User {
     private int id;
-    private String email;
-    private String firstName; // first_name
-    private String lastName; // last_name
+    private String primaryEmail;
     private String password;
-    private Date dob; // Ngày sinh
-    private int roleId; // ID vai trò (Foreign key từ Setting)
-    private Date createdDate; // Ngày tạo tài khoản
-    private int status; // Trạng thái tài khoản (Active, Inactive, etc.)
-    private String phone; // Số điện thoại
-    private boolean gender; // Giới tính (true: Nam, false: Nữ)
-    private String address; // Địa chỉ
-    private String imageURL; // URL ảnh đại diện
-
-    public User(int id, String email, String firstName, String lastName, String password, Date dob, int roleId, Date createdDate, int status, String phone, boolean gender, String address, String imageURL) {
-        this.id = id;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.dob = dob;
-        this.roleId = roleId;
-        this.createdDate = createdDate;
-        this.status = status;
-        this.phone = phone;
-        this.gender = gender;
-        this.address = address;
-        this.imageURL = imageURL;
-    }
+    private int roleId;
+    private Date createdDate;
+    private int status;
+    private String firstName;
+    private String lastName;
+    private Date dob;
+    private int gender; 
+    private String firstPhone;
+    private String secondPhone;
+    private String secondaryEmail;
+    private String imageUrl;
+    private String preferContact;
+    private String address;
 
     public User() {
     }
-    
-    
 
-    
-    public User(int id, String firstName, String lastName, String string1, String string2) {
+    public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, int gender, String firstPhone, String secondPhone, String secondaryEmail, String imageUrl, String preferContact, String address) {
         this.id = id;
-        this.email = string1;
+        this.primaryEmail = primaryEmail;
+        this.password = password;
+        this.roleId = roleId;
+        this.createdDate = createdDate;
+        this.status = status;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.imageURL = string2;
+        this.dob = dob;
+        this.gender = gender;
+        this.firstPhone = firstPhone;
+        this.secondPhone = secondPhone;
+        this.secondaryEmail = secondaryEmail;
+        this.imageUrl = imageUrl;
+        this.preferContact = preferContact;
+        this.address = address;
     }
 
-    // Getters và Setters cho tất cả các thuộc tính
 
     public int getId() {
         return id;
@@ -65,12 +59,12 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPrimaryEmail() {
+        return primaryEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPrimaryEmail(String primaryEmail) {
+        this.primaryEmail = primaryEmail;
     }
 
     public String getPassword() {
@@ -81,12 +75,20 @@ public class User {
         this.password = password;
     }
 
-    public Date getDob() {
-        return dob;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public int getStatus() {
@@ -95,38 +97,6 @@ public class User {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public boolean isGender() {
-        return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
     }
 
     public String getFirstName() {
@@ -145,21 +115,68 @@ public class User {
         this.lastName = lastName;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public Date getDob() {
+        return dob;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public int getGender() {
+        return gender;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setGender(int gender) {
+        this.gender = gender;
     }
-    
+
+    public String getFirstPhone() {
+        return firstPhone;
+    }
+
+    public void setFirstPhone(String firstPhone) {
+        this.firstPhone = firstPhone;
+    }
+
+    public String getSecondPhone() {
+        return secondPhone;
+    }
+
+    public void setSecondPhone(String secondPhone) {
+        this.secondPhone = secondPhone;
+    }
+
+    public String getSecondaryEmail() {
+        return secondaryEmail;
+    }
+
+    public void setSecondaryEmail(String secondaryEmail) {
+        this.secondaryEmail = secondaryEmail;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getPreferContact() {
+        return preferContact;
+    }
+
+    public void setPreferContact(String preferContact) {
+        this.preferContact = preferContact;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
     
 }
