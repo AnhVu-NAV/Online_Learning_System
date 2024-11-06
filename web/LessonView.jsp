@@ -12,6 +12,8 @@
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
+                background-color: #1e1e1e;  /* Đặt màu nền chung */
+                color: #fff;  /* Màu chữ trắng để dễ đọc trên nền tối */
             }
 
             /* CSS cho sidebar */
@@ -57,10 +59,15 @@
 
             /* Phần main content */
             #main-content {
-                margin-left: 300px;
+                margin-left: 333px;
                 padding: 20px;
                 transition: margin-left 0.3s ease;
                 margin-top: 60px;
+                min-height: 100vh;
+                background-color: #1e1e1e;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
             }
 
             /* Khi sidebar ẩn, nội dung sẽ mở rộng */
@@ -116,12 +123,21 @@
             }
 
             .lesson {
+                display: flex;
+                align-items: center;
                 padding: 5px 0;
+                border-bottom: 1px solid #ccc;
             }
 
             .lesson a {
                 color: #fff;
                 text-decoration: none;
+                margin-left: 10px;
+            }
+
+            .lesson a.current-lesson {
+                font-weight: bold;
+                color: #5a67d8; /* Màu bôi đậm cho bài học hiện tại */
             }
 
             .lesson a:hover {
@@ -153,16 +169,113 @@
                 font-size: 30px;
             }
 
+            .video-container {
+                width: 100%;  /* Chiếm toàn bộ chiều ngang */
+                display: flex;
+                justify-content: center;  /* Canh giữa */
+            }
+
+            .video-container iframe {
+                width: 90%;  /* Chiếm 80% màn hình */
+                height: 550px;  /* Chiều cao video */
+            }
+
+            /* CSS cho phần mô tả video */
+            .video-description {
+                margin-top: 20px;
+                padding: 15px;
+                background-color: #2c2f33;
+                border-radius: 8px;
+                margin-bottom: 0;
+            }
+
+            .video-description h3 {
+                margin-bottom: 10px;
+                font-size: 24px;
+
+            }
+
+            .video-description p {
+                font-size: 16px;
+                line-height: 1.6;
+                height: 100%;
+                color: #ccc;  /* Màu chữ cho đoạn mô tả */
+            }
+
+            #show-summary-btn {
+                position: absolute;
+                top: 15px;  /* Cách đỉnh màn hình một khoảng nhỏ */
+                right: 20px;  /* Cách cạnh phải của màn hình */
+                background-color: blanchedalmond;  /* Màu xanh chủ đạo */
+                color: black;
+                border: none;
+                padding: 10px 20px;  /* Tăng kích thước padding cho nút */
+                cursor: pointer;
+                border-radius: 8px;  /* Góc bo tròn */
+                font-size: 16px;  /* Tăng kích thước chữ */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Thêm hiệu ứng đổ bóng */
+                transition: background-color 0.3s ease, transform 0.3s ease;  /* Hiệu ứng khi hover */
+                z-index: 1000;  /* Đảm bảo nút luôn hiển thị trên cùng */
+                margin-right: 40px;
+            }
+
+            #show-summary-btn:hover {
+                background-color: #0056b3;  /* Màu xanh đậm hơn khi hover */
+                transform: translateY(-2px);  /* Hiệu ứng di chuyển khi hover */
+            }
+
+            /* CSS cho popup */
+            .popup {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 400px;
+                background-color: #fff;
+                box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+                border-radius: 10px;
+                padding: 20px;
+            }
+
+            .popup-content {
+                position: relative;
+            }
+
+            .popup h3 {
+                margin-top: 0;
+                color: #333;
+            }
+
+            .popup p {
+                color: #555;
+            }
+
+            .close-btn {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 20px;
+                cursor: pointer;
+                color: black;
+            }
+
+            /* Hiển thị khi popup được bật */
+            .popup.show {
+                display: block;
+            }
+
         </style>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Đảm bảo jQuery được tải -->
+
         <script>
             // Script để xử lý ẩn/hiện sidebar
             $(document).ready(function () {
                 $("#toggle-btn").click(function () {
                     $("#sidebar").toggleClass("hidden");
                 });
-
-
 
                 // Script để xử lý ẩn/hiện danh sách bài học và đổi icon
                 $(".chapter-title").click(function () {
@@ -177,7 +290,51 @@
                     }
                 });
             });
+
+            // Script để hiển thị và ẩn popup
+            document.addEventListener("DOMContentLoaded", function () {
+                var showSummaryBtn = document.getElementById("show-summary-btn");
+                var popup = document.getElementById("summary-popup");
+                var closeBtn = document.querySelector(".close-btn");
+
+                // Khi nhấn vào nút Show Summary, popup sẽ hiển thị
+                showSummaryBtn.addEventListener("click", function () {
+                    popup.classList.add("show");
+                });
+
+                // Khi nhấn vào nút Close (x), popup sẽ bị ẩn
+                closeBtn.addEventListener("click", function () {
+                    popup.classList.remove("show");
+                });
+
+                // Khi nhấn bên ngoài popup, popup cũng sẽ ẩn
+                window.addEventListener("click", function (event) {
+                    if (event.target === popup) {
+                        popup.classList.remove("show");
+                    }
+                });
+
+                // Lưu trạng thái hoàn thành cho các checkbox
+                const lessons = document.querySelectorAll('.lesson input[type="checkbox"]');
+                lessons.forEach(checkbox => {
+                    const lessonId = checkbox.id.replace("completed_", "");
+                    const isCompleted = localStorage.getItem("completed_" + lessonId) === "true";
+                    checkbox.checked = isCompleted;
+
+                    // Gán sự kiện toggleCompleted cho từng checkbox
+                    checkbox.addEventListener("change", function () {
+                        toggleCompleted(lessonId);
+                    });
+                });
+            });
+
+            // Hàm lưu trạng thái hoàn thành của bài học vào localStorage
+            function toggleCompleted(lessonId) {
+                const checkbox = document.getElementById("completed_" + lessonId);
+                localStorage.setItem("completed_" + lessonId, checkbox.checked);
+            }
         </script>
+
     </head>
     <body>
         <div id="header">
@@ -186,14 +343,14 @@
                 <span>LEARNIK</span>  
             </div>
             <div class="course-name">
-                <!-- Hiển thị tên khóa học -->
                 ${courseName}  
             </div>
+            <button id="show-summary-btn">Show Summary</button>
         </div>
 
         <!-- Sidebar -->
         <div id="sidebar">
-            <h2>Nội dung khóa học</h2>
+            <h2>Break Tab</h2>
 
 
             <c:forEach var="chapter" items="${chapters}">
@@ -214,8 +371,9 @@
                     <div class="lesson-list">
                         <c:forEach var="lesson" items="${lessonsMap[chapter.id]}">
                             <div class="lesson">
-                                <a href="LessonVideoController?lesson_id=${lesson.id}">${lesson.title}</a>
-                            </div>
+                                <input type="checkbox" id="completed_${lesson.id}" name="completed_${lesson.id}" onclick="toggleCompleted(${lesson.id})">
+                                <a href="LessonController?lesson_id=${lesson.id}"class="<c:if test='${currentLessonId == lesson.id}'>current-lesson</c:if>">${lesson.title}</a>
+                                </div>
                         </c:forEach>
                     </div>
                 </div>
@@ -227,16 +385,44 @@
 
 
         <div id="main-content">
-            <div class="video-container">
-                <iframe width="560" height="315" 
-                        src="https://www.youtube.com/embed/${videocontent.videoId}?list=${videocontent.listId}&index=${videocontent.index_vid}" 
-                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                </iframe>
-            </div>
+            <c:choose>
 
-            
+                <c:when test="${not empty textHtmlContent}">
+                    <div class="text-html-content">
 
+                        <div class="html-content">
+                            <c:out value="${textHtmlContent}" escapeXml="false"/> 
+                        </div>
+                    </div>
+                </c:when>
+
+
+                <c:when test="${not empty videocontent}">
+                    <div class="video-container">
+                        <iframe width="560" height="315" 
+                                src="https://www.youtube.com/embed/${videocontent.videoId}?list=${videocontent.listId}&index=${videocontent.index_vid}" 
+                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div id="summary-popup" class="popup">
+                        <div class="popup-content">
+                            <span class="close-btn">&times;</span>
+                            <h3>Summary</h3>
+                            <p>${videocontent.videoSummary}</p> 
+                        </div>
+                    </div>
+
+                    <div class="video-description">
+                        <h3>Description</h3>
+                        <p>${videocontent.description}</p> 
+                    </div>
+                </c:when>
+
+
+            </c:choose>
         </div>
+
 
     </body>
 </html>

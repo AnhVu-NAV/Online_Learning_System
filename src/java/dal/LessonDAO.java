@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Lesson;
+import model.TextContent;
 import model.VideoContent;
 import java.sql.Connection;
 
@@ -26,7 +27,6 @@ public class LessonDAO extends DBContext {
 
     public List<Lesson> getLessonsByChapterId(int chapterId) {
 
-        
         String query = "SELECT * FROM Lesson WHERE chapter_id = ? ORDER BY `order`";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -38,9 +38,9 @@ public class LessonDAO extends DBContext {
                 Lesson lesson = new Lesson();
                 lesson.setId(resultSet.getInt("id"));
                 lesson.setTitle(resultSet.getString("title"));
-                lesson.setStatus(resultSet.getInt("status"));  
-                lesson.setLessonTypeId(resultSet.getInt("lesson_type_id"));   
-                lesson.setChapterId(resultSet.getInt("chapter_id"));  
+                lesson.setStatus(resultSet.getInt("status"));
+                lesson.setLessonTypeId(resultSet.getInt("lesson_type_id"));
+                lesson.setChapterId(resultSet.getInt("chapter_id"));
                 lesson.setOrder(resultSet.getInt("order"));
                 // Thêm bài học vào danh sách
                 lessons.add(lesson);
@@ -52,15 +52,41 @@ public class LessonDAO extends DBContext {
         return lessons;
     }
     
-     public VideoContent getVideoContentById(int lessonId) {
+    public Lesson getLessonById(int lessonId) {
+    Lesson lesson = null;
+    String query = "SELECT * FROM Lesson WHERE id = ?";
+
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
+
+        statement.setInt(1, lessonId);
+        ResultSet rs = statement.executeQuery();
+
+        if (rs.next()) {
+            lesson = new Lesson();
+            lesson.setId(rs.getInt("id"));
+            lesson.setTitle(rs.getString("title"));
+            lesson.setStatus(rs.getInt("status"));
+            lesson.setLessonTypeId(rs.getInt("lesson_type_id"));
+            lesson.setChapterId(rs.getInt("chapter_id"));
+            lesson.setOrder(rs.getInt("order"));
+        }
+    } catch (SQLException e) {
+        LOGGER.log(java.util.logging.Level.SEVERE, "Error retrieving lesson", e);
+    }
+
+    return lesson;
+}
+
+
+    public VideoContent getVideoContentById(int lessonId) {
         VideoContent content = null;
         String query = "SELECT * FROM VideoContent WHERE lesson_id = ?";
-        
+
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            
+
             statement.setInt(1, lessonId);
             ResultSet rs = statement.executeQuery();
-            
+
             if (rs.next()) {
                 content = new VideoContent();
                 content.setLessonId(rs.getInt("lesson_id"));
@@ -73,7 +99,7 @@ public class LessonDAO extends DBContext {
         } catch (SQLException e) {
             LOGGER.log(java.util.logging.Level.SEVERE, "Error retrieving content", e);
         }
-        
+
         return content;
     }
 
@@ -93,6 +119,33 @@ public class LessonDAO extends DBContext {
             e.printStackTrace();
         }
         return lessons;
+    }
+    public TextContent getTextContentById(int lessonId) {
+        TextContent textContent = null;
+        String query = "SELECT * FROM TextContent WHERE lesson_id = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, lessonId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                textContent = new TextContent();
+                textContent.setLessonId(resultSet.getInt("lesson_id"));
+                textContent.setTextContent(resultSet.getString("text_content"));
+            }
+        } catch (SQLException e) {
+           LOGGER.log(java.util.logging.Level.SEVERE, "Error retrieving content", e);
+        }
+
+        return textContent;
+    }
+
+    public static void main(String[] args) {
+        LessonDAO ldao = new LessonDAO();
+        Lesson l = new Lesson();
+        l = ldao.getLessonById(13);
+        System.out.println(l);
+
     }
 
     // Lấy danh sách các bài học theo ID chương

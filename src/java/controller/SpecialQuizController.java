@@ -4,22 +4,19 @@
  */
 package controller;
 
-import dal.LessonDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import model.VideoContent;
+import javax.mail.Part;
 
 /**
  *
  * @author Admin
  */
-public class LessonVideoController extends HttpServlet {
+public class SpecialQuizController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +35,10 @@ public class LessonVideoController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LessonVideoController</title>");
+            out.println("<title>Servlet SpecialQuizController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LessonVideoController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SpecialQuizController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,31 +56,14 @@ public class LessonVideoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String lessonIdParam = request.getParameter("lesson_id");
-        if (lessonIdParam != null && !lessonIdParam.isEmpty()) {
-
-            int lessonId = Integer.parseInt(lessonIdParam);
-
-            LessonDAO lDAO = new LessonDAO();
-            VideoContent videocontent = lDAO.getVideoContentById(lessonId);
-            
-//            String descriptionPath = videocontent.getDescription();
-//            String descriptionContent = readFileContent(descriptionPath);
-//            videocontent.setDescription(descriptionContent); 
-
-           
-            request.setAttribute("videocontent", videocontent);
-
-           
-            request.getRequestDispatcher("ChapterDisplayController").forward(request, response);
-        }
+        request.getRequestDispatcher("SpecialQuizHandle.jsp").forward(request, response);
     }
+    
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       
+        response.sendRedirect("ChapterDisplayController");
     }
 
     /**
@@ -95,17 +75,5 @@ public class LessonVideoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    private String readFileContent(String filePath) throws IOException {
-    StringBuilder content = new StringBuilder();
-    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-        String line;
-        while ((line = reader.readLine()) != null) {
-            content.append(line).append("\n");
-        }
-    }
-    return content.toString();
-}
-    
 
 }
