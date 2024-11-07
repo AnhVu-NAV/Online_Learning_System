@@ -9,6 +9,7 @@ package model;
  * @author Admin
  */
 public class VideoContent {
+
     private int lessonId;
     private String videoId;
     private String listId;
@@ -17,7 +18,8 @@ public class VideoContent {
     private String description;
 
     // Constructors
-    public VideoContent() {}
+    public VideoContent() {
+    }
 
     public int getLessonId() {
         return lessonId;
@@ -67,6 +69,4 @@ public class VideoContent {
         this.description = description;
     }
 
-    
 }
-

@@ -14,6 +14,7 @@ import model.UserCourse;
  * @author AnhVuNAV
  */
 public class UserCourseDAO extends DBContext{
+    //VuNA
     public void registerUserForCourse(UserCourse userCourse) {
         String sql = "INSERT INTO UserCourse (fullName, phone1, phone2, email1, email2, contactMethod, gender, courseId, pricePackageId) "
                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";

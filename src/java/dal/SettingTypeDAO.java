@@ -15,6 +15,7 @@ import java.util.Vector;
  * @author 84941
  */
 public class SettingTypeDAO extends DBContext{
+    //VuLH
     // get an setting type list based on specific conditions
     public Vector<SettingType> getSettingTypes(String sql) {
         Vector<SettingType> vector = new Vector<SettingType>();

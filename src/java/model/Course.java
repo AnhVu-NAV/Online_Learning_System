@@ -4,48 +4,109 @@
  */
 package model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
+import lombok.ToString;
 
 /**
  *
  * @author AnhVuNAV
  */
+@ToString
 public class Course {
+
     private int id;
     private String title;
     private String subtitle; // Thêm thuộc tính subtitle
     private int expertId;
     private String description;
-    private String thumbnailUrl;
+    private List<String> thumbnailUrl; // New field for storing multiple thumbnail URLs
+    private int numberOfLearner;
+    private int status;
     private int numberOfLesson;
     private int price;
     private int salePrice;
     private Date createdDate;
     private Date updatedDate;
-    private int categoryId; 
+    private int categoryId;
     private float totalDuration;
+    private String categoryName;
+    private String ownerName;
     private List<String> taglines; // Thêm thuộc tính để lưu danh sách tagline
+    private List<String> thumbnailDescriptions;
 
-    private int status;
-    private int numberOfLearner;
     public Course() {
     }
 
-    public Course(int id, String title, int expertId, String description, String thumbnailUrl, int numberOfLesson, int price, int salePrice, Date createdDate, Date updatedDate, int categoryId, float totalDuration) {
+    public Course(int id, String title, String subtitle, int expertId, String description, List<String> thumbnailUrl, int numberOfLearner, int status, int price, int salePrice, Date createdDate, Date updatedDate, int categoryId, float totalDuration, String categoryName, String ownerName, List<String> taglines) {
         this.id = id;
         this.title = title;
+        this.subtitle = subtitle;
         this.expertId = expertId;
         this.description = description;
         this.thumbnailUrl = thumbnailUrl;
-        this.numberOfLesson = numberOfLesson;
+        this.numberOfLearner = numberOfLearner;
+        this.status = status;
         this.price = price;
         this.salePrice = salePrice;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
         this.categoryId = categoryId;
         this.totalDuration = totalDuration;
-    }    
+        this.categoryName = categoryName;
+        this.ownerName = ownerName;
+        this.taglines = taglines;
+    }
+
+    public Course(int id, String title, String subtitle, int expertId, int categoryId, int duration, String description) {
+        this.id = id;
+        this.title = title;
+        this.subtitle = subtitle;
+        this.expertId = expertId;
+        this.description = description;
+        this.categoryId = categoryId;
+    }
+
+    public Course(String title, String subtitle, int expertId, int categoryId, int duration, String description) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.expertId = expertId;
+        this.description = description;
+        this.categoryId = categoryId;
+    }
+
+    public Course(int aInt, String string, String string0, int aInt0, int aInt1, String description, int aInt2) {
+        this.id = aInt;
+        this.title = string;
+        this.subtitle = string0;
+        this.expertId = aInt1;
+        this.description = description;
+        this.status = aInt2;
+        this.categoryId = aInt0;
+    }
+
+    public Course(String title, String subtitle, int categoryId, int ownerId, String description, int status) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.expertId = ownerId;
+        this.description = description;
+        this.status = status;
+        this.categoryId = categoryId;
+    }
+
+    public Course(int id, String title, String subtitle, int expertId, int totalDuration, int categoryId, String description, int status, java.util.Date updatedDate, java.util.Date createdDate, int numberOfLearner) {
+        this.id = id;
+        this.title = title;
+        this.subtitle = subtitle;
+        this.expertId = expertId;
+        this.description = description;
+        this.numberOfLearner = numberOfLearner;
+        this.status = status;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+        this.categoryId = categoryId;
+        this.totalDuration = totalDuration;
+    }
 
     public int getId() {
         return id;
@@ -87,12 +148,36 @@ public class Course {
         this.description = description;
     }
 
-    public String getThumbnailUrl() {
+    public List<String> getThumbnailUrl() {
         return thumbnailUrl;
     }
 
-    public void setThumbnailUrl(String thumbnailUrl) {
+    public void setThumbnailUrl(List<String> thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public List<String> getThumbnailDescriptions() {
+        return thumbnailDescriptions;
+    }
+
+    public void setThumbnailDescriptions(List<String> thumbnailDescriptions) {
+        this.thumbnailDescriptions = thumbnailDescriptions;
     }
 
     public int getNumberOfLesson() {
@@ -139,20 +224,48 @@ public class Course {
         return categoryId;
     }
 
-    @Override
-    public String toString() {
-        return "Course{"
-                + "id=" + id
-                + ", title='" + title + '\''
-                + ", subtitle='" + subtitle + '\''
-                + ", expertId=" + expertId
-                + ", totalDuration=" + totalDuration
-                + ", categoryId=" + categoryId
-                + ", description='" + description + '\''
-                + ", status=" + status
-                + ", updatedDate=" + updatedDate
-                + ", createdDate=" + createdDate
-                + ", numberOfLearner=" + numberOfLearner
-                + '}';
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
+
+    public float getTotalDuration() {
+        return totalDuration;
+    }
+
+    public void setTotalDuration(float totalDuration) {
+        this.totalDuration = totalDuration;
+    }
+
+    public List<String> getTaglines() {
+        return taglines;
+    }
+
+    public void setTaglines(List<String> taglines) {
+        this.taglines = taglines;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getNumberOfLearner() {
+        return numberOfLearner;
+    }
+
+    public void setNumberOfLearner(int numberOfLearner) {
+        this.numberOfLearner = numberOfLearner;
+    }
+
+    public List<String> getThumbnailUrls() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrls(List<String> thumbnailUrls) {
+        this.thumbnailUrl = thumbnailUrls;
+    }
+
 }

@@ -9,6 +9,7 @@ package model;
  * @author 84941
  */
 public class CourseTagline {
+
     private int taglineId;
     private int courseId;
 
@@ -35,5 +36,5 @@ public class CourseTagline {
     public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
-    
+
 }

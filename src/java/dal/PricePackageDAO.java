@@ -18,12 +18,14 @@ import model.PricePackage;
  *
  * @author AnhVuNAV
  */
-public class PricePackageDAO extends DBContext{
+public class PricePackageDAO extends DBContext {
+
+    //VuNA
     // Lấy danh sách gói giá theo courseId
     public List<PricePackage> getPricePackagesByCourseId(int courseId) {
         List<PricePackage> pricePackages = new ArrayList<>();
         String sql = "SELECT * FROM PricePackage WHERE course_id = ?";
-        
+
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, courseId);
@@ -41,7 +43,8 @@ public class PricePackageDAO extends DBContext{
         }
         return pricePackages;
     }
-
+    
+    //VuLH
     public Vector<PricePackage> getPricePackages(String sql) {
         Vector<PricePackage> vector = new Vector<PricePackage>();
         try {

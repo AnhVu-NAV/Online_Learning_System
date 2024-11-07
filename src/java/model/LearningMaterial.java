@@ -5,17 +5,34 @@
 package model;
 
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author Admin
  */
+@Data
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
 public class LearningMaterial {
+
     private int lessonId;
     private String title;
     private Date uploadDate;
+    private Date updatedDate;
     private int duration;
     private int type;
+    private String videoUrl;
+    private String htmlContent;
+
+    public LearningMaterial() {
+    }
 
     public LearningMaterial(int lessonId, String title, Date uploadDate, int duration, int type) {
         this.lessonId = lessonId;
@@ -25,50 +42,4 @@ public class LearningMaterial {
         this.type = type;
     }
 
-    // Constructors
-    public LearningMaterial() {}
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-
-    public int getLessonId() {
-        return lessonId;
-    }
-
-    public void setLessonId(int lessonId) {
-        this.lessonId = lessonId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Date getUploadDate() {
-        return uploadDate;
-    }
-
-    public void setUploadDate(Date uploadDate) {
-        this.uploadDate = uploadDate;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-   
 }
-

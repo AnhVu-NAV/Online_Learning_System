@@ -9,6 +9,7 @@ package model;
  * @author Admin
  */
 public class Question {
+
     private int id;
     private int quizId;
     private int levelId;
@@ -18,7 +19,8 @@ public class Question {
     private String hint;
 
     // Constructors
-    public Question() {}
+    public Question() {
+    }
 
     public Question(int id, int quizId, int levelId, int status, String content, int questionTypeId, String hint) {
         this.id = id;
@@ -90,6 +92,5 @@ public class Question {
     public String toString() {
         return "Question{" + "id=" + id + ", quizId=" + quizId + ", levelId=" + levelId + ", status=" + status + ", content=" + content + ", questionTypeId=" + questionTypeId + ", hint=" + hint + '}';
     }
-    
-    
+
 }

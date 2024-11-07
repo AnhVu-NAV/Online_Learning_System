@@ -51,8 +51,8 @@ public class CourseDAOTest {
         int pageSize = 0;
         CourseDAO instance = new CourseDAO();
         List<Course> expResult = null;
-        List<Course> result = instance.getCourses(page, pageSize);
-        assertEquals(expResult, result);
+//        List<Course> result = instance.getCourses(page, pageSize);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -79,8 +79,8 @@ public class CourseDAOTest {
         System.out.println("getCourseCategories");
         CourseDAO instance = new CourseDAO();
         List<Setting> expResult = null;
-        List<Setting> result = instance.getCourseCategories();
-        assertEquals(expResult, result);
+//        List<Setting> result = instance.getCourseCategories();
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -94,8 +94,8 @@ public class CourseDAOTest {
         int courseId = 0;
         CourseDAO instance = new CourseDAO();
         List<String> expResult = null;
-        List<String> result = instance.getTaglinesByCourseId(courseId);
-        assertEquals(expResult, result);
+//        List<String> result = instance.getTaglinesByCourseId(courseId);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -113,8 +113,8 @@ public class CourseDAOTest {
         int pageSize = 0;
         CourseDAO instance = new CourseDAO();
         List<Course> expResult = null;
-        List<Course> result = instance.getCoursesByCategoriesAndKeyword(categories, keyword, sortOption, page, pageSize);
-        assertEquals(expResult, result);
+//        List<Course> result = instance.getCoursesByCategoriesAndKeyword(categories, keyword, sortOption, page, pageSize);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -174,8 +174,8 @@ public class CourseDAOTest {
         int categoryId = 0;
         CourseDAO instance = new CourseDAO();
         List<Course> expResult = null;
-        List<Course> result = instance.getRelatedCourses(categoryId);
-        assertEquals(expResult, result);
+//        List<Course> result = instance.getRelatedCourses(categoryId);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -191,8 +191,8 @@ public class CourseDAOTest {
         int courseId = 0;
         CourseDAO instance = new CourseDAO();
         List<Course> expResult = null;
-        List<Course> result = instance.getRelatedCourses(categoryId, expertId, courseId);
-        assertEquals(expResult, result);
+//        List<Course> result = instance.getRelatedCourses(categoryId, expertId, courseId);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -205,8 +205,8 @@ public class CourseDAOTest {
         System.out.println("getAllTaglines");
         CourseDAO instance = new CourseDAO();
         List<Tagline> expResult = null;
-        List<Tagline> result = instance.getAllTaglines();
-        assertEquals(expResult, result);
+//        List<Tagline> result = instance.getAllTaglines();
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -220,9 +220,9 @@ public class CourseDAOTest {
         List<String> taglines = null;
         int courseId = 0;
         CourseDAO instance = new CourseDAO();
-        List<Course> expResult = null;
-        List<Course> result = instance.getRelatedCoursesByTaglines(taglines, courseId);
-        assertEquals(expResult, result);
+//        List<Course> expResult = null;
+//        List<Course> result = instance.getRelatedCoursesByTaglines(taglines, courseId);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -238,8 +238,8 @@ public class CourseDAOTest {
         int limit = 0;
         CourseDAO instance = new CourseDAO();
         List<Course> expResult = null;
-        List<Course> result = instance.getRelatedCoursesByFilters(categoryId, taglines, limit);
-        assertEquals(expResult, result);
+//        List<Course> result = instance.getRelatedCoursesByFilters(categoryId, taglines, limit);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

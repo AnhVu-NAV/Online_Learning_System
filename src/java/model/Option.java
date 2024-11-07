@@ -9,7 +9,8 @@ package model;
  * @author Admin
  */
 public class Option {
-   private int id;
+
+    private int id;
     private int questionId;
     private int status;
     private int isTrue; // 1 for true, 0 for false in the database
@@ -17,7 +18,8 @@ public class Option {
     private String content;
 
     // Constructors
-    public Option() {}
+    public Option() {
+    }
 
     public Option(int id, int questionId, int status, int isTrue, String explanation, String content) {
         this.id = id;
@@ -35,8 +37,6 @@ public class Option {
     public void setContent(String content) {
         this.content = content;
     }
-
-   
 
     public int getId() {
         return id;
@@ -82,7 +82,5 @@ public class Option {
     public String toString() {
         return "Option{" + "id=" + id + ", questionId=" + questionId + ", status=" + status + ", isTrue=" + isTrue + ", explanation=" + explanation + '}';
     }
-    
-    
-    
+
 }

@@ -9,6 +9,7 @@ package model;
  * @author AnhVuNAV
  */
 public class UserCourse {
+
     private String fullName;
     private String phone1;
     private String phone2;
@@ -23,7 +24,7 @@ public class UserCourse {
     }
 
     public UserCourse(String fullName, String phone1, String phone2, String email1, String email2,
-                      String contactMethod, String gender, int courseId, int pricePackageId) {
+            String contactMethod, String gender, int courseId, int pricePackageId) {
         this.fullName = fullName;
         this.phone1 = phone1;
         this.phone2 = phone2;
@@ -106,6 +107,5 @@ public class UserCourse {
     public void setPricePackageId(int pricePackageId) {
         this.pricePackageId = pricePackageId;
     }
-    
-    
+
 }

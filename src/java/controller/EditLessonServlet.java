@@ -27,7 +27,7 @@ public class EditLessonServlet extends HttpServlet {
             LessonDAO lessonDAO = new LessonDAO();
 
             // Truy xuất thông tin bài học từ cơ sở dữ liệu
-            Lesson lesson = lessonDAO.getLessonById(lessonId); // Lấy dữ liệu từ DAO
+            Lesson lesson = lessonDAO.getLessonByID(lessonId); // Lấy dữ liệu từ DAO
             request.setAttribute("lesson", lesson);
             request.getRequestDispatcher("LessonDetails.jsp").forward(request, response);
         }

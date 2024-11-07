@@ -53,7 +53,7 @@ public class ChapterDAO extends DBContext {
         return chapters;
     }
 
-    public List<Chapter> getChaptersByCourseId(int courseId) {
+    public List<Chapter> getChaptersByCourseID(int courseId) {
         List<Chapter> chapters = new ArrayList<>();
         String sql = "SELECT * FROM Chapter WHERE course_id = ? AND status = 1 ORDER BY `order` ASC";
         try {

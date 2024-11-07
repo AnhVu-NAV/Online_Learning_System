@@ -19,6 +19,7 @@ import util.DataConvert;
  */
 public class PersonalCourseDAO extends DBContext {
 
+    //VuLH
     DataConvert dc = new DataConvert();
 
     public Vector<PersonalCourse> getPersonalCourses(String sql) {

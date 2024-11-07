@@ -31,7 +31,7 @@ public class UpdateLessonServlet extends HttpServlet {
 
         try {
             // Gọi phương thức cập nhật bài học từ DAO
-            lessonDAO.updateLesson(Integer.parseInt(lessonId), title, type, chapterId, order, videoLink, htmlContent);
+            lessonDAO.UpdateLesson(Integer.parseInt(lessonId), title, type, chapterId, order, videoLink, htmlContent);
             response.sendRedirect("subjectLesson");
         } catch (Exception e) {
             e.printStackTrace();

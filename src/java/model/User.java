@@ -17,14 +17,6 @@ import lombok.ToString;
  *
  * @author AnhVuNAV
  */
-@Builder
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
-
 public class User {
 
     private int id;
@@ -36,25 +28,14 @@ public class User {
     private String firstName;
     private String lastName;
     private Date dob;
-    private boolean gender;
+    private int gender;
     private String firstPhone;
     private String secondPhone;
     private String secondaryEmail;
-    private String imageURL;
+    private String imageUrl;
     private String preferContact;
-    int CustomerID;
-    String FirstName;
-    String LastName;
-    String Email;
-    String Password;
-    Date DoB;
-    Date Created_Date;
-    String PhoneNumber;
-    int RoleID;
-    int Status;
-    int Gender;
-    String Address;
-    String image_url;
+    private String address;
+    private String imageURL;
 
     //Add attribute role from setting
     private Setting role = new Setting();
@@ -62,7 +43,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, boolean gender, String firstPhone, String secondPhone, String secondaryEmail, String imageURL, String preferContact) {
+    public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, int gender, String firstPhone, String secondPhone, String secondaryEmail, String imageURL, String preferContact) {
         this.id = id;
         this.primaryEmail = primaryEmail;
         this.password = password;
@@ -78,25 +59,6 @@ public class User {
         this.secondaryEmail = secondaryEmail;
         this.imageURL = imageURL;
         this.preferContact = preferContact;
-    }
-    private int id;
-    private String primaryEmail;
-    private String password;
-    private int roleId;
-    private Date createdDate;
-    private int status;
-    private String firstName;
-    private String lastName;
-    private Date dob;
-    private int gender; 
-    private String firstPhone;
-    private String secondPhone;
-    private String secondaryEmail;
-    private String imageUrl;
-    private String preferContact;
-    private String address;
-
-    public User() {
     }
 
     public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, int gender, String firstPhone, String secondPhone, String secondaryEmail, String imageUrl, String preferContact, String address) {
@@ -118,6 +80,77 @@ public class User {
         this.address = address;
     }
 
+    public User(int id, String primaryEmail, String password, int status, int roleId, Date createdDate, String firstName, String lastName, Date dob, int gender, String firstPhone, String secondPhone, String secondaryEmail, String imageUrl, String preferContact, String address) {
+        this.id = id;
+        this.primaryEmail = primaryEmail;
+        this.password = password;
+        this.roleId = roleId;
+        this.createdDate = createdDate;
+        this.status = status;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.gender = gender;
+        this.firstPhone = firstPhone;
+        this.secondPhone = secondPhone;
+        this.secondaryEmail = secondaryEmail;
+        this.imageUrl = imageUrl;
+        this.preferContact = preferContact;
+        this.address = address;
+    }
+
+//    public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, boolean gender, String firstPhone, String secondPhone, String secondaryEmail, String imageURL, String preferContact, String address) {
+//        this.id = id;
+//        this.primaryEmail = primaryEmail;
+//        this.password = password;
+//        this.roleId = roleId;
+//        this.createdDate = createdDate;
+//        this.status = status;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.dob = dob;
+//        this.gender = Gender(gender);
+//        this.firstPhone = firstPhone;
+//        this.secondPhone = secondPhone;
+//        this.secondaryEmail = secondaryEmail;
+//        this.imageUrl = imageURL;
+//        this.preferContact = preferContact;
+//        this.address = address;
+//    }
+//
+//    public User(int id, String primaryEmail, String password, int roleId, Date createdDate, int status, String firstName, String lastName, Date dob, boolean gender, String firstPhone, String secondPhone, String secondaryEmail, String imageURL, String preferContact) {
+//        this.id = id;
+//        this.primaryEmail = primaryEmail;
+//        this.password = password;
+//        this.roleId = roleId;
+//        this.createdDate = createdDate;
+//        this.status = status;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.dob = dob;
+//        this.gender = Gender(gender);
+//        this.firstPhone = firstPhone;
+//        this.secondPhone = secondPhone;
+//        this.secondaryEmail = secondaryEmail;
+//        this.imageUrl = imageURL;
+//        this.preferContact = preferContact;
+//    }
+
+//    public boolean isGender() {
+//        if (gender == 2) {
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
+//
+//    public int Gender(boolean gender) {
+//        if (gender == false) {
+//            return 2;
+//        } else {
+//            return 1;
+//        }
+//    }
 
     public int getId() {
         return id;
@@ -134,20 +167,13 @@ public class User {
     public void setPrimaryEmail(String primaryEmail) {
         this.primaryEmail = primaryEmail;
     }
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getRoleId() {
@@ -253,5 +279,21 @@ public class User {
     public void setAddress(String address) {
         this.address = address;
     }
-    
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public Setting getRole() {
+        return role;
+    }
+
+    public void setRole(Setting role) {
+        this.role = role;
+    }
+
 }

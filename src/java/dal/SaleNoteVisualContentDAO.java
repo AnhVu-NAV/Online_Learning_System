@@ -18,6 +18,7 @@ import util.DataConvert;
  */
 public class SaleNoteVisualContentDAO extends DBContext {
 
+    //VuLH
     DataConvert dc = new DataConvert();
 
     // Insert new visual content into the database. Attribute id is AUTO_INCREMENT 

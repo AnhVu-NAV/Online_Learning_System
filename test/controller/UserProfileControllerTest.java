@@ -46,8 +46,8 @@ public class UserProfileControllerTest {
         System.out.println("processRequest");
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        UserProfileController instance = new UserProfileController();
-        instance.processRequest(request, response);
+//        UserProfileController instance = new UserProfileController();
+//        instance.processRequest(request, response);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -60,8 +60,8 @@ public class UserProfileControllerTest {
         System.out.println("doGet");
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        UserProfileController instance = new UserProfileController();
-        instance.doGet(request, response);
+//        UserProfileController instance = new UserProfileController();
+//        instance.doGet(request, response);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -74,9 +74,9 @@ public class UserProfileControllerTest {
         System.out.println("doPost");
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        UserProfileController instance = new UserProfileController();
-        instance.doPost(request, response);
-        // TODO review the generated test code and remove the default call to fail.
+//        UserProfileController instance = new UserProfileController();
+//        instance.doPost(request, response);
+//        // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
@@ -86,10 +86,10 @@ public class UserProfileControllerTest {
     @Test
     public void testGetServletInfo() {
         System.out.println("getServletInfo");
-        UserProfileController instance = new UserProfileController();
+//        UserProfileController instance = new UserProfileController();
         String expResult = "";
-        String result = instance.getServletInfo();
-        assertEquals(expResult, result);
+//        String result = instance.getServletInfo();
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

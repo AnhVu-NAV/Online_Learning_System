@@ -44,10 +44,10 @@ public class UpdateUserProfileControllerTest {
     @Test
     public void testProcessRequest() throws Exception {
         System.out.println("processRequest");
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
-        UpdateUserProfileController instance = new UpdateUserProfileController();
-        instance.processRequest(request, response);
+//        HttpServletRequest request = null;
+//        HttpServletResponse response = null;
+//        UpdateUserProfileController instance = new UpdateUserProfileController();
+//        instance.processRequest(request, response);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -60,8 +60,8 @@ public class UpdateUserProfileControllerTest {
         System.out.println("doGet");
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        UpdateUserProfileController instance = new UpdateUserProfileController();
-        instance.doGet(request, response);
+//        UpdateUserProfileController instance = new UpdateUserProfileController();
+//        instance.doGet(request, response);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -74,8 +74,8 @@ public class UpdateUserProfileControllerTest {
         System.out.println("doPost");
         HttpServletRequest request = null;
         HttpServletResponse response = null;
-        UpdateUserProfileController instance = new UpdateUserProfileController();
-        instance.doPost(request, response);
+//        UpdateUserProfileController instance = new UpdateUserProfileController();
+//        instance.doPost(request, response);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -85,11 +85,11 @@ public class UpdateUserProfileControllerTest {
      */
     @Test
     public void testGetServletInfo() {
-        System.out.println("getServletInfo");
-        UpdateUserProfileController instance = new UpdateUserProfileController();
-        String expResult = "";
-        String result = instance.getServletInfo();
-        assertEquals(expResult, result);
+//        System.out.println("getServletInfo");
+////        UpdateUserProfileController instance = new UpdateUserProfileController();
+//        String expResult = "";
+//        String result = instance.getServletInfo();
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

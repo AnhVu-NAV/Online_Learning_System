@@ -88,10 +88,10 @@
                                         <div class="col-sm-9">
                                             <p class="text-muted mb-0">
                                                 <c:choose>
-                                                    <c:when test="${user.isGender() == false}">
+                                                    <c:when test="${user.isGender() == 1}">
                                                         Male
                                                     </c:when>
-                                                    <c:when test="${user.isGender() == true}">
+                                                    <c:when test="${user.isGender() == 2}">
                                                         Female
                                                     </c:when>                                                       
                                                 </c:choose>

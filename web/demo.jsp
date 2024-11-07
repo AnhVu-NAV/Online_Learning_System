@@ -1,13 +1,7 @@
 <%-- 
-<<<<<<< HEAD:web/demo.jsp
     Document   : demo
     Created on : Sep 21, 2024, 5:00:20 PM
     Author     : ADMIN
-=======
-    Document   : Header
-    Created on : Sep 11, 2024, 8:33:04 PM
-    Author     : HuyLVN
->>>>>>> fbf38e88c7423732c03f084d6c211a2ea03af5a2:web/component/Header.jsp
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <<<<<<< HEAD:web/demo.jsp

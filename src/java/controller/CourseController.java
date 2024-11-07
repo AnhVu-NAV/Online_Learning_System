@@ -205,7 +205,7 @@ public class CourseController extends HttpServlet {
 
         // Insert the course into the database
         Course newCourse = new Course(name, subtitle, categoryId, ownerId, description, status);
-        int courseId = courseDAO.insertCourse(newCourse);
+        int courseId = courseDAO.insertSubject(newCourse);
 
         // Insert the thumbnail URLs into the Course_Thumbnails table
         if (!imageUrls.isEmpty()) {
@@ -225,7 +225,7 @@ public class CourseController extends HttpServlet {
     // Hiển thị form chỉnh sửa khóa học
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Course existingCourse = courseDAO.getCourseById(id);
+        Course existingCourse = courseDAO.getCourseByID(id);
         System.out.println(id);
 
         // Check if the course exists
