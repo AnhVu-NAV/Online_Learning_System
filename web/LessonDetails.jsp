@@ -112,9 +112,7 @@
                             <!-- HTML Content Section for Learning Material -->
                             <div class="FormTextField" id="htmlContentSection" style="display: ${lesson != null && lesson.lessonTypeId != null && lesson.lessonTypeId.value == 'LearningMaterial' ? 'flex' : 'none'};">
                                 <label class="Label">HTML content<span class="Required">*</span></label>
-                                <textarea class="Input" name="html_content" id="html_content" rows="5" oninput="updatePreview()">
-                                    ${lesson != null && lesson.learningMaterials != null && lesson.learningMaterials.size() > 0 ? lesson.learningMaterials[0].htmlContent : ''}
-                                </textarea>
+                                <textarea class="Input" name="html_content" id="htmlContent" rows="5" oninput="updatePreview()">${lesson != null && lesson.learningMaterials != null && lesson.learningMaterials.size() > 0 ? lesson.learningMaterials[0].htmlContent : ''}</textarea>
                                 <span class="Extra">The HTML should be 10 characters.</span>
                             </div>
 
