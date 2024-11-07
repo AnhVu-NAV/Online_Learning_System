@@ -229,10 +229,10 @@
                                                     <td>${user.getFirstName()} ${user.getLastName()}</td>
                                                     <td>
                                                         <c:choose>
-                                                            <c:when test="${user.isGender() == 1}">
+                                                            <c:when test="${user.getGender() == 1}">
                                                                 Male
                                                             </c:when>
-                                                            <c:when test="${user.isGender() == 2}">
+                                                            <c:when test="${user.getGender() == 2}">
                                                                 Female
                                                             </c:when>                                                       
                                                         </c:choose>

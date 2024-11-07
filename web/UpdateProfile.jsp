@@ -68,11 +68,10 @@
                                     </div>
                                     <div class="details-item">
                                         <label><strong>Gender:</strong></label>
-                                        <select name="gender" id="gender">
-                                            <option value="1" ${user.getGender() == 1 ? 'selected' : ''}>Male</option>
-                                            <option value="2" ${user.getGender() == 2 ? 'selected' : ''}>Female</option>
-                                            <option value="3" ${user.getGender() != 1 && user.getGender() != 2 ? 'selected' : ''}>Other</option>
-                                        </select>
+                                        <label><input type="radio" name="gender" value="1" ${user.getGender() == 1 ? 'checked' : ''}> Male</label>
+                                        <label><input type="radio" name="gender" value="2" ${user.getGender() == 2 ? 'checked' : ''}> Female</label>
+                                        <label><input type="radio" name="gender" value="3" ${user.getGender() != 1 && user.getGender() != 2 ? 'checked' : ''}> Other</label>
+                                       
                                     </div>
                                 </div>
                             </div>

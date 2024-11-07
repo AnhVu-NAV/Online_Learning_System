@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="profile-container">
+          <div class="profile-container">
                 <!-- Form for updating profile -->
                 <form action="UpdateUserProfile" method="post">
                     <form action="UpdateUserProfileServlet" method="post">
@@ -163,6 +163,7 @@
                         </div>
                     </form>
             </div>
+            
         </div>
         <script>
             function updatePreferredContactDropdown() {

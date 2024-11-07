@@ -17,6 +17,7 @@ import lombok.ToString;
  *
  * @author AnhVuNAV
  */
+@ToString
 public class User {
 
     private int id;
