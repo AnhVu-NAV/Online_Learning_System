@@ -153,7 +153,7 @@ public class UserDashboardController extends HttpServlet {
             String firstName = request.getParameter("addNewUserFirstName");
             String lastName = request.getParameter("addNewUserLastName");
             Date dob = dataConvert.StringToSqlDate(request.getParameter("addNewUserDob"));
-            Boolean gender = Boolean.parseBoolean(request.getParameter("addNewUserGender"));
+            int gender = Integer.parseInt(request.getParameter("addNewUserGender"));
             String email = request.getParameter("addNewUserEmail");
             String phone = request.getParameter("addNewUserPhone");
             int roleId = Integer.parseInt(request.getParameter("addNewUserRole"));

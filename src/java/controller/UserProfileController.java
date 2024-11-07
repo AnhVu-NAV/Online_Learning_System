@@ -64,7 +64,7 @@ public class UserProfileController extends HttpServlet {
 
             // Get user details from the database
             User user = userDAO.getUserByID(userId);
-
+             System.out.println(user.toString());
             // Handle case where user is not found
             if (user == null) {
                 response.sendRedirect("error.jsp");

@@ -229,10 +229,10 @@
                                                     <td>${user.getFirstName()} ${user.getLastName()}</td>
                                                     <td>
                                                         <c:choose>
-                                                            <c:when test="${user.isGender() == false}">
+                                                            <c:when test="${user.isGender() == 1}">
                                                                 Male
                                                             </c:when>
-                                                            <c:when test="${user.isGender() == true}">
+                                                            <c:when test="${user.isGender() == 2}">
                                                                 Female
                                                             </c:when>                                                       
                                                         </c:choose>
@@ -300,11 +300,11 @@
                                             <label>Gender</label>
                                             <div class="d-flex align-items-center mt-2">
                                                 <label class="option">
-                                                    <input type="radio" name="addNewUserGender" value="0" required checked> Male
+                                                    <input type="radio" name="addNewUserGender" value="1" required checked> Male
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 <label class="option ms-4">
-                                                    <input type="radio" name="addNewUserGender" value="1" required> Female
+                                                    <input type="radio" name="addNewUserGender" value="2" required> Female
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>

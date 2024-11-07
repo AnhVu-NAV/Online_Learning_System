@@ -14,6 +14,7 @@ import model.Blogs;
 
 public class BlogDAO extends DBContext {
 
+    //HuyLVN
     public BlogDAO() {
         super(); // Call the constructor of DBContext to initialize the connection
     }

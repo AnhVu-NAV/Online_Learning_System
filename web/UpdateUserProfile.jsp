@@ -70,6 +70,8 @@
                                     <label><strong>Gender:</strong></label>
                                     <label><input type="radio" name="gender" value="1" ${user.gender == 1 ? 'checked' : ''}> Male</label>
                                     <label><input type="radio" name="gender" value="2" ${user.gender == 2 ? 'checked' : ''}> Female</label>
+<!--                                <label><input type="radio" name="gender" value="true" ${user.gender ? 'checked' : ''}> Male</label>
+                                    <label><input type="radio" name="gender" value="false" ${!user.gender ? 'checked' : ''}> Female</label>-->
                                     <label><input type="radio" name="gender" value="3" ${user.gender != 1 && user.gender != 2 ? 'checked' : ''}> Other</label>
                                 </div>
                             </div>

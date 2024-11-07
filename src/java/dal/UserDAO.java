@@ -200,7 +200,7 @@ public class UserDAO extends DBContext {
         }
         return expertsList;
     }
-    
+
     //VuLH
     DataConvert dc = new DataConvert();
 
@@ -234,7 +234,7 @@ public class UserDAO extends DBContext {
             pre.setString(6, obj.getFirstName());
             pre.setString(7, obj.getLastName());
             pre.setDate(8, dc.UtilDateToSqlDate(obj.getDob()));
-            pre.setBoolean(9, obj.isGender());
+            pre.setInt(9, obj.getGender());
             pre.setString(10, obj.getFirstPhone());
             pre.setString(11, obj.getSecondPhone());
             pre.setString(12, obj.getSecondaryEmail());
@@ -265,13 +265,13 @@ public class UserDAO extends DBContext {
                 String firstName = rs.getString(7);
                 String lastName = rs.getString(8);
                 Date dob = rs.getDate(9);
-                boolean gender = rs.getBoolean(10);
+                int gender = rs.getInt(10);
                 String firstPhone = rs.getString(11);
                 String secondPhone = rs.getString(12);
                 String secondaryEmail = rs.getString(13);
-                String imageURL = rs.getString(14);
+                String imageUrl = rs.getString(14);
                 String preferContact = rs.getString(15);
-                User obj = new User(id, primaryEmail, password, roleId, createdDate, status, firstName, lastName, dob, gender, firstPhone, secondPhone, secondaryEmail, imageURL, preferContact);
+                User obj = new User(id, primaryEmail, password, roleId, createdDate, status, firstName, lastName, dob, gender, firstPhone, secondPhone, secondaryEmail, imageUrl, preferContact);
                 vector.add(obj);
 
             }
@@ -315,13 +315,13 @@ public class UserDAO extends DBContext {
                 String firstName = rs.getString(7);
                 String lastName = rs.getString(8);
                 Date dob = rs.getDate(9);
-                boolean gender = rs.getBoolean(10);
+                int gender = rs.getInt(10);
                 String firstPhone = rs.getString(11);
                 String secondPhone = rs.getString(12);
                 String secondaryEmail = rs.getString(13);
-                String imageURL = rs.getString(14);
+                String imageUrl = rs.getString(14);
                 String preferContact = rs.getString(15);
-                User obj = new User(id, primaryEmail, password, roleId, createdDate, status, firstName, lastName, dob, gender, firstPhone, secondPhone, secondaryEmail, imageURL, preferContact);
+                User obj = new User(id, primaryEmail, password, roleId, createdDate, status, firstName, lastName, dob, gender, firstPhone, secondPhone, secondaryEmail, imageUrl, preferContact);
                 vector.add(obj);
             }
         } catch (SQLException ex) {
@@ -360,7 +360,7 @@ public class UserDAO extends DBContext {
             pre.setString(6, obj.getFirstName());
             pre.setString(7, obj.getLastName());
             pre.setDate(8, dc.UtilDateToSqlDate(obj.getDob()));
-            pre.setBoolean(9, obj.isGender());
+            pre.setInt(9, obj.getGender());
             pre.setString(10, obj.getFirstPhone());
             pre.setString(11, obj.getSecondPhone());
             pre.setString(12, obj.getSecondaryEmail());
@@ -406,13 +406,13 @@ public class UserDAO extends DBContext {
                 String firstName = rs.getString(7);
                 String lastName = rs.getString(8);
                 Date dob = rs.getDate(9);
-                boolean gender = rs.getBoolean(10);
+                int gender = rs.getInt(10);
                 String firstPhone = rs.getString(11);
                 String secondPhone = rs.getString(12);
                 String secondaryEmail = rs.getString(13);
-                String imageURL = rs.getString(14);
+                String imageUrL = rs.getString(14);
                 String preferContact = rs.getString(15);
-                User obj = new User(id, primaryEmail, password, roleId, createdDate, status, firstName, lastName, dob, gender, firstPhone, secondPhone, secondaryEmail, imageURL, preferContact);
+                User obj = new User(id, primaryEmail, password, roleId, createdDate, status, firstName, lastName, dob, gender, firstPhone, secondPhone, secondaryEmail, imageUrL, preferContact);
                 return obj;
             }
         } catch (SQLException ex) {
@@ -420,5 +420,54 @@ public class UserDAO extends DBContext {
         }
         return null;
 
+    }
+    
+    //HuyLVN
+    public User getOne(String primary_email, String password, Integer status) {
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM user WHERE primary_email = ? AND password = ? AND status = ?";
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, primary_email);
+            stm.setString(2, password);
+            stm.setInt(3, status);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                return new User(
+                        rs.getInt("id"),
+                        rs.getString("primary_email"),
+                        rs.getString("password"),
+                        rs.getInt("status"),
+                        rs.getInt("role_id"),
+                        rs.getDate("created_date"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getDate("dob"),
+                        rs.getInt("gender"),
+                        rs.getString("first_phone"), // assuming this is firstPhone
+                        rs.getString("second_phone"), // assuming secondPhone is stored as `second_phone`
+                        rs.getString("secondary_email"),
+                        rs.getString("image_url"),
+                        rs.getString("prefer_contact"),
+                        rs.getString("address")
+                );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
     }
 }
