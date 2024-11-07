@@ -17,8 +17,16 @@
         <servlet-class>controller.ChapterDisplayController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LessonVideoController</servlet-name>
-        <servlet-class>controller.LessonVideoController</servlet-class>
+        <servlet-name>LessonController</servlet-name>
+        <servlet-class>controller.LessonController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuizHandleController</servlet-name>
+        <servlet-class>controller.QuizHandleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SpecialQuizController</servlet-name>
+        <servlet-class>controller.SpecialQuizController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserListController</servlet-name>
@@ -33,8 +41,38 @@
         <servlet-class>controller.DashboardController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ChapterDisplayController</servlet-name>
+        <servlet-class>controller.ChapterDisplayController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LessonVideoController</servlet-name>
+        <servlet-class>controller.LessonVideoController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>changePassword</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <url-pattern>/ForgotPasswordController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChapterDisplayController</servlet-name>
+        <url-pattern>/ChapterDisplayController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonVideoController</servlet-name>
+        <url-pattern>/LessonVideoController</url-pattern>
+        <servlet-name>UserListController</servlet-name>
+        <servlet-class>controller.UserListController</servlet-class>
+        <servlet-name>AdminDashboardController</servlet-name>
+        <servlet-class>controller.AdminDashboardController</servlet-class>
+        <servlet-name>DashboardController</servlet-name>
+        <servlet-class>controller.DashboardController</servlet-class>
         <servlet-name>AccountDashboardController</servlet-name>
         <servlet-class>controller.AccountDashboardController</servlet-class>
+        <servlet-name>UserDashboardController</servlet-name>
+        <servlet-class>controller.UserDashboardController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserDashboardController</servlet-name>
@@ -45,9 +83,148 @@
         <servlet-class>controller.SettingDashboardController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>MarketingDashboardController</servlet-name>
+        <servlet-class>controller.MarketingDashboardController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaleRegistrationDashboardController</servlet-name>
+        <servlet-class>controller.SaleRegistrationDashboardController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserDashboardController</servlet-name>
+        <url-pattern>/UserDashboardController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SettingDashboardController</servlet-name>
+        <url-pattern>/SettingDashboardController</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>changePassword</servlet-name>
+        <servlet-class>controller.ChangePasswordController</servlet-class>
         <servlet-name>BlogListServlet</servlet-name>
         <servlet-class>controller.BlogListServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CourseListController</servlet-name>
+        <servlet-class>controller.CourseListController</servlet-class>
+    </servlet>
+
+    <!-- Declare ForgotPasswordController Servlet -->
+    <servlet>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <servlet-class>controller.ForgotPasswordController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>changePassword</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <url-pattern>/ForgotPasswordController</url-pattern>
+
+    <!-- Declare Controller Servlet -->
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>controller.Controller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CourseDetailController</servlet-name>
+        <servlet-class>controller.CourseDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterCourseController</servlet-name>
+        <servlet-class>controller.RegisterCourseController</servlet-class>
+    </servlet>
+
+    <!-- Declare Mappings -->
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+
+    <!-- Map Controller Servlet -->
+    <servlet>
+    <servlet-mapping>
+        <servlet-name>ChapterDisplayController</servlet-name>
+        <url-pattern>/ChapterDisplay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonVideoController</servlet-name>
+        <url-pattern>/LessonVideo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDashboardController</servlet-name>
+        <url-pattern>/UserDashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SettingDashboardController</servlet-name>
+        <url-pattern>/SettingDashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseListController</servlet-name>
+        <servlet-class>controller.CourseListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserProfileController</servlet-name>
+        <servlet-class>controller.UserProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUserProfileController</servlet-name>
+        <servlet-class>controller.UpdateUserProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CourseDetailController</servlet-name>
+        <servlet-class>controller.CourseDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterCourseController</servlet-name>
+        <servlet-class>controller.RegisterCourseController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/Controller</url-pattern>
+    </servlet-mapping>
+
+    <!-- Map BlogListServlet -->
+    <servlet-mapping>
+        <servlet-name>BlogListServlet</servlet-name>
+        <url-pattern>/blogList</url-pattern>
+    </servlet-mapping>
+
+    <!-- Declare Controller Servlet -->
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>controller.Controller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogListServlet</servlet-name>
+        <servlet-class>com.example.project.controller.BlogListServlet</servlet-class>
+    </servlet>
+    <!-- Khai báo servlet BlogListServlet -->
+
+    <!-- Declare BlogListServlet -->
+    <servlet>
+        <servlet-name>BlogListServlet</servlet-name>
+        <servlet-class>controller.BlogListServlet</servlet-class>
+    </servlet>
+
+    <!-- Map ChangePasswordController Servlet -->
+    <servlet-mapping>
+        <servlet-name>changePassword</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
+    </servlet-mapping>
+
+    <!-- Map ForgotPasswordController Servlet -->
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <url-pattern>/ForgotPasswordController</url-pattern>
+    </servlet-mapping>
+
+    <!-- Map Controller Servlet -->
     <servlet>
         <servlet-name>CourseListController</servlet-name>
         <servlet-class>controller.CourseListController</servlet-class>
@@ -68,43 +245,28 @@
         <servlet-name>RegisterCourseController</servlet-name>
         <servlet-class>controller.RegisterCourseController</servlet-class>
     </servlet>
-
-    <!-- Declare Mappings -->
-    <servlet-mapping>
-        <servlet-name>ChangePasswordController</servlet-name>
-        <url-pattern>/changePassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ForgotPasswordController</servlet-name>
-        <url-pattern>/ForgotPassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ChapterDisplayController</servlet-name>
-        <url-pattern>/ChapterDisplay</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LessonVideoController</servlet-name>
-        <url-pattern>/LessonVideo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UserDashboardController</servlet-name>
-        <url-pattern>/UserDashboard</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SettingDashboardController</servlet-name>
-        <url-pattern>/SettingDashboard</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CourseListController</servlet-name>
-        <url-pattern>/CourseList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
+        <servlet-class>controller.CourseListController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UserProfileController</servlet-name>
-        <url-pattern>/UserProfile</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
+        <servlet-class>controller.UserProfileController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UpdateUserProfileController</servlet-name>
-        <url-pattern>/UpdateUserProfile</url-pattern>
+        <servlet-class>controller.UpdateUserProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CourseDetailController</servlet-name>
+        <servlet-class>controller.CourseDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterCourseController</servlet-name>
+        <servlet-class>controller.RegisterCourseController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CourseDetailController</servlet-name>
@@ -135,4 +297,54 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+
+    <servlet-mapping>
+        <servlet-name>CourseListController</servlet-name>
+        <url-pattern>/CourseList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/UserProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUserProfileController</servlet-name>
+        <url-pattern>/UpdateUserProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseDetailController</servlet-name>
+        <url-pattern>/CourseDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterCourseController</servlet-name>
+        <url-pattern>/RegisterCourse</url-pattern>
+    </servlet-mapping>
+    <!--    <servlet-mapping>
+        <servlet-name>HomepageController</servlet-name>
+        <url-pattern>/Homepage</url-pattern>
+    </servlet-mapping>-->
+    <!--    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>-->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
+    <servlet-mapping>
+        <servlet-name>MarketingDashboardController</servlet-name>
+        <url-pattern>/MarketingDashboardController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaleRegistrationDashboardController</servlet-name>
+        <url-pattern>/SaleRegistrationDashboardController</url-pattern>
+        <servlet-name>LessonController</servlet-name>
+        <url-pattern>/LessonController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizHandleController</servlet-name>
+        <url-pattern>/QuizHandleController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SpecialQuizController</servlet-name>
+        <url-pattern>/SpecialQuizController</url-pattern>
+    </servlet-mapping>
 </web-app>

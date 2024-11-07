@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>DashboardSidebar</title>
+        <title>Admin Dashboard Sidebar</title>
         <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -28,19 +28,13 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="AccountDashboardController?service=viewAllAccount" class="sidebar-link">
+                    <a href="${pageContext.request.contextPath}/UserDashboardController?service=viewAllUser" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>Users List</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-list"></i>
-                        <span>Accounts Log</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="SettingDashboardController?service=viewAllSetting" class="sidebar-link">
+                    <a href="${pageContext.request.contextPath}/SettingDashboardController?service=viewAllSetting" class="sidebar-link">
                         <i class="lni lni-cog"></i>
                         <span>Setting List</span>
                     </a>

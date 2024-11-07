@@ -1,0 +1,1165 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 3, 2024, 11:37:19 AM
+    Author     : AnhVuNAV
+*/
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Container Styling */
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Sidebar Course Info */
+.course-info {
+    width: 30%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+.course-info h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #007bff;
+}
+
+.course-info .course-tagline {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.course-info .course-thumbnail img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.course-info .course-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.course-info .stars {
+    color: #f39c12;
+    font-size: 18px;
+}
+
+.course-info .rating-number {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.course-info .course-price,
+.course-price-detail  {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.course-info .list-price,
+.list-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-right: 10px;
+}
+
+.course-info .sale-price {
+    color: #e74c3c;
+}
+
+/* Register Button */
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.register-btn.primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.register-btn.primary:hover {
+    background-color: #0056b3;
+}
+
+.register-btn.secondary {
+    background-color: #f8f9fa;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.register-btn.secondary:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.course-info .money-back {
+    font-size: 12px;
+    color: #777;
+    margin-top: 10px;
+}
+
+/* Customization Section */
+.customize-display {
+    margin-top: 30px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.customize-display h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.customization-option label {
+    font-size: 14px;
+    color: #333;
+}
+
+.customization-option select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+/* Main Content */
+.content {
+    width: 70%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+
+
+/* Related Courses Section (Slider) */
+    /* Global Styles */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Container Styling */
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Sidebar Course Info */
+.course-info {
+    width: 30%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+.course-info h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #007bff;
+}
+
+.course-info .course-tagline {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.course-info .course-thumbnail img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.course-info .course-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.course-info .stars {
+    color: #f39c12;
+    font-size: 18px;
+}
+
+.course-info .rating-number {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.course-info .course-price,
+.course-price-detail  {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.course-info .list-price,
+.list-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-right: 10px;
+}
+
+.course-info .sale-price {
+    color: #e74c3c;
+}
+
+/* Register Button */
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.register-btn.primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.register-btn.primary:hover {
+    background-color: #0056b3;
+}
+
+.register-btn.secondary {
+    background-color: #f8f9fa;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.register-btn.secondary:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.course-info .money-back {
+    font-size: 12px;
+    color: #777;
+    margin-top: 10px;
+}
+
+/* Customization Section */
+.customize-display {
+    margin-top: 30px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.customize-display h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.customization-option label {
+    font-size: 14px;
+    color: #333;
+}
+
+.customization-option select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+/* Main Content */
+.content {
+    width: 70%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+
+
+/* Related Courses Section (Slider) */
+.related-courses {
+    margin-top: 30px;
+}
+
+.courses-list {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px;
+    scroll-behavior: smooth;
+}
+
+.course-card {
+    min-width: 250px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.course-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.course-card {
+    width: 30%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column; /* Flex layout */
+    justify-content: space-between; /* Căn đều giữa các phần tử */
+    min-height: 400px; /* Chiều cao tối thiểu để đồng đều giữa các thẻ */
+}
+
+.course-card h4 {
+    font-size: 18px;
+    color: #007bff;
+    margin-bottom: 10px;
+    min-height: 60px; /* Đặt chiều cao tối thiểu cho tiêu đề */
+}
+
+.course-card h5 {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+    min-height: 40px; /* Đặt chiều cao tối thiểu cho mô tả */
+}
+
+.course-card .course-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 15px;
+}
+
+.course-card .register-btn {
+    padding: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    margin-top: auto; /* Đẩy nút xuống dưới cùng */
+}
+
+.course-card .register-btn:hover {
+    background-color: #0056b3;
+}
+
+
+.course-card h4 {
+    font-size: 18px;
+    color: #007bff;
+    margin-bottom: 10px;
+    min-height: 60px; /* Đặt chiều cao tối thiểu cho tiêu đề */
+}
+
+.course-card h5 {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+    min-height: 40px; /* Đặt chiều cao tối thiểu cho mô tả */
+}
+
+.course-card .course-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 15px;
+}
+
+.course-card .register-btn {
+    padding: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    margin-top: auto; /* Đẩy nút xuống dưới cùng */
+}
+
+.course-card .register-btn:hover {
+    background-color: #0056b3;
+}
+
+
+.slider {
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+
+.slider::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.slider::-webkit-scrollbar-thumb {
+    background-color: #007bff;
+    border-radius: 10px;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.register-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Popup Styles */
+.popup-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    width: 400px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* What you'll learn */
+.what-you-learn {
+    margin-bottom: 30px;
+}
+
+.what-you-learn h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.what-you-learn ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.what-you-learn li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.what-you-learn i {
+    color: #28a745;
+    margin-right: 10px;
+}
+
+/* Course Content */
+.course-content {
+    margin-bottom: 30px;
+}
+
+.course-content h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.course-content .sections {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+.course-content .section {
+    margin-bottom: 20px;
+}
+
+.course-content .section h4 {
+    font-size: 18px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.course-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.course-content li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.course-content li span {
+    color: #777;
+}
+
+.view-all {
+    width: 100%;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #007bff;
+    color: #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.view-all:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Related Courses */
+.related-courses {
+    margin-top: 40px;
+}
+
+.related-courses h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.courses-list {
+    display: flex;
+    gap: 20px;
+}
+
+.course-card {
+    width: 30%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.course-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.course-card h4 {
+    font-size: 18px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.course-card .course-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 15px;
+}
+
+.course-card .register-btn {
+    padding: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.course-card .register-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Popup Styles */
+.popup-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup-content {
+    width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form label {
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.register-form select {
+    padding: 10px;
+    background-color: #fff;
+}
+
+/* Styles for Add buttons */
+.add-btn {
+    display: block;
+    margin-bottom: 15px;
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+}
+
+.add-btn:hover {
+    text-decoration: underline;
+}
+
+.register-btn {
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.register-btn:hover {
+    background-color: #0056b3;
+}
+
+.register-form .price-package {
+    margin-bottom: 15px;
+}
+
+/* Tagline Styling */
+.course-taglines {
+    margin-top: 20px;
+}
+
+.course-taglines .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.course-taglines .tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.course-taglines .tag i {
+    margin-right: 5px;
+    color: #333;
+}
+
+.course-taglines .tag:hover {
+    background-color: #e0e0e0;
+    border-color: #aaa;
+    cursor: pointer;
+}
+
+.customize-display select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.sale-price {
+    color: red;
+    font-weight: bold;
+}
+
+.course-card {
+    text-decoration: none; /* Bỏ gạch chân */
+    color: inherit; /* Giữ nguyên màu chữ */
+    display: block;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #fff;
+}
+
+.course-card:hover {
+    transform: translateY(-5px); /* Tạo hiệu ứng nổi khi hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Bóng đổ nhẹ khi hover */
+}
+
+.course-card img {
+    width: 100%;
+    height: 25%; /* Chiều cao cố định cho tất cả ảnh */
+    object-fit: cover; /* Cắt ảnh cho vừa khung mà không làm méo ảnh */
+    border-radius: 5px;
+}
+
+.course-price {
+    font-size: 16px;
+    margin-top: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.list-price {
+    text-decoration: line-through; /* Gạch ngang giá gốc */
+    color: #999;
+}
+
+.sale-price {
+    font-weight: bold;
+    color: #e74c3c; /* Màu đỏ nổi bật cho giá khuyến mãi */
+}
+
+
+/*#phoneSection {
+    display: flex;
+    align-items: center;  Canh giữa theo trục dọc nếu cần 
+    gap: 10px;  Khoảng cách giữa các phần tử 
+}*/
+    /* What you'll learn */
+    .what-you-learn {
+        margin-bottom: 30px;
+    }
+
+.what-you-learn h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.what-you-learn ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.what-you-learn li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.what-you-learn i {
+    color: #28a745;
+    margin-right: 10px;
+}
+
+/* Course Content */
+.course-content {
+    margin-bottom: 30px;
+}
+
+.course-content h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.course-content .sections {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+.course-content .section {
+    margin-bottom: 20px;
+}
+
+.course-content .section h4 {
+    font-size: 18px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.course-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.course-content li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.course-content li span {
+    color: #777;
+}
+
+.view-all {
+    width: 100%;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #007bff;
+    color: #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.view-all:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Related Courses */
+.related-courses {
+    margin-top: 40px;
+}
+
+.related-courses h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.courses-list {
+    display: flex;
+    gap: 20px;
+}
+
+.course-card {
+    width: 30%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.course-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.course-card h4 {
+    font-size: 18px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.course-card .course-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 15px;
+}
+
+.course-card .register-btn {
+    padding: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.course-card .register-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Popup Styles */
+.popup-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup-content {
+    width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form label {
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.register-form select {
+    padding: 10px;
+    background-color: #fff;
+}
+
+/* Styles for Add buttons */
+.add-btn {
+    display: block;
+    margin-bottom: 15px;
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+}
+
+.add-btn:hover {
+    text-decoration: underline;
+}
+
+.register-btn {
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.register-btn:hover {
+    background-color: #0056b3;
+}
+
+.register-form .price-package {
+    margin-bottom: 15px;
+}
+
+/* Tagline Styling */
+.course-taglines {
+    margin-top: 20px;
+}
+
+.course-taglines .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.course-taglines .tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.course-taglines .tag i {
+    margin-right: 5px;
+    color: #333;
+}
+
+.course-taglines .tag:hover {
+    background-color: #e0e0e0;
+    border-color: #aaa;
+    cursor: pointer;
+}
+
+.customize-display select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.sale-price {
+    color: red;
+    font-weight: bold;
+}
+
+/*#phoneSection {
+    display: flex;
+    align-items: center;  Canh giữa theo trục dọc nếu cần 
+    gap: 10px;  Khoảng cách giữa các phần tử 
+}*/

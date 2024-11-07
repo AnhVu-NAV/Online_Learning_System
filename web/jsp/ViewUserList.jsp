@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.Vector,model.Account" %>
+<%@page import="java.util.Vector,model.User" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -21,16 +21,16 @@
     </head>
     <body>
         <div class="wrapper">
-            <jsp:include page="/component/DashboardSidebar.jsp"></jsp:include>
+            <jsp:include page="/component/AdminDashboardSidebar.jsp"></jsp:include>
                 <div class="main">
                     <main class="content px-3 py-4">
                         <div class="container-fluid">
                             <div class="mb-3">
                                 <!-- Display error message if any -->
-                            <c:set var="error_message" value="${requestScope.error_message}"></c:set>
-                            <c:if test="${not empty error_message}">
+                            <c:set var="errorMessage" value="${requestScope.errorMessage}"></c:set>
+                            <c:if test="${not empty errorMessage}">
                                 <div class="alert alert-danger" role="alert">
-                                    ${pageScope.error_message}
+                                    ${pageScope.errorMessage}
                                 </div>
                             </c:if>                                           
                             <!-- End error message -->
@@ -43,9 +43,26 @@
                                 </div>
                             </c:if>                                            
                             <!-- End message -->
+                            <!-- Profile start -->
+                            <nav class="navbar navbar-expand px-4 py-3">
+                                <div class="navbar-collapse collapse">
+                                    <ul class="navbar-nav ms-auto">
+                                        <li class="nav-item dropdown">
+                                            <c:set var="user" value="${sessionScope.user}"/>
+                                            <a href="" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                                <img src="${user.getImageURL()}" class="avatar img-fluid" alt="">
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end rounded">
+
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <!-- Profile end -->
                             <h3 class="fw-bold fs-4 mb-3">Admin Dashboard</h3>
                             <h3 class="fw-bold fs-4 my-3">Users List</h3>
-                            <form action="AccountDashboardController" method="post">
+                            <form action="UserDashboardController" method="post">
                                 <div class="row gx-2 gx-md-3 mb-4">
                                     <!-- Search by name -->
                                     <div class="col-md-4 mb-2 mb-md-0">
@@ -54,7 +71,7 @@
                                             <span class="input-group-prepend input-group-text">
                                                 <i class="bi-search"></i>
                                             </span>
-                                            <input type="text" class="form-control form-control-lg" name="search_by_name" placeholder="Search by name" aria-label="Search by name">
+                                            <input type="text" class="form-control form-control-lg" name="searchByName" placeholder="Search by name" aria-label="Search by name">
                                         </div>
                                     </div>
                                     <!-- End Search by name -->
@@ -66,7 +83,7 @@
                                             <span class="input-group-prepend input-group-text">
                                                 <i class="bi-search"></i>
                                             </span>
-                                            <input type="text" class="form-control form-control-lg" name="search_by_email" placeholder="Search by email" aria-label="Search by email">
+                                            <input type="text" class="form-control form-control-lg" name="searchByEmail" placeholder="Search by email" aria-label="Search by email">
                                         </div>
                                     </div>
                                     <!-- End Search by email -->
@@ -78,7 +95,7 @@
                                             <span class="input-group-prepend input-group-text">
                                                 <i class="bi-search"></i>
                                             </span>
-                                            <input type="text" class="form-control form-control-lg" name="search_by_phone" placeholder="Search by phone " aria-label="Search by phone">
+                                            <input type="text" class="form-control form-control-lg" name="searchByPhone" placeholder="Search by phone " aria-label="Search by phone">
                                         </div>
                                     </div>
                                     <!-- End Search by phone -->
@@ -88,7 +105,7 @@
                                     <!-- Fillter by gender -->
                                     <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
                                         <label class="form-label visually-hidden" for="fillterByGender">Select gender</label>
-                                        <select class="form-select form-select-lg" name="fillter_by_gender" aria-label="Select gender">
+                                        <select class="form-select form-select-lg" name="fillterByGender" aria-label="Select gender">
                                             <option value="all" selected>All gender</option>
                                             <option value="0">Male</option>
                                             <option value="1">Female</option>
@@ -99,7 +116,7 @@
                                     <!-- Fillter by role -->
                                     <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
                                         <label class="form-label visually-hidden" for="fillterByRole">Select role</label>
-                                        <select class="form-select form-select-lg" name="fillter_by_role" aria-label="Select role">
+                                        <select class="form-select form-select-lg" name="fillterByRole" aria-label="Select role">
                                             <option value="all" selected>All role</option>
                                             <c:forEach items="${requestScope.setting}" var="setting">
                                                 <option value="${setting.getId()}">${setting.getValue()}</option>
@@ -111,11 +128,11 @@
                                     <!-- Fillter by status -->
                                     <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
                                         <label class="form-label visually-hidden" for="fillterByStatus">Select status</label>
-                                        <select class="form-select form-select-lg" name="fillter_by_status" aria-label="Select status">
+                                        <select class="form-select form-select-lg" name="fillterByStatus" aria-label="Select status">
                                             <option value="all" selected>All status</option>
                                             <option value="0">Deactivate</option>
                                             <option value="1">Activated</option>                                            
-                                            <option value="2">Default Account</option>
+                                            <option value="2">Default User</option>
                                         </select>
                                     </div>
                                     <!-- End Fillter by status -->
@@ -130,24 +147,24 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="sort_by" id="sort_by_id"  value="sort_by_id" ${checked == 'sort_by_id' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="sort_by_id">
+                                                    <input class="form-check-input" type="radio" name="sortBy" id="sortById"  value="sortById" ${checked == 'sortById' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="sortById">
                                                     ID
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sort_by" id="sort_by_name" value="sort_by_name" ${checked == 'sort_by_name' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="sort_by_name">
+                                                <input class="form-check-input" type="radio" name="sortBy" id="sortByName" value="sortByName" ${checked == 'sortByName' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="sortByName">
                                                     Full name
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sort_by" id="sort_by_gender" value="sort_by_gender" ${checked == 'sort_by_gender' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="sort_by_gender">
+                                                <input class="form-check-input" type="radio" name="sortBy" id="sortByGender" value="sortByGender" ${checked == 'sortByGender' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="sortByGender">
                                                     Gender
                                                 </label>
                                             </div>
@@ -157,34 +174,33 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sort_by" id="sort_by_email" value="sort_by_email" ${checked == 'sort_by_email' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="sort_by_email">
+                                                <input class="form-check-input" type="radio" name="sortBy" id="sortByEmail" value="sortByEmail" ${checked == 'sortByEmail' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="sortByEmail">
                                                     Email
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sort_by" id="sort_by_phone" value="sort_by_phone" ${checked == 'sort_by_phone' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="sort_by_phone">
+                                                <input class="form-check-input" type="radio" name="sortBy" id="sortByPhone" value="sortByPhone" ${checked == 'sortByPhone' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="sortByPhone">
                                                     Phone 
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sort_by" id="sort_by_role" value="sort_by_role"  ${checked == 'sort_by_role' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="sort_by_role">
+                                                <input class="form-check-input" type="radio" name="sortBy" id="sortByRole" value="sortByRole"  ${checked == 'sortByRole' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="sortByRole">
                                                     Role
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- End sorting -->
                                 <br/>
-                                <input type="hidden" name="service" value="viewAllAccount">
+                                <input type="hidden" name="service" value="viewAllUser">
                                 <button type="submit" name="fillterSubmit"  value="submit" class="btn btn-outline-primary">Submit</button>
 
                             </form>
@@ -199,67 +215,71 @@
                                                 <th scope="col">Full Name</th>
                                                 <th scope="col">Gender</th>
                                                 <th scope="col">Email</th>
-                                                <th scope="col">Phone</th>
+                                                <th scope="col">First Phone</th>
+                                                <th scope="col">Second Phone</th>
                                                 <th scope="col">Role</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">View</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach items="${requestScope.data}" var="account">
+                                            <c:forEach items="${requestScope.data}" var="user">
                                                 <tr>
-                                                    <td>${account.getId()}</td>
-                                                    <td>${account.getFirst_name()} ${account.getLast_name()}</td>
+                                                    <td>${user.getId()}</td>
+                                                    <td>${user.getFirstName()} ${user.getLastName()}</td>
                                                     <td>
                                                         <c:choose>
-                                                            <c:when test="${account.isGender() == false}">
+                                                            <c:when test="${user.isGender() == false}">
                                                                 Male
                                                             </c:when>
-                                                            <c:when test="${account.isGender() == true}">
+                                                            <c:when test="${user.isGender() == true}">
                                                                 Female
                                                             </c:when>                                                       
                                                         </c:choose>
                                                     </td>
-                                                    <td>${account.getEmail()}</td>
-                                                    <td>${account.getPhone()}</td>
+                                                    <td>${user.getPrimaryEmail()}</td>
+                                                    <td>${user.getFirstPhone()}</td>
+                                                    <td>${user.getSecondPhone()}</td>
                                                     <td>
                                                         <c:forEach items="${requestScope.setting}" var="setting">
-                                                            <c:if test="${account.getRole_id()==setting.getId()}">
+                                                            <c:if test="${user.getRoleId()==setting.getId()}">
                                                                 ${setting.getValue()}
                                                             </c:if>
                                                         </c:forEach>
                                                     </td>
                                                     <td>
                                                         <c:choose>
-                                                            <c:when test="${account.getStatus() == 0}">
+                                                            <c:when test="${user.getStatus() == 0}">
                                                                 Deactivated
                                                             </c:when>
-                                                            <c:when test="${account.getStatus() == 1}">
+                                                            <c:when test="${user.getStatus() == 1}">
                                                                 Activated
                                                             </c:when>
-                                                            <c:when test="${account.getStatus() == 2}">
-                                                                Default Account
+                                                            <c:when test="${user.getStatus() == 2}">
+                                                                Default user
                                                             </c:when>
                                                         </c:choose>
                                                     </td>
-                                                    <td><a class="btn btn-primary" href="AccountDashboardController?service=viewUserDetails&id=${account.getId()}" role="button">View</a></td>
+                                                    <td><a class="btn btn-primary" href="UserDashboardController?service=viewUserDetails&id=${user.getId()}" role="button">View</a></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                            <!-- Start paging -->
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <c:forEach begin="1" end="${requestScope.totalPage}" var="i">
-                                        <li class="page-item"><a class="page-link" href="AccountDashboardController?service=viewAllAccount&index=${i}">${i}</a></li>
-                                    </c:forEach>
+                                        <li class="page-item"><a class="page-link" href="UserDashboardController?service=viewAllUser&index=${i}">${i}</a></li>
+                                        </c:forEach>
                                 </ul>
                             </nav>
+                            <!-- End paging -->
                             <!-- Registration Form Section start-->
                             <h3 class="fw-bold fs-4 my-3">Add new user</h3>                           
                             <div class="wrapper rounded bg-white p-4">                               
-                                <form class="form" action="AccountDashboardController" method="post">
+                                <form class="form" action="UserDashboardController" method="post">
                                     <div class="row">
                                         <div class="col-md-6 mt-md-0 mt-3">
                                             <label for="firstName">First Name</label>
@@ -298,12 +318,6 @@
                                         <div class="col-md-6 mt-md-0 mt-3">
                                             <label for="phone">Phone</label>
                                             <input type="tel" class="form-control w-100" id="addNewUserPhone" name="addNewUserPhone"> 
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mt-md-0 mt-3">
-                                            <label for="firstName">Address</label>
-                                            <input type="text" class="form-control w-100" id="addNewUserAddress" name="addNewUserAddress"> 
                                         </div>
                                     </div>
                                     <div class="my-md-2 my-3">

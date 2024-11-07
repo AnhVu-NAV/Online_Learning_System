@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -145,7 +147,7 @@
             });
         </script>
     <%
-            session.removeAttribute("message"); // Xóa thông báo sau khi hi?n th?
+            session.removeAttribute("message"); // XÃ³a thÃ´ng bÃ¡o sau khi hi?n th?
         } 
     %>
     </body>

@@ -6,30 +6,38 @@ package model;
 
 /**
  *
- * @author ADMIN
+ * @author AnhVuNAV
  */
 public class PricePackage {
-
     private int id;
-    private Course course;
     private String title;
-    private double price;
-    private double salePrice;
-    private int duration;
+    private int price;
+    private int salePrice;
+    private int courseId;
+    private Date saleStartDate;
+    private Date saleEndDate;
 
     public PricePackage() {
     }
 
-    public PricePackage(int id, Course course, String title, double price, double salePrice, int duration) {
+    public PricePackage(int id, String title, int price, int salePrice) {
         this.id = id;
-        this.course = course;
         this.title = title;
         this.price = price;
         this.salePrice = salePrice;
-        this.duration = duration;
     }
     
-    // <editor-fold defaultstate="collapsed" desc="Getter and Setter methods. Click on the + sign on the left to edit the code.">
+    public PricePackage(int id, int courseId, String title, int price, int salePrice, Date saleStartDate, Date saleEndDate) {
+        this.id = id;
+        this.courseId = courseId;
+        this.title = title;
+        this.price = price;
+        this.salePrice = salePrice;
+        this.saleStartDate = saleStartDate;
+        this.saleEndDate = saleEndDate;
+    }
+   
+
 
     public int getId() {
         return id;
@@ -39,12 +47,12 @@ public class PricePackage {
         this.id = id;
     }
 
-    public Course getCourse() {
-        return course;
+    public int getCourseId() {
+        return courseId;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
     public String getTitle() {
@@ -55,34 +63,54 @@ public class PricePackage {
         this.title = title;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public double getSalePrice() {
+    public int getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(double salePrice) {
+    public void setSalePrice(int salePrice) {
         this.salePrice = salePrice;
     }
 
-    public int getDuration() {
-        return duration;
+    public int getId() {
+        return id;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setId(int id) {
+        this.id = id;
     }
-    // </editor-fold>    
 
-    @Override
-    public String toString() {
-        return "PricePackage{" + "id=" + id + ", title=" + title + ", price=" + price + ", salePrice=" + salePrice + ", duration=" + duration + '}';
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    
+    
+    public Date getSaleStartDate() {
+        return saleStartDate;
+    }
+
+    public void setSaleStartDate(Date saleStartDate) {
+        this.saleStartDate = saleStartDate;
+    }
+
+    public Date getSaleEndDate() {
+        return saleEndDate;
+    }
+
+    public void setSaleEndDate(Date saleEndDate) {
+        this.saleEndDate = saleEndDate;
     }
     
 }

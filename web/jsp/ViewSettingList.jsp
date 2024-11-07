@@ -21,16 +21,16 @@
     </head>
     <body>
         <div class="wrapper">
-            <jsp:include page="/component/DashboardSidebar.jsp"></jsp:include>
+            <jsp:include page="/component/AdminDashboardSidebar.jsp"></jsp:include>
                 <div class="main">
                     <main class="content px-3 py-4">
                         <div class="container-fluid">
                             <div class="mb-3">
                                 <!-- Display error message if any -->
-                            <c:set var="error_message" value="${requestScope.error_message}"></c:set>
-                            <c:if test="${not empty error_message}">
+                            <c:set var="errorMessage" value="${requestScope.errorMessage}"></c:set>
+                            <c:if test="${not empty errorMessage}">
                                 <div class="alert alert-danger" role="alert">
-                                    ${pageScope.error_message}
+                                    ${pageScope.errorMessage}
                                 </div>
                             </c:if>                                           
                             <!-- End error message -->
@@ -43,6 +43,23 @@
                                 </div>
                             </c:if>                                            
                             <!-- End message -->
+                            <!-- Profile start -->
+                            <nav class="navbar navbar-expand px-4 py-3">
+                                <div class="navbar-collapse collapse">
+                                    <ul class="navbar-nav ms-auto">
+                                        <li class="nav-item dropdown">
+                                        <c:set var="user" value="${sessionScope.user}"/>
+                                            <a href="" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                                <img src="${user.getImageURL()}" class="avatar img-fluid" alt="">
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end rounded">
+
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <!-- Profile end -->
                             <h3 class="fw-bold fs-4 mb-3">Admin Dashboard</h3>
                             <h3 class="fw-bold fs-4 my-3">Setting List</h3>
                             <form action="SettingDashboardController" method="post">
@@ -54,7 +71,7 @@
                                             <span class="input-group-prepend input-group-text">
                                                 <i class="bi-search"></i>
                                             </span>
-                                            <input type="text" class="form-control form-control-lg" name="search_by_value" placeholder="Search by value" aria-label="Search by value">
+                                            <input type="text" class="form-control form-control-lg" name="searchByValue" placeholder="Search by value" aria-label="Search by value">
                                         </div>
                                     </div>
                                     <!-- End Search by value -->
@@ -62,10 +79,10 @@
                                     <!-- Fillter by type -->
                                     <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
                                         <label class="form-label visually-hidden" for="fillterByType">Select type</label>
-                                        <select class="form-select form-select-lg" name="fillter_by_type" aria-label="Select type">
+                                        <select class="form-select form-select-lg" name="fillterByType" aria-label="Select type">
                                             <option value="all" selected>All type</option>
-                                            <c:forEach items="${requestScope.setting_type}" var="setting_type">
-                                                <option value="${setting_type.getId()}">${setting_type.getName()}</option>
+                                            <c:forEach items="${requestScope.settingType}" var="settingType">
+                                                <option value="${settingType.getId()}">${settingType.getName()}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -74,7 +91,7 @@
                                     <!-- Fillter by status -->
                                     <div class="col-sm-6 col-md-4 mb-2 mb-sm-0">
                                         <label class="form-label visually-hidden" for="fillterByStatus">Select status</label>
-                                        <select class="form-select form-select-lg" name="fillter_by_status" aria-label="Select status">
+                                        <select class="form-select form-select-lg" name="fillterByStatus" aria-label="Select status">
                                             <option value="all" selected>All status</option>
                                             <option value="1">Activated</option>
                                             <option value="0">Deactivated</option>
@@ -91,24 +108,24 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="sort_by" id="sort_by_id"  value="sort_by_id" ${checked == 'sort_by_id' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="sort_by_id">
+                                                    <input class="form-check-input" type="radio" name="sortBy" id="sortById"  value="sortById" ${checked == 'sortById' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="sortById">
                                                     ID
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sort_by" id="sort_by_setting_type" value="sort_by_setting_type" ${checked == 'sort_by_setting_type' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="sort_by_setting_type">
+                                                <input class="form-check-input" type="radio" name="sortBy" id="sortBySettingType" value="sortBySettingType" ${checked == 'sortBySettingType' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="sortBySettingType">
                                                     Type
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sort_by" id="sort_by_value" value="sort_by_value" ${checked == 'sort_by_value' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="sort_by_value">
+                                                <input class="form-check-input" type="radio" name="sortBy" id="sortByValue" value="sortByValue" ${checked == 'sortByValue' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="sortByValue">
                                                     Value
                                                 </label>
                                             </div>
@@ -118,24 +135,24 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sort_by" id="sort_by_created_date" value="sort_by_created_date" ${checked == 'sort_by_created_date' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="sort_by_created_date">
+                                                <input class="form-check-input" type="radio" name="sortBy" id="sortByCreatedDate" value="sortByCreatedDate" ${checked == 'sortByCreatedDate' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="sortByCreatedDate">
                                                     Created date
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sort_by" id="sort_by_updated_date" value="sort_by_updated_date" ${checked == 'sort_by_updated_date' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="sort_by_updated_date">
+                                                <input class="form-check-input" type="radio" name="sortBy" id="sortByUpdatedDate" value="sortByUpdatedDate" ${checked == 'sortByUpdatedDate' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="sortByUpdatedDate">
                                                     Updated date 
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sort_by" id="sort_by_status" value="sort_by_status"  ${checked == 'sort_by_status' ? 'checked' : ''}>
-                                                <label class="form-check-label" for="sort_by_status">
+                                                <input class="form-check-input" type="radio" name="sortBy" id="sortByStatus" value="sortByStatus"  ${checked == 'sortByStatus' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="sortByStatus">
                                                     Status
                                                 </label>
                                             </div>
@@ -170,15 +187,15 @@
                                                 <tr>
                                                     <td>${setting.getId()}</td>
                                                     <td>
-                                                        <c:forEach items="${requestScope.setting_type}" var="setting_type">
-                                                            <c:if test="${setting.getSetting_type_id()==setting_type.getId()}">
-                                                                ${setting_type.getName()}
+                                                        <c:forEach items="${requestScope.settingType}" var="settingType">
+                                                            <c:if test="${setting.getSettingTypeId()==settingType.getId()}">
+                                                                ${settingType.getName()}
                                                             </c:if>
                                                         </c:forEach>
                                                     </td>                                                
                                                     <td>${setting.getValue()}</td>
-                                                    <td>${setting.getCreated_date()}</td>
-                                                    <td>${setting.getUpdated_date()}</td>
+                                                    <td>${setting.getCreatedDate()}</td>
+                                                    <td>${setting.getUpdatedDate()}</td>
                                                     <td>
                                                         <c:choose>
                                                             <c:when test="${setting.getStatus() == 0}">
@@ -218,10 +235,10 @@
                                         </div>
                                     </div>
                                     <div class="my-md-2 my-3">
-                                        <label for="subject">Role</label>
+                                        <label for="subject">Setting type</label>
                                         <select id="addNewSettingSettingType" class="form-select w-100" name="addNewSettingSettingType" required> 
-                                            <c:forEach items="${requestScope.setting_type}" var="setting_type">
-                                                <option value="${setting_type.getId()}">${setting_type.getName()}</option>
+                                            <c:forEach items="${requestScope.settingType}" var="settingType">
+                                                <option value="${settingType.getId()}">${settingType.getName()}</option>
                                             </c:forEach>
                                         </select>
                                     </div>

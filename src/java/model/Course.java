@@ -26,7 +26,9 @@ public class Course {
     private int categoryId; 
     private float totalDuration;
     private List<String> taglines; // Thêm thuộc tính để lưu danh sách tagline
-    
+
+    private int status;
+    private int numberOfLearner;
     public Course() {
     }
 
@@ -137,4 +139,20 @@ public class Course {
         return categoryId;
     }
 
+    @Override
+    public String toString() {
+        return "Course{"
+                + "id=" + id
+                + ", title='" + title + '\''
+                + ", subtitle='" + subtitle + '\''
+                + ", expertId=" + expertId
+                + ", totalDuration=" + totalDuration
+                + ", categoryId=" + categoryId
+                + ", description='" + description + '\''
+                + ", status=" + status
+                + ", updatedDate=" + updatedDate
+                + ", createdDate=" + createdDate
+                + ", numberOfLearner=" + numberOfLearner
+                + '}';
+    }
 }
