@@ -6,6 +6,7 @@ nbproject/private/private.xml
 nbproject/project.properties
 nbproject/private/private.xml
 <<<<<<< HEAD
+<<<<<<< HEAD
 nbproject/private/private.properties
 =======
 /nbproject/private/
@@ -66,3 +67,6 @@ lib/*
 nbproject/private/private.properties
 nbproject/private/private.xml
 nbproject/project.properties
+=======
+>>>>>>> parent of 7df2c06 (Update .gitignore)
+nbproject/private/private.xml
