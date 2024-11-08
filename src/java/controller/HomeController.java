@@ -5,6 +5,7 @@
 package controller;
 
 import dal.BlogDAO;
+import dal.CourseDAO;
 import dal.UserDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -16,6 +17,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import model.Blogs;
+import model.Course;
+import model.Tagline;
 import model.User;
 
 /**
@@ -28,6 +31,7 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        CourseDAO courseDAO = new CourseDAO();
 //        RequestDispatcher rd = request.getRequestDispatcher("/home.jsp");
         String action = request.getParameter("action");
         HttpSession session = request.getSession(false);
@@ -96,8 +100,11 @@ public class HomeController extends HttpServlet {
                 List<Blogs> blogList = blogDAO.getPaginatedBlogs((page - 1) * recordsPerPage, recordsPerPage);
                 int noOfRecords = blogDAO.getNoOfRecords();
                 int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-
+                // Fetch the courses based on filters
+                List<Course> randomCourses = courseDAO.getRandomCourses(8); // Fetch 8 random courses
+                
                 // Set attributes for the JSP
+                request.setAttribute("courses", randomCourses);
                 request.setAttribute("blogList", blogList);
                 request.setAttribute("noOfPages", noOfPages);
                 request.setAttribute("currentPage", page);

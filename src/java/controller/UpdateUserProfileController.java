@@ -99,7 +99,7 @@ public class UpdateUserProfileController extends HttpServlet {
             Date dob = request.getParameter("dob") != null ? new java.text.SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dob")) : null;
 
             UserDAO userDAO = new UserDAO();
-            User user = userDAO.getUser(userId);
+            User user = userDAO.getUserByID(userId);
 
             if (user == null) {
                 response.sendRedirect("error.jsp");
