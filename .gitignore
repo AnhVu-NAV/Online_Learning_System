@@ -4,12 +4,6 @@
 nbproject/private/private.properties
 nbproject/private/private.xml
 nbproject/project.properties
-nbproject/private/private.xml
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-nbproject/private/private.properties
-=======
 /nbproject/private/
 
 # NetBeans specific folders
@@ -64,15 +58,7 @@ Thumbs.db
 
 # Ignore all files in /lib except your JAR dependencies if manually added
 lib/*
->>>>>>> bd09cb7e7413942dd1a96938e63b52037406ccb1
 nbproject/private/private.properties
 nbproject/private/private.xml
 nbproject/project.properties
-=======
->>>>>>> parent of 7df2c06 (Update .gitignore)
-nbproject/private/private.xml
-=======
->>>>>>> parent of 7df2c06 (Update .gitignore)
-nbproject/private/private.properties
-nbproject/private/private.xml
-nbproject/project.properties
+
