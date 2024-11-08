@@ -153,7 +153,7 @@ public class UserDAO extends DBContext {
         }
         return null; // Return null if the user is not found
     }
-    
+
     public User getUser(int id) {
         String query = "SELECT * FROM User WHERE id = ?";
         try {
@@ -453,53 +453,50 @@ public class UserDAO extends DBContext {
         return null;
 
     }
-    
+
     //HuyLVN
-    public User getOne(String primary_email, String password, Integer status) {
-        PreparedStatement stm = null;
-        ResultSet rs = null;
+    public User getOne(String primaryEmail, String password, Integer status) {
+        Logger logger = Logger.getLogger(UserDAO.class.getName());
         String sql = "SELECT * FROM user WHERE primary_email = ? AND password = ? AND status = ?";
-        try {
-            stm = connection.prepareStatement(sql);
-            stm.setString(1, primary_email);
+
+        logger.info("Bắt đầu phương thức getOne với các tham số: primaryEmail=" + primaryEmail + ", status=" + status);
+
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setString(1, primaryEmail);
             stm.setString(2, password);
             stm.setInt(3, status);
-            rs = stm.executeQuery();
-            if (rs.next()) {
-                return new User(
-                        rs.getInt("id"),
-                        rs.getString("primary_email"),
-                        rs.getString("password"),
-                        rs.getInt("status"),
-                        rs.getInt("role_id"),
-                        rs.getDate("created_date"),
-                        rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        rs.getDate("dob"),
-                        rs.getInt("gender"),
-                        rs.getString("first_phone"), // assuming this is firstPhone
-                        rs.getString("second_phone"), // assuming secondPhone is stored as `second_phone`
-                        rs.getString("secondary_email"),
-                        rs.getString("image_url"),
-                        rs.getString("prefer_contact"),
-                        rs.getString("address")
-                );
+
+            logger.info("Đã chuẩn bị câu truy vấn SQL: " + sql);
+
+            try (ResultSet rs = stm.executeQuery()) {
+                if (rs.next()) {
+                    logger.info("Người dùng được tìm thấy với primaryEmail: " + primaryEmail);
+                    return User.builder()
+                            .id(rs.getInt("id"))
+                            .primaryEmail(rs.getString("primary_email"))
+                            .password(rs.getString("password"))
+                            .roleId(rs.getInt("role_id"))
+                            .createdDate(rs.getDate("created_date"))
+                            .status(rs.getInt("status"))
+                            .firstName(rs.getString("first_name"))
+                            .lastName(rs.getString("last_name"))
+                            .dob(rs.getDate("dob"))
+                            .gender(rs.getInt("gender"))
+                            .firstPhone(rs.getString("first_phone"))
+                            .secondPhone(rs.getString("second_phone"))
+                            .secondaryEmail(rs.getString("secondary_email"))
+                            .imageUrl(rs.getString("image_url"))
+                            .preferContact(rs.getString("prefer_contact"))
+                            .address(rs.getString("address"))
+                            .build();
+                } else {
+                    logger.info("Không tìm thấy người dùng với primaryEmail: " + primaryEmail);
+                }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stm != null) {
-                    stm.close();
-                }
-                connection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            logger.log(Level.SEVERE, "Lỗi SQL khi tìm người dùng với email: " + primaryEmail, ex);
         }
         return null;
     }
+
 }
