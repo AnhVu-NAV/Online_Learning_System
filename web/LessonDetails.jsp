@@ -22,10 +22,10 @@
                 const videoLinkSection = document.getElementById('videoLinkSection');
                 const htmlContentSection = document.getElementById('htmlContentSection');
 
-                if (lessonType === 'LearningMaterial') {
+                if (lessonType === '1') { // Sử dụng ID loại cho Learning Material
                     videoLinkSection.style.display = 'flex';
                     htmlContentSection.style.display = 'flex';
-                } else if (lessonType === 'Quiz') {
+                } else {
                     videoLinkSection.style.display = 'none';
                     htmlContentSection.style.display = 'none';
                 }
@@ -35,6 +35,18 @@
                 const htmlContent = document.getElementById('html_content').value;
                 document.getElementById('preview').innerHTML = htmlContent;
             }
+
+            function validateForm() {
+                const order = document.getElementById('order').value;
+
+                if (order <= 0) {
+                    alert("Order must be greater than 0");
+                    return false; // Ngăn form gửi đi nếu không hợp lệ
+                }
+
+                return true; // Cho phép gửi đi nếu hợp lệ
+            }
+
         </script>
     </head>
     <body>
@@ -66,7 +78,7 @@
                             </div>
                         </c:if>
 
-                        <form action="${pageContext.request.contextPath}/${lesson != null ? 'updateLesson' : 'createLesson'}" method="post">
+                        <form action="${pageContext.request.contextPath}/${lesson != null ? 'updateLesson' : 'createLesson'}" method="post" onsubmit="return validateForm()">
                             <input type="hidden" name="lessonId" value="${lesson.lessonId}">
 
                             <!-- Title and Type -->
@@ -80,9 +92,10 @@
                                     <label class="Label">Type<span class="Required">*</span></label>
                                     <select class="Select" id="lessonType" name="type" onchange="handleLessonTypeChange()" required>
                                         <option value="" disabled ${lesson == null ? 'selected' : ''}>Please select type</option>
-                                        <option value="LearningMaterial" ${lesson != null && lesson.lessonTypeId.value == 'LearningMaterial' ? 'selected' : ''}>Learning Material</option>
-                                        <option value="Quiz" ${lesson != null && lesson.lessonTypeId.value == 'Quiz' ? 'selected' : ''}>Quiz</option>
+                                        <option value="1" ${lesson != null && lesson.lessonTypeId == 1 ? 'selected' : ''}>Learning Material</option>
+                                        <option value="2" ${lesson != null && lesson.lessonTypeId == 2 ? 'selected' : ''}>Quiz</option>
                                     </select>
+
                                 </div>
                             </div>
 
@@ -103,18 +116,16 @@
                             </div>
 
                             <!-- Video Link Section for Learning Material -->
-                            <div class="FormTextField" id="videoLinkSection" style="display: ${lesson != null && lesson.lessonTypeId != null && lesson.lessonTypeId.value == 'LearningMaterial' ? 'flex' : 'none'};">
+                            <div class="FormTextField" id="videoLinkSection" style="display: ${lesson != null && lesson.lessonTypeId == 1 ? 'flex' : 'none'};">
                                 <label class="Label">Video link<span class="Required">*</span></label>
                                 <input type="url" class="Input" name="video_link" placeholder=""
                                        value="${lesson != null && lesson.learningMaterials != null && lesson.learningMaterials.size() > 0 ? lesson.learningMaterials[0].videoUrl : ''}"/>
                             </div>
 
                             <!-- HTML Content Section for Learning Material -->
-                            <div class="FormTextField" id="htmlContentSection" style="display: ${lesson != null && lesson.lessonTypeId != null && lesson.lessonTypeId.value == 'LearningMaterial' ? 'flex' : 'none'};">
+                            <div class="FormTextField" id="htmlContentSection" style="display: ${lesson != null && lesson.lessonTypeId == 1 ? 'flex' : 'none'};">
                                 <label class="Label">HTML content<span class="Required">*</span></label>
-                                <textarea class="Input" name="html_content" id="html_content" rows="5" oninput="updatePreview()">
-                                    ${lesson != null && lesson.learningMaterials != null && lesson.learningMaterials.size() > 0 ? lesson.learningMaterials[0].htmlContent : ''}
-                                </textarea>
+                                <textarea class="Input" name="html_content" id="html_content" rows="5" oninput="updatePreview()">${lesson != null && lesson.learningMaterials != null && lesson.learningMaterials.size() > 0 ? lesson.learningMaterials[0].htmlContent : ''}</textarea>
                                 <span class="Extra">The HTML should be 10 characters.</span>
                             </div>
 
@@ -127,16 +138,6 @@
                         </form>
                     </div>
 
-                    <!-- Document Preview Section -->
-<!--                    <div class="Document">
-                        <img class="Image4" src="https://via.placeholder.com/362x322" alt="Document Preview"/>
-                        <div class="ReplaceFileButtonWrapper">
-                            <button class="Button">
-                                <span>&#128190;</span>  Icon for file upload 
-                                <span>REPLACE ANOTHER FILE</span>
-                            </button>
-                        </div>
-                    </div>-->
                     <div class="Document">
                         <h3>HTML Content Preview:</h3>
                         <div id="preview" class="PreviewBox"></div>

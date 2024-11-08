@@ -60,48 +60,49 @@
                         <option value="">All Status</option>
                         <option value="1" <c:if test="${searchStatus == '1'}">selected</c:if>>Active</option>
                         <option value="0" <c:if test="${searchStatus == '0'}">selected</c:if>>Inactive</option>
-                    </select>
-                    <button type="submit">Search</button>
-                </form>
-            </div>
+                        </select>
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
 
-            <table class="Table">
-                <thead>
-                    <tr>
-                        <th class="col-id">#</th>
-                        <th class="col-lesson">Lesson</th>
-                        <th class="col-status">Status</th>
-                        <th class="col-type">Type</th>
-                        <th class="col-order">Order</th>
-                        <th class="col-actions">Actions</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <c:forEach var="lesson" items="${lessons}">
+                <table class="Table">
+                    <thead>
                         <tr>
-                            <td class="col-id">${lesson.lessonId}</td>
-                            <td class="col-lesson">${lesson.title}</td>
+                            <th class="col-id">#</th>
+                            <th class="col-lesson">Lesson</th>
+                            <th class="col-status">Status</th>
+                            <th class="col-type">Type</th>
+                            <th class="col-order">Order</th>
+                            <th class="col-actions">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    <c:forEach var="entry" items="${lessonsWithTypeValue}">
+                        <tr>
+                            <td class="col-id">${entry.key.id}</td>
+                            <td class="col-lesson">${entry.key.title}</td>
                             <td class="col-status">
                                 <c:choose>
-                                    <c:when test="${lesson.status == 1}">
-                                        <span class="StatusBadge Active"> Active</span>
+                                    <c:when test="${entry.key.status == 1}">
+                                        <span class="StatusBadge Active">Active</span>
                                     </c:when>
                                     <c:otherwise>
-                                        <span class="StatusBadge Inactive"> Inactive</span>
+                                        <span class="StatusBadge Inactive">Inactive</span>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
-                            <td class="col-type">${lesson.lessonTypeId.value}</td>
-                            <td class="col-order">${lesson.order}</td>
+                            <td class="col-type">${entry.value}</td> <!-- Sử dụng entry.value để hiển thị lessonTypeValue -->
+                            <td class="col-order">${entry.key.order}</td>
                             <td class="col-actions">
                                 <!-- Icon button for Activate/Deactivate -->
                                 <form action="subjectLesson" method="post" style="display:inline;">
-                                    <input type="hidden" name="lessonId" value="${lesson.lessonId}">
-                                    <input type="hidden" name="newStatus" value="${lesson.status == 1 ? 0 : 1}">
-                                    <button type="submit" class="IconButton" title="${lesson.status == 1 ? 'Deactivate' : 'Activate'}">
+                                    <input type="hidden" name="lessonId" value="${entry.key.id}">
+                                    <input type="hidden" name="newStatus" value="${entry.key.status == 1 ? 0 : 1}">
+                                    <input type="hidden" name="page" value="${currentPage}">
+                                    <button type="submit" class="IconButton" title="${entry.key.status == 1 ? 'Deactivate' : 'Activate'}">
                                         <c:choose>
-                                            <c:when test="${lesson.status == 1}">
+                                            <c:when test="${entry.key.status == 1}">
                                                 ❌ <!-- Deactivate icon -->
                                             </c:when>
                                             <c:otherwise>
@@ -110,16 +111,17 @@
                                         </c:choose>
                                     </button>
                                 </form>
-                                <button class="IconButton" onclick="window.location.href = '${pageContext.request.contextPath}/editLesson?lessonId=${lesson.lessonId}'">
+                                <button class="IconButton" onclick="window.location.href = '${pageContext.request.contextPath}/editLesson?lessonId=${entry.key.id}'">
                                     <span class="Edit">✎</span>
                                 </button>
                             </td>
                         </tr>
                     </c:forEach>
                 </tbody>
+
             </table>
-                    
-                 <div class="Pagination">
+
+            <div class="Pagination">
                 <button class="PaginationPrev" onclick="window.location.href = 'subjectLesson?page=${currentPage - 1}&records=${records}'" 
                         <c:if test="${currentPage == 1}">disabled</c:if>>«</button>
                 <c:forEach begin="1" end="${noOfPages}" var="i">

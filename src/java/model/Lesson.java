@@ -11,10 +11,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- *
- * @author AnhVuNAV
- */
 @Data
 @Builder
 @AllArgsConstructor
@@ -27,7 +23,7 @@ public class Lesson {
     private int chapterId;
     private int lessonId;                    // ID của bài học
     private Course courseId;                 // Tham chiếu đến Course (khoá học)
-//    private Setting lessonTypeId;       // Loại bài học (tham chiếu đến SubjectTopic)
+    private Setting lessonType;       // Loại bài học (tham chiếu đến Setting)
     private String topic;                    // Chủ đề bài học
     private int order;                       // Thứ tự của bài học
     private Vector<LearningMaterial> learningMaterials; // Danh sách tài liệu học
@@ -36,10 +32,10 @@ public class Lesson {
     private int lessonTypeId;
 
     // Constructor đầy đủ
-    public Lesson(int id, int status, int lessonTypeId, String title, int chapterId, int order) {
+    public Lesson(int id, int status,  Setting lessonType, String title, int chapterId, int order) {
         this.id = id;
         this.status = status;
-        this.lessonTypeId = lessonTypeId;
+        this.lessonType = lessonType;
         this.title = title;
         this.chapterId = chapterId;
         this.order = order;
@@ -51,56 +47,6 @@ public class Lesson {
         this.lessonTypeId = lessonTypeId;
         this.title = title;
         this.chapterId = chapterId;
-        this.order = order;
-    }
-
-    // Getter và Setter cho các thuộc tính
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    // Getter và Setter cho các thuộc tính
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getLessonTypeId() {
-        return lessonTypeId;
-    }
-
-    public void setLessonTypeId(int lessonTypeId) {
-        this.lessonTypeId = lessonTypeId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getChapterId() {
-        return chapterId;
-    }
-
-    public void setChapterId(int chapterId) {
-        this.chapterId = chapterId;
-    }
-
-    public int getOrder() {
-        return order;
-    }
-
-    public void setOrder(int order) {
         this.order = order;
     }
 
