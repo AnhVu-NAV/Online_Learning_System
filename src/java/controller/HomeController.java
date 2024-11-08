@@ -51,12 +51,12 @@ public class HomeController extends HttpServlet {
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             } else {
                 // If user is logged in, handle role-based forwarding
-                if (user.getRoleId() == 6) {
+                if (user.getRoleId() == 1) {
                     // Admin user
                     response.sendRedirect(request.getContextPath() + "/admin");
-                } else if (user.getRoleId() == 1) {
+                } else if (user.getRoleId() == 2) {
                     // Customer user
-                    response.sendRedirect(request.getContextPath() + "/customer");
+                    response.sendRedirect(request.getContextPath() + "/home");
                 }
             }
         } else if (action != null && action.equals("logout")) {
