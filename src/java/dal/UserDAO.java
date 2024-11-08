@@ -153,6 +153,38 @@ public class UserDAO extends DBContext {
         }
         return null; // Return null if the user is not found
     }
+    
+    public User getUser(int id) {
+        String query = "SELECT * FROM User WHERE id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setPrimaryEmail(rs.getString("primary_email"));
+                user.setPassword(rs.getString("password"));
+                user.setRoleId(rs.getInt("role_id"));
+                user.setCreatedDate(rs.getDate("created_date"));
+                user.setStatus(rs.getInt("status"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setDob(rs.getDate("dob"));
+//                user.setGender(rs.getInt("gender"));
+                user.setFirstPhone(rs.getString("first_phone"));
+                user.setSecondPhone(rs.getString("second_phone"));
+                user.setSecondaryEmail(rs.getString("secondary_email"));
+                user.setImageUrl(rs.getString("image_url"));
+                user.setPreferContact(rs.getString("prefer_contact"));
+                user.setAddress(rs.getString("address"));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Return null if the user is not found
+    }
 
     // Method to update user details
     public void updateUserProfile(User user) {

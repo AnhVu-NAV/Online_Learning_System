@@ -849,10 +849,10 @@
                                                     <c:if test="${requestScope.newCustomerDisplayDob=='true'}"><td>${user.getDob()}</td></c:if> 
                                                     <c:if test="${requestScope.newCustomerDisplayGender=='true'}">
                                                         <c:choose>
-                                                            <c:when test="${user.isGender() == false}">
+                                                            <c:when test="${user.getGender() == 1}">
                                                                 <td>Male</td>
                                                             </c:when>
-                                                            <c:when test="${user.isGender() == true}">
+                                                            <c:when test="${user.getGender() == 0}">
                                                                 <td>Female</td>
                                                             </c:when>                                                           
                                                         </c:choose>

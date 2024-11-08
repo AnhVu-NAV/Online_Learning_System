@@ -63,7 +63,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         request.setAttribute("recordsPerPage", recordsPerPage);  // Để lưu recordsPerPage trong form
 
         // Forward to JSP
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/BlogList.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/bloglist.jsp");
         dispatcher.forward(request, response);
 
     } catch (Exception e) {

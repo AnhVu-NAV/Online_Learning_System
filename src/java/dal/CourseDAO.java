@@ -917,4 +917,62 @@ public class CourseDAO extends DBContext {
 
         return new Course(id, title, subtitle, expertId, totalDuration, categoryId, description, status, updatedDate, createdDate, numberOfLearner);
     }
+    
+    public List<Course> getRandomCourses(int limit) {
+        List<Course> courses = new ArrayList<>();
+        String sql = "SELECT c.id, c.title, c.subtitle, c.description, c.category_id, c.expert_id, " +
+                     "c.number_of_learner, c.status, c.created_date, c.updated_date, " +
+                     "GROUP_CONCAT(DISTINCT cth.thumbnail_url) AS thumbnail_urls, " +
+                     "MAX(pp.price) AS price, MAX(pp.sale_price) AS sale_price, " +
+                     "GROUP_CONCAT(DISTINCT t.name) AS taglines " +
+                     "FROM Course c " +
+                     "LEFT JOIN PricePackage pp ON c.id = pp.course_id " +
+                     "LEFT JOIN Course_Thumbnails cth ON c.id = cth.course_id " +
+                     "LEFT JOIN Course_Tagline ct ON c.id = ct.course_id " +
+                     "LEFT JOIN Tagline t ON ct.tagline_id = t.id " +
+                     "WHERE c.status = 1 " +
+                     "GROUP BY c.id, c.title, c.subtitle, c.description, c.category_id, c.expert_id, " +
+                     "c.number_of_learner, c.status, c.created_date, c.updated_date " +
+                     "ORDER BY RAND() LIMIT ?";
+
+        try (
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, limit);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Course course = new Course();
+                    course.setId(rs.getInt("id"));
+                    course.setTitle(rs.getString("title"));
+                    course.setSubtitle(rs.getString("subtitle"));
+                    course.setDescription(rs.getString("description"));
+                    course.setCategoryId(rs.getInt("category_id"));
+                    course.setExpertId(rs.getInt("expert_id"));
+                    course.setNumberOfLearner(rs.getInt("number_of_learner"));
+                    course.setStatus(rs.getInt("status"));
+                    course.setCreatedDate(rs.getDate("created_date"));
+                    course.setUpdatedDate(rs.getDate("updated_date"));
+                    course.setPrice(rs.getInt("price"));
+                    course.setSalePrice(rs.getInt("sale_price"));
+
+                    // Parse thumbnail URLs and taglines if they are not null
+                    String thumbnails = rs.getString("thumbnail_urls");
+                    if (thumbnails != null) {
+                        course.setThumbnailUrl(Arrays.asList(thumbnails.split(",")));
+                    }
+
+                    String taglines = rs.getString("taglines");
+                    if (taglines != null) {
+                        course.setTaglines(Arrays.asList(taglines.split(",")));
+                    }
+
+                    courses.add(course);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return courses;
+    }
 }

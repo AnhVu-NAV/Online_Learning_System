@@ -17,6 +17,10 @@
         <link rel="stylesheet" href="css/courseList.css">
     </head>
     <body>
+        <!-- Header -->
+<!--        <div>
+            <%--<%@ include file="component/Menu.jsp" %>--%>
+        </div>-->
         <div class="container">
             <!-- Sidebar -->
             <div class="sidebar">

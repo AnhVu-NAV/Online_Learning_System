@@ -32,136 +32,136 @@
             <div class="profile-container">
                 <!-- Form for updating profile -->
                 <form action="UpdateUserProfile" method="post">
-                <form action="UpdateUserProfileServlet" method="post">
-                    <input type="hidden" name="userId" value="${user.id}" />
+                    <form action="UpdateUserProfileServlet" method="post">
+                        <input type="hidden" name="userId" value="${user.id}" />
 
-                    <!-- Profile Image Section -->
-                    <div class="profile-card">
-<!--                        <img src="${user.imageUrl}" alt="Profile Image" class="profile-image">-->
-                        <img id="imagePreview" src="${user.imageUrl}" alt="Profile Image" class="profile-image" style="display: block; max-width: 200px; margin-top: 10px;">
-                        <div class="details">
-                            <label for="imageFile"><strong>Upload New Profile Image:</strong></label>
-                            <input type="file" name="imageFile" id="profileImage" accept="image/*" onchange="previewImage()"/>
-                        </div>
-                    </div>
-
-                    <!-- Personal Details Section -->
-                    <div class="details-container">
-                        <div class="details-card">
-                            <div class="card-header">
-                                <h2 class="card-title">Personal Details</h2>
-                            </div>
-                            <div class="details-list">
-                                <div class="details-item">
-                                    <label for="firstName"><strong>First Name:</strong></label>
-                                    <input type="text" name="firstName" id="firstName" value="${user.firstName}" required />
-                                    <span id="firstNameError" class="error-message"></span> <!-- Thêm phần hiển thị lỗi -->
-                                </div>
-                                <div class="details-item">
-                                    <label for="lastName"><strong>Last Name:</strong></label>
-                                    <input type="text" name="lastName" id="lastName" value="${user.lastName}" required />
-                                    <span id="lastNameError" class="error-message"></span>
-                                </div>
-                                <div class="details-item">
-                                    <label for="dob"><strong>Date of Birth:</strong></label>
-                                    <input type="date" name="dob" id="dob" value="<fmt:formatDate value='${user.dob}' pattern='yyyy-MM-dd'/>" required />
-                                </div>
-                                <div class="details-item">
-                                    <label><strong>Gender:</strong></label>
-                                    <label><input type="radio" name="gender" value="1" ${user.gender == 1 ? 'checked' : ''}> Male</label>
-                                    <label><input type="radio" name="gender" value="2" ${user.gender == 2 ? 'checked' : ''}> Female</label>
-<!--                                <label><input type="radio" name="gender" value="true" ${user.gender ? 'checked' : ''}> Male</label>
-                                    <label><input type="radio" name="gender" value="false" ${!user.gender ? 'checked' : ''}> Female</label>-->
-                                    <label><input type="radio" name="gender" value="3" ${user.gender != 1 && user.gender != 2 ? 'checked' : ''}> Other</label>
-                                </div>
+                        <!-- Profile Image Section -->
+                        <div class="profile-card">
+    <!--                        <img src="${user.imageUrl}" alt="Profile Image" class="profile-image">-->
+                            <img id="imagePreview" src="${user.imageUrl}" alt="Profile Image" class="profile-image" style="display: block; max-width: 200px; margin-top: 10px;">
+                            <div class="details">
+                                <label for="imageFile"><strong>Upload New Profile Image:</strong></label>
+                                <input type="file" name="imageFile" id="profileImage" accept="image/*" onchange="previewImage()"/>
                             </div>
                         </div>
 
-                        <!-- Contact Details Section -->
-                        <div class="details-card">
-                            <div class="card-header">
-                                <h2 class="card-title">Contact Details</h2>
+                        <!-- Personal Details Section -->
+                        <div class="details-container">
+                            <div class="details-card">
+                                <div class="card-header">
+                                    <h2 class="card-title">Personal Details</h2>
+                                </div>
+                                <div class="details-list">
+                                    <div class="details-item">
+                                        <label for="firstName"><strong>First Name:</strong></label>
+                                        <input type="text" name="firstName" id="firstName" value="${user.firstName}" required />
+                                        <span id="firstNameError" class="error-message"></span> <!-- Thêm phần hiển thị lỗi -->
+                                    </div>
+                                    <div class="details-item">
+                                        <label for="lastName"><strong>Last Name:</strong></label>
+                                        <input type="text" name="lastName" id="lastName" value="${user.lastName}" required />
+                                        <span id="lastNameError" class="error-message"></span>
+                                    </div>
+                                    <div class="details-item">
+                                        <label for="dob"><strong>Date of Birth:</strong></label>
+                                        <input type="date" name="dob" id="dob" value="<fmt:formatDate value='${user.dob}' pattern='yyyy-MM-dd'/>" required />
+                                    </div>
+                                    <div class="details-item">
+                                        <label><strong>Gender:</strong></label>
+                                        <select name="gender" id="gender">
+                                            <option value="1" ${user.getGender() == 1 ? 'selected' : ''}>Male</option>
+                                            <option value="2" ${user.getGender() == 2 ? 'selected' : ''}>Female</option>
+                                            <option value="3" ${user.getGender() != 1 && user.getGender() != 2 ? 'selected' : ''}>Other</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="details-list">
-                                <div class="details-item">
-                                    <label for="primaryEmail"><strong>Primary Email:</strong></label>
-                                    <input type="email" name="primaryEmail" id="primaryEmail" value="${user.primaryEmail}" required oninput="updatePreferredContactDropdown()"/>
-                                    <span id="primaryEmailError" class="error-message"></span>
+
+                            <!-- Contact Details Section -->
+                            <div class="details-card">
+                                <div class="card-header">
+                                    <h2 class="card-title">Contact Details</h2>
                                 </div>
-                                <div class="details-item">
-                                    <label for="secondaryEmail"><strong>Secondary Email:</strong></label>
-                                    <input type="email" name="secondaryEmail" id="secondaryEmail" value="${user.secondaryEmail}" oninput="updatePreferredContactDropdown()"/>
+                                <div class="details-list">
+                                    <div class="details-item">
+                                        <label for="primaryEmail"><strong>Primary Email:</strong></label>
+                                        <input type="email" name="primaryEmail" id="primaryEmail" value="${user.primaryEmail}" required oninput="updatePreferredContactDropdown()"/>
+                                        <span id="primaryEmailError" class="error-message"></span>
+                                    </div>
+                                    <div class="details-item">
+                                        <label for="secondaryEmail"><strong>Secondary Email:</strong></label>
+                                        <input type="email" name="secondaryEmail" id="secondaryEmail" value="${user.secondaryEmail}" oninput="updatePreferredContactDropdown()"/>
+                                    </div>
+                                    <div class="details-item">
+                                        <label for="firstPhone"><strong>Primary Phone:</strong></label>
+                                        <input type="text" name="firstPhone" id="firstPhone" value="${user.firstPhone}" oninput="updatePreferredContactDropdown()"/>
+                                    </div>
+                                    <div class="details-item">
+                                        <label for="secondPhone"><strong>Secondary Phone:</strong></label>
+                                        <input type="text" name="secondPhone" id="secondPhone" value="${user.secondPhone}" oninput="updatePreferredContactDropdown()"/>
+                                    </div>
                                 </div>
-                                <div class="details-item">
-                                    <label for="firstPhone"><strong>Primary Phone:</strong></label>
-                                    <input type="text" name="firstPhone" id="firstPhone" value="${user.firstPhone}" oninput="updatePreferredContactDropdown()"/>
+                            </div>
+
+                            <!-- Address Section -->
+                            <div class="details-card">
+                                <div class="card-header">
+                                    <h2 class="card-title">Address</h2>
                                 </div>
-                                <div class="details-item">
-                                    <label for="secondPhone"><strong>Secondary Phone:</strong></label>
-                                    <input type="text" name="secondPhone" id="secondPhone" value="${user.secondPhone}" oninput="updatePreferredContactDropdown()"/>
+                                <div class="details-list">
+                                    <div class="details-item">
+                                        <label for="address"><strong>Address:</strong></label>
+                                        <input type="text" name="address" id="address" value="${user.address}" />
+                                    </div>
                                 </div>
+                            </div>
+
+                            <!-- Preferred Contact Method Section -->
+                            <div class="details-card">
+                                <div class="card-header">
+                                    <h2 class="card-title">Preferred Contact Method</h2>
+                                </div>
+                                <div class="details-list">
+                                    <div class="details-item">
+                                        <label for="preferContact"><strong>Preferred Contact:</strong></label>
+                                        <select name="preferContact" id="preferContact">
+                                            <c:if test="${not empty user.primaryEmail}">
+                                                <option value="Primary Email" 
+                                                        ${user.preferContact == 'Primary Email' || empty user.preferContact ? 'selected' : ''}>
+                                                    Primary Email
+                                                </option>
+                                            </c:if>
+                                            <c:if test="${not empty user.secondaryEmail}">
+                                                <option value="Secondary Email" 
+                                                        ${user.preferContact == 'Secondary Email' ? 'selected' : ''}>
+                                                    Secondary Email
+                                                </option>
+                                            </c:if>
+                                            <c:if test="${not empty user.firstPhone}">
+                                                <option value="Primary Phone" 
+                                                        ${user.preferContact == 'Primary Phone' ? 'selected' : ''}>
+                                                    Primary Phone
+                                                </option>
+                                            </c:if>
+                                            <c:if test="${not empty user.secondPhone}">
+                                                <option value="Secondary Phone" 
+                                                        ${user.preferContact == 'Secondary Phone' ? 'selected' : ''}>
+                                                    Secondary Phone
+                                                </option>
+                                            </c:if>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="action-buttons">
+                                <button class="btn btn-back" type="button" onclick="history.back()">Cancel</button>
+                                <button class="btn btn-update" type="submit">Update</button>
                             </div>
                         </div>
-
-                        <!-- Address Section -->
-                        <div class="details-card">
-                            <div class="card-header">
-                                <h2 class="card-title">Address</h2>
-                            </div>
-                            <div class="details-list">
-                                <div class="details-item">
-                                    <label for="address"><strong>Address:</strong></label>
-                                    <input type="text" name="address" id="address" value="${user.address}" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Preferred Contact Method Section -->
-                        <div class="details-card">
-                            <div class="card-header">
-                                <h2 class="card-title">Preferred Contact Method</h2>
-                            </div>
-                            <div class="details-list">
-                                <div class="details-item">
-                                    <label for="preferContact"><strong>Preferred Contact:</strong></label>
-                                    <select name="preferContact" id="preferContact">
-                                        <c:if test="${not empty user.primaryEmail}">
-                                            <option value="Primary Email" 
-                                                    ${user.preferContact == 'Primary Email' || empty user.preferContact ? 'selected' : ''}>
-                                                Primary Email
-                                            </option>
-                                        </c:if>
-                                        <c:if test="${not empty user.secondaryEmail}">
-                                            <option value="Secondary Email" 
-                                                    ${user.preferContact == 'Secondary Email' ? 'selected' : ''}>
-                                                Secondary Email
-                                            </option>
-                                        </c:if>
-                                        <c:if test="${not empty user.firstPhone}">
-                                            <option value="Primary Phone" 
-                                                    ${user.preferContact == 'Primary Phone' ? 'selected' : ''}>
-                                                Primary Phone
-                                            </option>
-                                        </c:if>
-                                        <c:if test="${not empty user.secondPhone}">
-                                            <option value="Secondary Phone" 
-                                                    ${user.preferContact == 'Secondary Phone' ? 'selected' : ''}>
-                                                Secondary Phone
-                                            </option>
-                                        </c:if>
-                                    </select>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Action Buttons -->
-                        <div class="action-buttons">
-                            <button class="btn btn-back" type="button" onclick="history.back()">Cancel</button>
-                            <button class="btn btn-update" type="submit">Update</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
             </div>
         </div>
         <script>

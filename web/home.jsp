@@ -1,6 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,23 +11,18 @@
         <link href="./css/bootstrap.min.css" rel="stylesheet">
         <link href="./css/home.css" rel="stylesheet">
         <link rel="stylesheet" href="./fontawesome/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-        <link href="./css/templatemo-learnik-blog.css" rel="stylesheet">
     </head>
     <body>
+
         <!-- Header -->
         <header>
             <%@ include file="component/Header.jsp" %>
         </header>
 
-        <!-- Main Content with Sidebar -->
         <div class="container mt-5">
             <div class="row">
-
-                <!-- Slider Section (Temporary static slider) -->
-                <!-- Static Bootstrap Carousel -->
+                <!-- Slider Section -->
                 <div class="col-md-8">
-                    <!-- Slider Section (Temporary static slider) -->
                     <div id="carouselExampleIndicators" class="carousel slide mb-5" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -36,22 +31,28 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="d-block w-100" src="img/img-01.jpg" alt="First slide">
+                                <a href="CourseDetail?courseId=11">
+                                <img class="d-block w-100" src="img/grammar_basics_thumbnail1.avif" alt="First slide">
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5>First Slide Title</h5>
+                                    <h5>Grammar Basics</h5>
                                 </div>
+                                </a>
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="img/img-02.jpg" alt="Second slide">
+                                <a href="CourseDetail?courseId=13">
+                                <img class="d-block w-100" src="img/conversation_practice_thumbnail1.avif" alt="Second slide">
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5>Second Slide Title</h5>
+                                    <h5>Conversation Practive</h5>
                                 </div>
+                                </a>
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="img/img-03.jpg" alt="Third slide">
+                                <a href="CourseDetail?courseId=23">
+                                <img class="d-block w-100" src="img/conversation_beginners_thumbnail1.jpg" alt="Third slide">
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5>Third Slide Title</h5>
+                                    <h5>Conversation Beginners</h5>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -64,50 +65,14 @@
                         </a>
                     </div>
                 </div>
-                <!-- Slider Section -->
-                <!--    <div class="container mt-4">
-                        <div id="slider" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
-                <c:forEach var="slide" items="${sliderList}">
-                    <div class="carousel-item ${slide.index == 0 ? 'active' : ''}">
-                        <a href="${slide.link}">
-                            <img src="${slide.imageUrl}" class="d-block w-100" alt="${slide.title}">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>${slide.title}</h5>
-                            </div>
-                        </a>
-                    </div>
-                </c:forEach>
-            </div>
-            <a class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </a>
-            <a class="carousel-control-next" href="#slider" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </a>
-            </div>
-            </div>-->
 
-                <!-- Sidebar (Latest Blogs, Show/Hide Fields, Contact Us, Useful Links) -->
-                <div class="col-md-4">
-                    <!-- Latest Blogs Section -->
+                <!-- Sidebar Section -->
+                <div class="col-md-4 latest-blogs-container">
                     <h3>Latest Blogs</h3>
                     <ul>
                         <c:forEach var="blog" items="${blogList}" begin="0" end="2">
                             <li><a href="BlogDetails?id=${blog.blogId}">${blog.title}</a></li>
                             </c:forEach>
-                    </ul>
-
-                    <!-- Contact Us -->
-                    <h3>Contact Us</h3>
-                    <p>Email: contact@yourwebsite.com</p>
-                    <p>Phone: +123456789</p>
-
-                    <!-- Useful Links -->
-                    <h3>Useful Links</h3>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
@@ -115,7 +80,7 @@
             <!-- Hot Blogs Section -->
             <div class="row mt-5">
                 <div class="col-md-12">
-                    <h2>Hot Blogs</h2>
+                    <h2 class="titleModul">Hot Blogs</h2>
                     <div class="row align-items-center">
                         <!-- Filter dropdown -->
                         <div class="col-md-4">
@@ -129,37 +94,14 @@
                             </form>
                         </div>
 
-                        <!-- Pagination dropdown -->
-                        <div class="col-md-4">
-                            <form action="home" method="get" class="form-inline">
-                                <input type="number" name="pageSize" class="form-control mr-3" min="1" max="100" value="${recordsPerPage}" onchange="this.form.submit()">
-<!--                                <label for="pageSize" class="mr-3">Records per page:</label>
-                                <select name="pageSize" class="form-control mr-3" onchange="this.form.submit()">
-                                    <option value="5" ${recordsPerPage == 5 ? 'selected' : ''}>5</option>
-                                    <option value="10" ${recordsPerPage == 10 ? 'selected' : ''}>10</option>
-                                    <option value="20" ${recordsPerPage == 20 ? 'selected' : ''}>20</option>
-                                </select>-->
-                                <input type="hidden" name="page" value="${currentPage}">
-                            </form>
-                        </div>
-
                         <!-- View All Button -->
-                        <div class="col-md-4 text-right">
-                            <!-- Dynamic URL pointing to blogList -->
-                            <a href="${pageContext.request.contextPath}/blogList" class="btn btn-primary">Xem toàn bộ</a>
+                        <div class="col-md-8 text-right view-all-container">
+                            <a href="${pageContext.request.contextPath}/blogList" class="btn btn-primary">View All</a>
                         </div>
                     </div>
 
-                    <div class="pagination">
-                        <c:forEach var="pageNum" begin="1" end="${noOfPages}">
-                            <a href="home?page=${pageNum}&pageSize=${recordsPerPage}" class="btn btn-secondary mr-2 ${currentPage == pageNum ? 'active' : ''}">
-                                ${pageNum}
-                            </a>
-                        </c:forEach>
-                    </div>
-
-                    <!-- Dynamic Blog Posts Section -->
-                    <div class="row">
+                    <!-- Blog List -->
+                    <div class="row mt-4">
                         <c:forEach var="blog" items="${blogList}">
                             <article class="col-12 col-md-6 tm-post">
                                 <hr class="tm-hr-primary">
@@ -167,7 +109,6 @@
                                     <div class="tm-post-link-inner">
                                         <img src="img/${blog.thumbnailUrl}" alt="${blog.title}" class="img-fluid">
                                     </div>
-                                    <span class="position-absolute tm-new-badge">New</span>
                                     <h2 class="tm-pt-30 tm-color-primary tm-post-title">${blog.title}</h2>
                                 </a>
                                 <p class="tm-pt-30">${blog.briefInfo}</p>
@@ -180,95 +121,81 @@
                         </c:forEach>
                     </div>
                 </div>
-            </div>
-        </div>
-
-
-
-
-        <!-- Courses Section -->
-        <div class="row mt-5">
-            <div class="col-md-12" style="margin-left:20%">
-                <h2>Courses</h2>
-                <form action="filterCourses" method="post" class="form-inline mb-4">
-                    <select name="filter" class="form-control mr-3" onchange="this.form.submit()">
-                        <option value="newest" ${param.filter == 'newest' ? 'selected' : ''}>Newest</option>
-                        <option value="popular" ${param.filter == 'popular' ? 'selected' : ''}>Most Popular</option>
-                        <option value="hotSale" ${param.filter == 'hotSale' ? 'selected' : ''}>Hot Sale</option>
-                    </select>
-                </form>
-
-                <!-- Sử dụng CourseItem.jsp để hiển thị mỗi khóa học (course) -->
-                <div class="row">
-                    <%--<c:forEach var="course" items="${courseList}">--%>
-                    <div class="col-md-8 mb-4">
-                        <jsp:include page="component/CourseItem.jsp" />
+                <div class="paginationContainer">
+                    <!-- Pagination -->
+                    <div class="pagination mt-3">
+                        <c:forEach var="pageNum" begin="1" end="${noOfPages}">
+                            <a href="home?page=${pageNum}&pageSize=${recordsPerPage}" class="btn btn-secondary mr-2 ${currentPage == pageNum ? 'active' : ''}">
+                                ${pageNum}
+                            </a>
+                        </c:forEach>
                     </div>
-                    <%--</c:forEach>--%>
+                    <!-- Pagination dropdown -->
+                    <div class="col-md-9 ">
+                        <form action="home" method="get" class="form-inline">
+                            <input type="number" name="pageSize" class="form-control mr-3" min="1" max="100" value="${recordsPerPage}" onchange="this.form.submit()">
+                            <input type="hidden" name="page" value="${currentPage}">
+                        </form>
+                    </div>
                 </div>
+            </div>
 
-<!--                 Course display area 
-                <div id="courseList">
-                    <div class="course-item">
-                        <h3 class="course-title">Course Title</h3>
-                        <p class="course-tagline">This is the tagline of the course.</p>
-                        <img class="course-thumbnail" src="img/course-thumbnail.jpg" alt="Course Thumbnail">
-                    </div>
-                </div>-->
-
-
-                <!--                 Show/Hide Course Fields 
-                                    <h3>Show/Hide Course Fields</h3>
-                                    <form action="applyCourseFields" method="post" class="form-inline">
-                                        <label class="mr-3"><input type="checkbox" name="fields" value="title" ${fn:contains(selectedFields, 'title') ? 'checked' : ''}> Title</label>
-                                        <label class="mr-3"><input type="checkbox" name="fields" value="tagline" ${fn:contains(selectedFields, 'tagline') ? 'checked' : ''}> Tagline</label>
-                                        <label class="mr-3"><input type="checkbox" name="fields" value="thumbnail" ${fn:contains(selectedFields, 'thumbnail') ? 'checked' : ''}> Thumbnail</label>
-                                        <button type="submit" class="btn btn-primary ml-3">Apply</button>
-                                    </form>-->
-
-                <!-- Show/Hide Course Fields -->
-                <!-- Show/Hide Course Fields -->
-                <h3>Show/Hide Course Fields</h3>
-                <form class="form-inline">
-                    <label class="mr-3">
-                        <input type="checkbox" id="toggleTitle" checked> Title
-                    </label>
-                    <label class="mr-3">
-                        <input type="checkbox" id="toggleTagline" checked> Tagline
-                    </label>
-                    <label class="mr-3">
-                        <input type="checkbox" id="toggleThumbnail" checked> Thumbnail
-                    </label>
-                </form>
-
-                <!-- Dynamically Display Courses Based on Selected Fields -->
-                <div class="row mt-4">
-                    <c:forEach var="course" items="${courseList}">
-                        <div class="col-md-6 mb-4">
-                            <div class="course-item">
-                                <!-- Display Title if selected -->
-                                <c:if test="${fn:contains(selectedFields, 'title')}">
-                                    <h4>${course.title}</h4>
-                                </c:if>
-
-                                <!-- Display Tagline if selected -->
-                                <c:if test="${fn:contains(selectedFields, 'tagline')}">
-                                    <p>${course.tagline}</p>
-                                </c:if>
-
-                                <!-- Display Thumbnail if selected -->
-                                <c:if test="${fn:contains(selectedFields, 'thumbnail')}">
-                                    <img src="${course.thumbnailUrl}" alt="${course.title}" class="img-fluid">
-                                </c:if>
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <h2 class="titleModul">Hot Course</h2>
+                    <!-- Course Grid Section -->
+                    <div class="course-grid mt-4" id="courseGrid">
+                        <c:forEach var="course" items="${courses}">
+                            <div class="course-card">
+                                <a href="CourseDetail?courseId=${course.id}">
+                                    <c:if test="${course.thumbnailUrls != null && !course.thumbnailUrls.isEmpty()}">
+                                        <img src="${course.thumbnailUrls[0]}" class="thumbnail" alt="${course.title}">
+                                    </c:if>
+                                    <c:if test="${course.thumbnailUrls == null || course.thumbnailUrls.isEmpty()}">
+                                        <img src="default-thumbnail.jpg" class="thumbnail" alt="${course.title}">
+                                    </c:if>
+                                    <div class="course-info">
+                                        <h3 class="course-title">${course.title}</h3>
+                                        <p class="course-subtitle">${course.subtitle}</p>
+                                        <div class="course-tagline">
+                                            <c:if test="${course.taglines != null && !course.taglines.isEmpty()}">
+                                                <c:forEach var="tagline" items="${course.taglines}">
+                                                    <div class="tag">
+                                                        <i class="fas fa-tag"></i>
+                                                        <span class="tagline">${tagline}</span>
+                                                    </div>
+                                                </c:forEach>
+                                            </c:if>
+                                            <c:if test="${course.taglines == null || course.taglines.isEmpty()}">
+                                                <p>No taglines available.</p>
+                                            </c:if>
+                                        </div>
+                                        <div class="pricing">
+                                            <span class="list-price">$${course.price}</span>
+                                            <span class="sale-price">$${course.salePrice}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!--                                <button class="register-btn">Register</button>-->
                             </div>
-                        </div>
-                    </c:forEach>
+                        </c:forEach>
+                    </div>
+                    <!-- Show/Hide Course Fields -->
+                    <h3 class="mt-5">Show/Hide Course Fields</h3>
+                    <form class="form-inline mb-4">
+                        <label class="mr-3">
+                            <input type="checkbox" id="toggleTitle" checked> Title
+                        </label>
+                        <label class="mr-3">
+                            <input type="checkbox" id="toggleTagline" checked> Tagline
+                        </label>
+                        <label class="mr-3">
+                            <input type="checkbox" id="toggleThumbnail" checked> Thumbnail
+                        </label>
+                    </form>
                 </div>
-
-
             </div>
         </div>
-
         <!-- Footer -->
         <footer class="mt-5">
             <%@ include file="component/Footer.jsp" %>
@@ -277,37 +204,23 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
 
-        <!-- JavaScript to toggle course fields -->
         <script>
-                        // Get checkbox elements
-                        const toggleTitle = document.getElementById('toggleTitle');
-                        const toggleTagline = document.getElementById('toggleTagline');
-                        const toggleThumbnail = document.getElementById('toggleThumbnail');
 
-                        // Get course field elements
-                        const courseTitle = document.querySelectorAll('.course-title');
-                        const courseTagline = document.querySelectorAll('.course-tagline');
-                        const courseThumbnail = document.querySelectorAll('.course-thumbnail');
+                                // Show/Hide Course Fields Toggle Script
+                                const toggleTitle = document.getElementById('toggleTitle');
+                                const toggleTagline = document.getElementById('toggleTagline');
+                                const toggleThumbnail = document.getElementById('toggleThumbnail');
 
-                        // Function to toggle visibility
-                        function toggleVisibility(element, isVisible) {
-                            element.forEach(item => {
-                                item.style.display = isVisible ? 'block' : 'none';
-                            });
-                        }
-
-                        // Add event listeners to checkboxes
-                        toggleTitle.addEventListener('change', () => {
-                            toggleVisibility(courseTitle, toggleTitle.checked);
-                        });
-
-                        toggleTagline.addEventListener('change', () => {
-                            toggleVisibility(courseTagline, toggleTagline.checked);
-                        });
-
-                        toggleThumbnail.addEventListener('change', () => {
-                            toggleVisibility(courseThumbnail, toggleThumbnail.checked);
-                        });
+                                toggleTitle.addEventListener('change', () => {
+                                    document.querySelectorAll('.course-title').forEach(item => item.style.display = toggleTitle.checked ? 'block' : 'none');
+                                });
+                                toggleTagline.addEventListener('change', () => {
+                                    document.querySelectorAll('.course-tagline').forEach(item => item.style.display = toggleTagline.checked ? 'block' : 'none');
+                                });
+                                toggleThumbnail.addEventListener('change', () => {
+                                    document.querySelectorAll('.thumbnail').forEach(item => item.style.display = toggleThumbnail.checked ? 'block' : 'none');
+                                });
         </script>
+
     </body>
 </html>

@@ -5,29 +5,30 @@
     flex-direction: row;
     justify-content: center;
     width: 100%;
+    margin-bottom: 200px; 
 }
 
 .web .div {
     background-color: #131212;
-    width: 1366px;
+    width: 100%;
     height: 768px;
     position: relative;
 }
 
 .web .overlap {
     position: absolute;
-    width: 1263px;
-    height: 634px;
+    width: 100%;
+    height: 100%;
     top: 134px;
-    left: 103px;
+    /*left: 103px;*/
 }
 
 .web .man-working-night {
     position: absolute;
-    width: 890px;
-    height: 634px;
+    width: 100%;
+    height: 100%;
     top: 0;
-    left: 373px;
+    /*left: 373px;*/
     object-fit: cover;
 }
 
@@ -139,7 +140,7 @@
     width: 438px;
     height: 19px;
     top: 48px;
-    left: 832px;
+    left: 80%;
 }
 
 .web .text-wrapper-4 {
@@ -200,3 +201,141 @@
     top: 44px;
 
 }
+
+/* Course Cards Grid Layout */
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 5 courses per row */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.customize select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Individual Course Cards */
+.course-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    min-height: 420px; /* Đặt chiều cao tối thiểu để các thẻ đồng đều */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Đảm bảo các phần bên trong được phân phối đều */
+}
+
+.course-card:hover {
+    transform: translateY(-5px); /* Card lifts on hover */
+}
+
+/* Remove underline for course card links */
+.course-card a {
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Inherits color from parent */
+    flex-grow: 1; /* Đảm bảo ảnh và thông tin chiếm toàn bộ chiều cao */
+}
+
+.course-card a:hover {
+    text-decoration: none; /* Ensures no underline on hover as well */
+    color: inherit; /* Keep the color the same on hover */
+}
+
+.thumbnail {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.course-info {
+    padding: 15px;
+    flex-grow: 1; /* Đảm bảo phần thông tin khóa học mở rộng */
+}
+
+.course-info h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.course-info .instructor, .course-info .students, .course-info .lessons {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.course-info .rating {
+    font-size: 14px;
+    color: #f39c12;
+    margin-bottom: 10px;
+}
+
+/* Pricing Section */
+.pricing {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.pricing .list-price {
+    text-decoration: line-through;
+    margin-right: 10px;
+    color: #999;
+}
+
+.pricing .sale-price {
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+/* Register Button */
+.register-btn {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-end; /* Đảm bảo nút "Register" ở cuối thẻ */
+}
+
+.register-btn:hover {
+    background-color: #0056b3;
+}
+
+h1, h2, h3 {
+    color: #333;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.profile-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
