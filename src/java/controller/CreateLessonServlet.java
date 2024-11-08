@@ -29,26 +29,42 @@ public class CreateLessonServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String title = request.getParameter("title");
-        String type = request.getParameter("type");
+        String type = request.getParameter("type"); // Giá trị này sẽ là "1" hoặc "2"
         int chapterId = Integer.parseInt(request.getParameter("chapter_id"));
-        int order = Integer.parseInt(request.getParameter("order"));
-        String videoLink = request.getParameter("video_link");
-        String htmlContent = request.getParameter("html_content");
-
-        LessonDAO lessonDAO = new LessonDAO();
+        int order;
 
         try {
-            if ("LearningMaterial".equals(type)) {
-                lessonDAO.createLearningMaterialLesson(title, chapterId, order, videoLink, htmlContent);
-            } else if ("Quiz".equals(type)) {
-                lessonDAO.createQuizLesson(title, chapterId, order);
+            order = Integer.parseInt(request.getParameter("order"));
+            if (order <= 0) {
+                request.setAttribute("errorMessage", "Order must be greater than 0.");
+                request.getRequestDispatcher("LessonDetails.jsp").forward(request, response);
+                return;
             }
-            response.sendRedirect("subjectLesson"); // Quay lại trang Course Lesson sau khi tạo thành công
+
+            LessonDAO lessonDAO = new LessonDAO();
+
+            // So sánh `type` với `id` của Lesson Type để xác định loại bài học
+            if ("1".equals(type)) { // `1` đại diện cho LearningMaterial
+                lessonDAO.createLearningMaterialLesson(title, chapterId, order, request.getParameter("video_link"), request.getParameter("html_content"));
+            } else if ("2".equals(type)) { // `2` đại diện cho Quiz
+                lessonDAO.createQuizLesson(title, chapterId, order);
+            } else {
+                request.setAttribute("errorMessage", "Invalid lesson type.");
+                request.getRequestDispatcher("LessonDetails.jsp").forward(request, response);
+                return;
+            }
+
+            response.sendRedirect("subjectLesson");
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Order or Chapter ID must be a valid number.");
+            request.getRequestDispatcher("LessonDetails.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
-            // Trả về trang LessonDetails.jsp với thông báo lỗi cụ thể hơn
             request.setAttribute("errorMessage", "Failed to create lesson: " + e.getMessage());
             request.getRequestDispatcher("LessonDetails.jsp").forward(request, response);
         }
     }
+
 }
