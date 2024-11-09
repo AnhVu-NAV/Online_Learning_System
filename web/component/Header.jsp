@@ -134,10 +134,10 @@
                         <c:otherwise>
                             <!-- Buttons for users who are not logged in -->
                             <li class="nav-item active">
-                                <a class="text-wrapper-6 nav-link" href="/signup">SIGN UP</a>
+                                <a class="text-wrapper-6 nav-link" href="<c:url value="/register"/>">SIGN UP</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="text-wrapper-7 nav-link" href='<c:url value="/login?action=login"/>'>LOG IN</a>
+                                <a class="text-wrapper-7 nav-link" href='<c:url value="/home?action=login"/>'>LOG IN</a>
                             </li>
                         </c:otherwise>
                     </c:choose>

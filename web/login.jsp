@@ -38,7 +38,7 @@
                         <input type="password" name="password" id="password" placeholder="Password" class="input-field" required>
                         <div class="remember-forgot">
                             <label><input type="checkbox" name="remember"> Remember Me</label>
-                            <a href="#">Forgot Password?</a>
+                            <a href='<c:url value="/ForgotPasswordController"/>'>Forgot Password?</a>
                         </div>
                         <input type="hidden" value="login" name="action"/>
                         <button type="submit" class="btn-login">Login</button>

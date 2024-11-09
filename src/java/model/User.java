@@ -112,4 +112,36 @@ public class User {
     public String getImageUrl(){
         return imageUrl;
     }
+
+//    public boolean isGender() {
+//        if (gender == 2) {
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
+//
+//    public int Gender(boolean gender) {
+//        if (gender == false) {
+//            return 2;
+//        } else {
+//            return 1;
+//        }
+//    }
+
+public User(String primaryEmail, String password, Date createdDate, 
+        String firstName, String lastName, Date dob, int gender, String firstPhone, String address) {
+        this.primaryEmail = primaryEmail;
+        this.password = password;
+        this.roleId = 4; // default role
+        this.createdDate = createdDate;
+        this.status = 1; // active status
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.gender = gender;
+        this.firstPhone = firstPhone;
+        this.address = address;
+    }
+
 }
