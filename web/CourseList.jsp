@@ -6,6 +6,17 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%
+    Integer roleId = (session != null) ? (Integer) session.getAttribute("roleId") : null;
+
+    // Nếu roleId là 3 (Admin), chuyển hướng đến /subjectLesson
+    if (roleId != null && roleId == 3) {
+        response.sendRedirect(request.getContextPath() + "/subjectLesson");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
