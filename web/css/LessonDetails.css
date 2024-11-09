@@ -266,3 +266,21 @@ body, html {
 .IconButton:focus {
     outline: none;
 }
+
+.image-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.caption {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 5px;
+}

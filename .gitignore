@@ -4,7 +4,6 @@
 nbproject/private/private.properties
 nbproject/private/private.xml
 nbproject/project.properties
-nbproject/private/private.xml
 /nbproject/private/
 
 # NetBeans specific folders
@@ -59,3 +58,7 @@ Thumbs.db
 
 # Ignore all files in /lib except your JAR dependencies if manually added
 lib/*
+nbproject/private/private.properties
+nbproject/private/private.xml
+nbproject/project.properties
+

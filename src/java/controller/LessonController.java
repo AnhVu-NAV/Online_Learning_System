@@ -5,6 +5,7 @@
 package controller;
 
 import dal.LessonDAO;
+import dal.QuestionDAO;
 import dal.QuizDAO;
 import jakarta.servlet.ServletContext;
 import java.io.IOException;
@@ -90,31 +91,36 @@ public class LessonController extends HttpServlet {
                         request.setAttribute("videocontent", videocontent);
                         request.getRequestDispatcher("ChapterDisplayController").forward(request, response);
                     }
-                } else if (lesson.getLessonTypeId() == 2) {
-                    QuizDAO quizDAO = new QuizDAO();
-                    Quiz quiz = quizDAO.getQuizById(lessonId); 
+                }
+                QuizDAO quizDAO = new QuizDAO();
+                QuestionDAO quesDAO = new QuestionDAO();
+                Quiz quiz = quizDAO.getQuizById(lessonId);
 
-                    if (quiz != null) {
-                        if (quiz.getType() == 1) {
-                            
-                            request.setAttribute("quizId", lessonId);
-                            request.setAttribute("questionNumber", 1); // Bắt đầu từ câu hỏi đầu tiên
-                            request.getRequestDispatcher("QuizHandleController").forward(request, response);
+                if (quiz != null) {
+                    if (quiz.getType() == 1) {
+                        // Gửi dữ liệu Quiz qua request để hiển thị pop-up
+                        request.setAttribute("quizTitle", quiz.getTitle());
+                        request.setAttribute("quizDescription", quiz.getDescription());
+                        request.setAttribute("totalQuestions", quesDAO.getQuestionCountForQuiz(lessonId));
+                        request.setAttribute("quizId", lessonId);
 
-                        } else if (quiz.getType() == 2) {
-                            
-                           request.getRequestDispatcher("SpecialQuizController").forward(request, response);
-                        }
+                        // Gửi thông báo rằng cần hiển thị pop-up
+                        request.setAttribute("showQuizPopup", true);
+                        request.getRequestDispatcher("ChapterDisplayController").forward(request, response);
+                    } else if (quiz.getType() == 2) {
+
+                        request.getRequestDispatcher("SpecialQuizController").forward(request, response);
                     }
                 }
             }
-            
         }
-        
+
     }
 
-        @Override
-        protected void doPost
+
+
+@Override
+protected void doPost
         (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             processRequest(request, response);
@@ -126,7 +132,7 @@ public class LessonController extends HttpServlet {
          * @return a String containing servlet description
          */
         @Override
-        public String getServletInfo
+public String getServletInfo
         
             () {
         return "Short description";

@@ -43,10 +43,10 @@ public class AuthorizationFilter implements Filter {
             HttpSession session = request.getSession(false);
             User user = (session != null) ? (User) session.getAttribute("user") : null;
             if (user != null) {
-                if (user.getRoleId() == 6) {
+                if (user.getRoleId() == 1) {
                     // Admin user
                     filterChain.doFilter(servletRequest, servletResponse);
-                } else if (user.getRoleId() == 1) {
+                } else if (user.getRoleId() == 6) {
                     // Customer user
                     request.setAttribute("message", "Not Permission");
                     request.setAttribute("alert", "danger");

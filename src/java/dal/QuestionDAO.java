@@ -3,6 +3,8 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Question;
@@ -39,6 +41,31 @@ public class QuestionDAO extends DBContext {
             logger.log(Level.SEVERE, "Error fetching question by quizId and question number", e);
         }
         return null;
+    }
+
+    public List<Question> getQuestionByQuizId(int quizId) {
+        List<Question> questions = new ArrayList<>();
+        String query = "SELECT * FROM Question WHERE quiz_id = ? ";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, quizId);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    Question question = new Question();
+                    question.setId(rs.getInt("id"));
+                    question.setQuizId(rs.getInt("quiz_id"));
+                    question.setLevelId(rs.getInt("level_id"));
+                    question.setStatus(rs.getInt("status"));
+                    question.setContent(rs.getString("content"));
+                    question.setQuestionTypeId(rs.getInt("question_type_id"));
+                    question.setHint(rs.getString("hint"));
+                    questions.add(question);
+                }
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error fetching question by quizId ", e);
+        }
+        return questions;
     }
 
     // Lấy số lượng câu hỏi trong một quiz

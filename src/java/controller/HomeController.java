@@ -51,12 +51,12 @@ public class HomeController extends HttpServlet {
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             } else {
                 // If user is logged in, handle role-based forwarding
-                if (user.getRoleId() == 6) {
+                if (user.getRoleId() == 1) {
                     // Admin user
                     response.sendRedirect(request.getContextPath() + "/admin");
-                } else if (user.getRoleId() == 1) {
+                } else if (user.getRoleId() == 2) {
                     // Customer user
-                    response.sendRedirect(request.getContextPath() + "/customer");
+                    response.sendRedirect(request.getContextPath() + "/home");
                 }
             }
         } else if (action != null && action.equals("logout")) {
@@ -102,7 +102,7 @@ public class HomeController extends HttpServlet {
                 int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
                 // Fetch the courses based on filters
                 List<Course> randomCourses = courseDAO.getRandomCourses(8); // Fetch 8 random courses
-                
+
                 // Set attributes for the JSP
                 request.setAttribute("courses", randomCourses);
                 request.setAttribute("blogList", blogList);
@@ -145,45 +145,40 @@ public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action != null && action.equals("login")) {
-            // Handle login via LoginController logic
-            String primary_email = request.getParameter("primary_email");
+            // Xử lý logic đăng nhập
+            String primaryEmail = request.getParameter("primary_email");
             String password = request.getParameter("password");
 
             UserDAO userDao = new UserDAO();
-            User user = userDao.getOne(primary_email, password, 1); // Assume not banned for login
+            User user = userDao.getOne(primaryEmail, password, 1); // Giả định trạng thái 1 là không bị cấm
 
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
 
             if (user == null) {
-                // Invalid credentials, return to login page
-                request.setAttribute("message", "Email or password is invalid");
+                // Sai thông tin đăng nhập, quay lại trang login
+                request.setAttribute("message", "Email hoặc mật khẩu không chính xác");
                 request.setAttribute("alert", "danger");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
-                // Add redirect after forwarding to login page
-//                response.sendRedirect(request.getContextPath() + "/login?action=login&message='Username or password is invalid'&alert=danger");
             } else if (user.getStatus() == 0) {
-                // Banned user, redirect to access denied page
+                // Tài khoản bị cấm, quay lại trang login với thông báo
                 session.removeAttribute("user");
-//                response.sendRedirect("AccessDenied.jsp");
-                request.setAttribute("message", "Account has been banned");
+                request.setAttribute("message", "Tài khoản của bạn đã bị cấm");
                 request.setAttribute("alert", "danger");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             } else {
-                // Login successful, handle role-based forwarding
-                String fullname = (String) session.getAttribute("fullname");
-                if (user.getRoleId() == 6) {
-                    // Admin user
-//                    response.sendRedirect(request.getContextPath() + "/dashboard");
+                // Đăng nhập thành công, chuyển hướng dựa trên vai trò
+                if (user.getRoleId() == 1) {
+                    // Người dùng admin
                     response.sendRedirect(request.getContextPath() + "/admin/dashboard");
-
                 } else if (user.getRoleId() == 2) {
-                    // Customer user
+                    // Người dùng khách hàng
                     response.sendRedirect(request.getContextPath() + "/home");
                 } else if (user.getRoleId() == 0) {
-                    // Default user
+                    // Người dùng mặc định, yêu cầu đổi mật khẩu
                     response.sendRedirect(request.getContextPath() + "/change-password");
                 } else {
+                    // Người dùng không xác định, quay lại trang chủ
                     session.removeAttribute("user");
                     response.sendRedirect(request.getContextPath() + "/home");
                 }

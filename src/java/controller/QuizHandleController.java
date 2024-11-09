@@ -76,7 +76,7 @@ public class QuizHandleController extends HttpServlet {
             quizId = Integer.parseInt(request.getParameter("quizId"));
             questionNumber = Integer.parseInt(request.getParameter("questionNumber"));
         } catch (NumberFormatException e) {
-            quizId = 16; 
+            quizId = 16;
             questionNumber = 1;
         }
 
@@ -101,7 +101,7 @@ public class QuizHandleController extends HttpServlet {
 
         // Lấy thời lượng của quiz từ cơ sở dữ liệu (trả về phút) và chuyển sang giây
         int durationInMinutes = quizDAO.getQuizDurationById(quizId);
-        int durationInSeconds = durationInMinutes * 60; 
+        int durationInSeconds = durationInMinutes * 60;
 
         // Lấy thời gian bắt đầu từ session hoặc đặt thời gian hiện tại nếu chưa có
         HttpSession session = request.getSession();
@@ -139,7 +139,7 @@ public class QuizHandleController extends HttpServlet {
         // Chuyển tiếp tới QuizHandle.jsp
         request.getRequestDispatcher("QuizHandle.jsp").forward(request, response);
     }
-    
+
     //doPost thực hiện thu nhận các dữ liệu từ JSP để xử lý sau đó hiển thị lại trên JSP
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -147,15 +147,8 @@ public class QuizHandleController extends HttpServlet {
         String quizIdParam = request.getParameter("quizId");
         String questionNumberParam = request.getParameter("questionNumber");
         String selectedOptionParam = request.getParameter("selectedOption");
-        String markParam = request.getParameter("mark"); // Thêm tham số mark để đánh dấu câu hỏi
-
-        // Kiểm tra các giá trị đầu vào
-        System.out.println("Received quizId: " + quizIdParam);
-        System.out.println("Received questionNumber: " + questionNumberParam);
-        System.out.println("Received selectedOption: " + selectedOptionParam);
-        System.out.println("Received mark: " + markParam);
-
-
+        String markParam = request.getParameter("mark");
+        String submitParam = request.getParameter("submit");
 
         // Chuyển đổi các tham số thành số nguyên
         int quizId = Integer.parseInt(quizIdParam);
@@ -168,47 +161,100 @@ public class QuizHandleController extends HttpServlet {
         if (selectedOptionParam != null && !selectedOptionParam.isEmpty()) {
             int selectedOptionId = Integer.parseInt(selectedOptionParam);
 
-            // Lấy bản đồ các câu hỏi đã trả lời từ session
             Map<Integer, Integer> answeredQuestions = (Map<Integer, Integer>) session.getAttribute("answeredQuestions");
 
-            // Nếu chưa có bản đồ answeredQuestions, tạo mới
             if (answeredQuestions == null) {
                 answeredQuestions = new HashMap<>();
             }
 
-            // Cập nhật câu trả lời đã chọn cho câu hỏi hiện tại
             answeredQuestions.put(questionNumber, selectedOptionId);
-
-            // Lưu lại bản đồ đã cập nhật vào session
             session.setAttribute("answeredQuestions", answeredQuestions);
         }
 
         // Xử lý trạng thái đánh dấu nếu có tham số mark
         if (markParam != null && !markParam.isEmpty()) {
             boolean isMarked = Boolean.parseBoolean(markParam);
-
-            // Lấy bản đồ các câu hỏi đã đánh dấu từ session
             Map<Integer, Boolean> markedQuestions = (Map<Integer, Boolean>) session.getAttribute("markedQuestions");
 
-            // Nếu chưa có bản đồ markedQuestions, tạo mới
             if (markedQuestions == null) {
                 markedQuestions = new HashMap<>();
             }
 
-            // Cập nhật trạng thái đánh dấu cho câu hỏi hiện tại
             if (isMarked) {
-                markedQuestions.put(questionNumber, true); // Đánh dấu câu hỏi
+                markedQuestions.put(questionNumber, true);
             } else {
-                markedQuestions.remove(questionNumber); // Bỏ đánh dấu câu hỏi
+                markedQuestions.remove(questionNumber);
             }
 
-            // Lưu lại bản đồ đã cập nhật vào session
             session.setAttribute("markedQuestions", markedQuestions);
         }
 
-        // Đặt trạng thái phản hồi là OK (200) để kết thúc xử lý mà không cần trả về HTML
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.sendRedirect("ChapterDisplayController");
+        // Xử lý tính điểm và chuyển hướng nếu người dùng nhấn Submit
+        if ("true".equals(submitParam)) {
+            Map<Integer, Integer> answeredQuestions = (Map<Integer, Integer>) session.getAttribute("answeredQuestions");
+
+            if (answeredQuestions == null) {
+                answeredQuestions = new HashMap<>();
+                session.setAttribute("answeredQuestions", answeredQuestions);
+            }
+
+            QuestionDAO questionDAO = new QuestionDAO();
+            OptionDAO optionDAO = new OptionDAO();
+            QuizDAO quizDAO = new QuizDAO();
+
+            List<Question> questions = questionDAO.getQuestionByQuizId(quizId);
+            int totalQuestions = questions.size();
+            int correctAnswers = 0;
+            
+
+            List<Map<String, Object>> resultDetails = new ArrayList<>();
+            for (Question question : questions) {
+                int questionId = question.getId();
+                int userAnswer = answeredQuestions.getOrDefault(questionId, -1);
+
+                List<Option> options = optionDAO.getOptionsByQuestionId(questionId);
+
+                boolean isCorrect = false;
+                String correctAnswerContent = "";
+                String userAnswerContent = "";
+
+                for (Option option : options) {
+                    if (option.getIsTrue() == 1) {
+                        correctAnswerContent = option.getContent();
+                    }
+                    if (option.getId() == userAnswer) {
+                        userAnswerContent = option.getContent();
+                        if (option.getIsTrue() == 1) {
+                            isCorrect = true;
+                            correctAnswers++;
+                        }
+                    }
+                }
+
+                Map<String, Object> questionResult = new HashMap<>();
+                questionResult.put("questionContent", question.getContent());
+                questionResult.put("userAnswer", userAnswerContent);
+                questionResult.put("correctAnswer", correctAnswerContent);
+                questionResult.put("isCorrect", isCorrect);
+                resultDetails.add(questionResult);
+            }
+
+            Quiz quiz = quizDAO.getQuizById(quizId);
+            double passRate = quiz.getPassRate();
+            boolean isPass = ((double) correctAnswers / totalQuestions) >= (passRate / 100);
+            double percentageScore = ((double) correctAnswers / totalQuestions) * 100;
+
+            request.setAttribute("resultDetails", resultDetails);
+            request.setAttribute("correctAnswers", correctAnswers);
+            request.setAttribute("totalQuestions", totalQuestions);
+            request.setAttribute("isPass", isPass);
+            request.setAttribute("passRate", passRate);
+            request.setAttribute("percentageScore", percentageScore);
+
+            session.invalidate();
+            request.getRequestDispatcher("QuizResult.jsp").forward(request, response);
+
+        }
     }
 
     @Override

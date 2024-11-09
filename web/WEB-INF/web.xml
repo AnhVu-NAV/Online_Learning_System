@@ -98,6 +98,14 @@
         <servlet-name>UpdateUserProfile</servlet-name>
         <servlet-class>controller.UpdateUserProfileController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GenerateVietQR</servlet-name>
+        <servlet-class>controller.GenerateVietQR</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyPayment</servlet-name>
+        <servlet-class>controller.VerifyPayment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changePassword</url-pattern>
@@ -196,6 +204,14 @@
     <servlet-mapping>
         <servlet-name>UpdateUserProfile</servlet-name>
         <url-pattern>/UpdateUserProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GenerateVietQR</servlet-name>
+        <url-pattern>/GenerateVietQR</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyPayment</servlet-name>
+        <url-pattern>/VerifyPayment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

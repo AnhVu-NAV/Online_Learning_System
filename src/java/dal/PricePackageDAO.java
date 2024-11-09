@@ -43,7 +43,7 @@ public class PricePackageDAO extends DBContext {
         }
         return pricePackages;
     }
-    
+
     //VuLH
     public Vector<PricePackage> getPricePackages(String sql) {
         Vector<PricePackage> vector = new Vector<PricePackage>();
@@ -70,4 +70,47 @@ public class PricePackageDAO extends DBContext {
         return vector;
 
     }
+
+    public int getPriceById(int pricePackageId) throws SQLException {
+        String sql = "SELECT sele_price FROM PricePackage WHERE id = ?";
+        try ( PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, pricePackageId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("sale_price");
+                }
+            }
+        }
+        throw new SQLException("PricePackage not found for ID: " + pricePackageId);
+    }
+    
+    /**
+     * Lấy thông tin gói giá theo ID.
+     *
+     * @param id ID của gói giá
+     * @return Đối tượng PricePackage hoặc null nếu không tìm thấy
+     * @throws Exception Nếu có lỗi trong quá trình truy vấn
+     */
+    public PricePackage getPricePackageById(int id) throws Exception {
+        String query = "SELECT * FROM PricePackage WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    PricePackage pricePackage = new PricePackage();
+                    pricePackage.setId(rs.getInt("id"));
+                    pricePackage.setCourseId(rs.getInt("course_id"));
+                    pricePackage.setTitle(rs.getString("title"));
+                    pricePackage.setPrice(rs.getInt("price"));
+                    pricePackage.setSalePrice(rs.getInt("sale_price"));
+                    return pricePackage;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Error while fetching price package by ID", e);
+        }
+        return null;
+    }
+
 }
