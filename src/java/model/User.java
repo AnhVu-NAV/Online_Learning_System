@@ -104,4 +104,19 @@ public class User {
 //        }
 //    }
 
+public User(String primaryEmail, String password, Date createdDate, 
+        String firstName, String lastName, Date dob, int gender, String firstPhone, String address) {
+        this.primaryEmail = primaryEmail;
+        this.password = password;
+        this.roleId = 4; // default role
+        this.createdDate = createdDate;
+        this.status = 1; // active status
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.gender = gender;
+        this.firstPhone = firstPhone;
+        this.address = address;
+    }
+
 }

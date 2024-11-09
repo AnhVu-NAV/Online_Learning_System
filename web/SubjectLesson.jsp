@@ -12,7 +12,7 @@
     Integer roleId = (session != null) ? (Integer) session.getAttribute("roleId") : null;
 
     // Nếu roleId trống hoặc khác 3, chuyển hướng về trang chủ
-    if (roleId == null || roleId != 3) {
+    if (roleId == null || roleId != 6 || roleId != 3) {
         response.sendRedirect(request.getContextPath() + "/home");
         return;
     }
