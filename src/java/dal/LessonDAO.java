@@ -34,8 +34,8 @@ public class LessonDAO extends DBContext {
     public List<Lesson> getLessonsByChapterId(int chapterId) {
         List<Lesson> lessons = new ArrayList<>();
 
-        String query = "SELECT * FROM Lesson WHERE chapter_id = ? ORDER BY order";
-
+        String query = "SELECT * FROM Lesson WHERE chapter_id = ? ORDER BY `order`";
+        
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, chapterId);
             ResultSet resultSet = statement.executeQuery();
