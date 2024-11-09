@@ -6,6 +6,15 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    // Lấy message và alert từ session
+    String message = (String) session.getAttribute("message");
+    String alert = (String) session.getAttribute("alert");
+
+    // Xóa message và alert khỏi session sau khi lấy
+    session.removeAttribute("message");
+    session.removeAttribute("alert");
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
