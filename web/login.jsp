@@ -43,7 +43,7 @@
                         <input type="hidden" value="login" name="action"/>
                         <button type="submit" class="btn-login">Login</button>
                         <!-- Button Back to Home -->
-                        <a href="./customer" class="btn-back-home">Back to Home</a>
+                        <a href="./home" class="btn-back-home">Back to Home</a>
                     </form>
                     <p class="signup">Don't have an account? <a href="register">Sign Up</a></p>
                 </div>
