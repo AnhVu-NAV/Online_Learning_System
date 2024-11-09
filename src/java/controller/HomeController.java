@@ -47,16 +47,29 @@ public class HomeController extends HttpServlet {
             }
 
             if (user == null) {
-                // If no user is logged in, display home
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             } else {
-                // If user is logged in, handle role-based forwarding
-                if (user.getRoleId() == 6) {
-                    // Admin user
-                    response.sendRedirect(request.getContextPath() + "/admin");
-                } else if (user.getRoleId() == 1) {
-                    // Customer user
-                    response.sendRedirect(request.getContextPath() + "/customer");
+                // Kiểm tra vai trò để chuyển hướng
+                switch (user.getRoleId()) {
+                    case 3: // Admin
+                        response.sendRedirect(request.getContextPath() + "/UserDashboardController");
+                        break;
+                    case 4: // Customer
+                        response.sendRedirect(request.getContextPath() + "/home");
+                        break;
+                    case 5: // Marketer
+                        response.sendRedirect(request.getContextPath() + "/MarketingDashboardController");
+                        break;
+                    case 6: // Expert
+                        response.sendRedirect(request.getContextPath() + "/CourseController?action=list");
+                        break;
+                    case 7: // Sale
+                        response.sendRedirect(request.getContextPath() + "/home");
+                        break;
+                    default:
+                        session.removeAttribute("user");
+                        response.sendRedirect(request.getContextPath() + "/home");
+                        break;
                 }
             }
         } else if (action != null && action.equals("logout")) {
@@ -68,61 +81,7 @@ public class HomeController extends HttpServlet {
             // Check if user is already logged in
 //            HttpSession session = request.getSession(false);
 //            User user = (User) session.getAttribute("user");
-
-            // Hiển thị danh sách blog trên trang home
-            BlogDAO blogDAO = new BlogDAO();
-
-// Default values for page and page size
-            int page = 1;
-            int recordsPerPage = 6; // Default page size
-
-            // Get the 'page' and 'pageSize' parameters from the request
-            try {
-                String pageParam = request.getParameter("page");
-                String pageSizeParam = request.getParameter("pageSize");
-
-                // Update page number
-                if (pageParam != null) {
-                    page = Integer.parseInt(pageParam);
-                }
-
-                // Update page size (recordsPerPage) if pageSize is provided
-                if (pageSizeParam != null) {
-                    recordsPerPage = Integer.parseInt(pageSizeParam);
-                }
-
-            } catch (NumberFormatException e) {
-                e.printStackTrace(); // In case of invalid page or pageSize values
-            }
-
-            try {
-                // Fetch paginated blogs
-                List<Blogs> blogList = blogDAO.getPaginatedBlogs((page - 1) * recordsPerPage, recordsPerPage);
-                int noOfRecords = blogDAO.getNoOfRecords();
-                int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-                // Fetch the courses based on filters
-                List<Course> randomCourses = courseDAO.getRandomCourses(8); // Fetch 8 random courses
-
-                // Set attributes for the JSP
-                request.setAttribute("courses", randomCourses);
-                request.setAttribute("blogList", blogList);
-                request.setAttribute("noOfPages", noOfPages);
-                request.setAttribute("currentPage", page);
-                request.setAttribute("recordsPerPage", recordsPerPage);  // Pass the current page size to the JSP
-
-                // Forward to JSP
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
-                dispatcher.forward(request, response);
-
-            } catch (Exception e) {
-                e.printStackTrace();  // Handle exception
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Something went wrong while fetching blog data.");
-            }
-
-            if (user != null) {
-                String fullname = user.getFirstName() + " " + user.getLastName();
-                session.setAttribute("fullname", fullname);
-            }
+            handleHomeContent(request, response);
 //            request.getRequestDispatcher("/home.jsp").forward(request, response);
         }
 
@@ -139,6 +98,46 @@ public class HomeController extends HttpServlet {
 //
 //        request.setAttribute("postList", filteredPosts);
 //        request.getRequestDispatcher("/home.jsp").forward(request, response);
+    }
+    
+     private void handleHomeContent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Thiết lập nội dung cho trang chủ
+        BlogDAO blogDAO = new BlogDAO();
+        CourseDAO courseDAO = new CourseDAO();
+
+        int page = 1;
+        int recordsPerPage = 6;
+
+        try {
+            String pageParam = request.getParameter("page");
+            String pageSizeParam = request.getParameter("pageSize");
+
+            if (pageParam != null) {
+                page = Integer.parseInt(pageParam);
+            }
+
+            if (pageSizeParam != null) {
+                recordsPerPage = Integer.parseInt(pageSizeParam);
+            }
+
+            List<Blogs> blogList = blogDAO.getPaginatedBlogs((page - 1) * recordsPerPage, recordsPerPage);
+            int noOfRecords = blogDAO.getNoOfRecords();
+            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            List<Course> randomCourses = courseDAO.getRandomCourses(8);
+
+            request.setAttribute("courses", randomCourses);
+            request.setAttribute("blogList", blogList);
+            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", page);
+            request.setAttribute("recordsPerPage", recordsPerPage);
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
+            dispatcher.forward(request, response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Có lỗi xảy ra khi tải nội dung trang chủ.");
+        }
     }
 
     @Override
@@ -168,15 +167,24 @@ public class HomeController extends HttpServlet {
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             } else {
                 // Đăng nhập thành công, chuyển hướng dựa trên vai trò
-                if (user.getRoleId() == 1) {
-                    // Người dùng admin
-                    response.sendRedirect(request.getContextPath() + "/admin/dashboard");
-                } else if (user.getRoleId() == 2) {
-                    // Người dùng khách hàng
-                    response.sendRedirect(request.getContextPath() + "/home");
-                } else if (user.getRoleId() == 0) {
+                if (user.getRoleId() == 0) {
                     // Người dùng mặc định, yêu cầu đổi mật khẩu
                     response.sendRedirect(request.getContextPath() + "/change-password");
+                } else if (user.getRoleId() == 3) {
+                    // Người dùng admin
+                    response.sendRedirect(request.getContextPath() + "/UserDashboardController");
+                } else if (user.getRoleId() == 4) {
+                    // Người dùng khách hàng
+                    response.sendRedirect(request.getContextPath() + "/home");
+                } else if (user.getRoleId() == 5) {
+                    // Người dùng Marketer,
+                    response.sendRedirect(request.getContextPath() + "/MarketingDashboardController");
+                } else if (user.getRoleId() == 6) {
+                    // Người dùng Expert 
+                    response.sendRedirect(request.getContextPath() + "/CourseController?action=list");
+                } else if (user.getRoleId() == 7) {
+                    // Người dùng Sale
+                    response.sendRedirect(request.getContextPath() + "/home");
                 } else {
                     // Người dùng không xác định, quay lại trang chủ
                     session.removeAttribute("user");
