@@ -123,6 +123,10 @@
         <url-pattern>/LessonVideo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>UserDashboardController</servlet-name>
+        <url-pattern>/UserDashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SettingDashboardController</servlet-name>
         <url-pattern>/SettingDashboard</url-pattern>
     </servlet-mapping>
@@ -145,6 +149,10 @@
     <servlet-mapping>
         <servlet-name>BlogListServlet</servlet-name>
         <url-pattern>/blogList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDashboardController</servlet-name>
+        <url-pattern>/UserDashboardController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SettingDashboardController</servlet-name>
@@ -190,7 +198,7 @@
     <!-- Map Authorization Filter -->
     <filter-mapping>
         <filter-name>AuthorizationFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
     <!-- Session Configuration -->
     <servlet-mapping>
@@ -198,9 +206,12 @@
         <url-pattern>/UpdateUserProfile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UserDashboardController</servlet-name>
-        <url-pattern>/UserDashboard</url-pattern>
-        <url-pattern>/UserDashboardController</url-pattern>
+        <servlet-name>GenerateVietQR</servlet-name>
+        <url-pattern>/GenerateVietQR</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyPayment</servlet-name>
+        <url-pattern>/VerifyPayment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
