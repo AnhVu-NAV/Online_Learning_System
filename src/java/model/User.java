@@ -104,4 +104,12 @@ public class User {
         this.preferContact = preferContact;
 //        this.address = address;
     }
+    
+    public String getImageURL(){
+        return imageUrl;
+    }
+    
+    public String getImageUrl(){
+        return imageUrl;
+    }
 }

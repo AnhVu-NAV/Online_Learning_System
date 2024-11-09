@@ -113,6 +113,9 @@
                     <li class="nav-item active">
                         <a class="text-wrapper-4 nav-link" href="${pageContext.request.contextPath}/CourseList">COURSES</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="text-wrapper-5 nav-link" href="${pageContext.request.contextPath}/ChapterDisplayController">My Course</a>
+                    </li>
                     <!-- Dynamic User Menu based on login status -->
                     <c:choose>
                         <c:when test="${not empty sessionScope.user}">
