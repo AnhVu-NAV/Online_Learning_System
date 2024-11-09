@@ -317,10 +317,10 @@
                                                     <c:if test="${requestScope.displayFullName=='true'}"><td>${user.getFirstName()} ${user.getLastName()}</td></c:if>
                                                     <c:if test="${requestScope.displayGender=='true'}"><td>
                                                             <c:choose>
-                                                                <c:when test="${user.getGender() == 1}">
+                                                                <c:when test="${user.getGender() == 0}">
                                                                     Male
                                                                 </c:when>
-                                                                <c:when test="${user.getGender() == 2}">
+                                                                <c:when test="${user.getGender() == 1}">
                                                                     Female
                                                                 </c:when>                                                       
                                                             </c:choose>

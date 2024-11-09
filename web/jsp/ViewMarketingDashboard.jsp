@@ -857,7 +857,7 @@
                                                             </c:when>                                                           
                                                         </c:choose>
                                                     </c:if>
-                                                    <c:if test="${requestScope.newCustomerDisplayImageUrl=='true'}"><td>${user.getImageURL()}</td></c:if>     
+                                                    <c:if test="${requestScope.newCustomerDisplayImageUrl=='true'}"><td>${user.getImageUrl()}</td></c:if>     
                                                     <c:if test="${requestScope.newCustomerDisplayPreferContact=='true'}"><td>${user.getPreferContact()}</td></c:if>
                                                     </tr>
                                             </c:forEach>

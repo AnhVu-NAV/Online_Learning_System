@@ -196,10 +196,10 @@
         <filter-class>filter.AuthorizationFilter</filter-class>
     </filter>
     <!-- Map Authorization Filter -->
-    <filter-mapping>
+<!--    <filter-mapping>
         <filter-name>AuthorizationFilter</filter-name>
-        <url-pattern>/admin/*</url-pattern>
-    </filter-mapping>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
     <!-- Session Configuration -->
     <servlet-mapping>
         <servlet-name>UpdateUserProfile</servlet-name>
