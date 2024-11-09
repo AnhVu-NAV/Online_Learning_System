@@ -22,7 +22,7 @@
             <div class="nav-buttons">
                 <div class="top-page">
                     <div>
-                    <button class="btn btn-back" onclick="history.back()">← Back</button>
+                   <button class="btn btn-back" onclick="window.location.href='${pageContext.request.contextPath}/home'">← Home</button>
                     </div>
                     <div>
                     <h2>User Profile</h2>

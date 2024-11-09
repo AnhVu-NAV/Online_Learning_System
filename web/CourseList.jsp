@@ -17,46 +17,7 @@
         <link rel="stylesheet" href="css/courseList.css">
     </head>
     <body>
-        <!-- Header -->
-        <%--<%@ include file="component/Menu.jsp" %>--%>
-        <!-- Fixed Header -->
-        <!--        <header class="header">
-                    <div class="header-content">
-                        <div class="logo">
-                            <a href="${pageContext.request.contextPath}/home" style="text-decoration: none; color: white;">Learnik</a>
-                        </div>
-                        <nav class="header-nav">
-                            <a href="${pageContext.request.contextPath}/home">Home</a>
-                            <a href="${pageContext.request.contextPath}/CourseList">Courses</a>
-                        </nav>
-        
-                         User Account Section 
-                        <div class="user-options">
-        <c:choose>
-            <c:when test="${not empty sessionScope.user}">
-                 Profile and Logout dropdown for logged-in users 
-                <div class="user-profile">
-                    <img src="${sessionScope.user.profilePictureUrl}" alt="Profile" class="profile-img">
-                    <div class="dropdown">
-                        <button class="dropdown-toggle" id="userMenu" data-toggle="dropdown">
-                ${sessionScope.user.firstName}
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/UserProfile?userId=${sessionScope.user.id}">Profile</a>
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/home?action=logout">Log Out</a>
-            </div>
-        </div>
-    </div>
-            </c:when>
-            <c:otherwise>
-                 Login and Sign Up buttons for guests 
-                <a href="${pageContext.request.contextPath}/login" class="login-btn">Log In</a>
-                <a href="${pageContext.request.contextPath}/signup" class="signup-btn">Sign Up</a>
-            </c:otherwise>
-        </c:choose>
-    </div>
-</div>
-</header>-->
+
         <div class="container">
             <!-- Sidebar -->
             <div class="sidebar">
@@ -88,9 +49,9 @@
                                 <!-- Submit button for filters -->
                                 <button type="submit" class="filter-btn">Filters</button>
                             </div>
-                            <!--                            <div class="filter-taglines">
-                                                            <h3>Taglines</h3>
-                                                            <ul>
+                            <!--                                                        <div class="filter-taglines">
+                                                                                        <h3>Taglines</h3>
+                                                                                        <ul>
                             <c:forEach var="tagline" items="${taglines}">  Lấy danh sách tagline từ backend 
                                 <li>
                                     <input type="checkbox" name="tagline" value="${tagline.name}" 

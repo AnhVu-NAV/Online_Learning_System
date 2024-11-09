@@ -247,7 +247,7 @@
         <!-- Popup Register Form -->
         <%@ include file="RegisterPopup.jsp" %>
         <%--<jsp:include page="/RegisterPopup.jsp"></jsp:include>--%>
-
+        
         <script>
             let currentSlideIndex = 0;
             let autoSlideInterval;
@@ -289,11 +289,25 @@
             document.getElementById('slider').addEventListener('mouseenter', stopAutoSlide);
             document.getElementById('slider').addEventListener('mouseleave', startAutoSlide);
             // Function to open the registration popup
+//            function openRegisterPopup(button) {
+//                const courseId = button.getAttribute('data-courseid');
+//                document.getElementById('hiddenCourseId').value = courseId;
+//                document.getElementById('registerPopup').style.display = 'flex';
+//            }
             function openRegisterPopup(button) {
-                const courseId = button.getAttribute('data-courseid');
-                document.getElementById('hiddenCourseId').value = courseId;
-                document.getElementById('registerPopup').style.display = 'flex';
+            const courseId = button.getAttribute('data-courseid');
+            const popup = document.getElementById('registerPopup');
+
+            document.getElementById('hiddenCourseId').value = courseId;
+
+            const isLoggedIn = '${not empty sessionScope.user}'; // Check if user is logged in
+            if (isLoggedIn === 'true') {
+                popup.style.display = 'flex';
+            } else {
+                window.location.href = "${pageContext.request.contextPath}/login?target=courseDetail&courseId=" + courseId;
             }
+            }
+
             // Function to close the registration popup
             function closeRegisterPopup() {
                 document.getElementById('registerPopup').style.display = 'none';

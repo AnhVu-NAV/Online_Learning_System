@@ -55,15 +55,31 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+                    <file>${file.reference.mysql-connector-java-8.0.30.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.sqljdbc42.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.mockito-core-5.14.2-javadoc.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.org.jacoco.ant-0.8.12.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.selenium-server-4.26.0.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.selenium-server-4.26.0.jar}</file>
+                </library>
+                <library dirs="200">
                     <file>${file.reference.javax.mail.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.json-20240303.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.gson-2.10.1.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>

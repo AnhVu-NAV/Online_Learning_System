@@ -96,14 +96,6 @@
             <div class="div">
                 <div class="overlap">
                     <img class="man-working-night" src="${pageContext.request.contextPath}/img/homethumbnail.webp" alt="home-img" />
-<!--                    <div class="group">
-                        <p class="text-wrapper">Save for the right education</p>
-                        <div class="frame"><div class="text-wrapper-2">Let’s Connect</div></div>
-                        <p class="p">
-                            Get courses from ₫249,000 and create a self-paced learning lifestyle that works for you.
-                            Sale ends Sept 13.
-                        </p>
-                    </div>-->
                 </div>
                 <div class="overlap-group-wrapper">
                     <div class="overlap-group">
@@ -114,11 +106,8 @@
                         </a>
                     </div>
                 </div>
-                            
+
                 <!-- Navigation Menu -->
-<!--                <div>
-                    <input type="search" placeholder="Search..." class="search-bar">
-                </div>-->
                 <ul class="navbar ml-auto">
                     <!-- Default Links visible to all users -->
                     <li class="nav-item active">
@@ -130,7 +119,7 @@
                             <!-- Profile dropdown for logged-in users -->
                             <li class="nav-item dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="${sessionScope.user.profilePictureUrl}" alt="Profile" class="profile-img">
+                                    <img src="${sessionScope.user.imageUrl}" alt="Profile" class="profile-img">
                                     ${sessionScope.user.firstName}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
@@ -155,6 +144,12 @@
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            $('#profileDropdown').click(function () {
+                $(this).next('.dropdown-menu').toggleClass('show');
+            });
+        </script>
     </body>
 
 </html>

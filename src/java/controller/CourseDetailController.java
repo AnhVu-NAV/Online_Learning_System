@@ -19,6 +19,7 @@ import model.Chapter;
 import model.Course;
 import model.Lesson;
 import model.PricePackage;
+import model.User;
 
 /**
  *
@@ -97,6 +98,16 @@ public class CourseDetailController extends HttpServlet {
             // Get price packages
             PricePackageDAO pricePackageDAO = new PricePackageDAO();
             List<PricePackage> pricePackages = pricePackageDAO.getPricePackagesByCourseId(courseId);
+
+            // User information
+            User user = (User) request.getSession().getAttribute("user");
+            if (user != null) {
+                request.setAttribute("userFullName", user.getFirstName() + " " + user.getLastName());
+                request.setAttribute("userPhone1", user.getFirstPhone());
+                request.setAttribute("userPhone2", user.getSecondPhone());
+                request.setAttribute("userEmail1", user.getPrimaryEmail());
+                request.setAttribute("userEmail2", user.getSecondaryEmail());
+            }
 
             // Set attributes for the JSP
             request.setAttribute("course", course);
