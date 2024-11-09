@@ -6,6 +6,15 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    // Lấy message và alert từ session
+    String message = (String) session.getAttribute("message");
+    String alert = (String) session.getAttribute("alert");
+
+    // Xóa message và alert khỏi session sau khi lấy
+    session.removeAttribute("message");
+    session.removeAttribute("alert");
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -43,7 +52,7 @@
                         <input type="hidden" value="login" name="action"/>
                         <button type="submit" class="btn-login">Login</button>
                         <!-- Button Back to Home -->
-                        <a href="./home" class="btn-back-home">Back to Home</a>
+                        <a href="./customer" class="btn-back-home">Back to Home</a>
                     </form>
                     <p class="signup">Don't have an account? <a href="register">Sign Up</a></p>
                 </div>
