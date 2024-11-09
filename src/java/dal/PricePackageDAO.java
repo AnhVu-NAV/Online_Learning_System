@@ -72,7 +72,7 @@ public class PricePackageDAO extends DBContext {
     }
 
     public int getPriceById(int pricePackageId) throws SQLException {
-        String sql = "SELECT sele_price FROM PricePackage WHERE id = ?";
+        String sql = "SELECT sale_price FROM PricePackage WHERE id = ?";
         try ( PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, pricePackageId);
             try (ResultSet rs = stmt.executeQuery()) {

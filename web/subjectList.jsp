@@ -81,6 +81,7 @@
                 <!-- Search and Add New Course -->
                 <div class="filter-section">
                     <input type="text" id="searchBar" placeholder="Search course by name..." class="search-bar" onkeyup="filterCourses()">
+                    <button class="add-course-btn" onclick="location.href = 'subjectLesson';">Lesson</button>
                     <button class="add-course-btn" onclick="location.href = 'CourseController?action=new';">Add New Course</button>
                 </div>
 

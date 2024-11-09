@@ -113,13 +113,16 @@
                     <li class="nav-item active">
                         <a class="text-wrapper-4 nav-link" href="${pageContext.request.contextPath}/CourseList">COURSES</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="text-wrapper-5 nav-link" href="${pageContext.request.contextPath}/ChapterDisplayController">My Course</a>
+                    </li>
                     <!-- Dynamic User Menu based on login status -->
                     <c:choose>
                         <c:when test="${not empty sessionScope.user}">
                             <!-- Profile dropdown for logged-in users -->
                             <li class="nav-item dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="${sessionScope.user.imageUrl}" alt="Profile" class="profile-img">
+                                    <img src="img/${sessionScope.user.imageUrl}" alt="Profile" class="profile-img">
                                     ${sessionScope.user.firstName}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">

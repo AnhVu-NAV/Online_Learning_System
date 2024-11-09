@@ -6,15 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    // Lấy message và alert từ session
-    String message = (String) session.getAttribute("message");
-    String alert = (String) session.getAttribute("alert");
-
-    // Xóa message và alert khỏi session sau khi lấy
-    session.removeAttribute("message");
-    session.removeAttribute("alert");
-%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,7 +13,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="././css/styleLogin.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleLogin.css"/>
     </head>
     <body id="LoginForm">
         <div class="container">
@@ -52,7 +43,7 @@
                         <input type="hidden" value="login" name="action"/>
                         <button type="submit" class="btn-login">Login</button>
                         <!-- Button Back to Home -->
-                        <a href="./customer" class="btn-back-home">Back to Home</a>
+                        <a href="./home" class="btn-back-home">Back to Home</a>
                     </form>
                     <p class="signup">Don't have an account? <a href="register">Sign Up</a></p>
                 </div>

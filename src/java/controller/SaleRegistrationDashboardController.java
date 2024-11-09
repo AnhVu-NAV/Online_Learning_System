@@ -13,6 +13,7 @@ import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,13 +34,7 @@ import sendEmail.IJavaMail;
  */
 public class SaleRegistrationDashboardController extends HttpServlet {
 
-    private String imageUploadDirectory;
-
-    @Override
-    public void init() throws ServletException {
-        // Lấy đường dẫn tuyệt đối cho thư mục /web/img
-        imageUploadDirectory = getServletContext().getRealPath("/img");
-    }
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -201,13 +196,15 @@ public class SaleRegistrationDashboardController extends HttpServlet {
             if (recommendCourseTextContent == null) {
                 recommendCourseTextContent = "";
             }
+            
+            
+            
             String subject = "Recommend course for you";
             String emailContent = recommendCourseTextContent+"\n"+course.toString();
             IJavaMail emailService = new EmailService();
             emailService.send(recommendCourseCustomerEmail, subject, emailContent);
             //set data for view 
             request.setAttribute("message", "Recommend course successfully");
-
             // select view
             RequestDispatcher dispath = request.getRequestDispatcher("SaleRegistrationDashboardController?service=viewAllRegistration");
             //run
