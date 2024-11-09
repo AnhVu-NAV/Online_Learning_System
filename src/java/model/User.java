@@ -87,4 +87,21 @@ public class User {
         this.preferContact = preferContact;
         this.address = address;
     }
+
+//    public boolean isGender() {
+//        if (gender == 2) {
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
+//
+//    public int Gender(boolean gender) {
+//        if (gender == false) {
+//            return 2;
+//        } else {
+//            return 1;
+//        }
+//    }
+
 }

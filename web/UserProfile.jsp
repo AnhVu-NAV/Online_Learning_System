@@ -34,7 +34,7 @@
 
                 <!-- Profile Card - Left Side -->
                 <div class="profile-card">
-                    <img src="img/${user.imageUrl}" alt="Profile Image" class="profile-image">
+                    <img src="${user.imageUrl}" alt="Profile Image" class="profile-image">
                     <h1 class="profile-name">${user.firstName} ${user.lastName}</h1>
                     <div class="profile-contact">
                         <p><strong>Email:</strong> ${user.primaryEmail}</p>
