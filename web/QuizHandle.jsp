@@ -297,7 +297,7 @@
                     </c:choose>
                 </div>
 
-                
+
 
 
             </div>
@@ -338,12 +338,12 @@
             </div>
 
         </div>
-                <form action="${pageContext.request.contextPath}/QuizHandleController" method="post">
-                    <input type="hidden" name="quizId" value="${question.quizId}">
-                    <input type="hidden" name="questionNumber" value="${questionNumber}">
-                    <!-- Nếu cần các trường khác như selectedOption hoặc mark -->
-                    <button type="submit" class="view-progress-button">Submit Answer</button>
-                </form>
+        <form action="QuizHandleController" method="post">
+            <input type="hidden" name="quizId" value="${question.quizId}">
+            <input type="hidden" name="questionNumber" value="${questionNumber}">
+            <input type="hidden" name="submit" value="true">
+            <button type="submit" class="view-progress-button">Submit</button>
+        </form>
 
 
 
@@ -456,6 +456,9 @@
                     }
                 };
             }
+
+            
+
 
         </script>
 
