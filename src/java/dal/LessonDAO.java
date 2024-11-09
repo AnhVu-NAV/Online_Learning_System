@@ -33,17 +33,15 @@ public class LessonDAO extends DBContext {
 
     public List<Lesson> getLessonsByChapterId(int chapterId) {
         List<Lesson> lessons = new ArrayList<>();
-        String query = "SELECT l.id, l.title, l.status, l.chapter_id, l.order, st.value AS lesson_type_value "
-                + "FROM Lesson l "
-                + "JOIN Setting st ON l.lesson_type_id = st.id "
-                + "WHERE l.chapter_id = ? "
-                + "ORDER BY l.order ASC, l.chapter_id ASC, l.id ASC";
+
+        String query = "SELECT * FROM Lesson WHERE chapter_id = ? ORDER BY order";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, chapterId);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
+
                 Lesson lesson = new Lesson();
                 lesson.setId(resultSet.getInt("id"));
                 lesson.setTitle(resultSet.getString("title"));
@@ -51,10 +49,7 @@ public class LessonDAO extends DBContext {
                 lesson.setLessonTypeId(resultSet.getInt("lesson_type_id"));
                 lesson.setChapterId(resultSet.getInt("chapter_id"));
                 lesson.setOrder(resultSet.getInt("order"));
-
-                // Có thể lấy thêm thông tin `lesson_type_value` nếu cần
-                String lessonTypeValue = resultSet.getString("lesson_type_value");
-
+                // Thêm bài học vào danh sách
                 lessons.add(lesson);
             }
         } catch (SQLException e) {

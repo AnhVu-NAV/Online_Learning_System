@@ -84,5 +84,20 @@ public class PersonalCourseDAO extends DBContext {
 
         return null; // Trả về null nếu không tìm thấy hoặc có lỗi xảy ra
     }
+    
+    public void savePersonalCourse(PersonalCourse personalCourse) throws SQLException {
+        String sql = "INSERT INTO PersonalCourse (customer_id, course_id, enroll_date, status, price_package_id, price) "
+                   + "VALUES (?, ?, ?, ?, ?, ?)";
+        try (
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, personalCourse.getCustomerId());
+            stmt.setInt(2, personalCourse.getCourseId());
+            stmt.setDate(3, new java.sql.Date(personalCourse.getEnrollDate().getTime()));
+            stmt.setInt(4, personalCourse.getStatus());
+            stmt.setInt(5, personalCourse.getPricePackageId());
+            stmt.setInt(6, personalCourse.getPrice()); // Lưu giá vào bảng
+            stmt.executeUpdate();
+        }
+    }
 
 }

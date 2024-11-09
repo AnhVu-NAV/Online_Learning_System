@@ -98,6 +98,14 @@
         <servlet-name>UpdateUserProfile</servlet-name>
         <servlet-class>controller.UpdateUserProfileController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GenerateVietQR</servlet-name>
+        <servlet-class>controller.GenerateVietQR</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyPayment</servlet-name>
+        <servlet-class>controller.VerifyPayment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changePassword</url-pattern>

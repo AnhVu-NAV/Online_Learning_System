@@ -266,6 +266,45 @@
                 display: block;
             }
 
+            .popup-actions {
+                display: flex;
+                justify-content: space-between; /* Căn đều giữa các nút */
+                margin-top: 20px; /* Thêm khoảng cách giữa các nút và nội dung phía trên */
+            }
+
+            .popup-actions button,
+            .popup-actions a button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                font-size: 14px;
+                cursor: pointer;
+            }
+
+            /* Style nút Start Quiz */
+            .popup-actions a button {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .popup-actions a button:hover {
+                background-color: #0056b3;
+            }
+
+            /* Style nút Close */
+            .popup-actions .close-btn-quiz {
+                background-color: #ff4d4d;
+                color: white;
+            }
+
+            .popup-actions .close-btn-quiz:hover {
+                background-color: #e60000;
+            }
+
+
+
+
+
         </style>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Đảm bảo jQuery được tải -->
@@ -299,7 +338,10 @@
 
                 // Khi nhấn vào nút Show Summary, popup sẽ hiển thị
                 showSummaryBtn.addEventListener("click", function () {
+                    // Kiểm tra nếu đúng nút Show Summary được nhấn
+
                     popup.classList.add("show");
+
                 });
 
                 // Khi nhấn vào nút Close (x), popup sẽ bị ẩn
@@ -313,25 +355,30 @@
                         popup.classList.remove("show");
                     }
                 });
+            });
 
-                // Lưu trạng thái hoàn thành cho các checkbox
-                const lessons = document.querySelectorAll('.lesson input[type="checkbox"]');
-                lessons.forEach(checkbox => {
-                    const lessonId = checkbox.id.replace("completed_", "");
-                    const isCompleted = localStorage.getItem("completed_" + lessonId) === "true";
-                    checkbox.checked = isCompleted;
 
-                    // Gán sự kiện toggleCompleted cho từng checkbox
-                    checkbox.addEventListener("change", function () {
-                        toggleCompleted(lessonId);
-                    });
+            // Lưu trạng thái hoàn thành cho các checkbox
+            const lessons = document.querySelectorAll('.lesson input[type="checkbox"]');
+            lessons.forEach(checkbox => {
+                const lessonId = checkbox.id.replace("completed_", "");
+                const isCompleted = localStorage.getItem("completed_" + lessonId) === "true";
+                checkbox.checked = isCompleted;
+                // Gán sự kiện toggleCompleted cho từng checkbox
+                checkbox.addEventListener("change", function () {
+                    toggleCompleted(lessonId);
                 });
             });
+
+
 
             // Hàm lưu trạng thái hoàn thành của bài học vào localStorage
             function toggleCompleted(lessonId) {
                 const checkbox = document.getElementById("completed_" + lessonId);
                 localStorage.setItem("completed_" + lessonId, checkbox.checked);
+            }
+            function closeQuizPopup() {
+                document.getElementById("quiz-popup").style.display = "none";
             }
         </script>
 
@@ -339,9 +386,11 @@
     <body>
         <div id="header">
             <div class="logo">
-
-                <span>LEARNIK</span>  
+                <a href="home" style="text-decoration: none; color: inherit;">
+                    <span>LEARNIK</span>
+                </a>
             </div>
+
             <div class="course-name">
                 ${courseName}  
             </div>
@@ -405,11 +454,11 @@
                         </iframe>
                     </div>
 
-                    <div id="summary-popup" class="popup">
+                    <div id="summary-popup" class="popup" >
                         <div class="popup-content">
-                            <span class="close-btn">&times;</span>
+                            <span class="close-btn" onclick="closeSummaryPopup()">&times;</span>
                             <h3>Summary</h3>
-                            <p>${videocontent.videoSummary}</p> 
+                            <p>${videocontent.videoSummary}</p>
                         </div>
                     </div>
 
@@ -422,6 +471,24 @@
 
             </c:choose>
         </div>
+        <c:if test="${showQuizPopup}">
+            <div id="quiz-popup" class="popup" style="display: flex;">
+                <div class="popup-content">
+                    <h3>${quizTitle}</h3>
+                    <p><strong>Description:</strong> ${quizDescription}</p>
+                    <p><strong>Total Questions:</strong> ${totalQuestions}</p>
+
+
+                    <div class="popup-actions">
+                        <a href="QuizHandleController?quizId=${quizId}&questionNumber=1">
+                            <button>Start Quiz</button>
+                        </a>
+                        <button class="close-btn-quiz" onclick="closeQuizPopup()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </c:if>
+
 
 
     </body>

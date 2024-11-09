@@ -17,10 +17,7 @@
         <link rel="stylesheet" href="css/courseList.css">
     </head>
     <body>
-        <!-- Header -->
-<!--        <div>
-            <%--<%@ include file="component/Menu.jsp" %>--%>
-        </div>-->
+
         <div class="container">
             <!-- Sidebar -->
             <div class="sidebar">
@@ -52,9 +49,9 @@
                                 <!-- Submit button for filters -->
                                 <button type="submit" class="filter-btn">Filters</button>
                             </div>
-                            <!--                            <div class="filter-taglines">
-                                                            <h3>Taglines</h3>
-                                                            <ul>
+                            <!--                                                        <div class="filter-taglines">
+                                                                                        <h3>Taglines</h3>
+                                                                                        <ul>
                             <c:forEach var="tagline" items="${taglines}">  Lấy danh sách tagline từ backend 
                                 <li>
                                     <input type="checkbox" name="tagline" value="${tagline.name}" 
@@ -94,6 +91,10 @@
                         </div>
                     </form>
                 </div>
+                <!-- Back to Course List Button -->
+                <a href="${pageContext.request.contextPath}/home" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Course List
+                </a>
             </div>
 
             <!-- Main Content -->
@@ -209,6 +210,8 @@
                 </div>
             </div>
         </div>
+
+        <%--<%@ include file="component/Footer.jsp" %>--%>
 
         <script>
             function toggleRelatedCourseField(field) {

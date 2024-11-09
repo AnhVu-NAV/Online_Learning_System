@@ -60,8 +60,8 @@ body {
 }
 
 .filter{
-    display: flex;  
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -349,15 +349,15 @@ body {
 }
 
 .sticky-header {
-        position: -webkit-sticky; /* Safari */
-        position: sticky;
-        top: 0;
-        background-color: white; /* Màu nền cho header */
-        z-index: 1000; /* Đảm bảo header luôn ở trên cùng */
-        padding: 10px; /* Khoảng cách bên trong */
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Đổ bóng cho header khi cuộn */
-    }
-    
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    background-color: white; /* Màu nền cho header */
+    z-index: 1000; /* Đảm bảo header luôn ở trên cùng */
+    padding: 10px; /* Khoảng cách bên trong */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Đổ bóng cho header khi cuộn */
+}
+
 /* Điều chỉnh header khi nằm trong phần Customization */
 .Customization .sticky-header {
     top: 0;
@@ -382,36 +382,36 @@ body {
 }
 
 /* Customization Section */
-    .customize-display {
-        margin-top: 30px;
-        margin-left: 5%;
-        background-color: #f8f9fa;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+.customize-display {
+    margin-top: 30px;
+    margin-left: 5%;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-    .customize-display h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
-        color: #333;
-    }
+.customize-display h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
 
-    .customization-option label {
-        font-size: 14px;
-        color: #333;
-    }
+.customization-option label {
+    font-size: 14px;
+    color: #333;
+}
 
-    .customization-option select {
-        width: 100%;
-        padding: 8px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        margin-top: 5px;
-        margin-bottom: 15px;
-    }
+.customization-option select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
 
-   .tag {
+.tag {
     display: inline-flex;
     align-items: center;
     background-color: #f1f1f1; /* Màu nền của thẻ */
@@ -477,4 +477,99 @@ body {
     .course-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/*
+ Header styling 
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;  Adjust height as needed 
+    background-color: #141624;
+    color: #fff;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header-nav a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.header-nav a:hover {
+    color: #007bff;
+}
+
+ Adjust container to accommodate fixed header 
+.container {
+    margin-top: 60px;  Space for header height 
+    display: flex;
+    height: calc(100vh - 60px);  Full height minus header 
+}
+
+ Fixed Sidebar styling 
+.sidebar {
+    width: 20%;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    height: calc(100vh - 80px);  Full height minus header 
+    position: fixed;
+    top: 80px;  Position below header 
+    left: 20px;  Keep left padding for container 
+    overflow-y: auto;
+}
+
+ Content adjusted to account for fixed sidebar 
+.content {
+    width: 78%;
+    margin-left: 22%;  Space for fixed sidebar 
+    padding: 20px 40px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+*/
+
+.back-button {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    text-align: center;
+    /*align-content: center;*/
+    /*margin: auto;*/
+}
+.back-button:hover {
+    background-color: #0056b3;
 }

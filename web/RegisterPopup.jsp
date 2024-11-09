@@ -48,9 +48,9 @@
 
             <label for="gender">Gender:</label>
             <select id="gender" name="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+                <option value="3">Other</option>
             </select>
 
             <button type="submit" class="register-btn primary">Register Now</button>
@@ -58,6 +58,32 @@
         <div id="message" class="message"></div>
     </div>
 </div>
+
+<c:if test="${not empty sessionScope.user}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('fullName').value = '${sessionScope.user.firstName} ${sessionScope.user.lastName}';
+            document.getElementById('phone1').value = '${sessionScope.user.firstPhone != null ? sessionScope.user.firstPhone : ''}';
+            document.getElementById('email1').value = '${sessionScope.user.primaryEmail != null ? sessionScope.user.primaryEmail : ''}';
+
+            if ('${sessionScope.user.secondPhone != null ? sessionScope.user.secondPhone : ''}' !== '') {
+                document.getElementById('phone2').value = '${sessionScope.user.secondPhone}';
+                document.getElementById('labelPhone2').style.display = 'block';
+                document.getElementById('phone2').style.display = 'block';
+            }
+
+            if ('${sessionScope.user.secondaryEmail != null ? sessionScope.user.secondaryEmail : ''}' !== '') {
+                document.getElementById('email2').value = '${sessionScope.user.secondaryEmail}';
+                document.getElementById('labelEmail2').style.display = 'block';
+                document.getElementById('email2').style.display = 'block';
+            }
+
+            updateContactMethodDropdown();
+        });
+    </script>
+</c:if>
+
+
 
 <script>
     function addPhone() {

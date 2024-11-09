@@ -4,8 +4,10 @@
  */
 package controller;
 
+import dal.CourseDAO;
 import dal.PricePackageDAO;
 import dal.UserCourseDAO;
+import dal.UserDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +16,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Course;
 import model.PricePackage;
+import model.User;
 import model.UserCourse;
 
 /**
@@ -86,25 +90,66 @@ public class RegisterCourseController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Lấy thông tin từ form đăng ký
-        String fullName = request.getParameter("fullName");
-        String phone1 = request.getParameter("phone1");
-        String phone2 = request.getParameter("phone2");
-        String email1 = request.getParameter("email1");
-        String email2 = request.getParameter("email2");
-        String contactMethod = request.getParameter("contactMethod");
-        String gender = request.getParameter("gender");
-        int courseId = Integer.parseInt(request.getParameter("courseId"));
-        int pricePackageId = Integer.parseInt(request.getParameter("pricePackageId"));
+        try {
+            // Lấy thông tin từ form đăng ký
+            int userId = ((User) request.getSession().getAttribute("user")).getId();
+            String fullName = request.getParameter("fullName");
+            String phone1 = request.getParameter("phone1");
+            String phone2 = request.getParameter("phone2");
+            String email1 = request.getParameter("email1");
+            String email2 = request.getParameter("email2");
+            String contactMethod = request.getParameter("contactMethod");
+            int gender = Integer.parseInt(request.getParameter("gender"));
 
-        // Tạo đối tượng UserCourse để lưu vào cơ sở dữ liệu
-        UserCourse userCourse = new UserCourse(fullName, phone1, phone2, email1, email2, contactMethod, gender, courseId, pricePackageId);
-        UserCourseDAO userCourseDAO = new UserCourseDAO();
-        userCourseDAO.registerUserForCourse(userCourse);
+            // Cập nhật thông tin người dùng
+            UserDAO userDAO = new UserDAO();
+            User user = userDAO.getUserById(userId);
+            user.setFirstName(fullName.split(" ")[0]);
+            user.setLastName(fullName.substring(fullName.indexOf(" ") + 1));
+            user.setFirstPhone(phone1);
+            user.setSecondPhone(phone2);
+            user.setPrimaryEmail(email1);
+            user.setSecondaryEmail(email2);
+            user.setGender(gender);
+            user.setPreferContact(contactMethod);
 
+            userDAO.updateUserProfile(user);
+
+            // Chuyển đến trang thanh toán QR
+            String courseId = request.getParameter("courseId");
+            String pricePackageId = request.getParameter("pricePackageId");
+
+            CourseDAO courseDAO = new CourseDAO();
+            Course course = courseDAO.getCourseByID(Integer.parseInt(courseId));
+            // Lấy thumbnail đầu tiên
+            String firstThumbnail = "";
+            if (course.getThumbnailUrls() != null && !course.getThumbnailUrls().isEmpty()) {
+                firstThumbnail = course.getThumbnailUrls().get(0);
+            }
+            PricePackageDAO pricePackageDAO = new PricePackageDAO();
+            PricePackage pricePackage = pricePackageDAO.getPricePackageById(Integer.parseInt(pricePackageId));
+            System.out.println(pricePackage);
+            // Đặt các thông tin cần thiết vào session để dùng cho trang thanh toán
+            request.getSession().setAttribute("paymentCourseId", courseId);
+            request.getSession().setAttribute("userFullName", user.getFirstName() + " " + user.getLastName()); // Tên đầy đủ
+            request.getSession().setAttribute("paymentCourseTitle", course.getTitle());
+            request.getSession().setAttribute("paymentPricePackageId", pricePackageId);
+            request.getSession().setAttribute("paymentPricePackageTitle", pricePackage.getTitle());
+            request.getSession().setAttribute("paymentPrice", pricePackage.getSalePrice());
+            request.getSession().setAttribute("paymentThumbnail", firstThumbnail);
+            // Redirect to payment page
+            response.sendRedirect("PaymentQR.jsp");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing your request.");
+        }
         // Chuyển hướng về trang xác nhận hoặc hiển thị thông báo thành công
-        response.sendRedirect("confirmation.jsp");
+//        response.sendRedirect("confirmation.jsp");
     }
+    
+//    public static void main(String[] args) {
+//        
+//    }
 
     /**
      * Returns a short description of the servlet.

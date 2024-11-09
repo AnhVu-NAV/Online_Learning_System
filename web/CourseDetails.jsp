@@ -55,10 +55,29 @@
             .next {
                 right: 10px;
             }
+
+            .back-button {
+                width: 100%;
+                background-color: #007bff;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-block;
+                margin-top: 20px;
+                text-align: center;
+            }
+            .back-button:hover {
+                background-color: #0056b3;
+            }
         </style>
     </head>
     <body>
         <div class="container">
+
             <% 
                 // Lấy courseId từ request (URL)
                 String courseId = request.getParameter("courseId");
@@ -73,6 +92,7 @@
             <div class="course-info">
                 <!-- Slider container -->
                 <div class="slider-container">
+
                     <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
                     <div class="slider" id="slider">
                         <c:forEach var="thumbnail" items="${course.thumbnailUrls}">
@@ -140,6 +160,10 @@
                         </div>
                     </form>
                 </div>
+                <!-- Back to Course List Button -->
+                <a href="${pageContext.request.contextPath}/CourseList" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Course List
+                </a>
 
             </div>
 
@@ -223,7 +247,7 @@
         <!-- Popup Register Form -->
         <%@ include file="RegisterPopup.jsp" %>
         <%--<jsp:include page="/RegisterPopup.jsp"></jsp:include>--%>
-
+        
         <script>
             let currentSlideIndex = 0;
             let autoSlideInterval;
@@ -265,11 +289,25 @@
             document.getElementById('slider').addEventListener('mouseenter', stopAutoSlide);
             document.getElementById('slider').addEventListener('mouseleave', startAutoSlide);
             // Function to open the registration popup
+//            function openRegisterPopup(button) {
+//                const courseId = button.getAttribute('data-courseid');
+//                document.getElementById('hiddenCourseId').value = courseId;
+//                document.getElementById('registerPopup').style.display = 'flex';
+//            }
             function openRegisterPopup(button) {
-                const courseId = button.getAttribute('data-courseid');
-                document.getElementById('hiddenCourseId').value = courseId;
-                document.getElementById('registerPopup').style.display = 'flex';
+            const courseId = button.getAttribute('data-courseid');
+            const popup = document.getElementById('registerPopup');
+
+            document.getElementById('hiddenCourseId').value = courseId;
+
+            const isLoggedIn = '${not empty sessionScope.user}'; // Check if user is logged in
+            if (isLoggedIn === 'true') {
+                popup.style.display = 'flex';
+            } else {
+                window.location.href = "${pageContext.request.contextPath}/login?target=courseDetail&courseId=" + courseId;
             }
+            }
+
             // Function to close the registration popup
             function closeRegisterPopup() {
                 document.getElementById('registerPopup').style.display = 'none';
