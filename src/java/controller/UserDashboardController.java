@@ -56,6 +56,16 @@ public class UserDashboardController extends HttpServlet {
             SettingType settingType = null;
             String sql = "select * from user ";
             String checked = "sortById";
+            //Display all fields by default
+            request.setAttribute("displayId", "true");
+            request.setAttribute("displayFullName", "true");
+            request.setAttribute("displayGender", "true");
+            request.setAttribute("displayEmail", "true");
+            request.setAttribute("displayFirstPhone", "true");
+            request.setAttribute("displaySecondPhone", "true");
+            request.setAttribute("displayRole", "true");
+            request.setAttribute("displayStatus", "true");
+            
             if (fillterSubmit != null) {
                 String searchByName = request.getParameter("searchByName");
                 String searchByEmail = request.getParameter("searchByEmail");
@@ -64,9 +74,18 @@ public class UserDashboardController extends HttpServlet {
                 String fillterByRole = request.getParameter("fillterByRole");
                 String fillterByStatus = request.getParameter("fillterByStatus");
                 String sortBy = request.getParameter("sortBy");
+                //reset all display fields
+                request.setAttribute("displayId", request.getParameter("displayId"));
+                request.setAttribute("displayFullName", request.getParameter("displayFullName"));
+                request.setAttribute("displayGender", request.getParameter("displayGender"));
+                request.setAttribute("displayEmail", request.getParameter("displayEmail"));
+                request.setAttribute("displayFirstPhone", request.getParameter("displayFirstPhone"));
+                request.setAttribute("displaySecondPhone", request.getParameter("displaySecondPhone"));
+                request.setAttribute("displayRole", request.getParameter("displayRole"));
+                request.setAttribute("displayStatus", request.getParameter("displayStatus"));
                 sql += " where (lower(first_name) like '%" + searchByName.toLowerCase() + "%' or lower(last_name) like '%" + searchByName.toLowerCase() + "%' ) "
-                        + " and email like '%" + searchByEmail + "%' "
-                        + " and (lơwer(first_phone) like '%" + searchByPhone + "%' or lower(second_phone) like '%" + searchByPhone + "%' )";
+                        + " and primary_email like '%" + searchByEmail + "%' "
+                        + " and (lower(first_phone) like '%" + searchByPhone + "%' or lower(second_phone) like '%" + searchByPhone + "%' )";
                 if (!fillterByGender.equals("all")) {
                     sql += " and gender= " + fillterByGender;
                 }
@@ -111,7 +130,7 @@ public class UserDashboardController extends HttpServlet {
                 }
             }
             //paging
-            int nrpp = 10;
+            int nrpp = 5;
             userVector = userDAO.getUsers(sql);
             int totalPage = (userVector.size() + nrpp - 1) / nrpp;
             String indexRaw = request.getParameter("index");
@@ -161,6 +180,7 @@ public class UserDashboardController extends HttpServlet {
             Date createdDate = GetTodayDate.getTodayDate();
             User user = new User(roleId, email, PasswordEncryption.EncryptBySHA256(password), roleId, createdDate, 2, firstName, lastName, dob, gender, phone, "", "", "", phone);
             userDAO.insertUser(user);
+            
             String subject = "New user successfully created. Please login with your default password";
             String emailContent = "Your default password is " + password;
             IJavaMail emailService = new EmailService();

@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/web/home.jsp</file>
-            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/web/component/CourseItem.jsp</file>
-            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/web/CourseList.jsp</file>
-            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/src/java/controller/UpdateUserProfileController.java</file>
-            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/src/java/controller/HomeController.java</file>
-            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/web/UpdateUserProfile.jsp</file>
-            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/web/editSubject.jsp</file>
+            <file>file:/D:/Merged_SWP391_Group4/swp391_onlinelearning/web/jsp/ViewUserList.jsp</file>
+            <file>file:/D:/Merged_SWP391_Group4/swp391_onlinelearning/web/jsp/ViewRegistrationList.jsp</file>
+            <file>file:/D:/Merged_SWP391_Group4/swp391_onlinelearning/src/java/controller/SaleRegistrationDashboardController.java</file>
+            <file>file:/D:/Merged_SWP391_Group4/swp391_onlinelearning/src/java/controller/UserDashboardController.java</file>
         </group>
     </open-files>
 </project-private>
