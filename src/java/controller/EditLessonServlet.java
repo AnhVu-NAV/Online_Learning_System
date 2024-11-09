@@ -20,18 +20,18 @@ public class EditLessonServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Lấy lessonId từ tham số yêu cầu
-        String lessonIdParam = request.getParameter("lessonId");
-        if (lessonIdParam != null) {
-            int lessonId = Integer.parseInt(lessonIdParam);
-            LessonDAO lessonDAO = new LessonDAO();
-
-            // Truy xuất thông tin bài học từ cơ sở dữ liệu
-            Lesson lesson = lessonDAO.getLessonByID(lessonId); // Lấy dữ liệu từ DAO
-            request.setAttribute("lesson", lesson);
-            request.getRequestDispatcher("LessonDetails.jsp").forward(request, response);
-        }
-        // Chuyển tiếp đến trang LessonDetails.jsp
-        request.getRequestDispatcher("LessonDetails.jsp").forward(request, response);
+//        // Lấy lessonId từ tham số yêu cầu
+//        String lessonIdParam = request.getParameter("lessonId");
+//        if (lessonIdParam != null) {
+//            int lessonId = Integer.parseInt(lessonIdParam);
+//            LessonDAO lessonDAO = new LessonDAO();
+//
+//            // Truy xuất thông tin bài học từ cơ sở dữ liệu
+//            Lesson lesson = lessonDAO.getLessonByID(lessonId); // Lấy dữ liệu từ DAO
+//            request.setAttribute("lesson", lesson);
+//            request.getRequestDispatcher("LessonDetails.jsp").forward(request, response);
+//        }
+//        // Chuyển tiếp đến trang LessonDetails.jsp
+//        request.getRequestDispatcher("LessonDetails.jsp").forward(request, response);
     }
 }

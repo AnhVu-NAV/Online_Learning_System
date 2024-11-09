@@ -5,6 +5,7 @@
  */
 package dal;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
+import model.Chapter;
 import model.LearningMaterial;
 import model.Setting;
 
@@ -362,46 +364,54 @@ public class LessonDAO extends DBContext {
     }
 
     // Lấy thông tin bài học theo ID
-    public Lesson getLessonByID(int lessonId) {
-        Lesson lesson = null;
-        String query = "SELECT l.id AS lesson_id, l.title, l.order, l.status, "
-                + "st.id AS lesson_type_id, " // Lấy ID của loại bài học thay vì value
-                + "vc.video_url, tc.text_content "
-                + "FROM lesson l "
-                + "JOIN setting st ON l.lesson_type_id = st.id "
-                + "LEFT JOIN LearningMaterial lm ON l.id = lm.lesson_id "
-                + "LEFT JOIN VideoContent vc ON lm.lesson_id = vc.lesson_id "
-                + "LEFT JOIN TextContent tc ON lm.lesson_id = tc.lesson_id "
-                + "WHERE l.id = ?";
+    public Lesson getLessonByID(int lessonId, HttpServletRequest request) {
+    Lesson lesson = null;
+    String query = "SELECT l.id AS lesson_id, l.title, l.order, l.status, "
+            + "l.chapter_id, c.title AS chapter_title, " // Thêm chapter.title vào câu truy vấn
+            + "st.id AS lesson_type_id, "
+            + "vc.video_url, tc.text_content "
+            + "FROM lesson l "
+            + "JOIN setting st ON l.lesson_type_id = st.id "
+            + "JOIN chapter c ON l.chapter_id = c.id " // JOIN với bảng chapter để lấy title
+            + "LEFT JOIN LearningMaterial lm ON l.id = lm.lesson_id "
+            + "LEFT JOIN VideoContent vc ON lm.lesson_id = vc.lesson_id "
+            + "LEFT JOIN TextContent tc ON lm.lesson_id = tc.lesson_id "
+            + "WHERE l.id = ?";
 
-        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setInt(1, lessonId);
-            ResultSet rs = pstmt.executeQuery();
+    try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+        pstmt.setInt(1, lessonId);
+        ResultSet rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                // Tạo LearningMaterial với video_url và html_content nếu tồn tại
-                LearningMaterial material = new LearningMaterial();
-                material.setVideoUrl(rs.getString("video_url"));
-                material.setHtmlContent(rs.getString("text_content"));
+        if (rs.next()) {
+            // Tạo LearningMaterial với video_url và html_content nếu tồn tại
+            LearningMaterial material = new LearningMaterial();
+            material.setVideoUrl(rs.getString("video_url"));
+            material.setHtmlContent(rs.getString("text_content"));
 
-                Vector<LearningMaterial> materials = new Vector<>();
-                materials.add(material);
+            Vector<LearningMaterial> materials = new Vector<>();
+            materials.add(material);
 
-                // Tạo đối tượng Lesson và thiết lập các thuộc tính
-                lesson = new Lesson();
-                lesson.setLessonId(rs.getInt("lesson_id"));
-                lesson.setTitle(rs.getString("title"));
-                lesson.setOrder(rs.getInt("order"));
-                lesson.setStatus(rs.getInt("status"));
-                lesson.setLessonTypeId(rs.getInt("lesson_type_id")); // Gán ID loại bài học
-                lesson.setLearningMaterials(materials); // Gán các tài liệu học
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            // Tạo đối tượng Lesson và thiết lập các thuộc tính
+            lesson = new Lesson();
+            lesson.setLessonId(rs.getInt("lesson_id"));
+            lesson.setTitle(rs.getString("title"));
+            lesson.setOrder(rs.getInt("order"));
+            lesson.setStatus(rs.getInt("status"));
+            lesson.setLessonTypeId(rs.getInt("lesson_type_id")); // Gán ID loại bài học
+            lesson.setChapterId(rs.getInt("chapter_id")); // Gán chapterId vào lesson
+            lesson.setLearningMaterials(materials); // Gán các tài liệu học
+
+            // Đặt chapterTitle vào request attribute để chuyển qua JSP
+            String chapterTitle = rs.getString("chapter_title");
+            request.setAttribute("chapterTitle", chapterTitle);
         }
-
-        return lesson;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+
+    return lesson;
+}
+
 
     public List<String> getAllLessonTypes() {
         List<String> lessonTypes = new ArrayList<>();
@@ -625,4 +635,21 @@ public class LessonDAO extends DBContext {
             }
         }
     }
+
+    public List<Chapter> getAllChapters() {
+        List<Chapter> chapters = new ArrayList<>();
+        String query = "SELECT id, title FROM chapter";
+        try (PreparedStatement pstmt = connection.prepareStatement(query); ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                Chapter chapter = new Chapter();
+                chapter.setId(rs.getInt("id"));
+                chapter.setTitle(rs.getString("title"));
+                chapters.add(chapter);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chapters;
+    }
+
 }

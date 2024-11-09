@@ -7,6 +7,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Chapter;
 
 @WebServlet("/createLesson")
 public class CreateLessonServlet extends HttpServlet {
@@ -14,13 +16,16 @@ public class CreateLessonServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Kiểm tra lỗi nếu có
         String error = request.getParameter("error");
         if (error != null) {
             request.setAttribute("errorMessage", "Failed to create lesson. Please try again.");
         }
 
-        // Forward tới LessonDetails.jsp để hiển thị form
+        LessonDAO lessonDAO = new LessonDAO();
+        List<Chapter> chapters = lessonDAO.getAllChapters(); // Get chapters from DAO
+        request.setAttribute("chapters", chapters); // Set chapters as a request attribute
+
+        // Forward to LessonDetails.jsp to display the form
         request.getRequestDispatcher("LessonDetails.jsp").forward(request, response);
     }
 

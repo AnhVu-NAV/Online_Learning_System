@@ -99,8 +99,8 @@ public class HomeController extends HttpServlet {
 //        request.setAttribute("postList", filteredPosts);
 //        request.getRequestDispatcher("/home.jsp").forward(request, response);
     }
-    
-     private void handleHomeContent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    private void handleHomeContent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Thiết lập nội dung cho trang chủ
         BlogDAO blogDAO = new BlogDAO();
         CourseDAO courseDAO = new CourseDAO();
@@ -151,9 +151,7 @@ public class HomeController extends HttpServlet {
             UserDAO userDao = new UserDAO();
             User user = userDao.getOne(primaryEmail, password, 1); // Giả định trạng thái 1 là không bị cấm
 
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-
+            // Kiểm tra nếu user là null
             if (user == null) {
                 // Sai thông tin đăng nhập, quay lại trang login
                 request.setAttribute("message", "Email hoặc mật khẩu không chính xác");
@@ -161,34 +159,43 @@ public class HomeController extends HttpServlet {
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             } else if (user.getStatus() == 0) {
                 // Tài khoản bị cấm, quay lại trang login với thông báo
+                HttpSession session = request.getSession();
                 session.removeAttribute("user");
                 request.setAttribute("message", "Tài khoản của bạn đã bị cấm");
                 request.setAttribute("alert", "danger");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             } else {
-                // Đăng nhập thành công, chuyển hướng dựa trên vai trò
-                if (user.getRoleId() == 0) {
-                    // Người dùng mặc định, yêu cầu đổi mật khẩu
-                    response.sendRedirect(request.getContextPath() + "/change-password");
-                } else if (user.getRoleId() == 3) {
-                    // Người dùng admin
-                    response.sendRedirect(request.getContextPath() + "/UserDashboardController");
-                } else if (user.getRoleId() == 4) {
-                    // Người dùng khách hàng
-                    response.sendRedirect(request.getContextPath() + "/home");
-                } else if (user.getRoleId() == 5) {
-                    // Người dùng Marketer,
-                    response.sendRedirect(request.getContextPath() + "/MarketingDashboardController");
-                } else if (user.getRoleId() == 6) {
-                    // Người dùng Expert 
-                    response.sendRedirect(request.getContextPath() + "/CourseController?action=list");
-                } else if (user.getRoleId() == 7) {
-                    // Người dùng Sale
-                    response.sendRedirect(request.getContextPath() + "/home");
-                } else {
-                    // Người dùng không xác định, quay lại trang chủ
-                    session.removeAttribute("user");
-                    response.sendRedirect(request.getContextPath() + "/home");
+                // Đăng nhập thành công, thêm user và roleId vào session
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                session.setAttribute("roleId", user.getRoleId());
+
+                // Chuyển hướng dựa trên vai trò của user
+                switch (user.getRoleId()) {
+                    //admin
+                    case 3:
+                        response.sendRedirect(request.getContextPath() + "/UserDashboardController");
+                        break;
+                    //customer
+                    case 4:
+                        response.sendRedirect(request.getContextPath() + "/home");
+                        break;
+                    //marketing
+                    case 5:
+                        response.sendRedirect(request.getContextPath() + "/MarketingDashboardController");
+                        break;
+                    //expert
+                    case 6:
+                        response.sendRedirect(request.getContextPath() + "/CourseController?action=list");
+                        break;
+                    //sale
+                    case 7:
+                        response.sendRedirect(request.getContextPath() + "/SaleRegistrationDashboardController");
+                        break;
+                    default:
+                        session.removeAttribute("user");
+                        response.sendRedirect(request.getContextPath() + "/home");
+                        break;
                 }
             }
         }

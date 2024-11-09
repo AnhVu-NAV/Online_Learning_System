@@ -1,4 +1,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    Integer roleId = (session != null) ? (Integer) session.getAttribute("roleId") : null;
+
+    // Nếu roleId trống hoặc khác 3, chuyển hướng về trang chủ
+    if (roleId == null) {
+        response.sendRedirect(request.getContextPath() + "/home");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>

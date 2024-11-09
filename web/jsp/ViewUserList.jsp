@@ -7,6 +7,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Vector,model.User" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+    Integer roleId = (session != null) ? (Integer) session.getAttribute("roleId") : null;
+
+    // Nếu roleId trống hoặc khác 3, chuyển hướng về trang chủ
+    if (roleId == null || roleId != 3) {
+        response.sendRedirect(request.getContextPath() + "/home");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
