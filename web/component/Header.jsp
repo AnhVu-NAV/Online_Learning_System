@@ -119,7 +119,7 @@
                             <!-- Profile dropdown for logged-in users -->
                             <li class="nav-item dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="img/${sessionScope.user.imageUrl}" alt="Profile" class="profile-img">
+                                    <img src="${sessionScope.user.imageUrl}" alt="Profile" class="profile-img">
                                     ${sessionScope.user.firstName}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">

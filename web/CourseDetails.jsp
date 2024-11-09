@@ -304,7 +304,7 @@
             if (isLoggedIn === 'true') {
                 popup.style.display = 'flex';
             } else {
-                window.location.href = "${pageContext.request.contextPath}/login?action=login?target=courseDetail&courseId=" + courseId;
+                window.location.href = "${pageContext.request.contextPath}/login?target=courseDetail&courseId=" + courseId;
             }
             }
 
