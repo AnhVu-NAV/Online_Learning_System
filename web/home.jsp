@@ -8,9 +8,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Learnik - Home</title>
-        <link href="./css/bootstrap.min.css" rel="stylesheet">
-        <link href="./css/home.css" rel="stylesheet">
-        <link rel="stylesheet" href="./fontawesome/css/all.min.css">
+        <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/home.css" rel="stylesheet">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/fontawesome/css/all.min.css">
     </head>
     <body>
 
@@ -83,7 +83,7 @@
                     <h2 class="titleModul">Hot Blogs</h2>
                     <div class="row align-items-center">
                         <!-- Filter dropdown -->
-                        <div class="col-md-4">
+<!--                        <div class="col-md-4">
                             <form action="filterBlogs" method="post" class="form-inline">
                                 <select name="filter" class="form-control mr-3" onchange="this.form.submit()">
                                     <option value="" ${param.filter == '' ? 'selected' : ''}>No Filter</option>
@@ -92,10 +92,10 @@
                                     <option value="mostViewed" ${param.filter == 'mostViewed' ? 'selected' : ''}>Most Viewed</option>
                                 </select>
                             </form>
-                        </div>
+                        </div>-->
 
                         <!-- View All Button -->
-                        <div class="col-md-8 text-right view-all-container">
+                        <div class="col-md-2 text-right view-all-container">
                             <a href="${pageContext.request.contextPath}/blogList" class="btn btn-primary">View All</a>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                                 <hr class="tm-hr-primary">
                                 <a href="blogDetail?blogId=${blog.blogId}" class="effect-lily tm-post-link tm-pt-60">
                                     <div class="tm-post-link-inner">
-                                        <img src="img/${blog.thumbnailUrl}" alt="${blog.title}" class="img-fluid">
+                                        <img src="${blog.thumbnailUrl}" alt="${blog.title}" class="img-fluid">
                                     </div>
                                     <h2 class="tm-pt-30 tm-color-primary tm-post-title">${blog.title}</h2>
                                 </a>

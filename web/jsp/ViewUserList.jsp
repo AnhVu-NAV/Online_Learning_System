@@ -7,6 +7,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Vector,model.User" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+    Integer roleId = (session != null) ? (Integer) session.getAttribute("roleId") : null;
+
+    // Nếu roleId trống hoặc khác 3, chuyển hướng về trang chủ
+    if (roleId == null || roleId != 3) {
+        response.sendRedirect(request.getContextPath() + "/home");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -147,7 +158,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="sortBy" id="sortById"  value="sortById" ${checked == 'sortById' ? 'checked' : ''}>
+                                                    <input class="form-check-input" type="radio" name="sortBy" id="sortById" value="sortById" ${checked == 'sortById' ? 'checked' : ''}>
                                                 <label class="form-check-label" for="sortById">
                                                     ID
                                                 </label>
@@ -190,7 +201,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="sortBy" id="sortByRole" value="sortByRole"  ${checked == 'sortByRole' ? 'checked' : ''}>
+                                                <input class="form-check-input" type="radio" name="sortBy" id="sortByRole" value="sortByRole" ${checked == 'sortByRole' ? 'checked' : ''}>
                                                 <label class="form-check-label" for="sortByRole">
                                                     Role
                                                 </label>
@@ -199,6 +210,93 @@
                                     </div>
                                 </div>
                                 <!-- End sorting -->
+                                <br/>
+                                <!-- Start choosing field -->
+                                <h5 class="mb-3">Display fields: </h5>
+                                <div class="row">
+                                    <!-- ID -->
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckId" name="displayId" ${requestScope.displayId == 'true' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="flexCheckId">
+                                                ID
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Full name -->
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckFullName" name="displayFullName" ${requestScope.displayFullName == 'true' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="flexCheckFullName">
+                                                Full name
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Gender -->
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckGender" name="displayGender" ${requestScope.displayGender == 'true' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="flexCheckGender">
+                                                Gender
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckEmail" name="displayEmail" ${requestScope.displayEmail == 'true' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="flexCheckEmail">
+                                                Email
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- First phone -->
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckFirstPhone" name="displayFirstPhone" ${requestScope.displayFirstPhone == 'true' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="flexCheckFirstPhone">
+                                                First phone
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Second phone -->
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckSecondPhone" name="displaySecondPhone" ${requestScope.displaySecondPhone == 'true' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="flexCheckSecondPhone">
+                                                Second phone
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Role -->
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckRole" name="displayRole" ${requestScope.displayRole == 'true' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="flexCheckRole">
+                                                Role
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Status -->
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="flexCheckStatus" name="displayStatus" ${requestScope.displayStatus == 'true' ? 'checked' : ''}>
+                                            <label class="form-check-label" for="flexCheckStatus">
+                                                Status
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End choosing field -->
+
+
                                 <br/>
                                 <input type="hidden" name="service" value="viewAllUser">
                                 <button type="submit" name="fillterSubmit"  value="submit" class="btn btn-outline-primary">Submit</button>
@@ -211,55 +309,61 @@
                                     <table class="table table-striped">    
                                         <thead>
                                             <tr class="highlight">
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Full Name</th>
-                                                <th scope="col">Gender</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">First Phone</th>
-                                                <th scope="col">Second Phone</th>
-                                                <th scope="col">Role</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">View</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                                <c:if test="${requestScope.displayId=='true'}"><th scope="col">ID</th></c:if>
+                                                <c:if test="${requestScope.displayFullName=='true'}"><th scope="col">Full Name</th></c:if>
+                                                <c:if test="${requestScope.displayGender=='true'}"><th scope="col">Gender</th></c:if>
+                                                <c:if test="${requestScope.displayEmail=='true'}"><th scope="col">Email</th></c:if>
+                                                <c:if test="${requestScope.displayFirstPhone=='true'}"><th scope="col">First Phone</th></c:if>
+                                                <c:if test="${requestScope.displaySecondPhone=='true'}"><th scope="col">Second Phone</th></c:if>
+                                                <c:if test="${requestScope.displayRole=='true'}"><th scope="col">Role</th></c:if>
+                                                <c:if test="${requestScope.displayStatus=='true'}"><th scope="col">Status</th></c:if>
+                                                    <th scope="col">View</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
                                             <c:forEach items="${requestScope.data}" var="user">
                                                 <tr>
-                                                    <td>${user.getId()}</td>
-                                                    <td>${user.getFirstName()} ${user.getLastName()}</td>
-                                                    <td>
-                                                        <c:choose>
-                                                            <c:when test="${user.getGender() == 1}">
-                                                                Male
-                                                            </c:when>
-                                                            <c:when test="${user.getGender() == 2}">
-                                                                Female
-                                                            </c:when>                                                       
-                                                        </c:choose>
-                                                    </td>
-                                                    <td>${user.getPrimaryEmail()}</td>
-                                                    <td>${user.getFirstPhone()}</td>
-                                                    <td>${user.getSecondPhone()}</td>
-                                                    <td>
-                                                        <c:forEach items="${requestScope.setting}" var="setting">
-                                                            <c:if test="${user.getRoleId()==setting.getId()}">
-                                                                ${setting.getValue()}
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                        <c:choose>
-                                                            <c:when test="${user.getStatus() == 0}">
-                                                                Deactivated
-                                                            </c:when>
-                                                            <c:when test="${user.getStatus() == 1}">
-                                                                Activated
-                                                            </c:when>
-                                                            <c:when test="${user.getStatus() == 2}">
-                                                                Default user
-                                                            </c:when>
-                                                        </c:choose>
-                                                    </td>
+
+                                                    <c:if test="${requestScope.displayId=='true'}"><td>${user.getId()}</td></c:if>
+                                                    <c:if test="${requestScope.displayFullName=='true'}"><td>${user.getFirstName()} ${user.getLastName()}</td></c:if>
+                                                    <c:if test="${requestScope.displayGender=='true'}"><td>
+                                                            <c:choose>
+                                                                <c:when test="${user.getGender() == 0}">
+                                                                    Male
+                                                                </c:when>
+                                                                <c:when test="${user.getGender() == 1}">
+                                                                    Female
+                                                                </c:when>                                                       
+                                                            </c:choose>
+                                                        </td>
+                                                    </c:if>
+                                                    <c:if test="${requestScope.displayEmail=='true'}"><td>${user.getPrimaryEmail()}</td></c:if>
+                                                    <c:if test="${requestScope.displayFirstPhone=='true'}"><td>${user.getFirstPhone()}</td></c:if>
+                                                    <c:if test="${requestScope.displaySecondPhone=='true'}"><td>${user.getSecondPhone()}</td></c:if>
+                                                    <c:if test="${requestScope.displayRole=='true'}"><td>
+                                                            <c:forEach items="${requestScope.setting}" var="setting">
+                                                                <c:if test="${user.getRoleId()==setting.getId()}">
+                                                                    ${setting.getValue()}
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </td>
+                                                    </c:if>
+                                                    <c:if test="${requestScope.displayStatus=='true'}"><td>
+                                                            <c:choose>
+                                                                <c:when test="${user.getStatus() == 0}">
+                                                                    Deactivated
+                                                                </c:when>
+                                                                <c:when test="${user.getStatus() == 1}">
+                                                                    Activated
+                                                                </c:when>
+                                                                <c:when test="${user.getStatus() == 2}">
+                                                                    Default user
+                                                                </c:when>
+                                                            </c:choose>
+                                                        </td>
+                                                    </c:if>
+                                                    `       
+
                                                     <td><a class="btn btn-primary" href="UserDashboardController?service=viewUserDetails&id=${user.getId()}" role="button">View</a></td>
                                                 </tr>
                                             </c:forEach>

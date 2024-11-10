@@ -188,7 +188,7 @@
         <filter-class>filter.AuthorizationFilter</filter-class>
     </filter>
     <!-- Map Authorization Filter -->
-    <filter-mapping>
+<!--    <filter-mapping>
         <filter-name>AuthorizationFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>

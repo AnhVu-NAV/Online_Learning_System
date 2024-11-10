@@ -5,6 +5,8 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
     <head>
@@ -104,10 +106,18 @@
                                 <div class="FormSelect">
                                     <label class="Label">Chapter<span class="Required">*</span></label>
                                     <select class="Select" name="chapter_id" required>
-                                        <option value="1" ${lesson != null && lesson.courseId != null && lesson.courseId.chapterId == 1 ? 'selected' : ''}>Chapter 1</option>
-                                        <option value="2" ${lesson != null && lesson.courseId != null && lesson.courseId.chapterId == 2 ? 'selected' : ''}>Chapter 2</option>
+                                        <option value="" disabled>- Select Chapter -</option>
+                                        <c:forEach var="chapter" items="${chapters}">
+                                            <option value="${chapter.id}" 
+                                                    <c:if test="${lesson != null && lesson.chapterId == chapter.id}">selected</c:if>>
+                                                ${chapter.id} - ${chapter.title}
+                                            </option>
+                                        </c:forEach>
                                     </select>
                                 </div>
+
+
+
                                 <div class="FormSelect">
                                     <label class="Label">Order<span class="Required">*</span></label>
                                     <input type="number" class="Input" name="order" placeholder="Order" required

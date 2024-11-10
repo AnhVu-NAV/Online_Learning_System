@@ -499,4 +499,66 @@ public class UserDAO extends DBContext {
         return null;
     }
 
+       // Check if email already exists
+    public boolean isEmailExists(String primaryEmail) {
+        String sql = "SELECT COUNT(*) FROM user WHERE primary_email = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, primaryEmail);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.INFO, "Email check found {0} matches for email {1}", new Object[]{count, primaryEmail});
+                    return count > 0; // Return true if count is greater than 0, meaning email exists
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "SQL error while checking email: " + primaryEmail, ex);
+        }
+        return false; // Return false if an exception occurs or no rows are found
+    }
+
+    // Check if phone number already exists
+    public boolean isPhoneExists(String firstPhone) {
+        String sql = "SELECT COUNT(*) FROM user WHERE first_phone = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, firstPhone);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.INFO, "Phone check found {0} matches for phone {1}", new Object[]{count, firstPhone});
+                    return count > 0; // Return true if count is greater than 0, meaning phone number exists
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "SQL error while checking phone number: " + firstPhone, ex);
+        }
+        return false; // Return false if an exception occurs or no rows are found
+    }
+
+    // Method to create a new user
+    public int createNewUser(User user) {
+        String sql = "INSERT INTO user (primary_email, password, role_id, created_date, status, first_name, last_name, dob, gender, first_phone, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, user.getPrimaryEmail());
+            stmt.setString(2, user.getPassword());
+            stmt.setInt(3, user.getRoleId());
+            stmt.setDate(4, new java.sql.Date(user.getCreatedDate().getTime()));
+            stmt.setInt(5, user.getStatus());
+            stmt.setString(6, user.getFirstName());
+            stmt.setString(7, user.getLastName());
+            stmt.setDate(8, new java.sql.Date(user.getDob().getTime()));
+            stmt.setInt(9, user.getGender());
+            stmt.setString(10, user.getFirstPhone());
+            stmt.setString(11, user.getAddress());
+
+            int rowsAffected = stmt.executeUpdate();
+            Logger.getLogger(UserDAO.class.getName()).log(Level.INFO, "User created successfully with email {0}, rows affected: {1}", new Object[]{user.getPrimaryEmail(), rowsAffected});
+            return rowsAffected;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "SQL error while creating new user with primaryEmail=" + user.getPrimaryEmail(), ex);
+            return 0;
+        }
+    }
+    
 }

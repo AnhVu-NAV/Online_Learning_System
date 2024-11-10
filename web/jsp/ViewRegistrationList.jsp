@@ -7,6 +7,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Vector,model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+    Integer roleId = (session != null) ? (Integer) session.getAttribute("roleId") : null;
+
+    // Nếu roleId trống hoặc khác 7, chuyển hướng về trang chủ
+    if (roleId == null || roleId != 7) {
+        response.sendRedirect(request.getContextPath() + "/home");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -377,9 +387,7 @@
                                 <!-- End choosing field -->
 
 
-                                <br/>
-                                <label for="numberInput">Enter number of records per page</label>
-                                <input type="number" id="nrpp" name="nrpp" min="1" max="100" step="1" required value="${requestScope.nrpp}">
+
                                 <br/>
                                 <input type="hidden" name="service" value="viewAllRegistration">
                                 <button type="submit" name="fillterSubmit"  value="submit" class="btn btn-outline-primary">Submit</button>
@@ -447,17 +455,16 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4 mt-md-0 mt-3">
-                                            <label for="recommendCourseCustomerId">Course Title</label>
+                                            <label for="recommendCourseCourseId">Course Title</label>
                                             <select id="recommendCourseCourseId" class="form-select w-100" name="recommendCourseCourseId" required> 
                                                 <c:forEach items="${requestScope.courseVector}" var="course">
                                                     <option value="${course.getId()}">${course.getTitle()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
-
-
                                     </div>
                                     <br/>
+
                                     <div class="row">
                                         <div class="col-md-8 mt-md-0 mt-3">
                                             <input type="text" class="form-control" placeholder="Note" aria-label="Note" name="recommendCourseTextContent">
@@ -470,8 +477,10 @@
                                             <button type="submit" name="recommendCourse" class="btn btn-primary w-100">Recommend course</button> 
                                         </div>
                                     </div>
-
                                 </form>
+
+                                
+
                             </div>
                             <!-- Reconmmend course end-->
 

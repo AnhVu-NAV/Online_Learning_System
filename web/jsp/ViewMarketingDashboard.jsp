@@ -6,6 +6,17 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+    Integer roleId = (session != null) ? (Integer) session.getAttribute("roleId") : null;
+
+    // Nếu roleId trống hoặc khác 5, chuyển hướng về trang chủ
+    if (roleId == null || roleId != 5) {
+        response.sendRedirect(request.getContextPath() + "/home");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -857,7 +868,7 @@
                                                             </c:when>                                                           
                                                         </c:choose>
                                                     </c:if>
-                                                    <c:if test="${requestScope.newCustomerDisplayImageUrl=='true'}"><td>${user.getImageURL()}</td></c:if>     
+                                                    <c:if test="${requestScope.newCustomerDisplayImageUrl=='true'}"><td>${user.getImageUrl()}</td></c:if>     
                                                     <c:if test="${requestScope.newCustomerDisplayPreferContact=='true'}"><td>${user.getPreferContact()}</td></c:if>
                                                     </tr>
                                             </c:forEach>

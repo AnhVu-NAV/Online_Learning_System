@@ -84,19 +84,28 @@ public class PersonalCourseDAO extends DBContext {
 
         return null; // Trả về null nếu không tìm thấy hoặc có lỗi xảy ra
     }
-    
+
     public void savePersonalCourse(PersonalCourse personalCourse) throws SQLException {
-        String sql = "INSERT INTO PersonalCourse (customer_id, course_id, enroll_date, status, price_package_id, price) "
-                   + "VALUES (?, ?, ?, ?, ?, ?)";
-        try (
-             PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, personalCourse.getCustomerId());
-            stmt.setInt(2, personalCourse.getCourseId());
-            stmt.setDate(3, new java.sql.Date(personalCourse.getEnrollDate().getTime()));
-            stmt.setInt(4, personalCourse.getStatus());
-            stmt.setInt(5, personalCourse.getPricePackageId());
-            stmt.setInt(6, personalCourse.getPrice()); // Lưu giá vào bảng
+        String sql = "INSERT INTO PersonalCourse (customer_id, course_id, enroll_date, status, price_package_id, price, expire_date, progress) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            // Set các giá trị vào PreparedStatement
+            stmt.setInt(1, personalCourse.getCustomerId());  // customer_id
+            stmt.setInt(2, personalCourse.getCourseId());     // course_id
+            stmt.setDate(3, new java.sql.Date(personalCourse.getEnrollDate().getTime()));  // enroll_date
+            stmt.setInt(4, personalCourse.getStatus());       // status (Learning)
+            stmt.setInt(5, personalCourse.getPricePackageId());  // price_package_id
+            stmt.setDouble(6, personalCourse.getPrice());     // price
+            stmt.setDate(7, new java.sql.Date(personalCourse.getExpireDate().getTime()));  // expire_date
+            stmt.setInt(8, personalCourse.getProgress());     // progress (Ban đầu là 0)
+//            stmt.setInt(9, personalCourse.getSaleNoteId());   // sale_note_id (Nếu có thông tin giảm giá thì lưu vào, nếu không thì null)
+
+            // Thực hiện câu lệnh SQL
             stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();  // In ra lỗi nếu có
+            throw e;  // Ném lại lỗi để xử lý ở ngoài
         }
     }
 

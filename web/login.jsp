@@ -22,7 +22,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="././css/styleLogin.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleLogin.css"/>
     </head>
     <body id="LoginForm">
         <div class="container">
@@ -47,7 +47,7 @@
                         <input type="password" name="password" id="password" placeholder="Password" class="input-field" required>
                         <div class="remember-forgot">
                             <label><input type="checkbox" name="remember"> Remember Me</label>
-                            <a href="#">Forgot Password?</a>
+                            <a href='<c:url value="/ForgotPasswordController"/>'>Forgot Password?</a>
                         </div>
                         <input type="hidden" value="login" name="action"/>
                         <button type="submit" class="btn-login">Login</button>
