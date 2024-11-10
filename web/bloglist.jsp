@@ -29,7 +29,7 @@
                 </div>
                 <nav class="tm-nav" id="tm-nav">            
                     <ul>
-                        <li class="tm-nav-item"><a href="BlogList.jsp" class="tm-nav-link">
+                        <li class="tm-nav-item"><a href="${pageContext.request.contextPath}/home" class="tm-nav-link">
                                 <i class="fas fa-home"></i>
                                 Blog Home
                             </a></li>
@@ -37,11 +37,11 @@
                                 <i class="fas fa-pen"></i>
                                 Single Post
                             </a></li>
-                        <li class="tm-nav-item"><a href="about.jsp" class="tm-nav-link">
+                        <li class="tm-nav-item"><a href="#" class="tm-nav-link">
                                 <i class="fas fa-users"></i>
                                 About Learnik
                             </a></li>
-                        <li class="tm-nav-item"><a href="contact.jsp" class="tm-nav-link">
+                        <li class="tm-nav-item"><a href="#" class="tm-nav-link">
                                 <i class="far fa-comments"></i>
                                 Contact Us
                             </a></li>
@@ -90,7 +90,7 @@
                            <a href="blogDetail?blogId=${blog.blogId}" class="effect-lily tm-post-link tm-pt-60">
                                 <div class="tm-post-link-inner">
                                     <!-- Hiển thị hình ảnh từ thumbnailUrl -->
-                                    <img src="img/${blog.thumbnailUrl}" alt="${blog.title}" class="img-fluid">
+                                    <img src="${blog.thumbnailUrl}" alt="${blog.title}" class="img-fluid">
                                 </div>
                                 <span class="position-absolute tm-new-badge">New</span>
                                 <h2 class="tm-pt-30 tm-color-primary tm-post-title">${blog.title}</h2>

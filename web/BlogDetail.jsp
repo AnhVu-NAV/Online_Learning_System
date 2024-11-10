@@ -56,7 +56,7 @@
 
         <div class="container-fluid">
             <main class="tm-main">         
-                <img src="img/${blog.thumbnailUrl}" alt="${blog.title}" class="img-fluid">
+                <img src="${blog.thumbnailUrl}" alt="${blog.title}" class="img-fluid">
                 <!-- Blog Details Section -->
                 <div class="row tm-row">
                     <div class="col-lg-8 tm-post-col">
