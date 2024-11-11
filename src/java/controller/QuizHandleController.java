@@ -251,7 +251,7 @@ public class QuizHandleController extends HttpServlet {
             request.setAttribute("passRate", passRate);
             request.setAttribute("percentageScore", percentageScore);
 
-            session.invalidate();
+//            session.invalidate();
             request.getRequestDispatcher("QuizResult.jsp").forward(request, response);
 
         }

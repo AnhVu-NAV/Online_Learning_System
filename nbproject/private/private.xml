@@ -38,9 +38,12 @@
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/src/java/controller/UpdateLessonServlet.java</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/src/java/util/CalculateRevenue.java</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/web/css/userProfile.css</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/src/java/controller/ChangePasswordController.java</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/web/LessonView.jsp</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/src/java/controller/CourseAnalysisServlet.java</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/src/java/model/PricePackage.java</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/src/java/controller/UserDashboardController.java</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/web/Register.jsp</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/src/java/dal/CourseDAO.java</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/src/java/controller/SaleRegistrationDashboardController.java</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/src/java/controller/LoginController.java</file>
@@ -89,6 +92,8 @@
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/web/css/newSubject.css</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/test/controller/UserProfileControllerTest.java</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/src/java/controller/UpdateUserProfileController.java</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/web/BlogDetail.jsp</file>
+            <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/src/java/model/VideoContent.java</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/web/component/CourseItem.jsp</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/web/RegisterPopup.jsp</file>
             <file>file:/D:/Anh%20Vu%20Nguyen/FPT_University/Semester%205/swp391_onlinelearning/web/LessonDetails.jsp</file>

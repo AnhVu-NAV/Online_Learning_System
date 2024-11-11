@@ -62,6 +62,9 @@
                     <a href="UpdateUserProfile?userId=${user.id}">
                         <button class="btn btn-update">Update Profile</button>
                     </a>
+                        <form action="changePassword" method="Post">
+                            <button class="btn btn-update">Change Password</button>
+                        </form>
                 </div>
 
                 <!-- Details Cards - Right Side -->

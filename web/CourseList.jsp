@@ -104,7 +104,7 @@
                 </div>
                 <!-- Back to Course List Button -->
                 <a href="${pageContext.request.contextPath}/home" class="back-button">
-                    <i class="fas fa-arrow-left"></i> Back to Course List
+                    <i class="fas fa-arrow-left"></i> Back to Home
                 </a>
             </div>
 
